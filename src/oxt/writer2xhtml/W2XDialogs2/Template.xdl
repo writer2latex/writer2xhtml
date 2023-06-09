@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE dlg:window PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "dialog.dtd">
+<dlg:window xmlns:dlg="http://openoffice.org/2000/dialog" xmlns:script="http://openoffice.org/2000/script" dlg:id="Template" dlg:left="139" dlg:top="84" dlg:width="260" dlg:height="185" dlg:closeable="true" dlg:moveable="true" dlg:title="Template" dlg:withtitlebar="false">
+ <dlg:styles>
+  <dlg:style dlg:style-id="0" dlg:text-color="0xff3333"/>
+  <dlg:style dlg:style-id="1" dlg:font-weight="150"/>
+ </dlg:styles>
+ <dlg:bulletinboard>
+  <dlg:checkbox dlg:id="UseCustomTemplate" dlg:tab-index="0" dlg:left="10" dlg:top="18" dlg:width="180" dlg:height="12" dlg:help-url="org.openoffice.da.writer2xhtml.oxt:UseCustomTemplate" dlg:value="Use custom HTML template" dlg:checked="false">
+   <script:event script:event-name="on-itemstatechange" script:macro-name="vnd.sun.star.UNO:UseCustomTemplateChange" script:language="UNO"/>
+  </dlg:checkbox>
+  <dlg:textfield dlg:id="CustomTemplate" dlg:tab-index="1" dlg:left="18" dlg:top="32" dlg:width="232" dlg:height="74" dlg:help-url="org.openoffice.da.writer2xhtml.oxt:UseCustomTemplate" dlg:hscroll="true" dlg:vscroll="true" dlg:multiline="true">
+   <script:event script:event-name="on-keyup" script:macro-name="vnd.sun.star.UNO:TemplateKeyup" script:language="UNO"/>
+  </dlg:textfield>
+  <dlg:button dlg:id="LoadTemplateButton" dlg:tab-index="2" dlg:left="18" dlg:top="108" dlg:width="60" dlg:height="12" dlg:help-url="org.openoffice.da.writer2xhtml.oxt:LoadTemplate" dlg:value="Load...">
+   <script:event script:event-name="on-mouseup" script:macro-name="vnd.sun.star.UNO:LoadTemplateClick" script:language="UNO"/>
+  </dlg:button>
+  <dlg:text dlg:style-id="0" dlg:id="TestTemplateLabel" dlg:tab-index="3" dlg:left="90" dlg:top="110" dlg:width="160" dlg:height="24" dlg:value="Test" dlg:multiline="true"/>
+  <dlg:text dlg:id="ContentIdLabel" dlg:tab-index="4" dlg:left="18" dlg:top="142" dlg:width="50" dlg:height="12" dlg:value="Content id"/>
+  <dlg:combobox dlg:id="ContentId" dlg:tab-index="5" dlg:left="72" dlg:top="140" dlg:width="50" dlg:height="12" dlg:help-url="org.openoffice.da.writer2xhtml.oxt:ContentId" dlg:spin="true">
+   <dlg:menupopup>
+    <dlg:menuitem dlg:value="content"/>
+   </dlg:menupopup>
+  </dlg:combobox>
+  <dlg:text dlg:id="PanelIdLabel" dlg:tab-index="6" dlg:left="18" dlg:top="156" dlg:width="50" dlg:height="12" dlg:value="Panel id"/>
+  <dlg:combobox dlg:id="PanelId" dlg:tab-index="7" dlg:left="72" dlg:top="154" dlg:width="50" dlg:height="12" dlg:help-url="org.openoffice.da.writer2xhtml.oxt:PanelId" dlg:spin="true">
+   <dlg:menupopup>
+    <dlg:menuitem dlg:value="panel"/>
+   </dlg:menupopup>
+  </dlg:combobox>
+  <dlg:text dlg:id="HeaderIdLabel" dlg:tab-index="8" dlg:left="146" dlg:top="142" dlg:width="50" dlg:height="12" dlg:value="Header id"/>
+  <dlg:combobox dlg:id="HeaderId" dlg:tab-index="9" dlg:left="200" dlg:top="140" dlg:width="50" dlg:height="12" dlg:help-url="org.openoffice.da.writer2xhtml.oxt:HeaderId" dlg:spin="true">
+   <dlg:menupopup>
+    <dlg:menuitem dlg:value="header"/>
+   </dlg:menupopup>
+  </dlg:combobox>
+  <dlg:text dlg:id="FooterIdLabel" dlg:tab-index="10" dlg:left="146" dlg:top="156" dlg:width="50" dlg:height="12" dlg:value="Footer id"/>
+  <dlg:combobox dlg:id="FooterId" dlg:tab-index="11" dlg:left="200" dlg:top="154" dlg:width="50" dlg:height="12" dlg:help-url="org.openoffice.da.writer2xhtml.oxt:FooterId" dlg:spin="true">
+   <dlg:menupopup>
+    <dlg:menuitem dlg:value="footer"/>
+   </dlg:menupopup>
+  </dlg:combobox>
+  <dlg:text dlg:style-id="1" dlg:id="HTMLTemplateLabel" dlg:tab-index="12" dlg:left="4" dlg:top="6" dlg:width="185" dlg:height="11" dlg:value="HTML Template"/>
+  <dlg:button dlg:id="HelpButton" dlg:tab-index="13" dlg:left="200" dlg:top="4" dlg:width="55" dlg:height="14" dlg:help-url="org.openoffice.da.writer2xhtml.oxt:ConfigHTMLTemplate" dlg:value="Help" dlg:button-type="help"/>
+ </dlg:bulletinboard>
+</dlg:window>

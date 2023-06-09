@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE dlg:window PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "dialog.dtd">
+<dlg:window xmlns:dlg="http://openoffice.org/2000/dialog" xmlns:script="http://openoffice.org/2000/script" dlg:id="Configuration" dlg:left="139" dlg:top="84" dlg:width="260" dlg:height="185" dlg:help-url="org.openoffice.da.writer2xhtml.oxt:SettingsDialog" dlg:closeable="true" dlg:moveable="true" dlg:title="Writer2xhtml Toolbar Configuration" dlg:withtitlebar="false">
+ <dlg:styles>
+  <dlg:style dlg:style-id="0" dlg:font-weight="150"/>
+ </dlg:styles>
+ <dlg:bulletinboard>
+  <dlg:text dlg:style-id="0" dlg:id="XhtmlLabel" dlg:tab-index="0" dlg:left="6" dlg:top="4" dlg:width="185" dlg:height="12" dlg:value="XHTML Export"/>
+  <dlg:text dlg:id="XhtmlFormatLabel" dlg:tab-index="1" dlg:left="12" dlg:top="18" dlg:width="55" dlg:height="12" dlg:value="Format"/>
+  <dlg:menulist dlg:id="XhtmlFormat" dlg:tab-index="2" dlg:left="72" dlg:top="16" dlg:width="120" dlg:height="12" dlg:help-url="org.openoffice.da.writer2xhtml.oxt:SettingsXhtmlFormat" dlg:spin="true" dlg:linecount="4">
+   <dlg:menupopup>
+    <dlg:menuitem dlg:value="XHTML 1.0 strict"/>
+    <dlg:menuitem dlg:value="XHTML 1.1"/>
+    <dlg:menuitem dlg:value="XHTML 1.1 + MathML 2.0"/>
+    <dlg:menuitem dlg:value="HTML5" dlg:selected="true"/>
+   </dlg:menupopup>
+   <script:event script:event-name="on-itemstatechange" script:macro-name="vnd.sun.star.UNO:XhtmlFormatChange" script:language="UNO"/>
+  </dlg:menulist>
+  <dlg:text dlg:id="XhtmlViewLabel" dlg:tab-index="3" dlg:left="12" dlg:top="32" dlg:width="55" dlg:height="12" dlg:value="After export"/>
+  <dlg:menulist dlg:id="XhtmlView" dlg:tab-index="4" dlg:left="72" dlg:top="30" dlg:width="120" dlg:height="12" dlg:help-url="org.openoffice.da.writer2xhtml.oxt:SettingsXhtmlView" dlg:spin="true" dlg:linecount="3">
+   <dlg:menupopup>
+    <dlg:menuitem dlg:value="Do nothing"/>
+    <dlg:menuitem dlg:value="Open with default web browser" dlg:selected="true"/>
+    <dlg:menuitem dlg:value="Open with custom application"/>
+   </dlg:menupopup>
+   <script:event script:event-name="on-itemstatechange" script:macro-name="vnd.sun.star.UNO:XhtmlViewChange" script:language="UNO"/>
+  </dlg:menulist>
+  <dlg:text dlg:id="XhtmlExecutableLabel" dlg:tab-index="5" dlg:left="12" dlg:top="44" dlg:width="55" dlg:height="12" dlg:value="Application"/>
+  <dlg:textfield dlg:id="XhtmlExecutable" dlg:tab-index="6" dlg:left="72" dlg:top="44" dlg:width="120" dlg:height="12" dlg:help-url="org.openoffice.da.writer2xhtml.oxt:SettingsXhtmlExecutable"/>
+  <dlg:button dlg:id="XhtmlBrowseButton" dlg:tab-index="7" dlg:left="200" dlg:top="43" dlg:width="55" dlg:height="14" dlg:help-url="org.openoffice.da.writer2xhtml.oxt:SettingsXhtmlBrowse" dlg:value="Browse...">
+   <script:event script:event-name="on-mouseup" script:macro-name="vnd.sun.star.UNO:XhtmlBrowseClick" script:language="UNO"/>
+  </dlg:button>
+  <dlg:text dlg:style-id="0" dlg:id="EpubLabel" dlg:tab-index="8" dlg:left="6" dlg:top="58" dlg:width="185" dlg:height="12" dlg:value="EPUB Export"/>
+  <dlg:text dlg:id="EpubFormatLabel" dlg:tab-index="9" dlg:left="12" dlg:top="72" dlg:width="55" dlg:height="12" dlg:value="Format"/>
+  <dlg:menulist dlg:id="EpubFormat" dlg:tab-index="10" dlg:left="72" dlg:top="70" dlg:width="120" dlg:height="12" dlg:help-url="org.openoffice.da.writer2xhtml.oxt:SettingsEpubFormat" dlg:spin="true" dlg:linecount="2">
+   <dlg:menupopup>
+    <dlg:menuitem dlg:value="EPUB 2"/>
+    <dlg:menuitem dlg:value="EPUB 3" dlg:selected="true"/>
+   </dlg:menupopup>
+   <script:event script:event-name="on-itemstatechange" script:macro-name="vnd.sun.star.UNO:EpubFormatChange" script:language="UNO"/>
+  </dlg:menulist>
+  <dlg:text dlg:id="EpubViewLabel" dlg:tab-index="11" dlg:left="12" dlg:top="86" dlg:width="55" dlg:height="12" dlg:value="After export"/>
+  <dlg:menulist dlg:id="EpubView" dlg:tab-index="12" dlg:left="72" dlg:top="84" dlg:width="120" dlg:height="12" dlg:help-url="org.openoffice.da.writer2xhtml.oxt:SettingsEpubView" dlg:spin="true" dlg:linecount="3">
+   <dlg:menupopup>
+    <dlg:menuitem dlg:value="Do nothing"/>
+    <dlg:menuitem dlg:value="open with default viewer" dlg:selected="true"/>
+    <dlg:menuitem dlg:value="open with custom application"/>
+   </dlg:menupopup>
+   <script:event script:event-name="on-itemstatechange" script:macro-name="vnd.sun.star.UNO:EpubViewChange" script:language="UNO"/>
+  </dlg:menulist>
+  <dlg:text dlg:id="EpubExecutableLabel" dlg:tab-index="13" dlg:left="12" dlg:top="98" dlg:width="55" dlg:height="12" dlg:value="Application"/>
+  <dlg:textfield dlg:id="EpubExecutable" dlg:tab-index="14" dlg:left="72" dlg:top="98" dlg:width="120" dlg:height="12" dlg:help-url="org.openoffice.da.writer2xhtml.oxt:SettingsEpubExecutable"/>
+  <dlg:button dlg:id="EpubBrowseButton" dlg:tab-index="15" dlg:left="200" dlg:top="97" dlg:width="55" dlg:height="14" dlg:help-url="org.openoffice.da.writer2xhtml.oxt:SettingsEpubBrowse" dlg:value="Browse...">
+   <script:event script:event-name="on-mouseup" script:macro-name="vnd.sun.star.UNO:EpubBrowseClick" script:language="UNO"/>
+  </dlg:button>
+  <dlg:button dlg:id="HelpButton" dlg:tab-index="16" dlg:left="200" dlg:top="4" dlg:width="55" dlg:height="14" dlg:help-url="org.openoffice.da.writer2xhtml.oxt:SettingsDialog" dlg:value="Help" dlg:button-type="help"/>
+ </dlg:bulletinboard>
+</dlg:window>

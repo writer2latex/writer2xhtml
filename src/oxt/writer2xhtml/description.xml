@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<description xmlns="http://openoffice.org/extensions/description/2006"
+             xmlns:d="http://openoffice.org/extensions/description/2006"
+             xmlns:xlink="http://www.w3.org/1999/xlink">
+			 
+  <identifier value="org.openoffice.da.writer2xhtml.oxt" />
+  
+  <version value="1.7" />
+  
+  <dependencies>
+    <OpenOffice.org-minimal-version value="3.0" d:name="OpenOffice.org 3.0"/>
+  </dependencies>
+  
+  <publisher>
+    <name xlink:href="http://writer2latex.sourceforge.net" 
+    lang="en">Writer2LaTeX</name>
+  </publisher>
+  
+  <display-name>
+    <name lang="da">Writer2xhtml eksportfiltre</name>
+    <name lang="en">Writer2xhtml export filters</name>
+    <name lang="ca">Filtres d'exportació per al writer2xhtml</name>
+    <name lang="de">Writer2xhtml Exportfilter</name>
+    <name lang="nl">Writer2xhtml exportfilters</name>
+    <name lang="nn">Writer2xhtml eksportfilter</name>
+    <name lang="es">Writer2xhtml filtros para exportar</name>
+    <name lang="fi">Writer2xhtml vienti suodattimet</name>
+    <name lang="fr">Filtres d'exportation Writer2xhtml</name>
+    <name lang="it">Filtri di esportazione Writer2xhtml</name>
+    <name lang="pt_BR">Filtros de exportação Writer2xhtml</name>
+    <name lang="cs">Exportní filtry Writer2xhtml</name>
+    <name lang="pl">Filtry ekportu Writer2xhtml</name>
+    <name lang="ru">Фильтры экспорта Writer2xhtml</name>
+    <name lang="uk">Фільтри експорту Writer2xhtml</name>
+    <name lang="tr">Writer2xhtml ihraç etme filitreleri</name>
+    <name lang="fa">Writer2xhtml export filters</name>
+  </display-name>
+  
+  <icon>
+    <default xlink:href="images/w2licon.png" />
+    <high-contrast xlink:href="images/w2hclicon.png" />
+  </icon>
+  
+  
+  <extension-description>
+    <src xlink:href="descriptions/desc_da.txt" lang="da" />
+    <src xlink:href="descriptions/desc_en.txt" lang="en" />
+    <src xlink:href="descriptions/desc_ca.txt" lang="ca" />
+    <src xlink:href="descriptions/desc_de.txt" lang="de" />
+    <src xlink:href="descriptions/desc_nl.txt" lang="nl" />
+    <src xlink:href="descriptions/desc_nn.txt" lang="nn" />
+    <src xlink:href="descriptions/desc_es.txt" lang="es" />
+    <src xlink:href="descriptions/desc_fi.txt" lang="fi" />
+    <src xlink:href="descriptions/desc_fr.txt" lang="fr" />
+    <src xlink:href="descriptions/desc_it.txt" lang="it" />
+    <src xlink:href="descriptions/desc_pt_BR.txt" lang="pt_BR" />
+    <src xlink:href="descriptions/desc_cs.txt" lang="cs" />
+    <src xlink:href="descriptions/desc_pl.txt" lang="pl" />
+    <src xlink:href="descriptions/desc_ru.txt" lang="ru" />
+    <src xlink:href="descriptions/desc_uk.txt" lang="uk" />
+    <src xlink:href="descriptions/desc_tr.txt" lang="tr" />
+  </extension-description>
+
+</description> 

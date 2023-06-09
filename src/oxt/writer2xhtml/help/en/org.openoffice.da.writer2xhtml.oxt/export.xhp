@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<helpdocument version="1.0">
+	<meta>
+        <topic id="writer2xhtml-export-writer" indexer="include">
+            <title xml-lang="en-US">HTML Export (Writer)</title>
+            <filename>org.openoffice.da.writer2xhtml.oxt/export.xhp</filename>
+        </topic>
+    </meta>
+    <body>
+    	<bookmark xml-lang="en-US" branch="hid/org.openoffice.da.writer2xhtml.oxt:Options" id="bm_options"/>
+        <paragraph role="heading" level="1" xml-lang="en-US">HTML Export (Writer)</paragraph>
+        <paragraph role="paragraph" xml-lang="en-US">Exports the current document to HTML format.</paragraph>
+        <section id="howtoget" xml-lang="en-US">
+        	Choose <emph>File - Export - XHTML 1.0 strict</emph><br/>
+        	or <emph>File - Export - XHTML 1.1</emph><br/>
+        	or <emph>File - Export - XHTML 1.1 + MathML 2.0</emph><br/>
+        	or <emph>File - Export - HTML5</emph><br/>
+        	or click the <emph>HTML5-button</emph> in the toolbar
+        </section>
+        
+        <paragraph role="heading" level="2" xml-lang="en-US">General</paragraph>
+        
+    	<bookmark xml-lang="en-US" branch="hid/org.openoffice.da.writer2xhtml.oxt:OptionsConfig" id="bm_options_config"/>
+		<paragraph role="paragraph" xml-lang="en-US"><ahelp hid="org.openoffice.da.writer2xhtml.oxt:OptionsConfig" visibility="hidden">Select the style to use for the HTML document</ahelp></paragraph>
+		<section id="split1">
+        <paragraph role="heading" level="3" xml-lang="en-US">Use style</paragraph>
+    	<paragraph role="paragraph" xml-lang="en-US">This option allows you to choose between various styles to apply to the
+    	HTML document.</paragraph>
+    	</section>
+        <list type="unordered">
+			<listitem>
+				<section id="split2">
+				<paragraph role="paragraph" xml-lang="en-US"><emph>Original formatting</emph> produces an HTML document which uses
+				the same style as the original document. The document will look quite similar to the original when viewed
+				in a browser.</paragraph>
+				</section>
+			</listitem>
+			<listitem>
+				<paragraph role="paragraph" xml-lang="en-US"><emph>Chocolate, Midnight, Modern, Oldstyle, Steely, Swiss, Traditional
+				and Ultramarine</emph> formats the document with one of the
+				<link href="http://www.w3.org/StyleSheets/Core/" name="Link to the W3C's page on core style sheets">8 core styles</link> provided by the World Wide Web Consortium.</paragraph>
+			</listitem>
+			<listitem>
+				<paragraph role="paragraph" xml-lang="en-US"><emph>Custom</emph> is a user defined format. You can define your own
+				style by providing a CSS style sheet and a mapping from Writer styles to your CSS styles.
+				 To configure the custom format, choose <emph><link href="org.openoffice.da.writer2xhtml.oxt/Configuration/Introduction.xhp"
+				name="Custom configuration">Tools - Options - Writer2xhtml</link></emph>.</paragraph>
+			</listitem>
+        </list>
+        <section id="split3">
+    	<paragraph role="paragraph" xml-lang="en-US">Expert users can extend the list with further formats using
+    	<emph>configuration packages</emph>. See the documentation on the
+    	<link href="http://writer2latex.sourceforge.net" name="Link to the Writer2LaTeX Website">web site for Writer2xhtml</link>.
+    	An example configuration package <emph>xhtml-config-sample.oxt</emph> is provided.</paragraph>
+		</section>
+		
+    	<bookmark xml-lang="en-US" branch="hid/org.openoffice.da.writer2xhtml.oxt:OptionsUnits" id="bm_options_units"/>
+		<paragraph role="paragraph" xml-lang="en-US"><ahelp hid="org.openoffice.da.writer2xhtml.oxt:Units" visibility="hidden">Select the units to use for dimensions in the HTML document, either the original units, pixels or relative units (recommended)</ahelp></paragraph>
+		<section id="units">
+	    <paragraph role="heading" level="3" xml-lang="en-US">Units</paragraph>
+        <paragraph role="paragraph" xml-lang="en-US">In %PRODUCTNAME, font sizes are usually given in points and other dimensions
+	    in e.g. cm or inches. Use this option to select how to convert units.</paragraph>
+        <list type="unordered">
+			<listitem>
+				<paragraph role="paragraph" xml-lang="en-US"><emph>Original</emph> will use the same units as in the source documents.
+				This is generally not recommended, except for printing purposes.</paragraph>
+			</listitem>
+			<listitem>
+				<paragraph role="paragraph" xml-lang="en-US"><emph>Pixels (px)</emph> will convert all units to pixels
+				(roughly 1/96 of an inch).</paragraph>
+			</listitem>
+			<listitem>
+				<paragraph role="paragraph" xml-lang="en-US"><emph>Relative (rem)</emph> will convert all units to relative units
+				(rem). This is the recommended setting, which will create a document suitable for viewing on any device.</paragraph>
+			</listitem>
+        </list>
+		</section>
+		
+   		<bookmark xml-lang="en-US" branch="hid/org.openoffice.da.writer2xhtml.oxt:OptionsScaling" id="bm_options_scaling"/>
+		<paragraph role="paragraph" xml-lang="en-US"><ahelp hid="org.openoffice.da.writer2xhtml.oxt:OptionsScaling" visibility="hidden">Select a scaling to apply to all dimensions in the document</ahelp></paragraph>
+		<section id="scaling1">
+       	<paragraph role="heading" level="3" xml-lang="en-US">Scaling</paragraph>
+       	</section>
+       	<section id="scaling2">
+    	<paragraph role="paragraph" xml-lang="en-US">Viewing the document in a web browser may require different dimensions
+    	(e.g. font sizes) than the original document.</paragraph>
+    	</section>
+       	<section id="scaling3">
+    	<paragraph role="paragraph" xml-lang="en-US">Using this option you can define a percentage used to scale all
+    	dimensions. Thus with the setting 140, all dimensions will be 40% larger than in the original document. Depending on the
+    	style you have selected and on the settings for image size and tables size below, some dimensions may be unaffected by
+    	this option.</paragraph>
+		</section>
+
+        <bookmark xml-lang="en-US" branch="hid/org.openoffice.da.writer2xhtml.oxt:OptionsMultilingual" id="bm_configmultilingual"/>
+		<paragraph role="paragraph" xml-lang="en-US"><ahelp hid="org.openoffice.da.writer2xhtml.oxt:OptionsMultilingual" visibility="hidden">Check this if you want to include language information for all used languages in the document</ahelp></paragraph>
+        <paragraph role="heading" level="3" xml-lang="en-US">Enable multilingual support</paragraph>
+        <paragraph role="paragraph" xml-lang="en-US">Check this to include language information for all used languages in the HTML document.
+        Otherwise only the default language will be exported.</paragraph>
+
+		<section id="filesheading">
+       	<paragraph role="heading" level="2" xml-lang="en-US">Files</paragraph>
+       	</section>
+
+    	<bookmark xml-lang="en-US" branch="hid/org.openoffice.da.writer2xhtml.oxt:OptionsSplit" id="bm_options_split"/>
+        <paragraph role="heading" level="3" xml-lang="en-US">Split document at headings</paragraph>
+   		<paragraph role="paragraph" xml-lang="en-US"><ahelp hid="org.openoffice.da.writer2xhtml.oxt:OptionsSplit" visibility="hidden">Check this to create a new document for each heading</ahelp></paragraph>
+        <paragraph role="paragraph" xml-lang="en-US">To make a long Writer document easier to read in the browser, you can use
+        this option to split the document in several small files.</paragraph>
+        <paragraph role="paragraph" xml-lang="en-US">Writer2xhtml will add a simple navigation panel that lets you
+        move between pages. The navigation links will be in the same language as the document (as defined
+        under <emph>Tools - Options - Language Settings - Languages</emph>).</paragraph>
+        <paragraph role="paragraph" xml-lang="en-US">Note that this option has no effect for headings
+        inside tables.</paragraph>
+
+    	<bookmark xml-lang="en-US" branch="hid/org.openoffice.da.writer2xhtml.oxt:OptionsSplitLevel" id="bm_options_splitlevel"/>
+   		<paragraph role="paragraph" xml-lang="en-US"><ahelp hid="org.openoffice.da.writer2xhtml.oxt:OptionsSplitLevel" visibility="hidden">Select the heading level at which the spliting should occur</ahelp></paragraph>
+    	<paragraph role="heading" level="3" xml-lang="en-US">Heading level</paragraph>
+    	<paragraph role="paragraph" xml-lang="en-US">If you have chosen to split the document at headings, you can use this option
+    	to define at which level splitting should occur. For example 2 to split the document at all headings of level 1 or 2.</paragraph>
+		
+    	<bookmark xml-lang="en-US" branch="hid/org.openoffice.da.writer2xhtml.oxt:OptionsRepeatLevels" id="bm_options_repeatlevels"/>
+        <paragraph role="heading" level="3" xml-lang="en-US">Repeat heading levels</paragraph>
+   		<paragraph role="paragraph" xml-lang="en-US"><ahelp hid="org.openoffice.da.writer2xhtml.oxt:OptionsRepeatLevels" visibility="hidden">Select the number of heading levels to repeat at the top of new documents</ahelp></paragraph>
+        <paragraph role="paragraph" xml-lang="en-US">To help the reader to identify the current position within the document,
+        you can use this option to repeat the parent headings whenever the document is split. If you for example split at
+        headings of level 3 and set this option to 2, the headings of level 1 and 2 will be repeated before the heading of level 3,
+        providing precise information as to where in the document the section belongs.</paragraph>
+
+   		<bookmark xml-lang="en-US" branch="hid/org.openoffice.da.writer2xhtml.oxt:OptionsSaveImagesInSubdir" id="bm_options_saveimagesinsubdir"/>
+		<paragraph role="paragraph" xml-lang="en-US"><ahelp hid="org.openoffice.da.writer2xhtml.oxt:OptionsSaveImagesInSubdir" visibility="hidden">Check this to save images in a subdirectory relative to the exported document</ahelp></paragraph>
+		<section id="saveimagesinsubdir">
+    	<paragraph role="heading" level="3" xml-lang="en-US">Save images in subdirectory</paragraph>
+    	<paragraph role="paragraph" xml-lang="en-US">Writer2xhtml normally saves images associated with the document in the same
+    	directory as the HTML document. If the document contains a large number of images it may be more convenient to save the
+    	images in a separate subdirectory. This option will create a subdirectory with the same name as the HTML document to
+    	store the images.</paragraph>
+    	</section>
+
+        <paragraph role="heading" level="2" xml-lang="en-US">Special content</paragraph>
+
+    	<bookmark xml-lang="en-US" branch="hid/org.openoffice.da.writer2xhtml.oxt:OptionsNotes" id="bm_options_notes"/>
+   		<paragraph role="paragraph" xml-lang="en-US"><ahelp hid="org.openoffice.da.writer2xhtml.oxt:OptionsNotes" visibility="hidden">Check this if you want to export notes (annotations) in the document</ahelp></paragraph>
+   		<section id="notes1">
+    	<paragraph role="heading" level="3" xml-lang="en-US">Export notes</paragraph>
+    	</section>
+    	<section id="notes2">
+	    <paragraph role="paragraph" xml-lang="en-US">If you select this option, notes (also known as annotations) in the
+    	%PRODUCTNAME document are exported as comments in the HTML document. They will not be directly visible in the browser,
+        only in the HTML source. If the option is not selected, notes are completely ignored.</paragraph>
+		</section>
+		
+    	<bookmark xml-lang="en-US" branch="hid/org.openoffice.da.writer2xhtml.oxt:OptionsUseDublinCore" id="bm_options_usedublincore"/>
+   		<paragraph role="paragraph" xml-lang="en-US"><ahelp hid="org.openoffice.da.writer2xhtml.oxt:OptionsUseDublinCore" visibility="hidden">Check this if you want to export all meta data (using the Dublin Core standard)</ahelp></paragraph>
+    	<section id="usedublincore">
+    	<paragraph role="heading" level="3" xml-lang="en-US">Export document properties (Dublin Core Meta data)</paragraph>
+	    <paragraph role="paragraph" xml-lang="en-US">If you select this option, the document properties (File - Properties)
+    	are exported using
+		<link href="http://dublincore.org/" name="Link to the Dublin Core standard">the Dublin Core standard</link>.</paragraph>
+		</section>
+
+        <paragraph role="heading" level="2" xml-lang="en-US">Figures, tables and formulas</paragraph>
+
+    	<bookmark xml-lang="en-US" branch="hid/org.openoffice.da.writer2xhtml.oxt:OptionsImageSize" id="bm_options_imagesize"/>
+		<paragraph role="paragraph" xml-lang="en-US"><ahelp hid="org.openoffice.da.writer2xhtml.oxt:ImageSize" visibility="hidden">Select how to handle the size of images, either by using the size defined in the document, define as a percentage of the screen width or by using the natural dimensions of the image</ahelp></paragraph>
+		<section id="imagesize">
+	    <paragraph role="heading" level="3" xml-lang="en-US">Image size</paragraph>
+        <paragraph role="paragraph" xml-lang="en-US">Often images in a %PRODUCTNAME document are scaled up or down from their original size.
+		Using this option you can select how to handle image sizes.</paragraph>
+        <list type="unordered">
+			<listitem>
+				<paragraph role="paragraph" xml-lang="en-US"><emph>Automatic</emph> will export a size based on the size defined
+				in the Writer document. The image will thus have a fixed size in the HTML document.</paragraph>
+			</listitem>
+			<listitem>
+				<paragraph role="paragraph" xml-lang="en-US"><emph>Relative to page width</emph> will calculate the width of the
+				image relative to the page. The image will thus occupy a fixed percentage of the screen width.</paragraph>
+			</listitem>
+			<listitem>
+				<paragraph role="paragraph" xml-lang="en-US"><emph>Do not export</emph> will not export image dimensions. The
+				image will thus have the natural, unscaled size.</paragraph>
+			</listitem>
+        </list>
+        </section>
+
+        <bookmark xml-lang="en-US" branch="hid/org.openoffice.da.writer2xhtml.oxt:OptionsEmbedSVG" id="bm_options_embedsvg"/>
+		<section id="embedsvg">
+        <paragraph role="heading" level="3" xml-lang="en-US">Embed vector graphics</paragraph>
+		<paragraph role="paragraph" xml-lang="en-US"><ahelp hid="org.openoffice.da.writer2xhtml.oxt:OptionsEmbedSVG" visibility="hidden">Check this to embed vector graphics in the document rather than in a separate file</ahelp></paragraph>
+        <paragraph role="paragraph" xml-lang="en-US">Vector graphics is exported to SVG format. If you check this option, the
+        SVG image will be embedded directly in the HTML document. Otherwise they will be included in a separate file.</paragraph>
+		</section>
+
+        <bookmark xml-lang="en-US" branch="hid/org.openoffice.da.writer2xhtml.oxt:OptionsEmbedImg" id="bm_options_embedimg"/>
+        <section id="embedimg">
+		<paragraph role="paragraph" xml-lang="en-US"><ahelp hid="org.openoffice.da.writer2xhtml.oxt:OptionsEmbedImg" visibility="hidden">Check this to embed raster graphics in the document rather than in a separate file</ahelp></paragraph>
+        <paragraph role="heading" level="3" xml-lang="en-US">Embed raster graphics</paragraph>
+        <paragraph role="paragraph" xml-lang="en-US">Raster graphics is exported to JPEG, PNG or GIF format. If you check this option, all
+        raster images will be embedded directly in the HTML document (base64 encoded). Otherwise they will be included in a separate file.
+        This is not recommended for documents with large images.</paragraph>
+        </section>
+        
+    	<bookmark xml-lang="en-US" branch="hid/org.openoffice.da.writer2xhtml.oxt:TableSize" id="bm_options_tablesize"/>
+		<paragraph role="paragraph" xml-lang="en-US"><ahelp hid="org.openoffice.da.writer2xhtml.oxt:TableSize" visibility="hidden">Select how to handle the size of tables, either by using the size defined in the document, define as a percentage of the screen width or by leaving the layout to the browser</ahelp></paragraph>
+		<section id="tablesize">
+	    <paragraph role="heading" level="3" xml-lang="en-US">Table size</paragraph>
+        <paragraph role="paragraph" xml-lang="en-US">Using this option you can select how to handle table sizes.</paragraph>
+        <list type="unordered">
+			<listitem>
+				<paragraph role="paragraph" xml-lang="en-US"><emph>Automatic</emph> will export a size based on the size defined
+				in the Writer document. The table will thus either have a fixed size in the resulting document or occupy a fixed percentage
+				of the screen width.</paragraph>
+			</listitem>
+			<listitem>
+				<paragraph role="paragraph" xml-lang="en-US"><emph>Relative to page width</emph> will calculate the width of the
+				table relative to the page. The table will thus occupy a fixed percentage of the screen width.</paragraph>
+			</listitem>
+			<listitem>
+				<paragraph role="paragraph" xml-lang="en-US"><emph>Do not export</emph> will not export table dimensions. The
+				size of the table will thus be adapted to the content.</paragraph>
+			</listitem>
+        </list>
+		</section>
+
+   		<bookmark xml-lang="en-US" branch="hid/org.openoffice.da.writer2xhtml.oxt:OptionsColumnScaling" id="bm_options_columnscaling"/>
+		<paragraph role="paragraph" xml-lang="en-US"><ahelp hid="org.openoffice.da.writer2xhtml.oxt:OptionsColumnScaling" visibility="hidden">Select a scaling to apply to all column dimensions in the document</ahelp></paragraph>
+		<section id="columnscaling">
+    	<paragraph role="heading" level="3" xml-lang="en-US">Column scaling</paragraph>
+    	<paragraph role="paragraph" xml-lang="en-US">This is a similar option, which only affects table columns. Thus you can further
+    	widen or narrow the columns of the tables if you wish.</paragraph>
+		</section>
+
+   		<bookmark xml-lang="en-US" branch="hid/org.openoffice.da.writer2xhtml.oxt:OptionsUseMathjax" id="bm_options_usemathjax"/>
+		<paragraph role="paragraph" xml-lang="en-US"><ahelp hid="org.openoffice.da.writer2xhtml.oxt:OptionsUseMathjax" visibility="hidden">Check this to load the JavaScript library MathJax for viewing mathematical content</ahelp></paragraph>
+		<section id="usemathjax">
+        	<paragraph role="heading" level="3" xml-lang="en-US">Use MathJax</paragraph>
+        	<paragraph role="paragraph" xml-lang="en-US">This option is only available if you export to XHTML+MathML or HTML5.
+        	<link href="http://www.mathjax.org/" name="MathJax web site">MathJax</link> is a JavaScript library for displaying mathematical content in web pages.
+        	Using MathJax ensures that your mathematical content will display correctly in most browsers.
+        	This includes formulas created with the extension <link href="http://roland65.free.fr/texmaths/" name="TexMaths web site">TexMaths</link>.
+        	</paragraph>
+        </section>
+        
+        <bookmark xml-lang="en-US" branch="hid/org.openoffice.da.writer2xhtml.oxt:OptionsFormulas" id="bm_options_formulas"/>
+		<paragraph role="paragraph" xml-lang="en-US"><ahelp hid="org.openoffice.da.writer2xhtml.oxt:OptionsFormulas" visibility="hidden">Select how to export mathematical formulas, either as images or as plain text in StarMath notation</ahelp></paragraph>
+        <paragraph role="heading" level="3" xml-lang="en-US">Formulas</paragraph>
+        <paragraph role="paragraph" xml-lang="en-US">Select how to export formulas if you are not using XHTML+MathML or HTML5.</paragraph>
+        <list type="unordered">
+			<listitem>
+		        <paragraph role="paragraph" xml-lang="en-US"><emph>Image with StarMath code</emph>: Export formulas as images
+		        with the original StarMath formula in the alt attribute.</paragraph>
+			</listitem>
+			<listitem>
+		        <paragraph role="paragraph" xml-lang="en-US"><emph>StarMath code</emph>: Export the original StarMath code directly
+		        in the text.</paragraph>
+			</listitem>
+		</list>
+
+        
+
+
+        <paragraph role="heading" level="2" xml-lang="en-US">AutoCorrect</paragraph>
+
+    	<bookmark xml-lang="en-US" branch="hid/org.openoffice.da.writer2xhtml.oxt:OptionsIgnoreHardLineBreaks" id="bm_options_ignorehardlinebreaks"/>
+        <paragraph role="heading" level="3" xml-lang="en-US">Ignore hard line breaks</paragraph>
+   		<paragraph role="paragraph" xml-lang="en-US"><ahelp hid="org.openoffice.da.writer2xhtml.oxt:OptionsIgnoreHardLineBreaks" visibility="hidden">Check this if you don't want to export hard (manual) line breaks</ahelp></paragraph>
+        <paragraph role="paragraph" xml-lang="en-US">Sometimes hard (or manual) line breaks are used in Writer to optimize
+        the placement of the line breaks. Since line breaking in a browser is completely different, you may want to ignore
+        all hard line breaks by selecting this option.</paragraph>
+
+    	<bookmark xml-lang="en-US" branch="hid/org.openoffice.da.writer2xhtml.oxt:OptionsIgnoreEmptyParagraphs" id="bm_options_ignoreemptyparagraphs"/>
+		<paragraph role="paragraph" xml-lang="en-US"><ahelp hid="org.openoffice.da.writer2xhtml.oxt:OptionsIgnoreEmptyParagraphs" visibility="hidden">Check this if you don't want to export empty paragraphs</ahelp></paragraph>
+        <section id="ignoreemptyparagraphs">
+        	<paragraph role="heading" level="3" xml-lang="en-US">Ignore empty paragraphs</paragraph>
+        	<paragraph role="paragraph" xml-lang="en-US">Empty paragraphs are sometimes used a simple means to create vertical
+        	spacing in Writer. In a well-structured document, an empty paragraph is probably a mistake. Hence you can select
+        	this option to ignore empty paragraphs in the document in the export.</paragraph>
+        </section>
+
+    	<bookmark xml-lang="en-US" branch="hid/org.openoffice.da.writer2xhtml.oxt:OptionsIgnoreDoubleSpaces" id="bm_options_ignoredoublespaces"/>
+		<paragraph role="paragraph" xml-lang="en-US"><ahelp hid="org.openoffice.da.writer2xhtml.oxt:OptionsIgnoreDoubleSpaces" visibility="hidden">Check this to treat several spaces as a single space in the export</ahelp></paragraph>
+        <section id="ignoredoublespaces">
+        	<paragraph role="heading" level="3" xml-lang="en-US">Ignore double spaces</paragraph>
+        	<paragraph role="paragraph" xml-lang="en-US">For similar reasons you can choose to ignore two or more spaces in a
+        	row using this option.</paragraph>
+        </section>
+        
+	</body>
+</helpdocument>

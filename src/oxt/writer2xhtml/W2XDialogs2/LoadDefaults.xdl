@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE dlg:window PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "dialog.dtd">
+<dlg:window xmlns:dlg="http://openoffice.org/2000/dialog" xmlns:script="http://openoffice.org/2000/script" dlg:id="LoadDefaults" dlg:left="255" dlg:top="145" dlg:width="160" dlg:height="64" dlg:closeable="true" dlg:moveable="true" dlg:title="Load default mappings">
+ <dlg:bulletinboard>
+  <dlg:text dlg:id="InfoLabel" dlg:tab-index="0" dlg:left="5" dlg:top="8" dlg:width="150" dlg:height="12" dlg:value="Do you wish to load the default mappings?"/>
+  <dlg:text dlg:id="OverwriteLabel" dlg:tab-index="1" dlg:left="5" dlg:top="22" dlg:width="150" dlg:height="12" dlg:value="(This will overwrite %s existing mappings)"/>
+  <dlg:button dlg:id="YesButton" dlg:tab-index="2" dlg:left="5" dlg:top="42" dlg:width="50" dlg:height="12" dlg:value="Yes" dlg:button-type="ok"/>
+  <dlg:button dlg:id="NoButton" dlg:tab-index="3" dlg:left="60" dlg:top="42" dlg:width="50" dlg:height="12" dlg:value="No" dlg:button-type="cancel"/>
+ </dlg:bulletinboard>
+</dlg:window>

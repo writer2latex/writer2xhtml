@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<helpdocument version="1.0">
+	<meta>
+        <topic id="writer2xhtml-configuration-stylesheets" indexer="include">
+            <title xml-lang="en-US">Content</title>
+            <filename>org.openoffice.da.writer2xhtml.oxt/Configuration/Stylesheets.xhp</filename>
+        </topic>
+    </meta>
+    <body>
+        <bookmark xml-lang="en-US" branch="hid/org.openoffice.da.writer2xhtml.oxt:ConfigStyleSheets" id="bm_configstylesheets"/>
+        <paragraph role="heading" level="1" xml-lang="en-US">Style sheets</paragraph>
+        <paragraph role="paragraph" xml-lang="en-US">Use this page to provide your own style sheets for the exported documents.</paragraph>
+
+        <section id="howtoget" xml-lang="en-US">
+        	Choose <emph>Tools - Options - Writer2xhtml - Style sheets</emph>
+        </section>
+        
+        <paragraph role="heading" level="2" xml-lang="en-US">Custom style sheets</paragraph>
+        <paragraph role="paragraph" xml-lang="en-US">The custom style sheet can either be an embedded style sheet for the EPUB
+        export or a linked style sheet for the HTML export.</paragraph>
+
+        <bookmark xml-lang="en-US" branch="hid/org.openoffice.da.writer2xhtml.oxt:LinkCustomStylesheet" id="bm_configlinkstylesheet"/>
+        <paragraph role="heading" level="3" xml-lang="en-US">Insert link to custom style sheet (HTML export)</paragraph>
+        <paragraph role="paragraph" xml-lang="en-US">Check this to link to your own, external CSS style sheet.
+        For more advanced solutions (eg. different style sheets for screen viewing and printing) you can use an
+        <link href="org.openoffice.da.writer2xhtml.oxt/Configuration/Template.xhp"
+		name="Template">HTML template</link>.</paragraph>
+
+        <bookmark xml-lang="en-US" branch="hid/org.openoffice.da.writer2xhtml.oxt:CustomStylesheetURL" id="bm_configcustomstylesheeturl"/>
+        <paragraph role="heading" level="3" xml-lang="en-US">URL</paragraph>
+        <paragraph role="paragraph" xml-lang="en-US">Enter the URL for the style sheet.</paragraph>
+
+        <bookmark xml-lang="en-US" branch="hid/org.openoffice.da.writer2xhtml.oxt:UseCustomStylesheet" id="bm_configusecustomstylesheet"/>
+        <paragraph role="heading" level="3" xml-lang="en-US">Include custom style sheet (EPUB export)</paragraph>
+        <paragraph role="paragraph" xml-lang="en-US">Check this to include a custom style sheet in the EPUB document.</paragraph>
+
+        <bookmark xml-lang="en-US" branch="hid/org.openoffice.da.writer2xhtml.oxt:CustomStylesheet" id="bm_configcustomstylesheet"/>
+        <paragraph role="heading" level="3" xml-lang="en-US">Custom style sheet</paragraph>
+        <paragraph role="paragraph" xml-lang="en-US">Enter the CSS code for your custom style sheet here.</paragraph>
+
+        <bookmark xml-lang="en-US" branch="hid/org.openoffice.da.writer2xhtml.oxt:LoadStylesheet" id="bm_configloadstylesheet"/>
+        <paragraph role="heading" level="3" xml-lang="en-US">Load...</paragraph>
+        <paragraph role="paragraph" xml-lang="en-US">Click to load the style sheet from a file.
+        This will create a copy of the original file. If you change, move or delete the original file, nothing
+        will happen to the style sheet. If you want to update the style sheet with a new version of the original file, click
+        this button again.</paragraph>
+        
+        <bookmark xml-lang="en-US" branch="hid/org.openoffice.da.writer2xhtml.oxt:Resources" id="bm_configresources"/>
+        <paragraph role="heading" level="3" xml-lang="en-US">Style resources</paragraph>
+        <paragraph role="paragraph" xml-lang="en-US">This is a list of resource files to include with the custom style sheet.
+        You can refer to these files from your style sheet. The reference should be by file name only, as the resource files
+        are placed in the same directory as the style sheet. For example:</paragraph>
+        <paragraph role="code" xml-lang="en-US">body { background-image:url('myimage.jpg'); }</paragraph>
+        <paragraph role="paragraph" xml-lang="en-US">Note that changes to this list will <emph>not</emph> be undone if
+        you click <emph>Cancel</emph>.</paragraph>
+        
+        <bookmark xml-lang="en-US" branch="hid/org.openoffice.da.writer2xhtml.oxt:NewResource" id="bm_newresource"/>
+        <paragraph role="heading" level="3" xml-lang="en-US">New...</paragraph>
+        <paragraph role="paragraph" xml-lang="en-US">Click this to add a new resource file to the list. Select the file and press
+        <emph>Open</emph> (On some systems you can select more than one file).
+        This will create a copy of the original file. If you change, move or delete the original file, nothing
+        will happen to the resource file. If you want to update the resource file with a new version of the original file, click
+        this button again.</paragraph>
+
+        <bookmark xml-lang="en-US" branch="hid/org.openoffice.da.writer2xhtml.oxt:DeleteResource" id="bm_deleteresource"/>
+        <paragraph role="heading" level="3" xml-lang="en-US">Delete...</paragraph>
+        <paragraph role="paragraph" xml-lang="en-US">Click this to delete the currently selected resource file from the list.
+        This will not affect the original file.</paragraph>
+
+    </body>
+</helpdocument>

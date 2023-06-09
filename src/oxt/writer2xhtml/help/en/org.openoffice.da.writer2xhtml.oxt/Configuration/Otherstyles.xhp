@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<helpdocument version="1.0">
+	<meta>
+        <topic id="writer2xhtml-configuration-content" indexer="include">
+            <title xml-lang="en-US">Other styles</title>
+            <filename>org.openoffice.da.writer2xhtml.oxt/Configuration/Otherstyles.xhp</filename>
+        </topic>
+    </meta>
+    <body>
+        <bookmark xml-lang="en-US" branch="hid/org.openoffice.da.writer2xhtml.oxt:ConfigOtherStyles" id="bm_configotherstyles"/>
+        <paragraph role="heading" level="1" xml-lang="en-US">Other styles</paragraph>
+        <paragraph role="paragraph" xml-lang="en-US">Use this page to define various style related features of the export.
+        This supplements the settings on the page
+        <link href="org.openoffice.da.writer2xhtml.oxt/Configuration/Masterstyles.xhp"
+		name="Template">Master styles</link>.</paragraph>
+
+        <section id="howtoget" xml-lang="en-US">
+        	Choose <emph>Tools - Options - Writer2xhtml - Other styles</emph>
+        </section>
+        
+        <paragraph role="heading" level="2" xml-lang="en-US">Style mappings for hard formatting</paragraph>
+        <paragraph role="paragraph" xml-lang="en-US">In general using real styles is preferred. These setting allows you to define
+        styles for a selection of hard text formatting attributes.</paragraph>
+        <paragraph role="note" xml-lang="en-US">To apply these settings: Go to the page
+        <emph><link href="org.openoffice.da.writer2xhtml.oxt/Configuration/Formatting.xhp"
+        name="Formatting">Formatting</link></emph> and set <emph>Formatting</emph> to either <emph>Ignore hard formatting</emph> or
+        <emph>Ignore all</emph>. Otherwise the rules you define here are ignored.</paragraph>
+
+        <bookmark xml-lang="en-US" branch="hid/org.openoffice.da.writer2xhtml.oxt:FormattingAttribute" id="bm_configformattingattribute"/>
+        <paragraph role="heading" level="3" xml-lang="en-US">Formatting attribute</paragraph>
+        <paragraph role="paragraph" xml-lang="en-US">Select a formatting attribute.</paragraph>
+
+        <bookmark xml-lang="en-US" branch="hid/org.openoffice.da.writer2xhtml.oxt:CustomAttribute" id="bm_configcustomattribute"/>
+        <paragraph role="heading" level="3" xml-lang="en-US">Apply custom style</paragraph>
+        <paragraph role="paragraph" xml-lang="en-US">Check this if you want to apply a custom style for this attribute.</paragraph>
+
+        <bookmark xml-lang="en-US" branch="hid/org.openoffice.da.writer2xhtml.oxt:AttributeElement" id="bm_configattributeelement"/>
+        <paragraph role="heading" level="3" xml-lang="en-US">HTML element</paragraph>
+        <paragraph role="paragraph" xml-lang="en-US">Enter the name of an HTML element or select one from the list.</paragraph>
+
+        <bookmark xml-lang="en-US" branch="hid/org.openoffice.da.writer2xhtml.oxt:AttributeCss" id="bm_configattributecss"/>
+        <paragraph role="heading" level="3" xml-lang="en-US">CSS class</paragraph>
+        <paragraph role="paragraph" xml-lang="en-US">Enter the name of a CSS class to apply to the element. If you leave this field
+        empty, the <emph>class</emph> attribute will not be set.</paragraph>
+
+        <paragraph role="heading" level="2" xml-lang="en-US">Other styles</paragraph>
+
+        <bookmark xml-lang="en-US" branch="hid/org.openoffice.da.writer2xhtml.oxt:TabstopStyle" id="bm_configtabstopstyle"/>
+        <paragraph role="heading" level="3" xml-lang="en-US">CSS class for tabulator stop</paragraph>
+        <paragraph role="paragraph" xml-lang="en-US">Normally tabulator stops are exported as spaces. If you enter the name of
+        a CSS class here, the space will be contained in a <emph>span</emph> element with your style in the class attribute.</paragraph>
+
+    </body>
+</helpdocument>

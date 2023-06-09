@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<helpdocument version="1.0">
+	<meta>
+        <topic id="writer2xhtml-configuration-content" indexer="include">
+            <title xml-lang="en-US">Formatting</title>
+            <filename>org.openoffice.da.writer2xhtml.oxt/Configuration/Formatting.xhp</filename>
+        </topic>
+    </meta>
+    <body>
+        <bookmark xml-lang="en-US" branch="hid/org.openoffice.da.writer2xhtml.oxt:ConfigFormattingExport" id="bm_configformattingexport"/>
+        <paragraph role="heading" level="1" xml-lang="en-US">Formatting</paragraph>
+        <paragraph role="paragraph" xml-lang="en-US">Use this page to define how much formatting to export.</paragraph>
+
+        <section id="howtoget" xml-lang="en-US">
+        	Choose <emph>Tools - Options - Writer2xhtml - Formatting</emph>
+        </section>
+        
+        <paragraph role="heading" level="2" xml-lang="en-US">Formatting export</paragraph>
+        <bookmark xml-lang="en-US" branch="hid/org.openoffice.da.writer2xhtml.oxt:SeparateStylesheet" id="bm_configseparatestylesheet"/>
+        <paragraph role="heading" level="3" xml-lang="en-US">Create separate style sheet</paragraph>
+        <paragraph role="paragraph" xml-lang="en-US">Check this if you want to create a separate CSS file in the export.
+        Otherwise the CSS code will be exported embedded in the HTML document(s).</paragraph>
+
+        <bookmark xml-lang="en-US" branch="hid/org.openoffice.da.writer2xhtml.oxt:CofigFormatting" id="bm_configformatting"/>
+        <paragraph role="heading" level="3" xml-lang="en-US">Formatting</paragraph>
+        <paragraph role="paragraph" xml-lang="en-US">This is used to specify how much text formatting
+        (character, paragraph and list formatting) to export.</paragraph>
+        <list type="unordered">
+        	<listitem>
+		        <paragraph role="paragraph" xml-lang="en-US"><emph>Convert all</emph>: Convert all supported formatting to CSS</paragraph>
+        	</listitem>
+        	<listitem>
+		        <paragraph role="paragraph" xml-lang="en-US"><emph>Ignore styles</emph>: Convert hard formatting but not formatting
+		        by styles. Use this value if you use a custom style sheet, but still want to be able to add some hard formatting
+		        (eg. a centered paragraph, some bold text etc.).</paragraph>
+        	</listitem>
+        	<listitem>
+		        <paragraph role="paragraph" xml-lang="en-US"><emph>Ignore hard formatting</emph>: Convert formatting by styles, but
+		        no hard formatting (except as given by
+		        <link href="org.openoffice.da.writer2xhtml.oxt/Configuration/Otherstyles.xhp" name="Other styles">attribute style
+		        mappings</link>).
+		        Use this if the document is well structured using styles, so that any hard formatting should be considered
+		        an error.</paragraph>
+        	</listitem>
+        	<listitem>
+		        <paragraph role="paragraph" xml-lang="en-US"><emph>Ignore all</emph>: Convert no formatting at all. Use this value
+		        if you use a custom stylesheet and the document is well structured using styles, so that any hard formatting should
+		        be considered an error.</paragraph>
+        	</listitem>
+        </list>
+
+        <bookmark xml-lang="en-US" branch="hid/org.openoffice.da.writer2xhtml.oxt:FrameFormatting" id="bm_configframeformatting"/>
+        <paragraph role="heading" level="3" xml-lang="en-US">Frame formatting</paragraph>
+        <paragraph role="paragraph" xml-lang="en-US">This is used for the same purpose, but affects frame formatting only.</paragraph>
+
+        <bookmark xml-lang="en-US" branch="hid/org.openoffice.da.writer2xhtml.oxt:SectionFormatting" id="bm_configsectionformatting"/>
+        <paragraph role="heading" level="3" xml-lang="en-US">Convert section formatting</paragraph>
+        <paragraph role="paragraph" xml-lang="en-US">Check this if you want to export section formatting (background, margins).</paragraph>
+
+        <bookmark xml-lang="en-US" branch="hid/org.openoffice.da.writer2xhtml.oxt:TableFormatting" id="bm_configtableformatting"/>
+        <paragraph role="heading" level="3" xml-lang="en-US">Convert table formatting</paragraph>
+        <paragraph role="paragraph" xml-lang="en-US">Check this if you want to export table formatting.</paragraph>
+
+        <bookmark xml-lang="en-US" branch="hid/org.openoffice.da.writer2xhtml.oxt:IgnoreTableDimensions" id="bm_configignoretabledimensions"/>
+        <paragraph role="heading" level="3" xml-lang="en-US">Ignore table dimensions</paragraph>
+        <paragraph role="paragraph" xml-lang="en-US">Check this if you do not want table dimensions (table width, column width and
+        row height) to be exported, but want to leave the layout of the tables to the browser.</paragraph>
+
+        <bookmark xml-lang="en-US" branch="hid/org.openoffice.da.writer2xhtml.oxt:ListFormatting" id="bm_configlistformatting"/>
+        <paragraph role="heading" level="3" xml-lang="en-US">List formatting</paragraph>
+        <paragraph role="paragraph" xml-lang="en-US">Choose how to export list formatting.</paragraph>
+        <list type="unordered">
+        	<listitem>
+		        <paragraph role="paragraph" xml-lang="en-US"><emph>Use CSS1</emph>: List formatting is exported using CSS1.
+		        This only provides basic support for list labels, and currently the browsers default indentations are used.</paragraph>
+        	</listitem>
+        	<listitem>
+		        <paragraph role="paragraph" xml-lang="en-US"><emph>Use CSS1 and non-standard lists</emph>: This value is used to fix a
+		        problem with continued lists. If you select this value, Writer2xhtml will export a list that continues on level 2 or below
+		        like</paragraph>
+		        <paragraph role="code" xml-lang="en-US">&lt;ol&gt;&lt;ol&gt;&lt;li&gt;...&lt;/li&gt;&lt;/ol&gt;&lt;/ol&gt;</paragraph>
+				<paragraph role="paragraph" xml-lang="en-US">This is not valid in HTML, but works in browsers.
+				Also two deprecated attributes are used to continue numbering.</paragraph>
+        	</listitem>
+        	<listitem>
+		        <paragraph role="paragraph" xml-lang="en-US"><emph>Use hard labels</emph>: If select this value, list labels are
+		        exported as part of the text. This adds full support for list labels (e.g. labels of the form 1.2.3). Unlike the other
+		        values indentations of the list are exported as well.</paragraph>
+        	</listitem>
+        </list>
+
+        <bookmark xml-lang="en-US" branch="hid/org.openoffice.da.writer2xhtml.oxt:MaxWidth" id="bm_configmaxwidth"/>
+        <paragraph role="heading" level="3" xml-lang="en-US">Maximum text width</paragraph>
+        <paragraph role="paragraph" xml-lang="en-US">In this field you can give a maximum width (like e.g. 800px)
+        for the exported text, which may enhance the readability. You can use any unit defined in CSS.
+        If the browser window is wider than this, the text will be centered with suitable margins. 
+        Leave the field blank if you want the text to occupy the full width of the browser window.</paragraph>
+    </body>
+</helpdocument>

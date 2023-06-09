@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<tree_view version="17-apr-2010">
+  <help_section application="writer2xhtml" id="w2x01" title="Writer2xhtml">
+      <topic id="writer2xhtml/org.openoffice.da.writer2xhtml.oxt/introduction.xhp">Introduction</topic>
+      <topic id="writer2xhtml/org.openoffice.da.writer2xhtml.oxt/menu.xhp">Menu and toolbar</topic>
+      <topic id="writer2xhtml/org.openoffice.da.writer2xhtml.oxt/export.xhp">HTML Export (Writer)</topic>
+      <topic id="writer2xhtml/org.openoffice.da.writer2xhtml.oxt/export_calc.xhp">HTML Export (Calc)</topic>
+      <topic id="writer2xhtml/org.openoffice.da.writer2xhtml.oxt/epub_export.xhp">EPUB Export (Writer)</topic>
+      <topic id="writer2xhtml/org.openoffice.da.writer2xhtml.oxt/epub_metadata.xhp">EPUB document properties (Writer)</topic>
+      <node id="w2x01_toolbar_configuration" title="Toolbar configuration">
+	      <topic id="writer2xhtml/org.openoffice.da.writer2xhtml.oxt/settings.xhp">Settings</topic>
+      </node>      
+      <node id="w2x01_configuration" title="Custom style">
+      	<topic id="writer2xhtml/org.openoffice.da.writer2xhtml.oxt/Configuration/Introduction.xhp">Introduction</topic>
+      	<topic id="writer2xhtml/org.openoffice.da.writer2xhtml.oxt/Configuration/General.xhp">General</topic>
+      	<topic id="writer2xhtml/org.openoffice.da.writer2xhtml.oxt/Configuration/Template.xhp">Template</topic>
+      	<topic id="writer2xhtml/org.openoffice.da.writer2xhtml.oxt/Configuration/Stylesheets.xhp">Style sheets</topic>
+      	<topic id="writer2xhtml/org.openoffice.da.writer2xhtml.oxt/Configuration/Masterstyles.xhp">Master styles</topic>
+      	<topic id="writer2xhtml/org.openoffice.da.writer2xhtml.oxt/Configuration/Otherstyles.xhp">Other styles</topic>
+      	<topic id="writer2xhtml/org.openoffice.da.writer2xhtml.oxt/Configuration/Formatting.xhp">Formatting</topic>
+      	<topic id="writer2xhtml/org.openoffice.da.writer2xhtml.oxt/Configuration/Content.xhp">Content</topic>
+      </node>      
+  </help_section>
+</tree_view>

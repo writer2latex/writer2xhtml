@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<helpdocument version="1.0">
+	<meta>
+        <topic id="writer2xhtml-epub-metadata" indexer="include">
+            <title xml-lang="en-US">EPUB document properties (Writer)</title>
+            <filename>org.openoffice.da.writer2xhtml.oxt/epub_metadata.xhp</filename>
+        </topic>
+    </meta>
+    <body>
+    	<bookmark xml-lang="en-US" branch="hid/org.openoffice.da.writer2xhtml.oxt:EpubMetadata" id="bm_metadata"/>
+        <paragraph role="heading" level="1" xml-lang="en-US">EPUB document properties (Writer)</paragraph>
+        <paragraph role="paragraph" xml-lang="en-US">Edit the document properties for an EPUB document.</paragraph>
+        <section id="howtoget" xml-lang="en-US">
+        	Choose <emph>File - Export - EPUB</emph> or <emph>File - Export - EPUB 3</emph>,
+        	and click <emph>Edit document properties</emph> in the export dialog<br/>
+        	or click the <emph>EPUB-button</emph> marked with <emph>i</emph> in the toolbar
+        </section>
+
+    
+        <paragraph role="paragraph" xml-lang="en-US">The EPUB standard specifies a large number of document properties.
+        Not all of these are supported by the OpenDocument standard.
+        Writer2xhtml supports the additional properties using user defined document properties.
+        This dialog provides a convenient interface to edit all EPUB document properties, but you can also access all properties
+        using the standard interface in %PRODUCTNAME Writer, that is <emph>File - Properties</emph>.
+        Writer2xhtml will always include the identifier, author(s), date(s) and the title.
+        Other fields are optional and can be left blank. In this case they will not be included in the EPUB document.</paragraph>
+
+
+        <paragraph role="heading" level="2" xml-lang="en-US">Custom identifier</paragraph>
+        <paragraph role="paragraph" xml-lang="en-US">Each EPUB document must have a unique identifier.
+        Normally Writer2xhtml generates a Universal Unique ID (UUID) for this purpose, but you may override this with
+        your own identifier.</paragraph>
+
+        <paragraph role="heading" level="3" xml-lang="en-US">Use custom identifier</paragraph>
+        <paragraph role="paragraph" xml-lang="en-US">Check this if you want to provide your own identifier</paragraph>
+
+        <paragraph role="heading" level="3" xml-lang="en-US">Identifier</paragraph>
+        <paragraph role="paragraph" xml-lang="en-US">Enter the identifier to use. Remember that it must be unique amongst all
+        EPUB documents.</paragraph>
+
+        <paragraph role="heading" level="3" xml-lang="en-US">Identifier type</paragraph>
+   		<paragraph role="paragraph" xml-lang="en-US">An identifier may follow a specific identification scheme, e.g. ISBN.
+   		Select or enter an identification scheme in this field.</paragraph>
+        
+        
+        <paragraph role="heading" level="2" xml-lang="en-US">Authors</paragraph>
+		<paragraph role="paragraph" xml-lang="en-US">An EPUB document can have several authors, which you can list here.
+		An author can be either a <emph>creator</emph>, that is a primary author of the publication, or a <emph>contributor</emph>,
+		that is a party whose contribution to the publication is secondary to the creator(s).
+		Furthermore an author may have a special role, e.g. <emph>illustrator</emph>. Both properties are specified when you add
+		a new author to the list.</paragraph>
+		<paragraph role="paragraph" xml-lang="en-US">Note that some EPUB readers may only present the first creator, hence
+		you should make sure that the primary creator is at the top of the list.</paragraph>
+		<paragraph role="paragraph" xml-lang="en-US">If you do not add any authors, Writer2xhtml will display and use a default value
+		for the author.</paragraph>
+        
+        <paragraph role="heading" level="3" xml-lang="en-US">Add...</paragraph>
+   		<paragraph role="paragraph" xml-lang="en-US">Click this to add new author to the list.</paragraph>
+
+        <paragraph role="heading" level="3" xml-lang="en-US">Modify...</paragraph>
+   		<paragraph role="paragraph" xml-lang="en-US">Click this to modify the currently selected author.</paragraph>
+
+        <paragraph role="heading" level="3" xml-lang="en-US">Delete...</paragraph>
+   		<paragraph role="paragraph" xml-lang="en-US">Click this to delete the currently selected author from the list.</paragraph>
+
+        <paragraph role="heading" level="3" xml-lang="en-US">Up</paragraph>
+   		<paragraph role="paragraph" xml-lang="en-US">Click this to move the currently selected author up one position in the list.</paragraph>
+
+        <paragraph role="heading" level="3" xml-lang="en-US">Down</paragraph>
+   		<paragraph role="paragraph" xml-lang="en-US">Click this to move the currently selected author down one position in the list.</paragraph>
+
+
+        <paragraph role="heading" level="2" xml-lang="en-US">Dates</paragraph>
+        <paragraph role="paragraph" xml-lang="en-US">An EPUB document can specify one or more dates relating to the publication.
+        Each date can be associated with a special event such as creation, publication or modification.</paragraph>
+		<paragraph role="paragraph" xml-lang="en-US">Note that some EPUB readers may only present the first date, hence
+		you should make sure that the primary date is at the top of the list.</paragraph>
+		<paragraph role="paragraph" xml-lang="en-US">If you do not add any dates, Writer2xhtml will display and use a default value
+		for the date (date of last modification).</paragraph>
+        
+        <paragraph role="heading" level="3" xml-lang="en-US">Add...</paragraph>
+   		<paragraph role="paragraph" xml-lang="en-US">Click this to add new date to the list.</paragraph>
+
+        <paragraph role="heading" level="3" xml-lang="en-US">Modify...</paragraph>
+   		<paragraph role="paragraph" xml-lang="en-US">Click this to modify the currently selected date.</paragraph>
+
+        <paragraph role="heading" level="3" xml-lang="en-US">Delete...</paragraph>
+   		<paragraph role="paragraph" xml-lang="en-US">Click this to delete the currently selected date from the list.</paragraph>
+        
+        <paragraph role="heading" level="3" xml-lang="en-US">Up</paragraph>
+   		<paragraph role="paragraph" xml-lang="en-US">Click this to move the currently selected date up one position in the list.</paragraph>
+
+        <paragraph role="heading" level="3" xml-lang="en-US">Down</paragraph>
+   		<paragraph role="paragraph" xml-lang="en-US">Click this to move the currently selected date down one position in the list.</paragraph>
+
+
+        <paragraph role="heading" level="2" xml-lang="en-US">Title</paragraph>
+        <paragraph role="paragraph" xml-lang="en-US">The title of the document. This will always be included in the EPUB
+        document.</paragraph>
+        
+        <paragraph role="heading" level="2" xml-lang="en-US">Subject</paragraph>
+        <paragraph role="paragraph" xml-lang="en-US">The subject of the document</paragraph>
+        
+        <paragraph role="heading" level="2" xml-lang="en-US">Keywords</paragraph>
+        <paragraph role="paragraph" xml-lang="en-US">A comma separated list of keywords</paragraph>
+        
+        <paragraph role="heading" level="2" xml-lang="en-US">Description</paragraph>
+        <paragraph role="paragraph" xml-lang="en-US">A description of the document</paragraph>
+        
+        <paragraph role="heading" level="2" xml-lang="en-US">Publisher</paragraph>
+		<paragraph role="paragraph" xml-lang="en-US">The publisher of the document.</paragraph>
+        
+        <paragraph role="heading" level="2" xml-lang="en-US">Type</paragraph>
+        <paragraph role="paragraph" xml-lang="en-US">Terms describing general categories, functions, genres, or aggregation levels
+        for content.</paragraph>
+        
+        <paragraph role="heading" level="2" xml-lang="en-US">Format</paragraph>
+        <paragraph role="paragraph" xml-lang="en-US">The media type or dimensions of the resource.</paragraph>
+        
+        <paragraph role="heading" level="2" xml-lang="en-US">Source</paragraph>
+        <paragraph role="paragraph" xml-lang="en-US">Information regarding a prior resource from which the publication was derived.</paragraph>
+        
+        <paragraph role="heading" level="2" xml-lang="en-US">Relation</paragraph>
+        <paragraph role="paragraph" xml-lang="en-US">An identifier of an auxiliary resource and its relationship to the publication.</paragraph>
+        
+        <paragraph role="heading" level="2" xml-lang="en-US">Coverage</paragraph>
+        <paragraph role="paragraph" xml-lang="en-US">The extent or scope of the publication’s content.</paragraph>
+        
+        <paragraph role="heading" level="2" xml-lang="en-US">Rights</paragraph>
+        <paragraph role="paragraph" xml-lang="en-US">A statement about rights, or a reference to one.</paragraph>
+        
+	</body>
+</helpdocument>
+        

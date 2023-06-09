@@ -1,0 +1,235 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<oor:component-data oor:name="Options"
+  oor:package="org.openoffice.da.Writer2xhtml"
+  xml:lang="en-US"
+  xmlns:oor="http://openoffice.org/2001/registry"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <node oor:name="XhtmlOptions">
+		<!-- General -->
+        <prop oor:name="Config" oor:type="xs:short">
+            <value>0</value>
+        </prop>
+        <prop oor:name="ConfigName" oor:type="xs:string">
+            <value />
+        </prop>
+        <prop oor:name="Units" oor:type="xs:short">
+            <value>2</value> <!-- relative -->
+        </prop>
+        <prop oor:name="Scaling" oor:type="xs:int">
+            <value>100</value>
+        </prop>
+        <prop oor:name="Multilingual" oor:type="xs:boolean">
+            <value>true</value>
+        </prop>
+        <!-- Files -->
+        <prop oor:name="Split" oor:type="xs:boolean">
+            <value>false</value>
+        </prop>
+        <prop oor:name="SplitLevel" oor:type="xs:short">
+            <value>1</value>
+        </prop>
+        <prop oor:name="RepeatLevels" oor:type="xs:short">
+            <value>5</value>
+        </prop>
+        <prop oor:name="SaveImagesInSubdir" oor:type="xs:boolean">
+            <value>false</value>
+        </prop>
+		<!-- Special content -->
+        <prop oor:name="Notes" oor:type="xs:boolean">
+            <value>true</value>
+        </prop>
+        <prop oor:name="UseDublinCore" oor:type="xs:boolean">
+            <value>true</value>
+        </prop>
+        <!-- Figures, tables and formulas -->
+        <prop oor:name="ImageSize" oor:type="xs:short">
+            <value>0</value> <!-- auto -->
+        </prop>
+        <prop oor:name="EmbedSVG" oor:type="xs:boolean">
+            <value>false</value>
+        </prop>
+        <prop oor:name="EmbedImg" oor:type="xs:boolean">
+            <value>false</value>
+        </prop>
+        <prop oor:name="TableSize" oor:type="xs:short">
+            <value>0</value> <!-- auto -->
+        </prop>
+        <prop oor:name="ColumnScaling" oor:type="xs:int">
+            <value>100</value>
+        </prop>
+        <prop oor:name="UseMathjax" oor:type="xs:boolean">
+            <value>true</value>
+        </prop>
+        <prop oor:name="Formulas" oor:type="xs:short">
+            <value>0</value> <!-- image+starmath -->
+        </prop>
+        <!-- Auto correct -->
+        <prop oor:name="IgnoreEmptyParagraphs" oor:type="xs:boolean">
+            <value>false</value>
+        </prop>
+        <prop oor:name="IgnoreHardLineBreaks" oor:type="xs:boolean">
+            <value>false</value>
+        </prop>
+        <prop oor:name="IgnoreDoubleSpaces" oor:type="xs:boolean">
+            <value>false</value>
+        </prop>
+    </node>
+    <node oor:name="XhtmlOptionsCalc">
+        <prop oor:name="Config" oor:type="xs:short">
+            <value>0</value>
+        </prop>
+        <prop oor:name="ConfigName" oor:type="xs:string">
+            <value></value>
+        </prop>
+        <prop oor:name="Units" oor:type="xs:short">
+            <value>2</value> <!-- relative -->
+        </prop>
+        <prop oor:name="Scaling" oor:type="xs:int">
+            <value>100</value>
+        </prop>
+        <prop oor:name="ColumnScaling" oor:type="xs:int">
+            <value>100</value>
+        </prop>
+		<!-- sheets -->
+        <prop oor:name="DisplayHiddenSheets" oor:type="xs:boolean">
+            <value>false</value>
+        </prop>
+        <prop oor:name="DisplayHiddenRowsCols" oor:type="xs:boolean">
+            <value>false</value>
+        </prop>
+        <prop oor:name="DisplayFilteredRowsCols" oor:type="xs:boolean">
+            <value>false</value>
+        </prop>
+        <prop oor:name="ApplyPrintRanges" oor:type="xs:boolean">
+            <value>false</value>
+        </prop>
+        <prop oor:name="UseTitleAsHeading" oor:type="xs:boolean">
+            <value>true</value>
+        </prop>
+        <prop oor:name="UseSheetNamesAsHeadings" oor:type="xs:boolean">
+            <value>true</value>
+        </prop>
+		<!-- Files -->
+        <prop oor:name="CalcSplit" oor:type="xs:boolean">
+            <value>false</value>
+        </prop>
+        <prop oor:name="SaveImagesInSubdir" oor:type="xs:boolean">
+            <value>false</value>
+        </prop>
+		<!-- Special content -->
+        <prop oor:name="Notes" oor:type="xs:boolean">
+            <value>true</value>
+        </prop>
+        <prop oor:name="UseDublinCore" oor:type="xs:boolean">
+            <value>true</value>
+        </prop>
+		<!- Figures and tables -->
+        <prop oor:name="ImageSize" oor:type="xs:short">
+            <value>0</value> <!-- auto -->
+        </prop>
+        <prop oor:name="EmbedSVG" oor:type="xs:boolean">
+            <value>false</value>
+        </prop>
+        <prop oor:name="EmbedImg" oor:type="xs:boolean">
+            <value>false</value>
+        </prop>
+    </node>
+    <node oor:name="EpubOptions">
+        <prop oor:name="Config" oor:type="xs:short">
+            <value>0</value>
+        </prop>
+        <prop oor:name="ConfigName" oor:type="xs:string">
+            <value></value>
+        </prop>
+        <prop oor:name="Units" oor:type="xs:short">
+            <value>2</value> <!-- relative -->
+        </prop>
+        <prop oor:name="Scaling" oor:type="xs:int">
+            <value>100</value>
+        </prop>
+        <prop oor:name="ColumnScaling" oor:type="xs:int">
+            <value>100</value>
+        </prop>
+        <prop oor:name="TableSize" oor:type="xs:short">
+            <value>1</value><!-- relative -->
+        </prop>
+        <prop oor:name="ImageSize" oor:type="xs:short">
+            <value>1</value><!-- relative -->
+        </prop>
+        <prop oor:name="RelativeFontSize" oor:type="xs:boolean">
+            <value>true</value>
+        </prop>
+        <prop oor:name="FontScaling" oor:type="xs:int">
+            <value>100</value>
+        </prop>
+        <prop oor:name="UseDefaultFont" oor:type="xs:boolean">
+            <value>true</value>
+        </prop>
+        <prop oor:name="DefaultFontName" oor:type="xs:string">
+            <value></value>
+        </prop>
+        <prop oor:name="IgnoreEmptyParagraphs" oor:type="xs:boolean">
+            <value>false</value>
+        </prop>
+        <prop oor:name="IgnoreHardLineBreaks" oor:type="xs:boolean">
+            <value>false</value>
+        </prop>
+        <prop oor:name="IgnoreDoubleSpaces" oor:type="xs:boolean">
+            <value>false</value>
+        </prop>
+        <prop oor:name="IncludeNCX" oor:type="xs:boolean">
+            <value>true</value>
+        </prop>
+        <prop oor:name="AvoidHtml5" oor:type="xs:boolean">
+            <value>false</value>
+        </prop>
+        <prop oor:name="DisplayHiddenText" oor:type="xs:boolean">
+            <value>false</value>
+        </prop>
+        <prop oor:name="Notes" oor:type="xs:boolean">
+            <value>true</value>
+        </prop>
+        <prop oor:name="UseDublinCore" oor:type="xs:boolean">
+            <value>true</value>
+        </prop>
+        <prop oor:name="SplitLevel" oor:type="xs:short">
+            <value>1</value>
+        </prop>
+        <prop oor:name="PageBreakSplit" oor:type="xs:short">
+            <value>0</value>
+        </prop>
+        <prop oor:name="UseImageSplit" oor:type="xs:boolean">
+            <value>false</value>
+        </prop>
+        <prop oor:name="ImageSplit" oor:type="xs:int">
+            <value>30</value>
+        </prop>
+        <prop oor:name="CoverImage" oor:type="xs:boolean">
+            <value>false</value>
+        </prop>
+        <prop oor:name="UseSplitAfter" oor:type="xs:boolean">
+            <value>true</value>
+        </prop>
+        <prop oor:name="SplitAfter" oor:type="xs:int">
+            <value>150</value>
+        </prop>
+        <prop oor:name="ExternalTocDepth" oor:type="xs:short">
+            <value>1</value>
+        </prop>
+        <prop oor:name="ExternalTocDepthMarks" oor:type="xs:short">
+            <value>0</value>
+        </prop>
+        <prop oor:name="IndexLinks" oor:type="xs:boolean">
+            <value>false</value>
+        </prop>
+        <prop oor:name="IncludeToc" oor:type="xs:boolean">
+            <value>true</value>
+        </prop>
+        <prop oor:name="OriginalImageSize" oor:type="xs:boolean">
+            <value>false</value>
+        </prop>
+    </node>
+</oor:component-data>
+
+
+		

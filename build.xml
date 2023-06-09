@@ -1,0 +1,219 @@
+<!-- 
+  ############################################################################
+  # This is the Ant build file for writer2xhtml
+  # Original: Sep 2004 (mgn)
+  # version 1.7 (2022-11-30)
+  ############################################################################
+-->
+<project name="writer2xhtml" default="help" basedir=".">
+
+    <!-- set this property to the location of your SO/OOo installation -->
+	<property name="OFFICE_CLASSES" location="/usr/lib/libreoffice/program/classes" />
+	<property name="URE_CLASSES" location="/usr/lib/libreoffice/program/classes" />
+
+    <description>writer2xhtml - build file</description>
+
+    <target name="help" description="Displays usage information">
+        <echo>Usage: ant &lt;target&gt;
+          The following targets are supported:
+          all
+              Build nearly everything
+          compile
+              Compile all file except the tests.        
+          jar
+              Create the standalone jar file.
+          oxt
+              Create extension packages for OOo
+          distro
+              Create the distribution packages
+          javadoc
+              Create the javadoc documentation in target/javadoc. 
+          clean
+        </echo>
+    </target>
+
+    <!-- configure the directories -->
+    <property name="jarfile" value="writer2xhtml"/>
+    <property name="basename" value="writer2xhtml17"/>
+    <property name="distrofile" value="${basename}.zip" />
+    <!--<property name="sourcedistrofile" value="${basename}source.zip" />-->
+    <property name="src" location="src/java"/>
+    <property name="source.distro" location="src/distro" />
+    <property name="classes" location="target/classes"/>
+    <property name="javadoc" location="target/javadoc"/>
+    <property name="tmp" location="target/tmp"/>
+    <property name="target" location="target"/>
+    <property name="target.lib" location="target/lib"/>
+    <property name="source.lib" location="src/lib"/>
+    <!-- classpath for the application; needs java-uno classes -->
+    <path id="main.class.path"> 
+        <!-- java uno classes -->
+    	<filelist dir="${URE_CLASSES}"
+	        files="jurt.jar,juh.jar,ridl.jar"/>
+        <filelist dir="${OFFICE_CLASSES}"
+    		files="unoil.jar"/>
+    </path> 
+
+    <target name="all"
+            description="Build nearly everything"
+            depends="javadoc,jar,oxt,distro" />
+
+    <target name="compile"
+            description="Compile the Java files (without tests)">
+        <!-- create empty output directory for classes if not present -->
+        <mkdir dir="${classes}"/>
+        <!-- compile the application code -->
+        <javac srcdir="${src}" 
+               destdir="${classes}"
+               encoding="us-ascii"
+        	   source="1.8"
+        	   target="1.8"
+	     	   classpath=""
+        	   includeantruntime="false"
+               debug="on">
+            <classpath refid="main.class.path"/>
+        </javac>
+        <copy todir="${classes}">
+            <fileset dir="${src}">
+                <include name="**/*.xml"/>
+                <include name="**/*.properties"/>
+            </fileset>
+        </copy>
+    </target>
+
+    <target name="jar"
+            depends="compile"
+            description="Create writer2xhtml jar file containing all compiled classes except OOo components and test cases.">
+	    <!-- make a jar from the classes not matching magic testcase identifiers-->
+        <mkdir dir="${target.lib}"/>
+        <jar jarfile="${target.lib}/${jarfile}.jar">
+            <fileset dir="${classes}">
+                <patternset>
+                    <exclude name="**/*Test.class"/>
+                    <exclude name="**/AllTests.class"/>
+		    		<include name="**/*.xml"/>
+		    		<include name="**/*.properties"/>
+                	<include name="**/*.class"/>
+                    <!-- do not include OOo components in standalone library -->
+                	<exclude name="org/openoffice/**/*"/>
+                </patternset>
+            </fileset>
+            <manifest>
+                <attribute name="Built-By" value="${user.name}"/>
+                <attribute name="Main-Class" value="writer2xhtml.Application"/>
+                <attribute name="Class-Path" value="jaxp.jar parser.jar"/>
+            </manifest>
+        </jar>
+    </target>
+	
+    <!-- Create extension package for OOo 2.0.4+ -->
+    <target name="oxt"
+            depends="jar"
+            description="Create extension package for installation with OOo 2.0.4+">
+        <mkdir dir="${target.lib}"/>
+        <mkdir dir="${tmp}"/>
+		
+        <!-- Main extension: writer2xhtml.oxt -->
+
+        <!-- Create jar with relevant files  -->
+        <jar jarfile="${tmp}/writer2xhtml-filter.jar">
+            <fileset dir="${classes}">
+                <patternset>
+                    <exclude name="**/*Test.class"/>
+                    <exclude name="**/AllTests.class"/>
+                	<include name="org/openoffice/da/comp/w2xcommon/**/*.class"/>
+                	<include name="org/openoffice/da/comp/w2xcommon/**/*.properties"/>
+                	<include name="org/openoffice/da/comp/writer2xhtml/**/*.class"/>
+                	<include name="writer2xhtml/api/**/*.class"/>
+                	<include name="writer2xhtml/base/**/*.class"/>
+                	<include name="writer2xhtml/epub/**/*.class"/>
+                	<include name="writer2xhtml/office/**/*.class"/>
+                	<include name="writer2xhtml/util/**/*.class"/>
+                	<include name="writer2xhtml/xhtml/**/*.class"/>
+                	<include name="writer2xhtml/xhtml/**/*.xml"/>
+                	<include name="writer2xhtml/xhtml/**/*.properties"/>
+                </patternset>
+            </fileset>
+            <manifest>
+                <attribute name="Built-By" value="${user.name}"/>
+                <!-- OOo needs this to register the filter: -->
+                <attribute name="RegistrationClassName" value="org.openoffice.da.comp.writer2xhtml.W2XRegistration" />
+                <attribute name="Class-Path" value="jaxp.jar parser.jar"/>
+            </manifest>
+        </jar>
+
+        <!-- Pack extension -->
+        <zip destfile="${target.lib}/writer2xhtml.oxt">
+            <zipfileset dir="src/oxt/writer2xhtml" prefix="" />
+            <zipfileset dir="${tmp}" includes="writer2xhtml-filter.jar" />
+        </zip>
+		
+        <!-- delete the jar for this extension -->
+        <delete file="${tmp}/writer2xhtml-filter.jar" />
+
+        <!-- Sample extension: xhtml-config-package.oxt (xhtml sample configuration package) -->
+
+        <zip destfile="${target.lib}/xhtml-config-sample.oxt" basedir="src/oxt/xhtml-config-sample"/>
+            
+    </target>
+	
+    <!-- Create distribution packages -->
+    <target name="distro" depends="jar,oxt"
+            description="Create Writer2xhtml distribution">
+		
+        <zip destfile="${target.lib}/${distrofile}">
+
+            <!-- Add misc files (documentation, readmes, scripts etc.) -->
+            <zipfileset dir="${source.distro}" prefix="${basename}"/>
+		
+            <!-- Add default configurations (copied from source tree) -->
+            <zipfileset dir="${src}/writer2xhtml/xhtml/config"  prefix="${basename}/config" />
+		
+            <!-- Add jar and oxt's -->
+            <zipfileset dir="${target.lib}" prefix="${basename}"
+             includes="${jarfile}.jar,writer2xhtml.oxt,xhtml-config-sample.oxt"/>
+        </zip>
+		
+        <!-- Pack the source distribution -->
+        <!--<zip destfile="${target.lib}/${sourcedistrofile}">
+            <zipfileset dir="." includes="src/**/*,build.xml" prefix="${basename}" /> 
+        </zip>-->
+			 
+    </target>
+
+    <target name="clean"
+            description="Remove unneccesary files and directories.">
+        <delete dir="${classes}"/>
+        <delete dir="${javadoc}"/>
+		<delete dir="${target.lib}" />
+        <delete dir="${tmp}" />
+        </target>
+
+    <target name="javadoc"
+            description="Create JavaDoc HTML pages.">
+        <mkdir dir="${javadoc}" />
+        <javadoc 
+             encoding="us-ascii"
+             destdir="${javadoc}"
+             author="true"
+             version="true"
+             use="true"
+			 breakiterator="true" 
+             splitindex="true"
+             notree="false"
+             nonavbar="false"
+             noindex="false"
+             nodeprecatedlist="false"
+             nodeprecated="false">
+            <classpath refid="main.class.path"/>
+        	<fileset dir="${src}/writer2xhtml/api" />
+        </javadoc>
+        <copy todir="${javadoc}">
+            <fileset dir="${src}">
+                <include name="**/*.gif"/>
+                <include name="**/*.png"/>
+            </fileset>
+        </copy>
+    </target>
+
+</project>

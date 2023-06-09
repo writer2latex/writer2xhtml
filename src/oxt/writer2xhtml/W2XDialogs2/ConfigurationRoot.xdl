@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE dlg:window PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "dialog.dtd">
+<dlg:window xmlns:dlg="http://openoffice.org/2000/dialog" xmlns:script="http://openoffice.org/2000/script" dlg:id="Configuration1" dlg:left="139" dlg:top="84" dlg:width="260" dlg:height="185" dlg:closeable="true" dlg:moveable="true" dlg:title="ConfigurationRoot" dlg:withtitlebar="false">
+ <dlg:styles>
+  <dlg:style dlg:style-id="0" dlg:border="none"/>
+  <dlg:style dlg:style-id="1" dlg:font-height="14"/>
+ </dlg:styles>
+ <dlg:bulletinboard>
+  <dlg:fixedline dlg:id="FixedLine1" dlg:tab-index="0" dlg:left="6" dlg:top="32" dlg:width="248" dlg:height="2"/>
+  <dlg:img dlg:style-id="0" dlg:id="ImageControl1" dlg:tab-index="1" dlg:left="8" dlg:top="6" dlg:width="21" dlg:height="21" dlg:scale-image="false" dlg:scale-mode="none" dlg:src="../images/w2licon.png"/>
+  <dlg:text dlg:style-id="1" dlg:id="Label1" dlg:tab-index="2" dlg:left="34" dlg:top="10" dlg:width="193" dlg:height="16" dlg:value="Writer2xhtml Custom Configuration"/>
+  <dlg:text dlg:id="Label2" dlg:tab-index="3" dlg:left="34" dlg:top="43" dlg:width="194" dlg:height="78" dlg:value="This is where you create a custom configuration for the Writer2xhtml export filter. You can define technical details of the generated XHTML documents and you can define how to map formatting to CSS. Creating a custom configuration requires some knowledge of XHTML and CSS." dlg:multiline="true"/>
+ </dlg:bulletinboard>
+</dlg:window>

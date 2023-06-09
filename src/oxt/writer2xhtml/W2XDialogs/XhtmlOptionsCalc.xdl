@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE dlg:window PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "dialog.dtd">
+<dlg:window xmlns:dlg="http://openoffice.org/2000/dialog" xmlns:script="http://openoffice.org/2000/script" dlg:id="XhtmlOptionsCalc" dlg:left="139" dlg:top="84" dlg:width="360" dlg:height="206" dlg:closeable="true" dlg:moveable="true" dlg:title="HTML Options (Calc2xhtml)">
+ <dlg:styles>
+  <dlg:style dlg:style-id="0" dlg:font-weight="150"/>
+ </dlg:styles>
+ <dlg:bulletinboard>
+  <dlg:text dlg:id="ConfigLabel" dlg:tab-index="21" dlg:left="12" dlg:top="22" dlg:width="60" dlg:height="12" dlg:value="Use style"/>
+  <dlg:menulist dlg:id="Config" dlg:tab-index="3" dlg:left="75" dlg:top="20" dlg:width="86" dlg:height="12" dlg:help-url="org.openoffice.da.writer2xhtml.oxt:OptionsCalcConfig" dlg:spin="true" dlg:linecount="2">
+   <dlg:menupopup>
+    <dlg:menuitem dlg:value="Original formatting"/>
+    <dlg:menuitem dlg:value="Custom"/>
+   </dlg:menupopup>
+   <script:event script:event-name="on-itemstatechange" script:macro-name="vnd.sun.star.UNO:ConfigChange" script:language="UNO"/>
+  </dlg:menulist>
+  <dlg:text dlg:id="ScalingLabel" dlg:tab-index="22" dlg:left="12" dlg:top="50" dlg:width="60" dlg:height="12" dlg:value="Scaling"/>
+  <dlg:numericfield dlg:id="Scaling" dlg:tab-index="5" dlg:left="85" dlg:top="48" dlg:width="60" dlg:height="12" dlg:help-url="org.openoffice.da.writer2xhtml.oxt:OptionsCalcScaling" dlg:strict-format="true" dlg:decimal-accuracy="0" dlg:value="100" dlg:value-min="1" dlg:value-max="1000" dlg:value-step="10" dlg:spin="true"/>
+  <dlg:text dlg:id="ScalingPercentLabel" dlg:tab-index="23" dlg:left="152" dlg:top="50" dlg:width="10" dlg:height="12" dlg:value="%"/>
+  <dlg:text dlg:id="ColumnScalingLabel" dlg:tab-index="24" dlg:left="12" dlg:top="64" dlg:width="60" dlg:height="12" dlg:value="Column scaling"/>
+  <dlg:numericfield dlg:id="ColumnScaling" dlg:tab-index="6" dlg:left="85" dlg:top="62" dlg:width="60" dlg:height="12" dlg:help-url="org.openoffice.da.writer2xhtml.oxt:OptionsCalcColumnScaling" dlg:strict-format="true" dlg:decimal-accuracy="0" dlg:value="100" dlg:value-min="1" dlg:value-max="1000" dlg:value-step="10" dlg:spin="true"/>
+  <dlg:text dlg:id="ColumnScalingPercentLabel" dlg:tab-index="25" dlg:left="152" dlg:top="64" dlg:width="10" dlg:height="12" dlg:value="%"/>
+  <dlg:text dlg:style-id="0" dlg:id="SpecialContentLabel" dlg:tab-index="26" dlg:left="186" dlg:top="50" dlg:width="156" dlg:height="12" dlg:value="Special content"/>
+  <dlg:checkbox dlg:id="Notes" dlg:tab-index="15" dlg:left="193" dlg:top="64" dlg:width="149" dlg:height="12" dlg:help-url="org.openoffice.da.writer2xhtml.oxt:OptionsCalcNotes" dlg:value="Export notes" dlg:checked="true"/>
+  <dlg:checkbox dlg:id="UseDublinCore" dlg:tab-index="16" dlg:left="193" dlg:top="78" dlg:width="149" dlg:height="12" dlg:help-url="org.openoffice.da.writer2xhtml.oxt:OptionsCalcUseDublinCore" dlg:value="Export document properties (Dublin Core Metadata)" dlg:checked="true"/>
+  <dlg:text dlg:style-id="0" dlg:id="SheetsLabel" dlg:tab-index="27" dlg:left="5" dlg:top="78" dlg:width="156" dlg:height="12" dlg:value="Sheets"/>
+  <dlg:checkbox dlg:id="DisplayHiddenSheets" dlg:tab-index="7" dlg:left="12" dlg:top="92" dlg:width="149" dlg:height="12" dlg:help-url="org.openoffice.da.writer2xhtml.oxt:OptionsCalcDisplayHiddenSheets" dlg:value="Display hidden sheets" dlg:checked="false"/>
+  <dlg:checkbox dlg:id="DisplayHiddenRowsCols" dlg:tab-index="8" dlg:left="12" dlg:top="106" dlg:width="149" dlg:height="12" dlg:help-url="org.openoffice.da.writer2xhtml.oxt:OptionsCalcDisplayHiddenRowsCols" dlg:value="Display hidden rows and columns" dlg:checked="false"/>
+  <dlg:checkbox dlg:id="DisplayFilteredRowsCols" dlg:tab-index="9" dlg:left="12" dlg:top="120" dlg:width="149" dlg:height="12" dlg:help-url="org.openoffice.da.writer2xhtml.oxt:OptionsCalcDisplayFilteredRowsCols" dlg:value="Display filtered rows and columns" dlg:checked="false"/>
+  <dlg:checkbox dlg:id="ApplyPrintRanges" dlg:tab-index="10" dlg:left="12" dlg:top="134" dlg:width="149" dlg:height="12" dlg:help-url="org.openoffice.da.writer2xhtml.oxt:OptionsCalcApplyPrintRanges" dlg:value="Apply print ranges" dlg:checked="false"/>
+  <dlg:checkbox dlg:id="UseTitleAsHeading" dlg:tab-index="11" dlg:left="12" dlg:top="148" dlg:width="149" dlg:height="12" dlg:help-url="org.openoffice.da.writer2xhtml.oxt:OptionsCalcUseTitleAsHeading" dlg:value="Use title as heading" dlg:checked="false"/>
+  <dlg:checkbox dlg:id="UseSheetNamesAsHeadings" dlg:tab-index="12" dlg:left="12" dlg:top="162" dlg:width="149" dlg:height="12" dlg:help-url="org.openoffice.da.writer2xhtml.oxt:OptionsCalcUseSheetNamesAsHeadings" dlg:value="Use sheet names as headings" dlg:checked="false"/>
+  <dlg:text dlg:style-id="0" dlg:id="FilesLabel" dlg:tab-index="28" dlg:left="186" dlg:top="8" dlg:width="156" dlg:height="12" dlg:value="Files"/>
+  <dlg:checkbox dlg:id="CalcSplit" dlg:tab-index="13" dlg:left="193" dlg:top="22" dlg:width="149" dlg:height="12" dlg:help-url="org.openoffice.da.writer2xhtml.oxt:OptionsCalcSplit" dlg:value="Save sheets in separate files" dlg:checked="false"/>
+  <dlg:checkbox dlg:id="SaveImagesInSubdir" dlg:tab-index="14" dlg:left="193" dlg:top="36" dlg:width="149" dlg:height="12" dlg:help-url="org.openoffice.da.writer2xhtml.oxt:OptionsCalcSaveImagesInSubdir" dlg:value="Save images in subdirectory" dlg:checked="false"/>
+  <dlg:button dlg:id="ExportButton" dlg:tab-index="0" dlg:left="5" dlg:top="186" dlg:width="60" dlg:height="12" dlg:value="Export" dlg:button-type="ok"/>
+  <dlg:button dlg:id="CancelButton" dlg:tab-index="1" dlg:left="75" dlg:top="186" dlg:width="60" dlg:height="12" dlg:value="Cancel" dlg:button-type="cancel"/>
+  <dlg:button dlg:id="HelpButton" dlg:tab-index="2" dlg:left="282" dlg:top="186" dlg:width="60" dlg:height="12" dlg:help-url="org.openoffice.da.writer2xhtml.oxt:OptionsCalc" dlg:value="Help" dlg:button-type="help"/>
+  <dlg:text dlg:style-id="0" dlg:id="GeneralLabel" dlg:tab-index="20" dlg:left="5" dlg:top="8" dlg:width="156" dlg:height="12" dlg:value="General"/>
+  <dlg:menulist dlg:id="ImageSize" dlg:tab-index="17" dlg:left="256" dlg:top="104" dlg:width="86" dlg:height="12" dlg:help-url="org.openoffice.da.writer2xhtml.oxt:OptionsCalcImageSize" dlg:spin="true" dlg:linecount="3">
+   <dlg:menupopup>
+    <dlg:menuitem dlg:value="Automatic"/>
+    <dlg:menuitem dlg:value="Relative to page width"/>
+    <dlg:menuitem dlg:value="Do not export"/>
+   </dlg:menupopup>
+  </dlg:menulist>
+  <dlg:text dlg:id="ImageSizeLabel" dlg:tab-index="30" dlg:left="193" dlg:top="106" dlg:width="60" dlg:height="12" dlg:value="Image size"/>
+  <dlg:checkbox dlg:id="EmbedSVG" dlg:tab-index="18" dlg:left="193" dlg:top="120" dlg:width="149" dlg:height="12" dlg:help-url="org.openoffice.da.writer2xhtml.oxt:OptionsCalcEmbedSVG" dlg:value="Embed vector graphics" dlg:checked="false"/>
+  <dlg:text dlg:id="UnitsLabel" dlg:tab-index="31" dlg:left="12" dlg:top="36" dlg:width="60" dlg:height="12" dlg:value="Units"/>
+  <dlg:menulist dlg:id="Units" dlg:tab-index="4" dlg:left="75" dlg:top="34" dlg:width="86" dlg:height="12" dlg:help-url="org.openoffice.da.writer2xhtml.oxt:OptionsCalcUnits" dlg:spin="true" dlg:linecount="3">
+   <dlg:menupopup>
+    <dlg:menuitem dlg:value="Original"/>
+    <dlg:menuitem dlg:value="Pixels (px)"/>
+    <dlg:menuitem dlg:value="Relative (rem)"/>
+   </dlg:menupopup>
+  </dlg:menulist>
+  <dlg:checkbox dlg:id="EmbedImg" dlg:tab-index="19" dlg:left="193" dlg:top="134" dlg:width="149" dlg:height="12" dlg:help-url="org.openoffice.da.writer2xhtml.oxt:OptionsCalcEmbedImg" dlg:value="Embed raster graphics" dlg:checked="false"/>
+  <dlg:text dlg:style-id="0" dlg:id="FigureLabel" dlg:tab-index="29" dlg:left="186" dlg:top="92" dlg:width="159" dlg:height="12" dlg:value="Figures"/>
+ </dlg:bulletinboard>
+</dlg:window>

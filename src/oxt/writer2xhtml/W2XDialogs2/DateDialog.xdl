@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE dlg:window PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "dialog.dtd">
+<dlg:window xmlns:dlg="http://openoffice.org/2000/dialog" xmlns:script="http://openoffice.org/2000/script" dlg:id="DateDialog" dlg:left="173" dlg:top="73" dlg:width="158" dlg:height="62" dlg:closeable="true" dlg:moveable="true" dlg:title="Date">
+ <dlg:bulletinboard>
+  <dlg:text dlg:id="DateLabel" dlg:tab-index="0" dlg:left="5" dlg:top="9" dlg:width="60" dlg:height="12" dlg:value="Date"/>
+  <dlg:datefield dlg:id="Date" dlg:tab-index="1" dlg:left="70" dlg:top="6" dlg:width="80" dlg:height="12" dlg:strict-format="true" dlg:date-format="short_YYYYMMDD_DIN5008" dlg:value-min="18000101" dlg:spin="true"/>
+  <dlg:text dlg:id="Eventlabel" dlg:tab-index="2" dlg:left="5" dlg:top="22" dlg:width="60" dlg:height="12" dlg:value="Event"/>
+  <dlg:textfield dlg:id="Event" dlg:tab-index="3" dlg:left="70" dlg:top="21" dlg:width="80" dlg:height="12"/>
+  <dlg:button dlg:id="OKButton" dlg:tab-index="4" dlg:left="5" dlg:top="43" dlg:width="50" dlg:height="12" dlg:value="OK" dlg:button-type="ok"/>
+  <dlg:button dlg:id="CancelButton" dlg:tab-index="5" dlg:left="61" dlg:top="43" dlg:width="50" dlg:height="12" dlg:value="Cancel" dlg:button-type="cancel"/>
+ </dlg:bulletinboard>
+</dlg:window>

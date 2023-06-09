@@ -1,0 +1,1 @@
+Writer2xhtml forneix a Writer i Calc filtres d'exportació per HTML i EPUB

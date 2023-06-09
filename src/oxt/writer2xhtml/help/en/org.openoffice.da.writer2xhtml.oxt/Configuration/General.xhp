@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<helpdocument version="1.0">
+	<meta>
+        <topic id="writer2xhtml-configuration-general" indexer="include">
+            <title xml-lang="en-US">Content</title>
+            <filename>org.openoffice.da.writer2xhtml.oxt/Configuration/General.xhp</filename>
+        </topic>
+    </meta>
+    <body>
+        <bookmark xml-lang="en-US" branch="hid/org.openoffice.da.writer2xhtml.oxt:ConfigurationGeneral" id="bm_configgeneral"/>
+        <paragraph role="heading" level="1" xml-lang="en-US">General</paragraph>
+        <paragraph role="paragraph" xml-lang="en-US">Use this page to define general technical aspects of the generated
+        HTML documents.</paragraph>
+
+        <section id="howtoget" xml-lang="en-US">
+        	Choose <emph>Tools - Options - Writer2xhtml - General</emph>
+        </section>
+        
+        <paragraph role="heading" level="2" xml-lang="en-US">General HTML settings</paragraph>
+        <bookmark xml-lang="en-US" branch="hid/org.openoffice.da.writer2xhtml.oxt:NoDoctype" id="bm_confignodoctype"/>
+        <paragraph role="heading" level="3" xml-lang="en-US">Do not include DOCTYPE</paragraph>
+        <paragraph role="paragraph" xml-lang="en-US">Check this if you do not want to not include the !DOCTYPE declaration in
+        the converted document.</paragraph>
+        <paragraph role="warning" xml-lang="en-US">The !DOCTYPE is required for a valid HTML document: This option should only be
+        used if you need to process the document further.</paragraph>
+
+        <bookmark xml-lang="en-US" branch="hid/org.openoffice.da.writer2xhtml.oxt:Encoding" id="bm_configencoding"/>
+        <paragraph role="heading" level="3" xml-lang="en-US">Encoding</paragraph>
+        <paragraph role="paragraph" xml-lang="en-US">Select the character encoding to use for the HTML document. Currently supported
+        encodings are <emph>UTF-8</emph> (recommended), <emph>UTF-16</emph>, <emph>ISO-8859-1</emph> and <emph>US-ASCII</emph>.
+        Characters not supported by the encoding are exported as numeric character entities.</paragraph>
+
+        <bookmark xml-lang="en-US" branch="hid/org.openoffice.da.writer2xhtml.oxt:AddBOM" id="bm_configaddbom"/>
+        <paragraph role="heading" level="3" xml-lang="en-US">Add Byte Order Mark (BOM)</paragraph>
+        <paragraph role="paragraph" xml-lang="en-US">Check this to include a BOM (Byte Order Mark) to the HTML document (UTF-8 only).
+        Normally this is not needed if you use UTF-8 encoding, but it may be required in rare cases.
+        </paragraph>
+
+        <bookmark xml-lang="en-US" branch="hid/org.openoffice.da.writer2xhtml.oxt:HexadecimalEntities" id="bm_confighexadecimalentities"/>
+        <paragraph role="heading" level="3" xml-lang="en-US">Numeric character entities</paragraph>
+        <paragraph role="paragraph" xml-lang="en-US">Select how to export numeric character entities. You can use either
+        <emph>hexadecimal</emph> or <emph>decimal</emph> numbers. This is not relevant if you use UTF-8 or UTF-16.</paragraph>
+
+        <bookmark xml-lang="en-US" branch="hid/org.openoffice.da.writer2xhtml.oxt:UseNamedEntities" id="bm_configusenamedentities"/>
+        <paragraph role="heading" level="3" xml-lang="en-US">Use named character entities</paragraph>
+        <paragraph role="paragraph" xml-lang="en-US">Check this to use named character entities as defined by (X)HTML.
+        If you export to HTML+MathML, also named MathML entities will be used.</paragraph>
+
+        <bookmark xml-lang="en-US" branch="hid/org.openoffice.da.writer2xhtml.oxt:PrettyPrint" id="bm_configprettyprint"/>
+        <paragraph role="heading" level="3" xml-lang="en-US">Use "pretty printing"</paragraph>
+        <paragraph role="paragraph" xml-lang="en-US">Check this to use "pretty print"
+        (using indentations and line breaks) in the HTML output.</paragraph>
+
+    </body>
+</helpdocument>

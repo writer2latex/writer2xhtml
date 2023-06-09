@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE dlg:window PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "dialog.dtd">
+<dlg:window xmlns:dlg="http://openoffice.org/2000/dialog" xmlns:script="http://openoffice.org/2000/script" dlg:id="NewDialog" dlg:left="255" dlg:top="145" dlg:width="160" dlg:height="50" dlg:closeable="true" dlg:moveable="true" dlg:title="New">
+ <dlg:bulletinboard>
+  <dlg:text dlg:id="NameLabel" dlg:tab-index="0" dlg:left="5" dlg:top="8" dlg:width="50" dlg:height="12" dlg:value="Name"/>
+  <dlg:combobox dlg:id="Name" dlg:tab-index="1" dlg:left="60" dlg:top="6" dlg:width="90" dlg:height="12" dlg:spin="true" dlg:linecount="15"/>
+  <dlg:button dlg:id="OKButton" dlg:tab-index="2" dlg:left="5" dlg:top="28" dlg:width="50" dlg:height="12" dlg:value="OK" dlg:button-type="ok"/>
+  <dlg:button dlg:id="CancelButton" dlg:tab-index="3" dlg:left="60" dlg:top="28" dlg:width="50" dlg:height="12" dlg:value="Cancel" dlg:button-type="cancel"/>
+ </dlg:bulletinboard>
+</dlg:window>

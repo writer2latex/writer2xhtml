@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE dlg:window PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "dialog.dtd">
+<dlg:window xmlns:dlg="http://openoffice.org/2000/dialog" xmlns:script="http://openoffice.org/2000/script" dlg:id="Stylesheets" dlg:left="139" dlg:top="84" dlg:width="260" dlg:height="185" dlg:closeable="true" dlg:moveable="true" dlg:title="Stylesheets" dlg:withtitlebar="false">
+ <dlg:styles>
+  <dlg:style dlg:style-id="0" dlg:font-weight="150"/>
+ </dlg:styles>
+ <dlg:bulletinboard>
+  <dlg:text dlg:style-id="0" dlg:id="IncludedCustomStylesheetLabel" dlg:tab-index="0" dlg:left="4" dlg:top="6" dlg:width="185" dlg:height="12" dlg:value="Custom style sheets"/>
+  <dlg:checkbox dlg:id="LinkCustomStylesheet" dlg:tab-index="1" dlg:left="10" dlg:top="18" dlg:width="180" dlg:height="12" dlg:help-url="org.openoffice.da.writer2xhtml.oxt:LinkCustomStylesheet" dlg:value="Insert link to custom style sheet (HTML export)" dlg:checked="false">
+   <script:event script:event-name="on-itemstatechange" script:macro-name="vnd.sun.star.UNO:LinkCustomStylesheetChange" script:language="UNO"/>
+  </dlg:checkbox>
+  <dlg:text dlg:id="CustomStylesheetURLLabel" dlg:tab-index="2" dlg:left="19" dlg:top="36" dlg:width="55" dlg:height="12" dlg:value="URL"/>
+  <dlg:textfield dlg:id="CustomStylesheetURL" dlg:tab-index="3" dlg:left="80" dlg:top="34" dlg:width="170" dlg:height="12" dlg:help-url="org.openoffice.da.writer2xhtml.oxt:CustomStylesheetURL"/>
+  <dlg:checkbox dlg:id="UseCustomStylesheet" dlg:tab-index="4" dlg:left="10" dlg:top="50" dlg:width="140" dlg:height="12" dlg:help-url="org.openoffice.da.writer2xhtml.oxt:UseCustomStylesheet" dlg:value="Include custom style sheet (EPUB export)" dlg:checked="false">
+   <script:event script:event-name="on-itemstatechange" script:macro-name="vnd.sun.star.UNO:UseCustomStylesheetChange" script:language="UNO"/>
+  </dlg:checkbox>
+  <dlg:textfield dlg:id="CustomStylesheet" dlg:tab-index="5" dlg:left="18" dlg:top="64" dlg:width="135" dlg:height="84" dlg:help-url="org.openoffice.da.writer2xhtml.oxt:CustomStylesheet" dlg:hscroll="true" dlg:vscroll="true" dlg:multiline="true"/>
+  <dlg:button dlg:id="LoadStylesheetButton" dlg:tab-index="6" dlg:left="18" dlg:top="156" dlg:width="60" dlg:height="12" dlg:help-url="org.openoffice.da.writer2xhtml.oxt:LoadStylesheet" dlg:value="Load...">
+   <script:event script:event-name="on-mouseup" script:macro-name="vnd.sun.star.UNO:LoadStylesheetClick" script:language="UNO"/>
+  </dlg:button>
+  <dlg:text dlg:id="ResourceLabel" dlg:tab-index="10" dlg:left="160" dlg:top="50" dlg:width="90" dlg:height="12" dlg:value="Style resources"/>
+  <dlg:menulist dlg:id="Resources" dlg:tab-index="7" dlg:left="160" dlg:top="64" dlg:width="90" dlg:height="84" dlg:help-url="org.openoffice.da.writer2xhtml.oxt:Resources"/>
+  <dlg:button dlg:id="NewResourceButton" dlg:tab-index="8" dlg:left="160" dlg:top="156" dlg:width="40" dlg:height="12" dlg:help-url="org.openoffice.da.writer2xhtml.oxt:NewResource" dlg:value="New...">
+   <script:event script:event-name="on-mouseup" script:macro-name="vnd.sun.star.UNO:NewResourceClick" script:language="UNO"/>
+  </dlg:button>
+  <dlg:button dlg:id="DeleteResourceButton" dlg:tab-index="9" dlg:left="209" dlg:top="156" dlg:width="40" dlg:height="12" dlg:help-url="org.openoffice.da.writer2xhtml.oxt:DeleteResource" dlg:value="Delete...">
+   <script:event script:event-name="on-mouseup" script:macro-name="vnd.sun.star.UNO:DeleteResourceClick" script:language="UNO"/>
+  </dlg:button>
+  <dlg:button dlg:id="HelpButton" dlg:tab-index="11" dlg:left="200" dlg:top="4" dlg:width="55" dlg:height="14" dlg:help-url="org.openoffice.da.writer2xhtml.oxt:ConfigStyleSheets" dlg:value="Help" dlg:button-type="help"/>
+ </dlg:bulletinboard>
+</dlg:window>

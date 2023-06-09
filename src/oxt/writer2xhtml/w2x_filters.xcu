@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<oor:component-data xmlns:oor="http://openoffice.org/2001/registry" xmlns:xs="http://www.w3.org/2001/XMLSchema" oor:package="org.openoffice.TypeDetection" oor:name="Filter">
+
+  <node oor:name="Filters">
+   
+	<node oor:name="org.openoffice.da.writer2xhtml5" oor:op="replace" oor:finalized="true" oor:mandatory="true">
+		<prop oor:name="FileFormatVersion"><value>0</value></prop>
+		<prop oor:name="Type"><value>writer_xhtml5_File</value></prop>
+		<prop oor:name="DocumentService"><value>com.sun.star.text.TextDocument</value></prop>
+        <prop oor:name="UIComponent"><value>org.openoffice.da.comp.writer2xhtml.HTML5OptionsDialog</value></prop>
+		<prop oor:name="UserData"><value>org.openoffice.da.comp.writer2xhtml.W2XExportFilter unused com.sun.star.comp.Writer.XMLOasisImporter com.sun.star.comp.Writer.XMLOasisExporter staroffice/sxw text/html5</value></prop>
+		<prop oor:name="FilterService"><value>com.sun.star.comp.Writer.XmlFilterAdaptor</value></prop>
+		<prop oor:name="TemplateName"/>
+		<prop oor:name="UIName">
+			<value>HTML5 [Writer2xhtml]</value>
+		</prop>
+		<prop oor:name="Flags"><value>EXPORT ALIEN 3RDPARTYFILTER</value></prop>
+	</node>
+
+	<node oor:name="org.openoffice.da.calc2xhtml5" oor:op="replace" oor:finalized="true" oor:mandatory="true">
+		<prop oor:name="FileFormatVersion"><value>0</value></prop>
+		<prop oor:name="Type"><value>writer_xhtml5_File</value></prop>
+		<prop oor:name="DocumentService"><value>com.sun.star.sheet.SpreadsheetDocument</value></prop>
+        <prop oor:name="UIComponent"><value>org.openoffice.da.comp.writer2xhtml.HTML5OptionsDialogCalc</value></prop>
+		<prop oor:name="UserData"><value>org.openoffice.da.comp.writer2xhtml.W2XExportFilter unused com.sun.star.comp.Calc.XMLOasisImporter com.sun.star.comp.Calc.XMLOasisExporter staroffice/sxc text/html5</value></prop>
+		<prop oor:name="FilterService"><value>com.sun.star.comp.Writer.XmlFilterAdaptor</value></prop><!-- sic! -->
+		<prop oor:name="TemplateName"/>
+		<prop oor:name="UIName">
+			<value>HTML5 [Writer2xhtml]</value>
+		</prop>
+		<prop oor:name="Flags"><value>EXPORT ALIEN 3RDPARTYFILTER</value></prop>
+	</node>
+
+	<node oor:name="org.openoffice.da.writer2xhtml" oor:op="replace" oor:finalized="true" oor:mandatory="true">
+		<prop oor:name="FileFormatVersion"><value>0</value></prop>
+		<prop oor:name="Type"><value>writer_xhtml10_File</value></prop>
+		<prop oor:name="DocumentService"><value>com.sun.star.text.TextDocument</value></prop>
+        <prop oor:name="UIComponent"><value>org.openoffice.da.comp.writer2xhtml.XhtmlOptionsDialog</value></prop>
+		<prop oor:name="UserData"><value>org.openoffice.da.comp.writer2xhtml.W2XExportFilter unused com.sun.star.comp.Writer.XMLOasisImporter com.sun.star.comp.Writer.XMLOasisExporter staroffice/sxw text/html</value></prop>
+		<prop oor:name="FilterService"><value>com.sun.star.comp.Writer.XmlFilterAdaptor</value></prop>
+		<prop oor:name="TemplateName"/>
+		<prop oor:name="UIName">
+			<value>XHTML 1.0 strict [Writer2xhtml]</value>
+		</prop>
+		<prop oor:name="Flags"><value>EXPORT ALIEN 3RDPARTYFILTER</value></prop>
+	</node>
+
+	<node oor:name="org.openoffice.da.writer2xhtml11" oor:op="replace" oor:finalized="true" oor:mandatory="true">
+		<prop oor:name="FileFormatVersion"><value>0</value></prop>
+		<prop oor:name="Type"><value>writer_xhtml11_File</value></prop>
+		<prop oor:name="DocumentService"><value>com.sun.star.text.TextDocument</value></prop>
+        <prop oor:name="UIComponent"><value>org.openoffice.da.comp.writer2xhtml.XhtmlOptionsDialog</value></prop>
+		<prop oor:name="UserData"><value>org.openoffice.da.comp.writer2xhtml.W2XExportFilter unused com.sun.star.comp.Writer.XMLOasisImporter com.sun.star.comp.Writer.XMLOasisExporter staroffice/sxw application/xhtml11</value></prop>
+		<prop oor:name="FilterService"><value>com.sun.star.comp.Writer.XmlFilterAdaptor</value></prop>
+		<prop oor:name="TemplateName"/>
+		<prop oor:name="UIName">
+			<value>XHTML 1.1 [Writer2xhtml]</value>
+		</prop>
+		<prop oor:name="Flags"><value>EXPORT ALIEN 3RDPARTYFILTER</value></prop>
+	</node>
+
+	<node oor:name="org.openoffice.da.calc2xhtml" oor:op="replace" oor:finalized="true" oor:mandatory="true">
+		<prop oor:name="FileFormatVersion"><value>0</value></prop>
+		<prop oor:name="Type"><value>writer_xhtml10_File</value></prop>
+		<prop oor:name="DocumentService"><value>com.sun.star.sheet.SpreadsheetDocument</value></prop>
+        <prop oor:name="UIComponent"><value>org.openoffice.da.comp.writer2xhtml.XhtmlOptionsDialogCalc</value></prop>
+		<prop oor:name="UserData"><value>org.openoffice.da.comp.writer2xhtml.W2XExportFilter unused com.sun.star.comp.Calc.XMLOasisImporter com.sun.star.comp.Calc.XMLOasisExporter staroffice/sxc text/html</value></prop>
+		<prop oor:name="FilterService"><value>com.sun.star.comp.Writer.XmlFilterAdaptor</value></prop><!-- sic! -->
+		<prop oor:name="TemplateName"/>
+		<prop oor:name="UIName">
+			<value>XHTML 1.0 strict [Writer2xhtml]</value>
+		</prop>
+		<prop oor:name="Flags"><value>EXPORT ALIEN 3RDPARTYFILTER</value></prop>
+	</node>
+
+	<node oor:name="org.openoffice.da.calc2xhtml11" oor:op="replace" oor:finalized="true" oor:mandatory="true">
+		<prop oor:name="FileFormatVersion"><value>0</value></prop>
+		<prop oor:name="Type"><value>writer_xhtml11_File</value></prop>
+		<prop oor:name="DocumentService"><value>com.sun.star.sheet.SpreadsheetDocument</value></prop>
+        <prop oor:name="UIComponent"><value>org.openoffice.da.comp.writer2xhtml.XhtmlOptionsDialogCalc</value></prop>
+		<prop oor:name="UserData"><value>org.openoffice.da.comp.writer2xhtml.W2XExportFilter unused com.sun.star.comp.Calc.XMLOasisImporter com.sun.star.comp.Calc.XMLOasisExporter staroffice/sxc application/xhtml11</value></prop>
+		<prop oor:name="FilterService"><value>com.sun.star.comp.Writer.XmlFilterAdaptor</value></prop><!-- sic! -->
+		<prop oor:name="TemplateName"/>
+		<prop oor:name="UIName">
+			<value>XHTML 1.1 [Writer2xhtml]</value>
+		</prop>
+		<prop oor:name="Flags"><value>EXPORT ALIEN 3RDPARTYFILTER</value></prop>
+	</node>
+
+	<node oor:name="org.openoffice.da.writer2xhtml.mathml" oor:op="replace" oor:finalized="true" oor:mandatory="true">
+		<prop oor:name="FileFormatVersion"><value>0</value></prop>
+		<prop oor:name="Type"><value>writer_xhtml_mathml_File</value></prop>
+		<prop oor:name="DocumentService"><value>com.sun.star.text.TextDocument</value></prop>
+        <prop oor:name="UIComponent"><value>org.openoffice.da.comp.writer2xhtml.XhtmlOptionsDialogMath</value></prop>
+		<prop oor:name="UserData"><value>org.openoffice.da.comp.writer2xhtml.W2XExportFilter unused com.sun.star.comp.Writer.XMLOasisImporter com.sun.star.comp.Writer.XMLOasisExporter staroffice/sxw application/xhtml+xml</value></prop>
+		<prop oor:name="FilterService"><value>com.sun.star.comp.Writer.XmlFilterAdaptor</value></prop>
+		<prop oor:name="TemplateName"/>
+		<prop oor:name="UIName">
+			<value>XHTML 1.1 + MathML 2.0 [Writer2xhtml]</value>
+		</prop>
+		<prop oor:name="Flags"><value>EXPORT ALIEN 3RDPARTYFILTER</value></prop>
+	</node>
+
+	<node oor:name="org.openoffice.da.writer2xhtml.epub3" oor:op="replace" oor:finalized="true" oor:mandatory="true">
+		<prop oor:name="FileFormatVersion"><value>0</value></prop>
+		<prop oor:name="Type"><value>writer_epub3_File</value></prop>
+		<prop oor:name="DocumentService"><value>com.sun.star.text.TextDocument</value></prop>
+        <prop oor:name="UIComponent"><value>org.openoffice.da.comp.writer2xhtml.Epub3OptionsDialog</value></prop>
+		<prop oor:name="UserData"><value>org.openoffice.da.comp.writer2xhtml.W2XExportFilter unused com.sun.star.comp.Writer.XMLOasisImporter com.sun.star.comp.Writer.XMLOasisExporter staroffice/sxw epub3</value></prop>
+		<prop oor:name="FilterService"><value>com.sun.star.comp.Writer.XmlFilterAdaptor</value></prop>
+		<prop oor:name="TemplateName"/>
+		<prop oor:name="UIName">
+			<value>EPUB 3 [Writer2xhtml]</value>
+		</prop>
+		<prop oor:name="Flags"><value>EXPORT ALIEN 3RDPARTYFILTER</value></prop>
+	</node>
+
+	<node oor:name="org.openoffice.da.writer2xhtml.epub" oor:op="replace" oor:finalized="true" oor:mandatory="true">
+		<prop oor:name="FileFormatVersion"><value>0</value></prop>
+		<prop oor:name="Type"><value>writer_epub_File</value></prop>
+		<prop oor:name="DocumentService"><value>com.sun.star.text.TextDocument</value></prop>
+        <prop oor:name="UIComponent"><value>org.openoffice.da.comp.writer2xhtml.EpubOptionsDialog</value></prop>
+		<prop oor:name="UserData"><value>org.openoffice.da.comp.writer2xhtml.W2XExportFilter unused com.sun.star.comp.Writer.XMLOasisImporter com.sun.star.comp.Writer.XMLOasisExporter staroffice/sxw application/epub+zip</value></prop>
+		<prop oor:name="FilterService"><value>com.sun.star.comp.Writer.XmlFilterAdaptor</value></prop>
+		<prop oor:name="TemplateName"/>
+		<prop oor:name="UIName">
+			<value>EPUB [Writer2xhtml]</value>
+		</prop>
+		<prop oor:name="Flags"><value>EXPORT ALIEN 3RDPARTYFILTER</value></prop>
+	</node>
+
+  </node>
+
+</oor:component-data>

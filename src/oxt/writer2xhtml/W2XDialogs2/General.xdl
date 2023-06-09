@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE dlg:window PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "dialog.dtd">
+<dlg:window xmlns:dlg="http://openoffice.org/2000/dialog" xmlns:script="http://openoffice.org/2000/script" dlg:id="General" dlg:left="139" dlg:top="84" dlg:width="260" dlg:height="185" dlg:closeable="true" dlg:moveable="true" dlg:title="General" dlg:withtitlebar="false">
+ <dlg:styles>
+  <dlg:style dlg:style-id="0" dlg:font-weight="150"/>
+ </dlg:styles>
+ <dlg:bulletinboard>
+  <dlg:checkbox dlg:id="NoDoctype" dlg:tab-index="0" dlg:left="10" dlg:top="18" dlg:width="180" dlg:height="12" dlg:help-url="org.openoffice.da.writer2xhtml.oxt:NoDoctype" dlg:value="Do not include DOCTYPE" dlg:checked="false"/>
+  <dlg:text dlg:id="EncodingLabel" dlg:tab-index="1" dlg:left="10" dlg:top="32" dlg:width="110" dlg:height="12" dlg:value="Encoding"/>
+  <dlg:menulist dlg:id="Encoding" dlg:tab-index="2" dlg:left="130" dlg:top="30" dlg:width="120" dlg:height="12" dlg:help-url="org.openoffice.da.writer2xhtml.oxt:Encoding" dlg:spin="true" dlg:linecount="4">
+   <dlg:menupopup>
+    <dlg:menuitem dlg:value="UTF-8"/>
+    <dlg:menuitem dlg:value="UTF-16"/>
+    <dlg:menuitem dlg:value="ISO-8859-1"/>
+    <dlg:menuitem dlg:value="US-ASCII"/>
+   </dlg:menupopup>
+   <script:event script:event-name="on-itemstatechange" script:macro-name="vnd.sun.star.UNO:EncodingChange" script:language="UNO"/>
+  </dlg:menulist>
+  <dlg:checkbox dlg:id="AddBOM" dlg:tab-index="3" dlg:left="10" dlg:top="46" dlg:width="240" dlg:height="12" dlg:help-url="org.openoffice.da.writer2xhtml.oxt:AddBOM" dlg:value="Add Byte Order Mark (BOM)" dlg:checked="false"/>
+  <dlg:text dlg:id="HexadecimalEntitiesLabel" dlg:tab-index="4" dlg:left="10" dlg:top="60" dlg:width="110" dlg:height="12" dlg:value="Numeric character entities"/>
+  <dlg:menulist dlg:id="HexadecimalEntities" dlg:tab-index="5" dlg:left="130" dlg:top="58" dlg:width="120" dlg:height="12" dlg:help-url="org.openoffice.da.writer2xhtml.oxt:HexadecimalEntities" dlg:spin="true" dlg:linecount="2">
+   <dlg:menupopup>
+    <dlg:menuitem dlg:value="Hexadecimal"/>
+    <dlg:menuitem dlg:value="Decimal"/>
+   </dlg:menupopup>
+  </dlg:menulist>
+  <dlg:checkbox dlg:id="UseNamedEntities" dlg:tab-index="6" dlg:left="10" dlg:top="74" dlg:width="240" dlg:height="12" dlg:help-url="org.openoffice.da.writer2xhtml.oxt:UseNamedEntities" dlg:value="Use named character entities" dlg:checked="false"/>
+  <dlg:checkbox dlg:id="PrettyPrint" dlg:tab-index="8" dlg:left="10" dlg:top="88" dlg:width="240" dlg:height="12" dlg:help-url="org.openoffice.da.writer2xhtml.oxt:PrettyPrint" dlg:value="Use &quot;pretty printing&quot;" dlg:checked="false"/>
+  <dlg:text dlg:style-id="0" dlg:id="GeneralLabel" dlg:tab-index="9" dlg:left="6" dlg:top="4" dlg:width="185" dlg:height="12" dlg:value="General HTML settings"/>
+  <dlg:button dlg:id="HelpButton" dlg:tab-index="10" dlg:left="200" dlg:top="4" dlg:width="55" dlg:height="14" dlg:help-url="org.openoffice.da.writer2xhtml.oxt:ConfigurationGeneral" dlg:value="Help" dlg:button-type="help"/>
+ </dlg:bulletinboard>
+</dlg:window>

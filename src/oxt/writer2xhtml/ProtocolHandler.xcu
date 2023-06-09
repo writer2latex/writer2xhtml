@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<oor:component-data oor:name="ProtocolHandler" oor:package="org.openoffice.Office" xmlns:oor="http://openoffice.org/2001/registry" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <!-- Declares the dispatch protocol handled by Writer2xhtml -->
+    <node oor:name="HandlerSet">
+        <!-- It seems that the node name must equal the implementation name of the service -->
+        <node oor:name="org.openoffice.da.comp.writer2xhtml.Writer2xhtml" oor:op="replace">
+            <prop oor:name="Protocols" oor:type="oor:string-list">
+                <value>org.openoffice.da.writer2xhtml:*</value>
+            </prop>
+        </node>
+    </node>
+</oor:component-data> 

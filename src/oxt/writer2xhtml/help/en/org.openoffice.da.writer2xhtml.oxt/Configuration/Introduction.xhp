@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<helpdocument version="1.0">
+	<meta>
+        <topic id="writer2xhtml-configuration-introduction" indexer="include">
+            <title xml-lang="en-US">Custom style</title>
+            <filename>org.openoffice.da.writer2xhtml.oxt/Configuration/Introduction.xhp</filename>
+        </topic>
+    </meta>
+    <body>
+        <paragraph role="heading" level="1" xml-lang="en-US">Custom style</paragraph>
+        <paragraph role="paragraph" xml-lang="en-US">Define a custom style for the HTML export</paragraph>
+
+        <section id="howtoget" xml-lang="en-US">
+        	Choose <emph>Tools - Options - Writer2xhtml</emph>
+        </section>
+        
+    	<bookmark xml-lang="en-US" branch="hid/org.openoffice.da.writer2xhtml.oxt:ConfigIntroduction" id="bm_configintroduction"/>
+        <paragraph role="paragraph" xml-lang="en-US">Writer2xhtml comes with a number of predefined styles.
+        A style defines technical aspects of the generated HTML styles, in particular the export of formatting.
+        Advanced users can define their own custom style. You can for example use the custom style to create HTML documents that
+        takes advantage of your own CSS style sheet.
+        This requires some knowledge of HTML and CSS.</paragraph>
+        <paragraph role="paragraph" xml-lang="en-US">To use the custom style, choose <emph>Custom</emph> in the export dialog.</paragraph>
+    </body>
+</helpdocument>

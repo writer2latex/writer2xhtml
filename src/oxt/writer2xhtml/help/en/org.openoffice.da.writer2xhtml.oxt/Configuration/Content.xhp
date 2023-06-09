@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<helpdocument version="1.0">
+	<meta>
+        <topic id="writer2xhtml-configuration-content" indexer="include">
+            <title xml-lang="en-US">Content</title>
+            <filename>org.openoffice.da.writer2xhtml.oxt/Configuration/Content.xhp</filename>
+        </topic>
+    </meta>
+    <body>
+        <bookmark xml-lang="en-US" branch="hid/org.openoffice.da.writer2xhtml.oxt:ConfigContent" id="bm_configcontent"/>
+        <paragraph role="heading" level="1" xml-lang="en-US">Content</paragraph>
+        <paragraph role="paragraph" xml-lang="en-US"></paragraph>
+
+        <section id="howtoget" xml-lang="en-US">
+        	Choose <emph>Tools - Options - Writer2xhtml - Content</emph>
+        </section>
+
+        <paragraph role="heading" level="2" xml-lang="en-US">Footnotes and endnotes</paragraph>
+
+        <bookmark xml-lang="en-US" branch="hid/org.openoffice.da.writer2xhtml.oxt:FootnotesHeading" id="bm_configfootnotesheading"/>
+
+        <bookmark xml-lang="en-US" branch="hid/org.openoffice.da.writer2xhtml.oxt:EndnotesHeading" id="bm_configendnotesheading"/>
+        <paragraph role="heading" level="3" xml-lang="en-US">Endnote heading</paragraph>
+        <paragraph role="paragraph" xml-lang="en-US">In %PRODUCTNAME Writer, endnotes cannot have a heading. If you want to add
+        a heading for the endnotes in the exported document, enter the desired heading here.</paragraph>
+
+        <paragraph role="heading" level="3" xml-lang="en-US">Footnote heading</paragraph>
+        <paragraph role="paragraph" xml-lang="en-US">In %PRODUCTNAME Writer, footnotes (when used as endnotes) cannot have a heading.
+        If you want to add a heading for the footnotes in the exported document, enter the desired heading here.
+        This has no effect if footnotes are placed at the bottom of the page.</paragraph>
+    </body>
+</helpdocument>

@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<oor:component-data oor:name="ToolbarOptions"
+  oor:package="org.openoffice.da.Writer2xhtml.toolbar"
+  xml:lang="en-US"
+  xmlns:oor="http://openoffice.org/2001/registry"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <node oor:name="Settings">
+        <prop oor:name="XhtmlFormat" oor:type="xs:short">
+            <value>3</value><!-- HTML5 -->
+        </prop>
+        <prop oor:name="XhtmlView" oor:type="xs:short">
+            <value>1</value><!-- Default application -->
+        </prop>
+        <prop oor:name="XhtmlExecutable" oor:type="xs:string">
+            <value></value>
+        </prop>
+        <prop oor:name="EpubFormat" oor:type="xs:short">
+            <value>1</value><!-- EPUB3 -->
+        </prop>
+        <prop oor:name="EpubView" oor:type="xs:short">
+            <value>1</value><!-- Default application -->
+        </prop>
+        <prop oor:name="EpubExecutable" oor:type="xs:string">
+            <value></value>
+        </prop>
+    </node>
+</oor:component-data>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE dlg:window PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "dialog.dtd">
+<dlg:window xmlns:dlg="http://openoffice.org/2000/dialog" xmlns:script="http://openoffice.org/2000/script" dlg:id="EpubMetadata" dlg:left="173" dlg:top="73" dlg:width="360" dlg:height="218" dlg:closeable="true" dlg:moveable="true" dlg:title="EPUB document properties (Writer2xhtml)">
+ <dlg:bulletinboard>
+  <dlg:checkbox dlg:id="UseCustomIdentifier" dlg:tab-index="0" dlg:left="5" dlg:top="8" dlg:width="165" dlg:height="12" dlg:value="Use custom identifier" dlg:checked="false">
+   <script:event script:event-name="on-itemstatechange" script:macro-name="vnd.sun.star.UNO:UseCustomIdentifierChange" script:language="UNO"/>
+  </dlg:checkbox>
+  <dlg:text dlg:id="IdentifierLabel" dlg:tab-index="1" dlg:left="20" dlg:top="22" dlg:width="40" dlg:height="12" dlg:value="Identifier"/>
+  <dlg:textfield dlg:id="Identifier" dlg:tab-index="2" dlg:left="65" dlg:top="20" dlg:width="105" dlg:height="12"/>
+  <dlg:text dlg:id="IdentifierTypeLabel" dlg:tab-index="3" dlg:left="20" dlg:top="36" dlg:width="40" dlg:height="12" dlg:value="Type"/>
+  <dlg:combobox dlg:id="IdentifierType" dlg:tab-index="4" dlg:left="65" dlg:top="34" dlg:width="105" dlg:height="12" dlg:spin="true">
+   <dlg:menupopup>
+    <dlg:menuitem dlg:value="ISBN"/>
+    <dlg:menuitem dlg:value="DOI"/>
+    <dlg:menuitem dlg:value="URI"/>
+    <dlg:menuitem dlg:value="URL"/>
+    <dlg:menuitem dlg:value="UUID"/>
+   </dlg:menupopup>
+  </dlg:combobox>
+  <dlg:text dlg:id="AuthorsLabel" dlg:tab-index="5" dlg:left="5" dlg:top="50" dlg:width="165" dlg:height="12" dlg:value="Authors"/>
+  <dlg:menulist dlg:id="Authors" dlg:tab-index="6" dlg:left="10" dlg:top="62" dlg:width="130" dlg:height="36"/>
+  <dlg:button dlg:id="AuthorUpButton" dlg:tab-index="10" dlg:left="145" dlg:top="62" dlg:width="25" dlg:height="12" dlg:value="Up">
+   <script:event script:event-name="on-mouseup" script:macro-name="vnd.sun.star.UNO:AuthorUpClick" script:language="UNO"/>
+  </dlg:button>
+  <dlg:button dlg:id="AuthorDownButton" dlg:tab-index="11" dlg:left="145" dlg:top="86" dlg:width="25" dlg:height="12" dlg:value="Down">
+   <script:event script:event-name="on-mouseup" script:macro-name="vnd.sun.star.UNO:AuthorDownClick" script:language="UNO"/>
+  </dlg:button>
+  <dlg:button dlg:id="AddAuthorButton" dlg:tab-index="7" dlg:left="10" dlg:top="100" dlg:width="40" dlg:height="12" dlg:value="Add...">
+   <script:event script:event-name="on-mouseup" script:macro-name="vnd.sun.star.UNO:AuthorAddClick" script:language="UNO"/>
+  </dlg:button>
+  <dlg:button dlg:id="ModifyAuthorButton" dlg:tab-index="8" dlg:left="55" dlg:top="100" dlg:width="40" dlg:height="12" dlg:value="Modify...">
+   <script:event script:event-name="on-mouseup" script:macro-name="vnd.sun.star.UNO:AuthorModifyClick" script:language="UNO"/>
+  </dlg:button>
+  <dlg:button dlg:id="DeleteAuthorButton" dlg:tab-index="9" dlg:left="100" dlg:top="100" dlg:width="40" dlg:height="12" dlg:value="Delete...">
+   <script:event script:event-name="on-mouseup" script:macro-name="vnd.sun.star.UNO:AuthorDeleteClick" script:language="UNO"/>
+  </dlg:button>
+  <dlg:text dlg:id="DatesLabel" dlg:tab-index="33" dlg:left="5" dlg:top="116" dlg:width="165" dlg:height="12" dlg:value="Dates"/>
+  <dlg:menulist dlg:id="Dates" dlg:tab-index="12" dlg:left="10" dlg:top="128" dlg:width="130" dlg:height="36"/>
+  <dlg:button dlg:id="AddDateButton" dlg:tab-index="13" dlg:left="10" dlg:top="166" dlg:width="40" dlg:height="12" dlg:value="Add...">
+   <script:event script:event-name="on-mouseup" script:macro-name="vnd.sun.star.UNO:DateAddClick" script:language="UNO"/>
+  </dlg:button>
+  <dlg:button dlg:id="ModifyDateButton" dlg:tab-index="14" dlg:left="55" dlg:top="166" dlg:width="40" dlg:height="12" dlg:value="Modify...">
+   <script:event script:event-name="on-mouseup" script:macro-name="vnd.sun.star.UNO:DateModifyClick" script:language="UNO"/>
+  </dlg:button>
+  <dlg:button dlg:id="DeleteDateButton" dlg:tab-index="15" dlg:left="100" dlg:top="166" dlg:width="40" dlg:height="12" dlg:value="Delete...">
+   <script:event script:event-name="on-mouseup" script:macro-name="vnd.sun.star.UNO:DateDeleteClick" script:language="UNO"/>
+  </dlg:button>
+  <dlg:text dlg:id="PublisherLabel" dlg:tab-index="34" dlg:left="190" dlg:top="84" dlg:width="50" dlg:height="12" dlg:value="Publisher"/>
+  <dlg:textfield dlg:id="Publisher" dlg:tab-index="22" dlg:left="245" dlg:top="82" dlg:width="105" dlg:height="12"/>
+  <dlg:text dlg:id="TypeLabel" dlg:tab-index="35" dlg:left="190" dlg:top="98" dlg:width="50" dlg:height="12" dlg:value="Type"/>
+  <dlg:textfield dlg:id="Type" dlg:tab-index="23" dlg:left="245" dlg:top="96" dlg:width="105" dlg:height="12"/>
+  <dlg:text dlg:id="FormatLabel" dlg:tab-index="36" dlg:left="190" dlg:top="112" dlg:width="50" dlg:height="12" dlg:value="Format"/>
+  <dlg:textfield dlg:id="Format" dlg:tab-index="24" dlg:left="245" dlg:top="110" dlg:width="105" dlg:height="12"/>
+  <dlg:text dlg:id="SourceLabel" dlg:tab-index="37" dlg:left="190" dlg:top="126" dlg:width="50" dlg:height="12" dlg:value="Source"/>
+  <dlg:textfield dlg:id="Source" dlg:tab-index="25" dlg:left="245" dlg:top="124" dlg:width="105" dlg:height="12"/>
+  <dlg:text dlg:id="RelationLabel" dlg:tab-index="38" dlg:left="190" dlg:top="140" dlg:width="50" dlg:height="12" dlg:value="Relation"/>
+  <dlg:textfield dlg:id="Relation" dlg:tab-index="26" dlg:left="245" dlg:top="138" dlg:width="105" dlg:height="12"/>
+  <dlg:text dlg:id="CoverageLabel" dlg:tab-index="39" dlg:left="190" dlg:top="154" dlg:width="50" dlg:height="12" dlg:value="Coverage"/>
+  <dlg:textfield dlg:id="Coverage" dlg:tab-index="27" dlg:left="245" dlg:top="152" dlg:width="105" dlg:height="12"/>
+  <dlg:text dlg:id="RightsLabel" dlg:tab-index="40" dlg:left="190" dlg:top="168" dlg:width="50" dlg:height="12" dlg:value="Rights"/>
+  <dlg:textfield dlg:id="Rights" dlg:tab-index="28" dlg:left="245" dlg:top="166" dlg:width="105" dlg:height="12"/>
+  <dlg:button dlg:id="OKButton" dlg:tab-index="29" dlg:left="10" dlg:top="195" dlg:width="50" dlg:height="12" dlg:value="OK" dlg:button-type="ok"/>
+  <dlg:button dlg:id="CancelButton" dlg:tab-index="30" dlg:left="65" dlg:top="195" dlg:width="50" dlg:height="12" dlg:value="Cancel" dlg:button-type="cancel"/>
+  <dlg:button dlg:id="HelpButton" dlg:tab-index="31" dlg:left="300" dlg:top="195" dlg:width="50" dlg:height="12" dlg:help-url="org.openoffice.da.writer2xhtml.oxt:EpubMetadata" dlg:value="Help" dlg:button-type="help"/>
+  <dlg:fixedline dlg:id="FixedLine1" dlg:tab-index="41" dlg:left="180" dlg:top="9" dlg:width="1" dlg:height="170" dlg:align="vertical"/>
+  <dlg:text dlg:id="TitleLabel" dlg:tab-index="42" dlg:left="190" dlg:top="8" dlg:width="50" dlg:height="12" dlg:value="Title"/>
+  <dlg:textfield dlg:id="Title" dlg:tab-index="18" dlg:left="245" dlg:top="6" dlg:width="105" dlg:height="12"/>
+  <dlg:text dlg:id="SubjectLabel" dlg:tab-index="43" dlg:left="190" dlg:top="22" dlg:width="50" dlg:height="12" dlg:value="Subject"/>
+  <dlg:textfield dlg:id="Subject" dlg:tab-index="19" dlg:left="245" dlg:top="20" dlg:width="105" dlg:height="12"/>
+  <dlg:text dlg:id="KeywordsLabel" dlg:tab-index="44" dlg:left="190" dlg:top="36" dlg:width="50" dlg:height="12" dlg:value="Keywords"/>
+  <dlg:textfield dlg:id="Keywords" dlg:tab-index="20" dlg:left="245" dlg:top="34" dlg:width="105" dlg:height="12"/>
+  <dlg:text dlg:id="DescriptionLabel" dlg:tab-index="45" dlg:left="190" dlg:top="50" dlg:width="50" dlg:height="12" dlg:value="Description"/>
+  <dlg:textfield dlg:id="Description" dlg:tab-index="21" dlg:left="245" dlg:top="48" dlg:width="105" dlg:height="32" dlg:vscroll="true" dlg:multiline="true"/>
+  <dlg:button dlg:id="DateUpButton" dlg:tab-index="16" dlg:left="145" dlg:top="128" dlg:width="25" dlg:height="12" dlg:value="Up">
+   <script:event script:event-name="on-mouseup" script:macro-name="vnd.sun.star.UNO:DateUpClick" script:language="UNO"/>
+  </dlg:button>
+  <dlg:button dlg:id="DateDownButton" dlg:tab-index="17" dlg:left="145" dlg:top="152" dlg:width="25" dlg:height="12" dlg:value="Down">
+   <script:event script:event-name="on-mouseup" script:macro-name="vnd.sun.star.UNO:DateDownClick" script:language="UNO"/>
+  </dlg:button>
+ </dlg:bulletinboard>
+</dlg:window>

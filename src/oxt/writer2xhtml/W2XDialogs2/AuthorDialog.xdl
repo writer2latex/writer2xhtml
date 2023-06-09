@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE dlg:window PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "dialog.dtd">
+<dlg:window xmlns:dlg="http://openoffice.org/2000/dialog" xmlns:script="http://openoffice.org/2000/script" dlg:id="AuthorDialog" dlg:left="101" dlg:top="46" dlg:width="158" dlg:height="78" dlg:closeable="true" dlg:moveable="true" dlg:title="Author">
+ <dlg:bulletinboard>
+  <dlg:text dlg:id="RoleLabel" dlg:tab-index="4" dlg:left="5" dlg:top="36" dlg:width="60" dlg:height="12" dlg:value="Role"/>
+  <dlg:menulist dlg:id="Type" dlg:tab-index="2" dlg:left="70" dlg:top="20" dlg:width="80" dlg:height="12" dlg:spin="true" dlg:linecount="2">
+   <dlg:menupopup>
+    <dlg:menuitem dlg:value="Creator"/>
+    <dlg:menuitem dlg:value="Contributor"/>
+   </dlg:menupopup>
+  </dlg:menulist>
+  <dlg:text dlg:id="TypeLabel" dlg:tab-index="0" dlg:left="5" dlg:top="21" dlg:width="60" dlg:height="12" dlg:value="Author type"/>
+  <dlg:menulist dlg:id="Role" dlg:tab-index="3" dlg:left="70" dlg:top="34" dlg:width="80" dlg:height="12" dlg:spin="true" dlg:linecount="10">
+   <dlg:menupopup>
+    <dlg:menuitem dlg:value="N/A"/>
+    <dlg:menuitem dlg:value="Adapter [adp]"/>
+    <dlg:menuitem dlg:value="Annotator [ann]"/>
+    <dlg:menuitem dlg:value="Arranger [arr]"/>
+    <dlg:menuitem dlg:value="Artist [art]"/>
+    <dlg:menuitem dlg:value="Associated name [asn]"/>
+    <dlg:menuitem dlg:value="Author [aut]"/>
+    <dlg:menuitem dlg:value="Author in quotations or text extracts [aqt]"/>
+    <dlg:menuitem dlg:value="Author of afterword, colophon, etc. [aft]"/>
+    <dlg:menuitem dlg:value="Author of introduction, etc. [aui]"/>
+    <dlg:menuitem dlg:value="Bibliographic antecedent [ant]"/>
+    <dlg:menuitem dlg:value="Book producer [bkp]"/>
+    <dlg:menuitem dlg:value="Collaborator [clb]"/>
+    <dlg:menuitem dlg:value="Commentator [cmm]"/>
+    <dlg:menuitem dlg:value="Designer [dsr]"/>
+    <dlg:menuitem dlg:value="Editor [edt]"/>
+    <dlg:menuitem dlg:value="Illustrator [ill]"/>
+    <dlg:menuitem dlg:value="Lyricist [lyr]"/>
+    <dlg:menuitem dlg:value="Metadata contact [mdc]"/>
+    <dlg:menuitem dlg:value="Musician [mus]"/>
+    <dlg:menuitem dlg:value="Narrator [nrt]"/>
+    <dlg:menuitem dlg:value="Other [oth]"/>
+    <dlg:menuitem dlg:value="Photographer [pht]"/>
+    <dlg:menuitem dlg:value="Printer [prt]"/>
+    <dlg:menuitem dlg:value="Redactor [red]"/>
+    <dlg:menuitem dlg:value="Reviewer [rev]"/>
+    <dlg:menuitem dlg:value="Sponsor [spn]"/>
+    <dlg:menuitem dlg:value="Thesis advisor [ths]"/>
+    <dlg:menuitem dlg:value="Transcriber [trc]"/>
+    <dlg:menuitem dlg:value="Translator [trl]"/>
+   </dlg:menupopup>
+  </dlg:menulist>
+  <dlg:text dlg:id="AuthorLabel" dlg:tab-index="5" dlg:left="5" dlg:top="7" dlg:width="60" dlg:height="12" dlg:value="Author"/>
+  <dlg:textfield dlg:id="Author" dlg:tab-index="1" dlg:left="70" dlg:top="5" dlg:width="80" dlg:height="12"/>
+  <dlg:button dlg:id="OKButton" dlg:tab-index="6" dlg:left="5" dlg:top="55" dlg:width="50" dlg:height="12" dlg:value="OK" dlg:button-type="ok"/>
+  <dlg:button dlg:id="CancelButton" dlg:tab-index="7" dlg:left="61" dlg:top="55" dlg:width="50" dlg:height="12" dlg:value="Cancel" dlg:button-type="cancel"/>
+ </dlg:bulletinboard>
+</dlg:window>

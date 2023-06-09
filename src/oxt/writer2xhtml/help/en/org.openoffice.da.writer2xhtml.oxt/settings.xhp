@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<helpdocument version="1.0">
+	<meta>
+        <topic id="writer2xhtml-settings" indexer="include">
+            <title xml-lang="en-US">Toolbar Settings</title>
+            <filename>org.openoffice.da.writer2xhtml.oxt/settings.xhp</filename>
+        </topic>
+    </meta>
+    <body>
+		<bookmark xml-lang="en-US" branch="hid/org.openoffice.da.writer2xhtml.oxt:SettingsDialog" id="bm_settingsdialog"/>
+        <paragraph role="heading" level="1" xml-lang="en-US">Writer2xhtml Toolbar Settings</paragraph>
+        
+        <section id="howtoget" xml-lang="en-US">
+        	Select <emph>Tools - Options - Writer2xhtml toolbar - Settings</emph>
+        </section>
+    
+        <paragraph role="heading" level="2" xml-lang="en-US">HTML Export</paragraph>
+        <paragraph role="paragraph" xml-lang="en-US">Use these settings to configure the behavior of the HTML export button in the toolbar.</paragraph>
+
+		<bookmark xml-lang="en-US" branch="hid/org.openoffice.da.writer2xhtml.oxt:SettingsXhtmlFormat" id="bm_settingsxhtmlformat"/>
+		<paragraph role="paragraph" xml-lang="en-US"><ahelp hid="org.openoffice.da.writer2latex.oxt:SettingsXhtmlFormat" visibility="hidden">Select the HTML format to use when clicking the HTML export button in the toolbar</ahelp></paragraph>
+        <paragraph role="heading" level="3" xml-lang="en-US">Format</paragraph>
+        <paragraph role="paragraph" xml-lang="en-US">Select an HTML format in the list. This format will be used when you click the HTML
+        export button in the toolbar. The default format is HTML5.</paragraph>
+		
+		<bookmark xml-lang="en-US" branch="hid/org.openoffice.da.writer2xhtml.oxt:SettingsXhtmlView" id="bm_settingsxhtmlview"/>
+		<paragraph role="paragraph" xml-lang="en-US"><ahelp hid="org.openoffice.da.writer2latex.oxt:SettingsXhtmlView" visibility="hidden">Choose the desired behavior after export</ahelp></paragraph>
+        <paragraph role="heading" level="3" xml-lang="en-US">After export</paragraph>
+        <paragraph role="paragraph" xml-lang="en-US">After export, Writer2xhtml can display the result in a web browser.
+        Choose the desired behavior in the list.</paragraph>
+        <list type="unordered">
+			<listitem>
+				<paragraph role="paragraph" xml-lang="en-US"><emph>Do nothing</emph> if you do not want to view the result after export</paragraph>
+			</listitem>
+			<listitem>
+				<paragraph role="paragraph" xml-lang="en-US"><emph>Open with default web browser</emph> if you view the result using your 
+				system's default web browser
+				</paragraph>
+			</listitem>
+			<listitem>
+				<paragraph role="paragraph" xml-lang="en-US"><emph>Open with custom application</emph> if you want to view the result using an application
+				of your choice.</paragraph>
+			</listitem>
+        </list>
+		
+		<bookmark xml-lang="en-US" branch="hid/org.openoffice.da.writer2xhtml.oxt:SettingsXhtmlExecutable" id="bm_settingsxhtmlexecutable"/>
+		<paragraph role="paragraph" xml-lang="en-US"><ahelp hid="org.openoffice.da.writer2latex.oxt:SettingsXhtmlExecutable" visibility="hidden">Enter the full path to the application you wish to use</ahelp></paragraph>
+        <paragraph role="heading" level="3" xml-lang="en-US">Application</paragraph>
+        <paragraph role="paragraph" xml-lang="en-US">Enter the full path to the application you wish to use.</paragraph>
+		
+		<bookmark xml-lang="en-US" branch="hid/org.openoffice.da.writer2xhtml.oxt:SettingsXhtmlBrowse" id="bm_settingsxhtmlbrowse"/>
+		<paragraph role="paragraph" xml-lang="en-US"><ahelp hid="org.openoffice.da.writer2latex.oxt:SettingsXhtmlBrowse" visibility="hidden">Browse for the application</ahelp></paragraph>
+        <paragraph role="heading" level="3" xml-lang="en-US">Browse...</paragraph>
+        <paragraph role="paragraph" xml-lang="en-US">Click this to open a file dialog, where you can browse for the application.</paragraph>
+		
+        <paragraph role="heading" level="2" xml-lang="en-US">EPUB Export</paragraph>
+        <paragraph role="paragraph" xml-lang="en-US">Use these settings to configure the behavior of the EPUB export button in the toolbar.</paragraph>
+
+		<bookmark xml-lang="en-US" branch="hid/org.openoffice.da.writer2xhtml.oxt:SettingsEpubFormat" id="bm_settingsepubformat"/>
+		<paragraph role="paragraph" xml-lang="en-US"><ahelp hid="org.openoffice.da.writer2latex.oxt:SettingsEpubFormat" visibility="hidden">Select the EPUB format to use when clicking the EPUB export button in the toolbar</ahelp></paragraph>
+        <paragraph role="heading" level="3" xml-lang="en-US">Format</paragraph>
+        <paragraph role="paragraph" xml-lang="en-US">Select an EPUB format in the list. This format will be used when you click the EPUB
+        export button in the toolbar. The default format is EPUB 3.</paragraph>
+
+		<bookmark xml-lang="en-US" branch="hid/org.openoffice.da.writer2xhtml.oxt:SettingsEpubView" id="bm_settingsepubview"/>
+		<paragraph role="paragraph" xml-lang="en-US"><ahelp hid="org.openoffice.da.writer2latex.oxt:SettingsEpubView" visibility="hidden">Choose the desired behavior after export</ahelp></paragraph>
+        <paragraph role="heading" level="3" xml-lang="en-US">After export</paragraph>
+        <paragraph role="paragraph" xml-lang="en-US">After export, Writer2xhtml can display the result in an EPUB reader.
+        Choose the desired behavior in the list.</paragraph>
+        <list type="unordered">
+			<listitem>
+				<paragraph role="paragraph" xml-lang="en-US"><emph>Do nothing</emph> if you do not want to view the result after export</paragraph>
+			</listitem>
+			<listitem>
+				<paragraph role="paragraph" xml-lang="en-US"><emph>Open with default web browser</emph> if you view the result using your 
+				system's default EPUB reader.
+				</paragraph>
+			</listitem>
+			<listitem>
+				<paragraph role="paragraph" xml-lang="en-US"><emph>Open with custom application</emph> if you want to view the result using an application
+				of your choice.</paragraph>
+			</listitem>
+        </list>
+
+		<bookmark xml-lang="en-US" branch="hid/org.openoffice.da.writer2xhtml.oxt:SettingsEpubExecutable" id="bm_settingsepubexecutable"/>
+		<paragraph role="paragraph" xml-lang="en-US"><ahelp hid="org.openoffice.da.writer2latex.oxt:SettingsEpubExecutable" visibility="hidden">Enter the full path to the application you wish to use</ahelp></paragraph>
+        <paragraph role="heading" level="3" xml-lang="en-US">Application</paragraph>
+        <paragraph role="paragraph" xml-lang="en-US">Enter the full path to the application you wish to use.</paragraph>
+		
+		<bookmark xml-lang="en-US" branch="hid/org.openoffice.da.writer2xhtml.oxt:SettingsEpubBrowse" id="bm_settingsepubbrowse"/>
+		<paragraph role="paragraph" xml-lang="en-US"><ahelp hid="org.openoffice.da.writer2latex.oxt:SettingsEpubBrowse" visibility="hidden">Browse for the application</ahelp></paragraph>
+        <paragraph role="heading" level="3" xml-lang="en-US">Browse...</paragraph>
+        <paragraph role="paragraph" xml-lang="en-US">Click this to open a file dialog, where you can browse for the application.</paragraph>
+    </body>
+</helpdocument>

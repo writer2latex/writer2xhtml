@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<helpdocument version="1.0">
+	<meta>
+        <topic id="writer2xhtml-introduction" indexer="include">
+            <title xml-lang="en-US">Introduction</title>
+            <filename>org.openoffice.da.writer2xhtml.oxt/introduction.xhp</filename>
+        </topic>
+    </meta>
+    <body>
+        <paragraph role="heading" level="1" xml-lang="en-US">Introduction to Writer2xhtml</paragraph>
+        
+        <paragraph role="paragraph" xml-lang="en-US">The Writer2xhtml is a tool for publishing web content
+        and electronic books from %PRODUCTNAME Writer.
+        Using Writer2xhtml you will be able to author well-structured HTML and EPUB documents using (almost)
+        the full power of %PRODUCTNAME Writer.</paragraph>
+        <paragraph role="paragraph" xml-lang="en-US">Writer2xhtml has two modes of operation</paragraph>
+        <list type="unordered">
+			<listitem>
+		        <paragraph role="paragraph" xml-lang="en-US">You can use Writer2xhtml as an export filter.
+		        It adds HTML and EPUB formats to the <emph>File - Export</emph> 
+		        <link href="org.openoffice.da.writer2xhtml.oxt/menu.xhp" name="Applications">menu</link>.
+		        </paragraph>
+			</listitem>
+			<listitem>  
+		        <paragraph role="paragraph" xml-lang="en-US">You can publish directly to HTML or EPUB
+		        and view the result using the provided
+		        <link href="org.openoffice.da.writer2xhtml.oxt/menu.xhp" name="Applications">toolbar</link>.
+		        </paragraph>
+			</listitem>
+        </list>
+    </body>
+</helpdocument>

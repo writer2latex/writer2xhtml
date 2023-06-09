@@ -1,0 +1,232 @@
+Version history for Writer2LaTeX
+================================
+
+Version 1.7 beta (August 2022)
+ - Writer2xhtml has now been completely separated from Writer2LaTeX
+ - Writer2xhtml extension:
+       - Reworked export dialogs supporting additional options
+       - Added help button to configuration dialogs (workaround to avoid the online help)
+ - Writer2xhtml core:
+       - New option original_page_numbers to export original page numbers to EPUB
+       - New option units, which adds support for rem units
+       - Added support for image bullets
+       - Improved table support (borders, column widths)
+       - Fix some minor issues to ensure valid HTML5 documents
+       - Fix bug with charts in spreadsheets
+       - Fix bug with documents containing two identical images
+
+Version 1.6.1 (October 2018)
+  - Writer2LaTeX:
+       - Fix bug with string replace
+  - Writer2xhtml:
+       - Fix bug with images (EPUB only)
+       - Improved support for alphabetical index
+       - Added support for user index
+       - New EPUB options external_toc_depth_marks and index_links for the content table
+       - New EPUB option avoid_html5 for enhanced EPUB 2 compatibility 
+
+Version 1.6 (May 2018)
+  - Writer2LaTex extension:
+       - New toolbar replacing the previous separate extension Writer4LaTeX
+       - New feature to insert bibliographic references in Writer directly from BibTeX files
+       - The log viewer dialog now features an option to display error messages only
+       - WMF and EMF images are now exported to PDF
+  - Writer2LaTeX core:
+       - Basic support for Hebrew (XeTeX backend only)
+       - Export bibliography using a thebibliography environment if use_bibtex is false
+       - Adapt to the new color scheme in StarMath introduced with LO 4.4/AOO 4.2
+       - New option old_math_colors to select the old StarMath color scheme
+       - New option font to select a predefined font scheme
+       - New option bibtex_encoding to select the encoding for external BibTeX files
+  - Writer2xhtml extension:
+       - New toolbar to directly export to XHTML or EPUB
+  - Writer2xhtml core:
+       - Support for EPUB 3
+       - New option include_ncx to include an NCX file even if the export format is EPUB 3
+       - Improved markup of footnotes, endnotes, table of contents, alphabetical index and bibliography
+       - Bibliographic references now link directly to the bibliography item
+       - Added support for background color in alphabetical index and bibliography
+       - New option max_width to set the maximum text width
+       - New option embed_img to embed binary images directly as base64
+       - Style maps now support before and after content (similarly to ::before and ::after in CSS)
+  - General:
+       - It is now possible to pass options to the filters using soffice --headless --convert-to
+
+Version 1.4 (February 2015)
+  - All:
+       - Optimized memory usage
+       - Images that are used more than once in the document are now only exported once
+       - Now requires Java 6
+  - LaTeX:
+       - New option display_hidden_text to toggle the export of hidden text in the document
+       - Merge spans with identical formatting
+       - Support for TexMaths equations
+       - The package ooomath.sty is no longer required by standard configurations
+       - StarMath bugfixes
+  - XHTML:
+       - Support for (polyglot) HTML5, replacing the target format XHTML+MathML+XSLT
+       - New option use_mathjax to load the MathJax library if the target format is XHTML+MathML or HTML5
+       - Support for TexMaths equations (only if use_mathjax=true)
+       - Vector graphics is now converted to SVG if target format is HTML5
+       - New option embed_svg to embed SVG directly in HTML if target format is HTML5
+       - Support for HTML5 elements in templates
+       - Merge span elements with identical attributes
+       - New option table_size replacing the option ignore_table_dimensions
+       - Support display equations
+       
+Version 1.2.1 (September 2014)
+  - All:
+       - Updated to work with LO 4.x
+       
+Version 1.2 beta (March 2012)
+  - Filters:
+       - Added user interface to edit custom configuration
+       - Added help files
+       - New Writer4LaTeX extension supporting the use of Writer as a frontend to LaTeX     
+  - LaTeX:
+       - Support XeTeX and polyglossia.sty
+       - Support for xepersian.sty
+       - Support Zotero, JabRef and natbib.sty
+       - Improved support for cross references
+       - Support unnumbered headings
+       - Support first/last foot for multipage tables
+       - Cleaner export of formulas (avoiding redundant braces)
+       - Support for new StarMath constructs
+       - Support the "numbered formula" AutoText in Writer
+  - XHTML:
+       - Support conversion to EPUB format
+       - Support conversion to XHTML 1.1 (without MathML)
+       - The style sheet can now be created in a separate file
+       - New option to export images using relative width
+       - Improved support for footnotes and endnotes
+       - Improved support for list formatting
+       - Support split by page breaks
+       - Support optional export of hidden text
+       - Formulas can now be exported as images
+       - Added option to avoid pretty printing of the xhtml source
+  - General:
+       - New methods to load custom templates and style sheets in the converter API
+       - Support for complex options in the converter API
+       - New method in the converter API to access the metadata of the converted document
+       - The converter API now provides pointers to headings and other important places in the converted document
+       - The converter API now provides better identification of files that are part of the main document flow
+       - New attributes Resources, ResourceURL in filter API
+           
+Version 1.0 (September 2009)
+  -Filters:
+      - Changed to oxt format and separated into Writer2LaTeX and Writer2xhtml extensions
+      - Added (localized) dialogs to the filters
+  - LaTeX:
+      - Export vector graphics to pdf for use with pdfTeX.
+      - Support equations generated by OOoLaTeX.
+  - XHTML:
+      - Improved navigation features for splitted documents
+      - Do not export hidden or filtered rows and columns. Apply print ranges.
+      - Improved batch conversion
+  - General:
+      - Export images to a subdirectory.
+
+Version 0.5 (June 2007)
+  - LaTeX:
+      - support fancyhdr.sty
+      - support geometry.sty 
+      - support supertabular.sty
+      - support tabulary.sty
+      - support colortbl.sty
+      - support l, c, r columns in tables
+      - support floating figures and tables
+      - some graphics improvements
+      - custom tabstop handling
+      - flexible handling of notes (ignore, comment, marginpar, pdf annotation)
+      - string replace (eg. LaTeX -> \LaTeX)
+  - XHTML:
+      - convert an entire directory with index page(s) 
+      - convert using a template document
+      - support html forms
+      - custom tabstop handling
+      - support continued lists
+      - improved export of table formatting
+      - support background images
+      - improved table of contents
+  - General:
+      - support OpenDocument
+      - now installable as uno package (extension)
+      - no longer using the XMerge framework
+
+Version 0.4 (July 2005)
+  - LaTeX:
+    - improved readability of output (wrap long lines, do not include unused
+      labels and hypertargets)
+    - support for more languages
+    - writer.sty is replaced by the optional package ooomath.sty
+    - color.sty is now optional
+    - new options to ignore hard page and line breaks
+    - new option to ignore double spaces
+    - new option to specify that the document is *not* multilingual
+    - support for cp1251 (Windows cyrillic) and latin2 inputenc 
+    - improved style maps for paragraphs (avoid line break, verbatim content)
+    - cleaned up configuration of formatting
+    - improved export of list formatting
+    - support for other documentclasses than article
+    - support for lastpage.sty
+    - support for eurosym.sty
+    - support for tipa.sty
+    - support for various 8-bit fonts: Wingdings, Windows Symbol
+    - support for OpenSymbol
+  - XHTML:
+    - converts units to px (default)
+    - Calc2xhtml added
+    - improved support for table formatting; table formatting is now always
+      exported
+    - (partial) bidi support
+    - support for sections (margins and background color)
+    - new option to scale column widths
+    - new options to ignore double spaces, hard line breaks and empty paragraphs 
+  - General
+    - Added ant build file (provided by Michael Niedermair)
+    - Now possible to specify output path+file name on command line
+    - removed usage of document specific configuration files (*-config.xml)
+    - new option to create user configuration automatically
+
+Version 0.3.2 (February 2004)
+  - LaTeX:
+    - support for custom math symbols (%symbol)
+    - improved handling of paragraph formatting
+    - support for table borders
+    - support for alphabetical index
+    - support for pdf meta data
+  - XHTML:
+    - support for three different XHTML variants
+    - long documents can be split in several XHTML documents
+    - support for custom style sheets
+    - more flexible handling of fomatting
+    - support for most XHTML elements (including blockquote, dl, hr)
+    - support for alphabetical index
+    - support for meta data
+
+Version 0.3 (October 2003)
+  - support for BibTeX
+  - support for greek and russian text
+  - support for more languages
+  - support for latin1, cp1250, iso-8859-7, koi8-r and utf8 (Dominique
+    Unruh's ucs.sty) inputencodings
+  - support for symbol fonts: pifont.sty, wasysym.sty, ifsym.sty and
+    bbding.sty
+  - support for ulem.sty (underline/cross out)
+  - export of footnotes configuration, list label styles, heading
+    styles and hard paragraph formatting can be disabled
+  - custom export of list styles
+  - bugfixes
+
+Version 0.2 (March 2003)
+  - support for tables
+  - support for graphics
+  - support for outline numbering and list styles
+  - support for page styles
+  - support for sections (columns)
+  - custom export of text and paragraph styles
+  - integration with xmerge (enables use as export filter)
+  - export to XHTML + MathML
+
+Version 0.1 (September 2002)
+  - first simple version

@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE dlg:window PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "dialog.dtd">
+<dlg:window xmlns:dlg="http://openoffice.org/2000/dialog" xmlns:script="http://openoffice.org/2000/script" dlg:id="EpubOptions" dlg:left="139" dlg:top="84" dlg:width="360" dlg:height="284" dlg:closeable="true" dlg:moveable="true" dlg:title="EPUB Options (Writer2xhtml)">
+ <dlg:styles>
+  <dlg:style dlg:style-id="0" dlg:font-weight="150"/>
+ </dlg:styles>
+ <dlg:bulletinboard>
+  <dlg:text dlg:style-id="0" dlg:id="StyleLabel" dlg:tab-index="0" dlg:left="5" dlg:top="8" dlg:width="160" dlg:height="12" dlg:value="Style"/>
+  <dlg:text dlg:id="ConfigLabel" dlg:tab-index="1" dlg:left="10" dlg:top="22" dlg:width="60" dlg:height="12" dlg:value="Use style"/>
+  <dlg:menulist dlg:id="Config" dlg:tab-index="2" dlg:left="75" dlg:top="20" dlg:width="90" dlg:height="12" dlg:help-url="org.openoffice.da.writer2xhtml.oxt:EpubOptionsConfig" dlg:spin="true" dlg:linecount="10">
+   <dlg:menupopup>
+    <dlg:menuitem dlg:value="Original formatting"/>
+    <dlg:menuitem dlg:value="Custom"/>
+   </dlg:menupopup>
+   <script:event script:event-name="on-itemstatechange" script:macro-name="vnd.sun.star.UNO:ConfigChange" script:language="UNO"/>
+  </dlg:menulist>
+  <dlg:text dlg:id="ScalingLabel" dlg:tab-index="3" dlg:left="10" dlg:top="36" dlg:width="60" dlg:height="12" dlg:value="Scaling"/>
+  <dlg:numericfield dlg:id="Scaling" dlg:tab-index="4" dlg:left="90" dlg:top="34" dlg:width="60" dlg:height="12" dlg:help-url="org.openoffice.da.writer2xhtml.oxt:EpubOptionsScaling" dlg:strict-format="true" dlg:decimal-accuracy="0" dlg:value="100" dlg:value-min="1" dlg:value-max="1000" dlg:value-step="10" dlg:spin="true"/>
+  <dlg:text dlg:id="ScalingPercentLabel" dlg:tab-index="6" dlg:left="155" dlg:top="36" dlg:width="10" dlg:height="12" dlg:value="%"/>
+  <dlg:text dlg:id="ColumnScalingLabel" dlg:tab-index="7" dlg:left="10" dlg:top="64" dlg:width="60" dlg:height="12" dlg:value="Column scaling"/>
+  <dlg:numericfield dlg:id="ColumnScaling" dlg:tab-index="8" dlg:left="90" dlg:top="62" dlg:width="60" dlg:height="12" dlg:help-url="org.openoffice.da.writer2xhtml.oxt:EpubOptionsColumnScaling" dlg:strict-format="true" dlg:decimal-accuracy="0" dlg:value="100" dlg:value-min="1" dlg:value-max="1000" dlg:value-step="10" dlg:spin="true"/>
+  <dlg:text dlg:id="ColumnScalingPercentLabel" dlg:tab-index="42" dlg:left="155" dlg:top="64" dlg:width="10" dlg:height="12" dlg:value="%"/>
+  <dlg:checkbox dlg:id="RelativeFontSize" dlg:tab-index="9" dlg:left="10" dlg:top="78" dlg:width="155" dlg:height="12" dlg:help-url="org.openoffice.da.writer2xhtml.oxt:EpubOptionsRelativeFontSize" dlg:value="Use relative font size" dlg:checked="true">
+   <script:event script:event-name="on-itemstatechange" script:macro-name="vnd.sun.star.UNO:RelativeFontSizeChange" script:language="UNO"/>
+  </dlg:checkbox>
+  <dlg:text dlg:id="FontScalingLabel" dlg:tab-index="43" dlg:left="19" dlg:top="92" dlg:width="50" dlg:height="12" dlg:value="Scaling"/>
+  <dlg:numericfield dlg:id="FontScaling" dlg:tab-index="10" dlg:left="90" dlg:top="90" dlg:width="60" dlg:height="12" dlg:help-url="org.openoffice.da.writer2xhtml.oxt:EpubOptionsFontScaling" dlg:strict-format="true" dlg:decimal-accuracy="0" dlg:value="100" dlg:value-min="1" dlg:value-max="1000" dlg:value-step="10" dlg:spin="true"/>
+  <dlg:text dlg:id="FontScalingPercentLabel" dlg:tab-index="44" dlg:left="155" dlg:top="92" dlg:width="10" dlg:height="12" dlg:value="%"/>
+  <dlg:checkbox dlg:id="UseDefaultFont" dlg:tab-index="11" dlg:left="10" dlg:top="106" dlg:width="155" dlg:height="12" dlg:help-url="org.openoffice.da.writer2xhtml.oxt:EpubOptionsUseDefaultFont" dlg:value="Use a single font for the entire document" dlg:checked="false">
+   <script:event script:event-name="on-itemstatechange" script:macro-name="vnd.sun.star.UNO:UseDefaultFontChange" script:language="UNO"/>
+  </dlg:checkbox>
+  <dlg:text dlg:id="DefaultFontNameLabel" dlg:tab-index="45" dlg:left="19" dlg:top="120" dlg:width="50" dlg:height="12" dlg:value="Font name"/>
+  <dlg:combobox dlg:id="DefaultFontName" dlg:tab-index="12" dlg:left="75" dlg:top="118" dlg:width="90" dlg:height="12" dlg:help-url="org.openoffice.da.writer2xhtml.oxt:EpubOptionsDefaultFontName" dlg:spin="true"/>
+  <dlg:text dlg:id="ImageSizeLabel" dlg:tab-index="50" dlg:left="10" dlg:top="148" dlg:width="60" dlg:height="12" dlg:value="Image size"/>
+  <dlg:menulist dlg:id="ImageSize" dlg:tab-index="14" dlg:left="75" dlg:top="146" dlg:width="90" dlg:height="12" dlg:help-url="org.openoffice.da.writer2xhtml.oxt:EpubOptionsImageSize" dlg:spin="true" dlg:linecount="3">
+   <dlg:menupopup>
+    <dlg:menuitem dlg:value="Automatic"/>
+    <dlg:menuitem dlg:value="Relative to page width"/>
+    <dlg:menuitem dlg:value="Do not export"/>
+   </dlg:menupopup>
+  </dlg:menulist>
+  <dlg:text dlg:style-id="0" dlg:id="AutoCorrectLabel" dlg:tab-index="35" dlg:left="5" dlg:top="162" dlg:width="160" dlg:height="12" dlg:value="AutoCorrect"/>
+  <dlg:checkbox dlg:id="IgnoreHardLineBreaks" dlg:tab-index="15" dlg:left="10" dlg:top="176" dlg:width="155" dlg:height="12" dlg:help-url="org.openoffice.da.writer2xhtml.oxt:EpubOptionsIgnoreHardLineBreaks" dlg:value="Ignore hard line breaks" dlg:checked="false"/>
+  <dlg:checkbox dlg:id="IgnoreEmptyParagraphs" dlg:tab-index="16" dlg:left="10" dlg:top="190" dlg:width="155" dlg:height="12" dlg:help-url="org.openoffice.da.writer2xhtml.oxt:EpubOptionsIgnoreEmptyParagraphs" dlg:value="Ignore empty paragraphs" dlg:checked="false"/>
+  <dlg:checkbox dlg:id="IgnoreDoubleSpaces" dlg:tab-index="17" dlg:left="10" dlg:top="204" dlg:width="155" dlg:height="12" dlg:help-url="org.openoffice.da.writer2xhtml.oxt:EpubOptionsIgnoreDoubleSpaces" dlg:value="Ignore double spaces" dlg:checked="false"/>
+  <dlg:text dlg:style-id="0" dlg:id="SpecialContentLabel" dlg:tab-index="34" dlg:left="5" dlg:top="218" dlg:width="160" dlg:height="12" dlg:value="Special content"/>
+  <dlg:checkbox dlg:id="DisplayHiddenText" dlg:tab-index="18" dlg:left="10" dlg:top="232" dlg:width="155" dlg:height="12" dlg:help-url="org.openoffice.da.writer2xhtml.oxt:EpubOptionsDisplayHiddenText" dlg:value="Display hidden text" dlg:checked="false"/>
+  <dlg:checkbox dlg:id="Notes" dlg:tab-index="19" dlg:left="10" dlg:top="246" dlg:width="155" dlg:height="12" dlg:help-url="org.openoffice.da.writer2xhtml.oxt:EpubOptionsNotes" dlg:value="Export notes" dlg:checked="true"/>
+  <dlg:text dlg:style-id="0" dlg:id="DocumentDivisionLabel" dlg:tab-index="36" dlg:left="185" dlg:top="8" dlg:width="160" dlg:height="12" dlg:value="Document division (page breaks)"/>
+  <dlg:text dlg:id="SplitLevelLabel" dlg:tab-index="37" dlg:left="190" dlg:top="22" dlg:width="90" dlg:height="12" dlg:value="At heading level"/>
+  <dlg:menulist dlg:id="SplitLevel" dlg:tab-index="20" dlg:left="285" dlg:top="20" dlg:width="60" dlg:height="12" dlg:help-url="org.openoffice.da.writer2xhtml.oxt:EpubOptionsSplitLevel" dlg:spin="true" dlg:linecount="7">
+   <dlg:menupopup>
+    <dlg:menuitem dlg:value="None"/>
+    <dlg:menuitem dlg:value="1"/>
+    <dlg:menuitem dlg:value="2"/>
+    <dlg:menuitem dlg:value="3"/>
+    <dlg:menuitem dlg:value="4"/>
+    <dlg:menuitem dlg:value="5"/>
+    <dlg:menuitem dlg:value="6"/>
+   </dlg:menupopup>
+  </dlg:menulist>
+  <dlg:text dlg:id="PageBreakSplitLabel" dlg:tab-index="46" dlg:left="190" dlg:top="36" dlg:width="90" dlg:height="12" dlg:value="At page breaks"/>
+  <dlg:menulist dlg:id="PageBreakSplit" dlg:tab-index="21" dlg:left="285" dlg:top="34" dlg:width="60" dlg:height="12" dlg:help-url="org.openoffice.da.writer2xhtml.oxt:EpubOptionsPageBreakSplit" dlg:spin="true" dlg:linecount="4">
+   <dlg:menupopup>
+    <dlg:menuitem dlg:value="None"/>
+    <dlg:menuitem dlg:value="Defined by styles"/>
+    <dlg:menuitem dlg:value="All explicit"/>
+    <dlg:menuitem dlg:value="All"/>
+   </dlg:menupopup>
+  </dlg:menulist>
+  <dlg:text dlg:id="ImageSplitLabel" dlg:tab-index="51" dlg:left="199" dlg:top="64" dlg:width="60" dlg:height="12" dlg:value="Minimum width"/>
+  <dlg:checkbox dlg:id="UseImageSplit" dlg:tab-index="22" dlg:left="190" dlg:top="50" dlg:width="155" dlg:height="12" dlg:help-url="org.openoffice.da.writer2xhtml.oxt:EpubOptionsUseImageSplit" dlg:value="Use full screen for large images" dlg:checked="false">
+   <script:event script:event-name="on-itemstatechange" script:macro-name="vnd.sun.star.UNO:UseImageSplitChange" script:language="UNO"/>
+  </dlg:checkbox>
+  <dlg:numericfield dlg:id="ImageSplit" dlg:tab-index="23" dlg:left="270" dlg:top="62" dlg:width="60" dlg:height="12" dlg:help-url="org.openoffice.da.writer2xhtml.oxt:EpubOptionsImageSplit" dlg:strict-format="true" dlg:decimal-accuracy="0" dlg:value="100" dlg:value-min="0" dlg:value-max="100" dlg:spin="true"/>
+  <dlg:text dlg:id="ImageSplitPercentLabel" dlg:tab-index="52" dlg:left="335" dlg:top="64" dlg:width="10" dlg:height="12" dlg:value="%"/>
+  <dlg:checkbox dlg:id="CoverImage" dlg:tab-index="24" dlg:left="190" dlg:top="78" dlg:width="155" dlg:height="12" dlg:help-url="org.openoffice.da.writer2xhtml.oxt:EpubOptionsCoverImage" dlg:value="Use first image as cover image" dlg:checked="false"/>
+  <dlg:checkbox dlg:id="UseSplitAfter" dlg:tab-index="25" dlg:left="190" dlg:top="92" dlg:width="155" dlg:height="12" dlg:help-url="org.openoffice.da.writer2xhtml.oxt:EpubOptionsUseEpubAutoSplit" dlg:value="Automatic split of long documents" dlg:checked="false">
+   <script:event script:event-name="on-itemstatechange" script:macro-name="vnd.sun.star.UNO:UseSplitAfterChange" script:language="UNO"/>
+  </dlg:checkbox>
+  <dlg:text dlg:id="SplitAfterLabel" dlg:tab-index="47" dlg:left="199" dlg:top="106" dlg:width="80" dlg:height="12" dlg:value="After (in 1000 characters)"/>
+  <dlg:numericfield dlg:id="SplitAfter" dlg:tab-index="26" dlg:left="285" dlg:top="104" dlg:width="60" dlg:height="12" dlg:help-url="org.openoffice.da.writer2xhtml.oxt:EpubOptionsEpubAutoSplit" dlg:strict-format="true" dlg:decimal-accuracy="0" dlg:value-min="10" dlg:value-max="1000" dlg:value-step="10" dlg:spin="true"/>
+  <dlg:text dlg:style-id="0" dlg:id="TocLabel" dlg:tab-index="49" dlg:left="185" dlg:top="120" dlg:width="108" dlg:height="12" dlg:value="Navigation table"/>
+  <dlg:text dlg:id="ExternalTocDepthLabel" dlg:tab-index="48" dlg:left="190" dlg:top="134" dlg:width="100" dlg:height="12" dlg:value="Heading levels to include"/>
+  <dlg:menulist dlg:id="ExternalTocDepth" dlg:tab-index="27" dlg:left="300" dlg:top="132" dlg:width="45" dlg:height="12" dlg:help-url="org.openoffice.da.writer2xhtml.oxt:EpubOptionsExternalTocDepth" dlg:spin="true" dlg:linecount="11">
+   <dlg:menupopup>
+    <dlg:menuitem dlg:value="0"/>
+    <dlg:menuitem dlg:value="1"/>
+    <dlg:menuitem dlg:value="2"/>
+    <dlg:menuitem dlg:value="3"/>
+    <dlg:menuitem dlg:value="4"/>
+    <dlg:menuitem dlg:value="5"/>
+    <dlg:menuitem dlg:value="6"/>
+    <dlg:menuitem dlg:value="7"/>
+    <dlg:menuitem dlg:value="8"/>
+    <dlg:menuitem dlg:value="9"/>
+    <dlg:menuitem dlg:value="10"/>
+   </dlg:menupopup>
+  </dlg:menulist>
+  <dlg:checkbox dlg:id="IncludeToc" dlg:tab-index="30" dlg:left="190" dlg:top="176" dlg:width="155" dlg:height="12" dlg:help-url="org.openoffice.da.writer2xhtml.oxt:EpubOptionsIncludeToc" dlg:value="Also include original table of contents" dlg:checked="false"/>
+  <dlg:checkbox dlg:id="IncludeNCX" dlg:tab-index="32" dlg:left="190" dlg:top="218" dlg:width="155" dlg:height="12" dlg:help-url="org.openoffice.da.writer2xhtml.oxt:EpubOptionsIncludeNCX" dlg:value="Include EPUB 2 navigation" dlg:checked="false"/>
+  <dlg:button dlg:id="ExportButton" dlg:tab-index="38" dlg:left="5" dlg:top="264" dlg:width="55" dlg:height="12" dlg:value="Export" dlg:button-type="ok"/>
+  <dlg:button dlg:id="CancelButton" dlg:tab-index="39" dlg:left="70" dlg:top="264" dlg:width="55" dlg:height="12" dlg:value="Cancel" dlg:button-type="cancel"/>
+  <dlg:button dlg:id="EditMetadata" dlg:tab-index="40" dlg:left="135" dlg:top="264" dlg:width="100" dlg:height="12" dlg:help-url="org.openoffice.da.writer2xhtml.oxt:EpubOptionsEditMetadata" dlg:value="Edit document properties">
+   <script:event script:event-name="on-mouseup" script:macro-name="vnd.sun.star.UNO:EditMetadataClick" script:language="UNO"/>
+  </dlg:button>
+  <dlg:button dlg:id="HelpButton" dlg:tab-index="41" dlg:left="290" dlg:top="264" dlg:width="55" dlg:height="12" dlg:help-url="org.openoffice.da.writer2xhtml.oxt:EpubOptions" dlg:value="Help" dlg:button-type="help"/>
+  <dlg:checkbox dlg:id="IndexLinks" dlg:tab-index="29" dlg:left="190" dlg:top="162" dlg:width="155" dlg:height="12" dlg:help-url="org.openoffice.da.writer2xhtml.oxt:EpubOptionsIndexLinks" dlg:value="Include links to other indexes" dlg:checked="false"/>
+  <dlg:text dlg:style-id="0" dlg:id="CompatibilityLabel" dlg:tab-index="53" dlg:left="185" dlg:top="204" dlg:width="160" dlg:height="12" dlg:value="EPUB 2 compatibility"/>
+  <dlg:checkbox dlg:id="AvoidHtml5" dlg:tab-index="33" dlg:left="190" dlg:top="232" dlg:width="155" dlg:height="12" dlg:help-url="org.openoffice.da.writer2xhtml.oxt:EpubOptionsAvoidHtml5" dlg:value="Avoid HTML5 elements" dlg:checked="false"/>
+  <dlg:text dlg:id="ExternalTocDepthMarksLabel" dlg:tab-index="54" dlg:left="190" dlg:top="148" dlg:width="100" dlg:height="12" dlg:value="Index mark levels to include"/>
+  <dlg:menulist dlg:id="ExternalTocDepthMarks" dlg:tab-index="28" dlg:left="300" dlg:top="146" dlg:width="45" dlg:height="12" dlg:help-url="org.openoffice.da.writer2xhtml.oxt:EpubOptionsExternalTocDepthMarks" dlg:spin="true" dlg:linecount="11">
+   <dlg:menupopup>
+    <dlg:menuitem dlg:value="0"/>
+    <dlg:menuitem dlg:value="1"/>
+    <dlg:menuitem dlg:value="2"/>
+    <dlg:menuitem dlg:value="3"/>
+    <dlg:menuitem dlg:value="4"/>
+    <dlg:menuitem dlg:value="5"/>
+    <dlg:menuitem dlg:value="6"/>
+    <dlg:menuitem dlg:value="7"/>
+    <dlg:menuitem dlg:value="8"/>
+    <dlg:menuitem dlg:value="9"/>
+    <dlg:menuitem dlg:value="10"/>
+   </dlg:menupopup>
+  </dlg:menulist>
+  <dlg:text dlg:id="UnitsLabel" dlg:tab-index="55" dlg:left="10" dlg:top="134" dlg:width="60" dlg:height="12" dlg:value="Units"/>
+  <dlg:menulist dlg:id="Units" dlg:tab-index="13" dlg:left="75" dlg:top="132" dlg:width="90" dlg:height="12" dlg:help-url="org.openoffice.da.writer2xhtml.oxt:EpubOptionsUnits" dlg:spin="true" dlg:linecount="3">
+   <dlg:menupopup>
+    <dlg:menuitem dlg:value="Original"/>
+    <dlg:menuitem dlg:value="Pixels (px)"/>
+    <dlg:menuitem dlg:value="Relative (rem)"/>
+   </dlg:menupopup>
+  </dlg:menulist>
+  <dlg:checkbox dlg:id="OriginalPageNumbers" dlg:tab-index="31" dlg:left="190" dlg:top="190" dlg:width="155" dlg:height="12" dlg:help-url="org.openoffice.da.writer2xhtml.oxt:EpubOptionsOriginalPageNumbers" dlg:value="Include original page numbers (experimental feature)" dlg:checked="false"/>
+  <dlg:menulist dlg:id="TableSize" dlg:tab-index="5" dlg:left="75" dlg:top="48" dlg:width="90" dlg:height="12" dlg:help-url="org.openoffice.da.writer2xhtml.oxt:EpubOptionsTableSize" dlg:spin="true" dlg:linecount="3">
+   <dlg:menupopup>
+    <dlg:menuitem dlg:value="Automatic"/>
+    <dlg:menuitem dlg:value="Relative to page width"/>
+    <dlg:menuitem dlg:value="Do not export"/>
+   </dlg:menupopup>
+   <script:event script:event-name="on-itemstatechange" script:macro-name="vnd.sun.star.UNO:TableSizeChange" script:language="UNO"/>
+  </dlg:menulist>
+  <dlg:text dlg:id="TableSizeLabel" dlg:tab-index="56" dlg:left="10" dlg:top="50" dlg:width="60" dlg:height="12" dlg:value="Table size"/>
+ </dlg:bulletinboard>
+</dlg:window>

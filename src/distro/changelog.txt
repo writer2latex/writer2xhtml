@@ -1,0 +1,87 @@
+Changelog for Writer2xhtml version 1.6.1 -> 1.7 beta
+
+All changes are classified as
+- New feature: New functionality has been added to the extension
+- Improved: A feature was changed to work better than in the previous version
+- Bugfix: A bug in the previous version was fixed
+- Changed: Something has changed due to a design decision
+
+---------- version 1.7 ----------
+
+- Improvement: Export of list formatting is now using modern CSS features like counters.
+
+- Changed: The option list_formatting now supports the values ignore_all (do not export list formatting),
+  convert_labels (only convert the labels, not indentations), convert_all (convert all list formatting).
+  The old values css1, css1_hack and hard_labels have been removed.  
+
+- Bugfix: Fix crash in Calc export when last row/column in view is hidden
+
+- Improvement: No longer uses deprecated Java constructions
+
+- Improvement: Pretty printing now works better with spreadsheets.
+
+- Bugfix: The option use_mathjax now works correctly with TeXMaths equations. Also TeXMaths equations are now always
+  typeset in inline mode.
+
+- Bugfix: The converter now always uses the current page layout when calculating relative widths. Previously the first
+  page layout in the document was used, which caused miscalculations if page layout changes in the document.
+
+---------- version 1.7 beta ----------
+
+- Bugfix: The converter no longer crashes on spreadsheets with diagrams.
+
+- New feature: New boolean option original_page_numbers. If this option is set to true, the original page numbers will
+  be included in EPUB export. This feature is currently experimental.
+
+- Improved: The EPUB filter dialog has been extended to support the options table_size (previously only available in
+  the custom configuration settings), units (replacing convert_to_px) and the new option original_page_numbers.
+
+- Changed: The configuration file cleanxhtml.xml no longer sets custom_stylesheet.
+
+- Improved: The HTML filter dialog in Writer has been extended and redesigned to a two column layout. The options
+  multilingual, embed_svg (HTML5 only), embed_img, table_size and formulas (XHTML 1.0 and 1.1 only) can now be set
+  in the filter dialog, and are thus removed from the configuration settings. Also all three values for the options
+  table_size and image_size can now be set in the filter dialog.
+  The same applies to the HTML filter dialog in Calc, which now supports the options embed_svg (HTML5 only),
+  embed_img and image_size. (The other aforementioned options multilingual, table_size and formulas are not relevant
+  for spreadsheet documents.)
+  
+- Changed: Removed localizations of filter dialogs (only some strings were translated anyway)
+
+- New feature: New option units with values rem (default), px and original. This replaces the options convert_to_px,
+  which corresponds to the values px and original. For backwards compatibility, convert_to_px is still accepted.
+
+- Changed: The option formulas (for XHTML 1.0 and 1.1 strict only) no longer supports the values latex and image+latex
+
+- Bugfix: The configuration option formulas=image+starmath now works correctly if embed_img=true
+
+- Improved: Simplified export of column widths in tables (the old method set width on table cells rather than table
+  columns. This was due to differences in browsers, and should not be relevant anymore).
+  
+- Improved: No longer sets absolute table width and the CSS attribute table-layout:fixed when exporting Writer documents.
+  The old behavior was too strict and could lead to overfull table cells. On the other hand when exporting Calc
+  documents the two attributes are now both set, because overflow of table cells is o.k. in a spreadsheets document.
+
+- New feature: Added support for the ODF attribute table:border-model (collapsing or separating borders)
+
+- Bugfix: The toolbar settings are now also visible in Calc.
+
+- Improved: Added Help button to all configuration dialogs (because the "official" help button leads to online help).
+
+- New feature: Added support for image bullets in lists.
+
+- Bugfix: The converter no longer crashes if embed_img=true and the document contains two identical pictures.
+
+- Improved: Removed the redundant attribute type from <script> if producing HTML5.
+
+- Bugfix: Removed the deprecated profile attribute (Dublin Core) from <html> if producing HTML5.
+
+- Bugfix: Removed the deprecated type attribute from <style> if producing HTML5.
+
+- Bugfix: The <title> must be non-empty. The file name is now used as title if the document has an empty title. 
+
+- Changed: The batch conversion feature has been removed. Also removed the two associated options directory_icon and
+  document_icon (uplink is kept because it might be useful even without batch conversion).
+
+- Changed: Writer2xhtml has been separated from Writer2LaTeX: All LaTeX code has been removed, and packages etc. has
+  been renamed to avoid conflicts if installed together with Writer2LaTeX.

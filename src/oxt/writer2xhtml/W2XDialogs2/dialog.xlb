@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE library:library PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "library.dtd">
+<library:library xmlns:library="http://openoffice.org/2000/library" library:name="W2XDialogs2" library:readonly="false" library:passwordprotected="false">
+ <library:element library:name="ConfigurationRoot"/>
+ <library:element library:name="General"/>
+ <library:element library:name="Template"/>
+ <library:element library:name="Stylesheets"/>
+ <library:element library:name="Styles1"/>
+ <library:element library:name="Styles2"/>
+ <library:element library:name="Formatting"/>
+ <library:element library:name="Content"/>
+ <library:element library:name="NewDialog"/>
+ <library:element library:name="DeleteDialog"/>
+ <library:element library:name="LoadDefaults"/>
+ <library:element library:name="EpubOptions"/>
+ <library:element library:name="EpubMetadata"/>
+ <library:element library:name="AuthorDialog"/>
+ <library:element library:name="DateDialog"/>
+ <library:element library:name="ToolbarConfigurationRoot"/>
+ <library:element library:name="ToolbarSettings"/>
+</library:library>

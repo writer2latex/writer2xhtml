@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<helpdocument version="1.0">
+	<meta>
+        <topic id="writer2xhtml-configuration-template" indexer="include">
+            <title xml-lang="en-US">Content</title>
+            <filename>org.openoffice.da.writer2xhtml.oxt/Configuration/Template.xhp</filename>
+        </topic>
+    </meta>
+    <body>
+        <bookmark xml-lang="en-US" branch="hid/org.openoffice.da.writer2xhtml.oxt:ConfigHTMLTemplate" id="bm_confightmltemplate"/>
+        <paragraph role="heading" level="1" xml-lang="en-US">Template</paragraph>
+        <paragraph role="paragraph" xml-lang="en-US">Use this page to define an HTML template to use as a basis for the
+        generated HTML documents.</paragraph>
+
+        <section id="howtoget" xml-lang="en-US">
+        	Choose <emph>Tools - Options - Writer2xhtml - Template</emph>
+        </section>
+        
+        <paragraph role="heading" level="2" xml-lang="en-US">HTML Template</paragraph>
+        <bookmark xml-lang="en-US" branch="hid/org.openoffice.da.writer2xhtml.oxt:UseCustomTemplate" id="bm_configusecustomtemplate"/>
+        <paragraph role="heading" level="3" xml-lang="en-US">Use custom HTML template</paragraph>
+        <paragraph role="paragraph" xml-lang="en-US">Check this if you want to define an HTML template. Otherwise a default
+        template will be used.</paragraph>
+        <paragraph role="paragraph" xml-lang="en-US">A template should be an ordinary HTML file (do not include a DOCTYPE declaration)
+        with some special elements:</paragraph>
+        <list type="unordered">
+			<listitem>
+				<paragraph role="paragraph" xml-lang="en-US">An element with the id <emph>content</emph> is used to
+				fill the text content.
+		        If no such element exists, the <emph>body</emph> element is used. If there is no <emph>body</emph> element
+        		in the template, the root element is used.</paragraph>
+			</listitem>
+			<listitem>
+				<paragraph role="paragraph" xml-lang="en-US">Elements with the id <emph>header</emph> or
+				<emph>footer</emph> (optional) will be filled with a simple navigation panel using a first/previous/next/last scheme
+				(for spreadsheet documents, sheet names are used for navigation).</paragraph>
+			</listitem>
+			<listitem>
+				<paragraph role="paragraph" xml-lang="en-US">An element with the id <emph>panel</emph> (optional)
+				will be filled with a simple navigation panel using a table of contens-like scheme.</paragraph>
+			</listitem>
+		</list>
+        <paragraph role="paragraph" xml-lang="en-US">You can change the names of the id attributes at the bottom of this page.</paragraph>
+        <paragraph role="paragraph" xml-lang="en-US">The template must be well-formed XML. If this is not the case, an error message
+        is displayed below the template. A template with errors will be ignored in the export.</paragraph>
+        <paragraph role="paragraph" xml-lang="en-US">A simple template including a header might look like this:</paragraph>
+		<paragraph role="code" xml-lang="en-US">
+&lt;html&gt;<br/>
+&#xA0;&#xA0;&lt;head&gt;<br/>
+&#xA0;&#xA0;&#xA0;&#xA0;&lt;title/&gt;<br/>
+&#xA0;&#xA0;&lt;/head&gt;<br/>
+&#xA0;&#xA0;&lt;body&gt;<br/>
+&#xA0;&#xA0;&#xA0;&#xA0;&lt;div id='header'/&gt;<br/>
+&#xA0;&#xA0;&#xA0;&#xA0;&lt;div id='content'/&gt;<br/>
+&#xA0;&#xA0;&lt;/body&gt;<br/>
+&lt;/html&gt;
+</paragraph>
+        <paragraph role="paragraph" xml-lang="en-US">As the template does not include footer and panel nodes, these elements will not be included.
+        </paragraph>
+        
+        <paragraph role="paragraph" xml-lang="en-US">A template with all the elements, suitable for HTML5 might look like this:
+        </paragraph>
+		<paragraph role="code" xml-lang="en-US">
+&lt;html&gt;<br/>
+&#xA0;&#xA0;&lt;head&gt;<br/>
+&#xA0;&#xA0;&#xA0;&#xA0;&lt;title/&gt;<br/>
+&#xA0;&#xA0;&lt;/head&gt;<br/>
+&#xA0;&#xA0;&lt;body&gt;<br/>
+&#xA0;&#xA0;&#xA0;&#xA0;&lt;header&gt;&lt;nav id='header'/&gt;&lt;/header&gt;<br/>
+&#xA0;&#xA0;&#xA0;&#xA0;&lt;aside&gt;&lt;nav id='panel'/&gt;&lt;/aside&gt;<br/>
+&#xA0;&#xA0;&#xA0;&#xA0;&lt;div id='content'/&gt;<br/>
+&#xA0;&#xA0;&#xA0;&#xA0;&lt;footer&gt;&lt;nav id='footer'/&gt;&lt;/footer&gt;<br/>
+&#xA0;&#xA0;&lt;/body&gt;<br/>
+&lt;/html&gt;
+</paragraph>
+        
+        <paragraph role="paragraph" xml-lang="en-US">The absolutely mininal template is this:</paragraph>
+		<paragraph role="code" xml-lang="en-US">
+&lt;div/&gt;
+</paragraph>
+        <paragraph role="paragraph" xml-lang="en-US">The <emph>div</emph>-element will be used as the content container.
+        The generated document will not be a complete HTML document (no <emph>html</emph>, <emph>head</emph> and
+        <emph>body</emph> nodes). It will however still be a well-formed XML file that can be handled with standard tools.
+        The use case for this is that you can produce HTML fragments suitable for inclusion in e.g. a CMS.</paragraph>
+		<paragraph role="note" xml-lang="en-US">Make sure to check the option <emph>Do not include DOCTYPE</emph> in this case!</paragraph>
+
+        <bookmark xml-lang="en-US" branch="hid/org.openoffice.da.writer2xhtml.oxt:LoadTemplate" id="bm_configloadtemplate"/>
+        <paragraph role="heading" level="3" xml-lang="en-US">Load...</paragraph>
+        <paragraph role="paragraph" xml-lang="en-US">Click this to load a template from a file. This will overwrite the current contents
+        of the template.</paragraph>
+
+        <bookmark xml-lang="en-US" branch="hid/org.openoffice.da.writer2xhtml.oxt:ContentId" id="bm_configcontentid"/>
+        <paragraph role="heading" level="3" xml-lang="en-US">Content id</paragraph>
+        <paragraph role="paragraph" xml-lang="en-US">Enter the id to use for the content node.</paragraph>
+
+        <bookmark xml-lang="en-US" branch="hid/org.openoffice.da.writer2xhtml.oxt:PanelId" id="bm_configpanelid"/>
+        <paragraph role="heading" level="3" xml-lang="en-US">Panel id</paragraph>
+        <paragraph role="paragraph" xml-lang="en-US">Enter the id to use for the panel node.</paragraph>
+
+        <bookmark xml-lang="en-US" branch="hid/org.openoffice.da.writer2xhtml.oxt:HeaderId" id="bm_configheaderid"/>
+        <paragraph role="heading" level="3" xml-lang="en-US">Header id</paragraph>
+        <paragraph role="paragraph" xml-lang="en-US">Enter the id to use for the header node.</paragraph>
+
+        <bookmark xml-lang="en-US" branch="hid/org.openoffice.da.writer2xhtml.oxt:FooterId" id="bm_configfooterid"/>
+        <paragraph role="heading" level="3" xml-lang="en-US">Footer id</paragraph>
+        <paragraph role="paragraph" xml-lang="en-US">Enter the id to use for the footer node.</paragraph>
+
+    </body>
+</helpdocument>
