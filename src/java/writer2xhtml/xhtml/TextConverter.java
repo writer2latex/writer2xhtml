@@ -27,7 +27,9 @@
 package writer2xhtml.xhtml;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 import java.util.Stack;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -77,7 +79,7 @@ public class TextConverter extends ConverterHelper {
     // Counters for generated numbers
     private ListCounter outlineNumbering;
     private Map<String, ListCounter> listCounters = new HashMap<>();
-    private String sCurrentListLabel = null;
+    private Set<String> usedLists = new HashSet<>();
     
     // Mode used to handle floats (depends on source doc type and config)
     private int nFloatMode; 
@@ -312,6 +314,7 @@ public class TextConverter extends ConverterHelper {
         	nCharacterCount = 0;
         	bPendingPageBreak = false;
             if (converter.getOutFileIndex()>=0) { footCv.insertFootnotes(node,false); }
+            usedLists.clear();
             return converter.nextOutFile();
         }
         return (Element) node;
@@ -858,7 +861,12 @@ public class TextConverter extends ConverterHelper {
         	return createList(nLevel,sStyleName,sStartValue,hnode);
         }
     	if (continueNumbering(onode) && currentList==null) { // This is the first item of a continued list
-			return createList(nLevel,sStyleName,"none",hnode);
+    		if (usedLists.contains(sStyleName)) {
+    			return createList(nLevel,sStyleName,"none",hnode);
+    		}
+    		else { // Continued list in start of file; must add explicit restart
+    			return createList(nLevel,sStyleName,Integer.toString(counter.getValue(nLevel)),hnode);
+    		}
     	}
         else if (currentList==null) { // This is the first item of a list
 			counter.restart(nLevel).step(nLevel);
@@ -880,6 +888,7 @@ public class TextConverter extends ConverterHelper {
     private Element createList(int nLevel, String sStyleName, String sStartValue, Node hnode) {
 	    ListStyle style = ofr.getListStyle(sStyleName);
 	    if (style!=null) {
+	    	usedLists.add(style.getName());
 		    Element list = converter.createElement(style.isNumber(nLevel) ? "ol" : "ul");
 		    hnode.appendChild(list);
 		    StyleInfo info = new StyleInfo();
