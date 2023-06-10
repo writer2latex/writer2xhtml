@@ -16,11 +16,11 @@
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston,
  *  MA  02111-1307  USA
  *
- *  Copyright: 2002-2018 by Henrik Just
+ *  Copyright: 2002-2023 by Henrik Just
  *
  *  All Rights Reserved.
  * 
- *  Version 1.6.1 (2018-08-10)
+ *  Version 1.7 (2023-06-10)
  *
  */
 package writer2xhtml.xhtml;
@@ -130,7 +130,7 @@ class UserIndexConverter extends IndexConverterHelper {
 	private Element createEntry(Element ul, String sStyleName) {
     	Element li = converter.createElement("li");
     	ul.appendChild(li);
-    	return getTextCv().createParagraph(li,sStyleName);
+    	return getTextCv().createParagraph(li,sStyleName,false);
 	}
     
 }

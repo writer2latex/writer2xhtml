@@ -16,11 +16,11 @@
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston,
  *  MA  02111-1307  USA
  *
- *  Copyright: 2002-2018 by Henrik Just
+ *  Copyright: 2002-2023 by Henrik Just
  *
  *  All Rights Reserved.
  * 
- *  Version 1.6.1 (2018-08-10)
+ *  Version 1.7 (2023-06-10)
  *
  */
 package writer2xhtml.xhtml;
@@ -122,7 +122,7 @@ class AlphabeticalIndexConverter extends IndexConverterHelper {
             	if (entry.sWord[j]!=null) {
 		            Element li = converter.createElement("li");
 		            container.appendChild(li);
-		            Element p = getTextCv().createParagraph(li,sEntryStyleName[j]);
+		            Element p = getTextCv().createParagraph(li,sEntryStyleName[j],false);
 		            if (j<2 && entry.sWord[j+1]!=null) {
 		            	// This is a key, and may already be inserted
 		            	if (!entry.sWord[j].equals(sLastKey[j])) {

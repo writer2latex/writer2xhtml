@@ -20,7 +20,7 @@
  *
  *  All Rights Reserved.
  * 
- *  Version 2.0 (2023-06-07)
+ *  Version 2.0 (2023-06-09)
  *
  */
 
@@ -108,6 +108,16 @@ public class CSVList{
    	return null;
    }
    
+   /** Remove a specific value associated with a key 
+    * 
+    * @param sKey the key (ignored if null)
+    */
+   public void removeValue(String sKey){
+   	if (sKey!=null && items.containsKey(sKey)) {
+   		items.remove(sKey);
+   	}
+   }
+
    /** Remove all values from the list
     */
    public void clear() {

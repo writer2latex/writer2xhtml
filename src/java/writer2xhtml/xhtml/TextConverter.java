@@ -710,7 +710,7 @@ public class TextConverter extends ConverterHelper {
         else {
             // Hack because createParagraph doesn't work the way we need here :-(
             Element temp = converter.createElement("temp");
-            par = createParagraph(temp, sStyleName);
+            par = createParagraph(temp, sStyleName, Misc.isElement(hnode,"li"));
             prependAsapNode(par);
             traverseFloats(onode,hnode,par);
             hnode.appendChild(temp.getFirstChild());
@@ -825,14 +825,14 @@ public class TextConverter extends ConverterHelper {
         Element currentList = null;
         
         // We must keep track of the numbering to ensure proper continuation with file split
-        ListCounter counter = getListCounter(ofr.getListStyle(sStyleName));
 
         // Traverse the list, creating list elements on the way
         Node child = onode.getFirstChild();
         while (child!=null) {
             if (Misc.isElement(child,XMLString.TEXT_LIST_ITEM)) {
                 String sStartValue = Misc.getAttribute(child, XMLString.TEXT_START_VALUE);
-                currentList = createList(onode,nLevel,sStyleName,sStartValue,hnode,currentList,counter);
+                currentList = createList(onode,nLevel,sStyleName,sStartValue,hnode,currentList);
+                ListCounter counter = getListCounter(ofr.getListStyle(sStyleName));
                 sCurrentListLabel = counter.getLabel();
                 Element item = converter.createElement("li");
                 currentList.appendChild(item);
@@ -840,9 +840,8 @@ public class TextConverter extends ConverterHelper {
                 counter.step(nLevel);
             }
             else if (Misc.isElement(child, XMLString.TEXT_LIST_HEADER)) {
-                currentList = createList(onode,nLevel,sStyleName,null,hnode,currentList,counter);
+                currentList = createList(onode,nLevel,sStyleName,null,hnode,currentList);
                 Element item = converter.createElement("li");
-                item.setAttribute("counterdebug",counter.getLabel());
                 currentList.appendChild(item);
                 StyleInfo info = new StyleInfo();
                 getListSc().applyUnnumberedItemStyle(nLevel, sStyleName, info);
@@ -855,7 +854,8 @@ public class TextConverter extends ConverterHelper {
     }
     
     // Determine restart of numbering, create a new list if required and attach it to the current hnode
-    private Element createList(Node onode, int nLevel, String sStyleName, String sStartValue, Node hnode, Element currentList, ListCounter counter) {
+    private Element createList(Node onode, int nLevel, String sStyleName, String sStartValue, Node hnode, Element currentList) {
+    	ListCounter counter = getListCounter(ofr.getListStyle(sStyleName));
     	if (sStartValue!=null) { // The list restarts at this item; must create a new list to do this with CSS
             counter.restart(nLevel,Misc.getPosInteger(sStartValue, 1)-1).step(nLevel);
         	return createList(nLevel,sStyleName,sStartValue,hnode);
@@ -1553,12 +1553,17 @@ public class TextConverter extends ConverterHelper {
     	return node;
     }
 	
-    /* Create a styled paragraph node */
-    protected Element createParagraph(Element node, String sStyleName) {
+    /* Create and append a  styled paragraph node */
+    protected Element createParagraph(Element hnode, String sStyleName, boolean bInList) {
         StyleInfo info = new StyleInfo();
         getParSc().applyStyle(sStyleName,info);
+        if (bInList && config.listFormatting()==XhtmlConfig.CONVERT_ALL) {
+        	// We have to kill these properties because they are *replaced* by list properties
+        	info.props.removeValue("margin-left");
+        	info.props.removeValue("text-indent");
+        }
         Element par = converter.createElement(info.sTagName);
-        node.appendChild(par);
+        hnode.appendChild(par);
         applyStyle(info,par);
         StyleWithProperties style = ofr.getParStyle(sStyleName);
         if (style!=null && style.isAutomatic()) {

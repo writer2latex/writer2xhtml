@@ -16,11 +16,11 @@
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston,
  *  MA  02111-1307  USA
  *
- *  Copyright: 2002-2015 by Henrik Just
+ *  Copyright: 2002-2023 by Henrik Just
  *
  *  All Rights Reserved.
  * 
- *  Version 1.6 (2015-06-20)
+ *  Version 1.7 (2023-06-10)
  *
  */
 
@@ -57,7 +57,7 @@ class XhtmlBibliographyGenerator extends BibliographyGenerator {
 		converter.addTarget(li, "bib"+sKey);
 		converter.addEpubType(li, "biblioentry");
 		ul.appendChild(li);
-		currentPar = converter.getTextCv().createParagraph(li, sStyleName);
+		currentPar = converter.getTextCv().createParagraph(li, sStyleName, false);
 	}
 	
 	@Override protected void insertBibliographyItemElement(String sStyleName, String sText) {
