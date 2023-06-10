@@ -133,6 +133,11 @@ public class ListStyleConverter extends StyleConverterHelper {
         		        props = new CSVList(";");
 	        	        cssListTextIndent(style,nLevel,props);
 	        		    addStyleDeclaration(sSelector+" > li > p:first-of-type",props,sIndent,buf);
+	        		    
+	        		    // And all paragraphs get margin zero
+	        		    props = new CSVList(";");
+	        		    props.addValue("margin-left","0");
+	        		    addStyleDeclaration(sSelector+" > li > p",props,sIndent,buf);	        		    
 
 	        	    	// The first paragraph also gets the label
         		        // TODO: What if the first paragraph is a heading?
@@ -227,12 +232,12 @@ public class ListStyleConverter extends StyleConverterHelper {
 			sMarginLeft = Calc.sub(sMarginLeft, getLength(style.getLevelStyleProperty(nLevel-1, XMLString.FO_MARGIN_LEFT)));
 		}
 		props.addValue("margin-left","0");
-		props.addValue("padding-left",sMarginLeft);
+		props.addValue("padding-left",scale(sMarginLeft));
     }
     
     // Create CSS property for text-indent
     private void cssListTextIndent(ListStyle style, int nLevel, CSVList props) {
-    	props.addValue("text-indent", getLength(style.getLevelStyleProperty(nLevel, XMLString.FO_TEXT_INDENT)));
+    	props.addValue("text-indent", scale(getLength(style.getLevelStyleProperty(nLevel, XMLString.FO_TEXT_INDENT))));
     }
 
     // ================= Label formatting ===================
@@ -287,7 +292,7 @@ public class ListStyleConverter extends StyleConverterHelper {
     				getLength(style.getLevelStyleProperty(nLevel, XMLString.FO_TEXT_INDENT)));
     		String sWidth = Calc.sub(getLength(style.getLevelStyleProperty(nLevel, XMLString.TEXT_LIST_TAB_STOP_POSITION)),sMarginLeft);
     		// This formula is arbitrary (should be width of the actual content)... 
-    		String sWidthEstimate = (3+3*Misc.getPosInteger(getString(style.getLevelProperty(nLevel, XMLString.TEXT_DISPLAY_LEVELS)), 1))+"mm";
+    		String sWidthEstimate = (1.5+3*Misc.getPosInteger(getString(style.getLevelProperty(nLevel, XMLString.TEXT_DISPLAY_LEVELS)), 1))+"mm";
     		// ...but disregarding that, this seems to be the algorithm folllowed by LO
     		if (Calc.isLessThan(sWidth, sWidthEstimate)) { // Too narrow space, use left margin as alternative tab stop
         		sWidth = Calc.sub(getLength(style.getLevelStyleProperty(nLevel, XMLString.FO_MARGIN_LEFT)),sMarginLeft);
@@ -299,7 +304,7 @@ public class ListStyleConverter extends StyleConverterHelper {
         		}
     		}
 			props.addValue("display","inline-block");
-			props.addValue("width",sWidth);
+			props.addValue("width",scale(sWidth));
 			props.addValue("text-indent","0");
     	}
     }

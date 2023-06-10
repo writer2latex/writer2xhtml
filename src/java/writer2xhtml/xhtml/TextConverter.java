@@ -80,6 +80,7 @@ public class TextConverter extends ConverterHelper {
     private ListCounter outlineNumbering;
     private Map<String, ListCounter> listCounters = new HashMap<>();
     private Set<String> usedLists = new HashSet<>();
+    private String sCurrentListLabel = null;
     
     // Mode used to handle floats (depends on source doc type and config)
     private int nFloatMode; 
@@ -566,9 +567,7 @@ public class TextConverter extends ConverterHelper {
         // Note: nListLevel may in theory be different from the outline level,
         // though the ui in OOo does not allow this
 
-        // Numbering: It is possible to define outline numbering in CSS2
-        // using counters; but this is not supported in all browsers
-        // TODO: Offer CSS2 solution as an alternative later.
+        // TODO: Currently the label is exported as text. Offer CSS solution using counters?
 
         // Note: Conditional styles are not supported
         int nLevel = getOutlineLevel(onode);
@@ -686,6 +685,7 @@ public class TextConverter extends ConverterHelper {
         else { // beyond h6 - export as ordinary paragraph
             handleParagraph(onode,hnode);
         }
+        sCurrentListLabel = null;
     }
 
     /*
@@ -717,19 +717,17 @@ public class TextConverter extends ConverterHelper {
         }
 
         // Maybe add to toc
-        tocCv.handleParagraph((Element)onode, par, null); // TODO: Do we need a list label here?
+        tocCv.handleParagraph((Element)onode, par, sCurrentListLabel);
+        sCurrentListLabel = null;
 
         if (!bIsEmpty) {
             par = createTextBackground(par, sStyleName);
-            // insertListLabel(currentListStyle, nCurrentListLevel, "ItemNumber", null, sCurrentListLabel, par);
-            //sCurrentListLabel = null;
             traverseInlineText(onode,par);
         }
         else {
             // An empty paragraph (this includes paragraphs that only contains
             // whitespace) is ignored by the browser, hence we add &nbsp;
             par.appendChild( converter.createTextNode("\u00A0") );
-            //sCurrentListLabel = null;
         }        
         
         if (converter.isOPS() && !par.hasChildNodes()) {
@@ -835,6 +833,7 @@ public class TextConverter extends ConverterHelper {
             if (Misc.isElement(child,XMLString.TEXT_LIST_ITEM)) {
                 String sStartValue = Misc.getAttribute(child, XMLString.TEXT_START_VALUE);
                 currentList = createList(onode,nLevel,sStyleName,sStartValue,hnode,currentList,counter);
+                sCurrentListLabel = counter.getLabel();
                 Element item = converter.createElement("li");
                 currentList.appendChild(item);
                 traverseListItem(child,nLevel,sStyleName,item);
@@ -849,6 +848,7 @@ public class TextConverter extends ConverterHelper {
                 getListSc().applyUnnumberedItemStyle(nLevel, sStyleName, info);
                 applyStyle(info,item);
                 traverseListItem(child,nLevel,sStyleName,item);
+                sCurrentListLabel = null;
             }
         	child = child.getNextSibling();
         }

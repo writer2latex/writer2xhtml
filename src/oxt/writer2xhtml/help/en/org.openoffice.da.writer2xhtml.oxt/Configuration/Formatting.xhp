@@ -24,7 +24,7 @@
         <bookmark xml-lang="en-US" branch="hid/org.openoffice.da.writer2xhtml.oxt:CofigFormatting" id="bm_configformatting"/>
         <paragraph role="heading" level="3" xml-lang="en-US">Formatting</paragraph>
         <paragraph role="paragraph" xml-lang="en-US">This is used to specify how much text formatting
-        (character, paragraph and list formatting) to export.</paragraph>
+        (character and paragraph) to export.</paragraph>
         <list type="unordered">
         	<listitem>
 		        <paragraph role="paragraph" xml-lang="en-US"><emph>Convert all</emph>: Convert all supported formatting to CSS</paragraph>
@@ -71,21 +71,13 @@
         <paragraph role="paragraph" xml-lang="en-US">Choose how to export list formatting.</paragraph>
         <list type="unordered">
         	<listitem>
-		        <paragraph role="paragraph" xml-lang="en-US"><emph>Use CSS1</emph>: List formatting is exported using CSS1.
-		        This only provides basic support for list labels, and currently the browsers default indentations are used.</paragraph>
+		        <paragraph role="paragraph" xml-lang="en-US"><emph>Convert all</emph>: Convert all supported formatting to CSS.</paragraph>
         	</listitem>
         	<listitem>
-		        <paragraph role="paragraph" xml-lang="en-US"><emph>Use CSS1 and non-standard lists</emph>: This value is used to fix a
-		        problem with continued lists. If you select this value, Writer2xhtml will export a list that continues on level 2 or below
-		        like</paragraph>
-		        <paragraph role="code" xml-lang="en-US">&lt;ol&gt;&lt;ol&gt;&lt;li&gt;...&lt;/li&gt;&lt;/ol&gt;&lt;/ol&gt;</paragraph>
-				<paragraph role="paragraph" xml-lang="en-US">This is not valid in HTML, but works in browsers.
-				Also two deprecated attributes are used to continue numbering.</paragraph>
+		        <paragraph role="paragraph" xml-lang="en-US"><emph>Convert labels</emph>: Convert numbering and bullets, but use browser default for indentations.</paragraph>
         	</listitem>
         	<listitem>
-		        <paragraph role="paragraph" xml-lang="en-US"><emph>Use hard labels</emph>: If select this value, list labels are
-		        exported as part of the text. This adds full support for list labels (e.g. labels of the form 1.2.3). Unlike the other
-		        values indentations of the list are exported as well.</paragraph>
+		        <paragraph role="paragraph" xml-lang="en-US"><emph>Ignore all</emph>: Convert no list formatting at all, leaving everything to browser defaults or to a custom style sheet.</paragraph>
         	</listitem>
         </list>
 
