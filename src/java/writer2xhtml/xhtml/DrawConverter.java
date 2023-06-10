@@ -16,11 +16,11 @@
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston,
  *  MA  02111-1307  USA
  *
- *  Copyright: 2002-2022 by Henrik Just
+ *  Copyright: 2002-2023 by Henrik Just
  *
  *  All Rights Reserved.
  * 
- *  Version 1.7 (2022-06-23)
+ *  Version 1.7 (2023-06-10)
  *
  */
  
@@ -66,7 +66,6 @@ import writer2xhtml.util.SimpleXMLParser;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 import org.w3c.dom.Element;
 
 public class DrawConverter extends ConverterHelper {
@@ -131,48 +130,6 @@ public class DrawConverter extends ConverterHelper {
         bEmbedImg = config.embedImg();
     }
     
-    ///////////////////////////////////////////////////////////////////////
-    // Complete Draw documents/presentations
-
-    public void convertDrawContent(Element onode) {
-        if (!onode.hasChildNodes()) { return; }
-        NodeList nList = onode.getChildNodes();
-        int nLen = nList.getLength();
-        for (int i=0; i<nLen; i++) {
-            Node child = nList.item(i);
-            if (child.getNodeType() == Node.ELEMENT_NODE) {
-                String sNodeName = child.getNodeName();
-                if (sNodeName.equals(XMLString.DRAW_PAGE)) {
-                    handleDrawPage((Element)child,converter.nextOutFile());
-                }
-            }
-        }
-    }
-
-    private void handleDrawPage(Element onode, Element hnode) {
-        Element div = converter.createElement("div");
-        hnode.appendChild(div);
-		
-        // Style it (TODO: Apply hard drawing-page (background) style)
-        StyleInfo info = new StyleInfo();
-        getPageSc().applyStyle(onode.getAttribute(XMLString.DRAW_MASTER_PAGE_NAME),info);
-        info.props.addValue("top","40px"); // Somewhat arbitrary
-        info.props.addValue("left","0");
-        info.props.addValue("position","absolute");		
-        applyStyle(info,div);
-		
-        // Traverse the draw:page
-        if (!onode.hasChildNodes()) { return; }
-        NodeList nList = onode.getChildNodes();
-        int nLen = nList.getLength();
-        for (int i=0; i<nLen; i++) {
-            Node child = nList.item(i);
-            if (child.getNodeType() == Node.ELEMENT_NODE) {
-                handleDrawElement((Element)child,div,div,ABSOLUTE);
-            }
-        }
-    }
-	
     /////////////////////////////////////////////////////////////////////////
     // Form document
 
@@ -578,14 +535,6 @@ public class DrawConverter extends ConverterHelper {
         if (sStyleName!=null) {
             getFrameSc().applyStyle(sStyleName,info);
         }
-        // Presentation frame style
-        String sPresentationStyleName = Misc.getAttribute(frame, XMLString.PRESENTATION_STYLE_NAME);
-        if (sPresentationStyleName!=null) {
-            if ("outline".equals(Misc.getAttribute(frame, XMLString.PRESENTATION_CLASS))) {
-                getPresentationSc().enterOutline(sPresentationStyleName);
-            }
-            getPresentationSc().applyStyle(sPresentationStyleName,info);
-        }
         // Additional text formatting
         String sTextStyleName = Misc.getAttribute(frame, XMLString.DRAW_TEXT_STYLE_NAME);
         if (sTextStyleName!=null) {
@@ -660,7 +609,6 @@ public class DrawConverter extends ConverterHelper {
         if (sContentWidth!=null) {
         	converter.popContentWidth();
         }
-        getPresentationSc().exitOutline();
     }
 	
     private void handleDrawGroup(Element onode, Element hnodeBlock, Element hnodeInline, int nMode) {

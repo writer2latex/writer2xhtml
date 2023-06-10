@@ -16,11 +16,11 @@
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston,
  *  MA  02111-1307  USA
  *
- *  Copyright: 2002-2022 by Henrik Just
+ *  Copyright: 2002-2023 by Henrik Just
  *
  *  All Rights Reserved.
  * 
- *  Version 1.7 (2022-08-17)
+ *  Version 1.7 (2023-06-10)
  *
  */
 
@@ -331,7 +331,6 @@ public class Converter extends ConverterBase {
         // Traverse the body
         Element body = ofr.getContent();
         if (ofr.isSpreadsheet()) { tableCv.convertTableContent(body); }
-        else if (ofr.isPresentation()) { drawCv.convertDrawContent(body); }
         else { textCv.convertTextContent(body); }
 		
         // Set the title page and text page entries

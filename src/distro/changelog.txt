@@ -8,6 +8,8 @@ All changes are classified as
 
 ---------- version 1.7 ----------
 
+- Changed: Removed old experimental code to export presentations to HTML
+
 - Improvement: Export of list formatting is now using modern CSS features like counters.
 
 - Changed: The option list_formatting now supports the values ignore_all (do not export list formatting),

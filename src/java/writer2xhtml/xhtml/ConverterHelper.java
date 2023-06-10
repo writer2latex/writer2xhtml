@@ -16,11 +16,11 @@
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston,
  *  MA  02111-1307  USA
  *
- *  Copyright: 2002-2022 by Henrik Just
+ *  Copyright: 2002-2023 by Henrik Just
  *
  *  All Rights Reserved.
  * 
- *  Version 1.7 (2022-06-14)
+ *  Version 1.7 (2023-06-10)
  *
  */
 
@@ -82,8 +82,6 @@ class ConverterHelper {
     CellStyleConverter getCellSc() { return converter.getStyleCv().getCellSc(); }
 	
     FrameStyleConverter getFrameSc() { return converter.getStyleCv().getFrameSc(); }
-	
-    PresentationStyleConverter getPresentationSc() { return converter.getStyleCv().getPresentationSc(); }
 	
     PageStyleConverter getPageSc() { return converter.getStyleCv().getPageSc(); }
     

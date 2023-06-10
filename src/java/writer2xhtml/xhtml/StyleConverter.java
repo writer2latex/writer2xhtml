@@ -16,11 +16,11 @@
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston,
  *  MA  02111-1307  USA
  *
- *  Copyright: 2002-2022 by Henrik Just
+ *  Copyright: 2002-2023 by Henrik Just
  *
  *  All Rights Reserved.
  * 
- *  Version 1.7 (2022-06-07)
+ *  Version 1.7 (2023-06-10)
  *
  */
 
@@ -55,7 +55,6 @@ class StyleConverter extends ConverterHelper {
 
     // Helpers for drawing styles
     private FrameStyleConverter frameSc;
-    private PresentationStyleConverter presentationSc;
 	
     // Helper for page styles
     private PageStyleConverter pageSc;
@@ -79,7 +78,6 @@ class StyleConverter extends ConverterHelper {
         rowSc = new RowStyleConverter(ofr,config,converter,nType);
         cellSc = new CellStyleConverter(ofr,config,converter,nType);
         frameSc = new FrameStyleConverter(ofr,config,converter,nType);
-        presentationSc = new PresentationStyleConverter(ofr,config,converter,nType);
         pageSc = new PageStyleConverter(ofr,config,converter,nType);
     }
 	
@@ -102,8 +100,6 @@ class StyleConverter extends ConverterHelper {
     CellStyleConverter getCellSc() { return cellSc; }
 
     FrameStyleConverter getFrameSc() { return frameSc; }
-
-    PresentationStyleConverter getPresentationSc() { return presentationSc; }
 
     PageStyleConverter getPageSc() { return pageSc; }
 	
@@ -145,7 +141,6 @@ class StyleConverter extends ConverterHelper {
         buf.append(getTableSc().getStyleDeclarations(sIndent));
         buf.append(getRowSc().getStyleDeclarations(sIndent));
         buf.append(getFrameSc().getStyleDeclarations(sIndent));
-        buf.append(getPresentationSc().getStyleDeclarations(sIndent));
         buf.append(getPageSc().getStyleDeclarations(sIndent));
         return buf.toString();
     }
