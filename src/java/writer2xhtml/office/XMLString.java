@@ -20,13 +20,13 @@
  *
  *  All Rights Reserved.
  * 
- *  Version 1.7 (2023-05-26)
+ *  Version 1.7 (2023-06-13)
  *
  */
 
 package writer2xhtml.office;
 
-/* XML strings (tags and attributes) in the OOo XML namespaces
+/* XML strings (tags and attributes) in the ODF XML namespaces
  * typosafe but not typesafe :-)
  */
 
@@ -359,6 +359,7 @@ public class XMLString {
     public static final String TEXT_MIN_LABEL_WIDTH="text:min-label-width";
     public static final String TEXT_MIN_LABEL_DISTANCE="text:min-label-distance";
     public static final String TEXT_STYLE_NAME="text:style-name";
+    public static final String TEXT_STYLE_OVERRIDE="text:style-override";
     public static final String TEXT_VISITED_STYLE_NAME="text:visited-style-name";
     public static final String TEXT_DISPLAY_LEVELS="text:display-levels";
     public static final String TEXT_CONTINUE_NUMBERING="text:continue-numbering";

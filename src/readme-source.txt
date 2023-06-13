@@ -1,7 +1,7 @@
 Writer2xhtml source version 1.7
 ===============================
 
-Writer2xhtml is (c) 2002-2022 by Henrik Just.
+Writer2xhtml is (c) 2002-2023 by Henrik Just.
 The source is available under the terms and conditions of the
 GNU LESSER GENERAL PUBLIC LICENSE, version 2.1.
 Please see the file COPYING.TXT for details.
@@ -124,7 +124,7 @@ In addition to oxt, the build file supports the following targets:
     clean
 
 
-Henrik Just, June 2022
+Henrik Just, June 2023
 
 
 Thanks to Michael Niedermair for writing the original ant build file

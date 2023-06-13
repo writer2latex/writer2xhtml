@@ -20,7 +20,7 @@
  *
  *  All Rights Reserved.
  * 
- *  Version 1.7 (2023-06-08)
+ *  Version 1.7 (2023-06-13)
  *
  */
 
@@ -343,8 +343,9 @@ public class ListStyleConverter extends StyleConverterHelper {
         	StringBuilder label = new StringBuilder();
         	label.append(sPrefix);
         	for (int i=nLevels; i>0; i--) {
-        		label.append(getCounterFormat(style,nLevel-i+1));
-        		if (i>1) { label.append(" '.' "); }
+        		String sCounter = getCounterFormat(style,nLevel-i+1);
+        		label.append(sCounter);
+        		if (i>1 && sCounter.length()>0) { label.append(" '.' "); }
         	}
         	label.append(sSuffix);
         	// Assign the content property
@@ -381,12 +382,17 @@ public class ListStyleConverter extends StyleConverterHelper {
     // Translate the number format for a numbered style to a CSS counter format
     private String getCounterFormat(ListStyle style, int nLevel) {
     	String sNumFormat = style.getLevelProperty(nLevel,XMLString.STYLE_NUM_FORMAT);
-    	String sCSSNumFormat = "decimal";
-    	if ("i".equals(sNumFormat)) { sCSSNumFormat = "lower-roman"; }
-    	else if ("I".equals(sNumFormat)) { sCSSNumFormat = "upper-roman"; }
-    	else if ("a".equals(sNumFormat)) { sCSSNumFormat = "lower-alpha"; }
-    	else if ("A".equals(sNumFormat)) { sCSSNumFormat = "upper-alpha"; }
-		return "counter("+getClassName(style,nLevel)+","+sCSSNumFormat+")";
+    	if (sNumFormat.length()>0) {
+	    	String sCSSNumFormat = "decimal";
+	    	if ("i".equals(sNumFormat)) { sCSSNumFormat = "lower-roman"; }
+	    	else if ("I".equals(sNumFormat)) { sCSSNumFormat = "upper-roman"; }
+	    	else if ("a".equals(sNumFormat)) { sCSSNumFormat = "lower-alpha"; }
+	    	else if ("A".equals(sNumFormat)) { sCSSNumFormat = "upper-alpha"; }
+			return "counter("+getClassName(style,nLevel)+","+sCSSNumFormat+")";
+    	}
+    	else { // No numbering at this level
+    		return "";
+    	}
     }
 	
     // ================= Helpers ===================

@@ -20,20 +20,20 @@
  *
  *  All Rights Reserved.
  * 
- *  Version 1.7 (2023-06-10)
+ *  Version 1.7 (2023-06-13)
  *
  */
  
 package writer2xhtml.api;
 
 /** This is a factory class which provides static methods to create converters
- *  for documents in OpenDocument (or OpenOffice.org 1.x) format into a specific MIME type
+ *  for documents in OpenDocument format into a specific MIME type
  */
 public class ConverterFactory {
 
     // Version information
     private static final String VERSION = "1.7";
-    private static final String DATE = "2022-06-10";
+    private static final String DATE = "2022-06-13";
 	
     /** Return the Writer2LaTeX version in the form
      *  (major version).(minor version).(patch level)<br/>

@@ -1,4 +1,4 @@
-Changelog for Writer2xhtml version 1.6.1 -> 1.7 beta
+Changelog for Writer2xhtml version 1.6.1 -> 1.7
 
 All changes are classified as
 - New feature: New functionality has been added to the extension

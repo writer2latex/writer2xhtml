@@ -1,7 +1,7 @@
 Version history for Writer2LaTeX
 ================================
 
-Version 1.7 beta (August 2022)
+Version 1.7 (June 2023)
  - Writer2xhtml has now been completely separated from Writer2LaTeX
  - Writer2xhtml extension:
        - Reworked export dialogs supporting additional options
@@ -14,6 +14,7 @@ Version 1.7 beta (August 2022)
        - Fix some minor issues to ensure valid HTML5 documents
        - Fix bug with charts in spreadsheets
        - Fix bug with documents containing two identical images
+       - Improved support for list formatting using CSS counters
 
 Version 1.6.1 (October 2018)
   - Writer2LaTeX:

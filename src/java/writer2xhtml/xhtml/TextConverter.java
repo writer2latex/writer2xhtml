@@ -20,7 +20,7 @@
  *
  *  All Rights Reserved.
  * 
- *  Version 1.7 (2023-06-09)
+ *  Version 1.7 (2023-06-13)
  *
  */
 
@@ -830,14 +830,24 @@ public class TextConverter extends ConverterHelper {
         Node child = onode.getFirstChild();
         while (child!=null) {
             if (Misc.isElement(child,XMLString.TEXT_LIST_ITEM)) {
+            	String sLocalStyleName = sStyleName;
+            	// A single list item may override the list style. In this case force a new list for this single item
+            	String sStyleOverride = Misc.getAttribute(child, XMLString.TEXT_STYLE_OVERRIDE);
+            	if (sStyleOverride!=null) {
+            		currentList = null;
+            		sLocalStyleName = sStyleOverride;
+            	}
                 String sStartValue = Misc.getAttribute(child, XMLString.TEXT_START_VALUE);
-                currentList = createList(onode,nLevel,sStyleName,sStartValue,hnode,currentList);
-                ListCounter counter = getListCounter(ofr.getListStyle(sStyleName));
+                currentList = createList(onode,nLevel,sLocalStyleName,sStartValue,hnode,currentList);
+                ListCounter counter = getListCounter(ofr.getListStyle(sLocalStyleName));
                 sCurrentListLabel = counter.getLabel();
                 Element item = converter.createElement("li");
                 currentList.appendChild(item);
-                traverseListItem(child,nLevel,sStyleName,item);
+                traverseListItem(child,nLevel,sLocalStyleName,item);
                 counter.step(nLevel);
+            	if (sStyleOverride!=null) {
+            		currentList = null;
+            	}
             }
             else if (Misc.isElement(child, XMLString.TEXT_LIST_HEADER)) {
                 currentList = createList(onode,nLevel,sStyleName,null,hnode,currentList);
