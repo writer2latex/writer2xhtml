@@ -1,5 +1,5 @@
-Writer2xhtml source version 1.7
-===============================
+Writer2xhtml source version 1.7.1
+=================================
 
 Writer2xhtml is (c) 2002-2023 by Henrik Just.
 The source is available under the terms and conditions of the

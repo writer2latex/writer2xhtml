@@ -5,7 +5,7 @@
 			 
   <identifier value="org.openoffice.da.writer2xhtml.oxt" />
   
-  <version value="1.7" />
+  <version value="1.7.1" />
   
   <dependencies>
     <OpenOffice.org-minimal-version value="3.0" d:name="OpenOffice.org 3.0"/>

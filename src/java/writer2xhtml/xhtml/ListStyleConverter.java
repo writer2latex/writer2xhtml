@@ -132,11 +132,13 @@ public class ListStyleConverter extends StyleConverterHelper {
 	        	    	// The first paragraph gets a new text-indent
         		        props = new CSVList(";");
 	        	        cssListTextIndent(style,nLevel,props);
+	        	        // TODO: Not if list is attached to paragraph
 	        		    addStyleDeclaration(sSelector+" > li > p:first-of-type",props,sIndent,buf);
 	        		    
 	        		    // And all paragraphs get margin zero
 	        		    props = new CSVList(";");
 	        		    props.addValue("margin-left","0");
+	        	        // TODO: Not if list is attached to paragraph
 	        		    addStyleDeclaration(sSelector+" > li > p",props,sIndent,buf);	        		    
 
 	        	    	// The first paragraph also gets the label
@@ -232,11 +234,13 @@ public class ListStyleConverter extends StyleConverterHelper {
 			sMarginLeft = Calc.sub(sMarginLeft, getLength(style.getLevelStyleProperty(nLevel-1, XMLString.FO_MARGIN_LEFT)));
 		}
 		props.addValue("margin-left","0");
+		// TODO: Zero i list attached to paragraph
 		props.addValue("padding-left",scale(sMarginLeft));
     }
     
     // Create CSS property for text-indent
     private void cssListTextIndent(ListStyle style, int nLevel, CSVList props) {
+    	// TODO: Not if list is attached to paragraph
     	props.addValue("text-indent", scale(getLength(style.getLevelStyleProperty(nLevel, XMLString.FO_TEXT_INDENT))));
     }
 

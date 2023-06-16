@@ -1,7 +1,7 @@
-Writer2xhtml version 1.7
-========================
+Writer2xhtml version 1.7.1
+==========================
 
-This is the distribution of Writer2xhtml version 1.7
+This is the distribution of Writer2xhtml version 1.7.1
 
 Latest version can be found at the web site
   http://writer2latex.sourceforge.net/writer2xhtml.html

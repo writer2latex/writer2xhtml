@@ -2,7 +2,7 @@
   ############################################################################
   # This is the Ant build file for writer2xhtml
   # Original: Sep 2004 (mgn)
-  # version 1.7 (2022-11-30)
+  # version 1.7.1 (2023-06-16)
   ############################################################################
 -->
 <project name="writer2xhtml" default="help" basedir=".">
@@ -35,7 +35,7 @@
     <!-- configure the directories -->
     <property name="jarfile" value="writer2xhtml"/>
     <property name="basename" value="writer2xhtml17"/>
-    <property name="distrofile" value="${basename}.zip" />
+    <property name="distrofile" value="${basename}1.zip" />
     <!--<property name="sourcedistrofile" value="${basename}source.zip" />-->
     <property name="src" location="src/java"/>
     <property name="source.distro" location="src/distro" />

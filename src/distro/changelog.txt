@@ -1,10 +1,13 @@
-Changelog for Writer2xhtml version 1.6.1 -> 1.7
+Changelog for Writer2xhtml version 1.6.1 -> 1.7.1
 
 All changes are classified as
 - New feature: New functionality has been added to the extension
 - Improved: A feature was changed to work better than in the previous version
 - Bugfix: A bug in the previous version was fixed
 - Changed: Something has changed due to a design decision
+
+---------- version 1.7.1 ----------
+
 
 ---------- version 1.7 ----------
 
