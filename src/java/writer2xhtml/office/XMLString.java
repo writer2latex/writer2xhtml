@@ -20,7 +20,7 @@
  *
  *  All Rights Reserved.
  * 
- *  Version 1.7 (2023-06-13)
+ *  Version 1.7.1 (2023-06-25)
  *
  */
 
@@ -213,6 +213,8 @@ public class XMLString {
     public static final String STYLE_COUNTRY_COMPLEX="style:country-complex";
     public static final String STYLE_LANGUAGE_ASIAN="style:language-asian";
     public static final String STYLE_COUNTRY_ASIAN="style:country-asian";
+	public static final String STYLE_TAB_STOPS="style:tab-stops";
+	public static final String STYLE_TAB_STOP="style:tab-stop";
 
     // table namespace - elements
     public static final String TABLE_="table:";

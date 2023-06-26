@@ -8,12 +8,13 @@ All changes are classified as
 
 ---------- version 1.7.1 ----------
 
+- Improvement: Calculation of list indentations and label widths are now closer to the original
 
 ---------- version 1.7 ----------
 
 - Changed: Removed old experimental code to export presentations to HTML
 
-- Improvement: Export of list formatting is now using modern CSS features like counters.
+- Improved: Export of list formatting is now using modern CSS features like counters.
 
 - Changed: The option list_formatting now supports the values ignore_all (do not export list formatting),
   convert_labels (only convert the labels, not indentations), convert_all (convert all list formatting).
@@ -21,9 +22,9 @@ All changes are classified as
 
 - Bugfix: Fix crash in Calc export when last row/column in view is hidden
 
-- Improvement: No longer uses deprecated Java constructions
+- Improved: No longer uses deprecated Java constructions
 
-- Improvement: Pretty printing now works better with spreadsheets.
+- Improved: Pretty printing now works better with spreadsheets.
 
 - Bugfix: The option use_mathjax now works correctly with TeXMaths equations. Also TeXMaths equations are now always
   typeset in inline mode.

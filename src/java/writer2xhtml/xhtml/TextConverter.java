@@ -20,7 +20,7 @@
  *
  *  All Rights Reserved.
  * 
- *  Version 1.7 (2023-06-13)
+ *  Version 1.7.1 (2023-06-24)
  *
  */
 
@@ -822,9 +822,10 @@ public class TextConverter extends ConverterHelper {
         if (sStyleName1!=null) { sStyleName = sStyleName1; }
         
         // List are created on the fly because we may need several lists if an item restarts numbering
+        // We also keep track of the numbering to ensure proper continuation with file split
+        // The method createList handles this
         Element currentList = null;
         
-        // We must keep track of the numbering to ensure proper continuation with file split
 
         // Traverse the list, creating list elements on the way
         Node child = onode.getFirstChild();
@@ -838,7 +839,7 @@ public class TextConverter extends ConverterHelper {
             		sLocalStyleName = sStyleOverride;
             	}
                 String sStartValue = Misc.getAttribute(child, XMLString.TEXT_START_VALUE);
-                currentList = createList(onode,nLevel,sLocalStyleName,sStartValue,hnode,currentList);
+                currentList = createList(child,nLevel,sLocalStyleName,sStartValue,hnode,currentList);
                 ListCounter counter = getListCounter(ofr.getListStyle(sLocalStyleName));
                 sCurrentListLabel = counter.getLabel();
                 Element item = converter.createElement("li");
@@ -850,11 +851,11 @@ public class TextConverter extends ConverterHelper {
             	}
             }
             else if (Misc.isElement(child, XMLString.TEXT_LIST_HEADER)) {
-                currentList = createList(onode,nLevel,sStyleName,null,hnode,currentList);
+                currentList = createList(child,nLevel,sStyleName,null,hnode,currentList);
                 Element item = converter.createElement("li");
                 currentList.appendChild(item);
                 StyleInfo info = new StyleInfo();
-                getListSc().applyUnnumberedItemStyle(nLevel, sStyleName, info);
+                getListSc().applyUnnumberedItemStyle(sStyleName, info);
                 applyStyle(info,item);
                 traverseListItem(child,nLevel,sStyleName,item);
                 sCurrentListLabel = null;
@@ -864,18 +865,25 @@ public class TextConverter extends ConverterHelper {
     }
     
     // Determine restart of numbering, create a new list if required and attach it to the current hnode
-    private Element createList(Node onode, int nLevel, String sStyleName, String sStartValue, Node hnode, Element currentList) {
+    private Element createList(Node itemnode, int nLevel, String sStyleName, String sStartValue, Node hnode, Element currentList) {
+    	// In addition the the list style we may need the paragraph style
+    	String sParStyleName = null;
+    	Element par = Misc.getFirstChildElement(itemnode);
+    	if (Misc.isElement(par, XMLString.TEXT_P)) {
+    		sParStyleName = Misc.getAttribute(par, XMLString.TEXT_STYLE_NAME);
+    	}
+    	
     	ListCounter counter = getListCounter(ofr.getListStyle(sStyleName));
     	if (sStartValue!=null) { // The list restarts at this item; must create a new list to do this with CSS
             counter.restart(nLevel,Misc.getPosInteger(sStartValue, 1)-1).step(nLevel);
-        	return createList(nLevel,sStyleName,sStartValue,hnode);
+        	return createList(nLevel,sStyleName,sStartValue,sParStyleName,hnode);
         }
-    	if (continueNumbering(onode) && currentList==null) { // This is the first item of a continued list
+    	if (continueNumbering(itemnode.getParentNode()) && currentList==null) { // This is the first item of a continued list
     		if (usedLists.contains(sStyleName)) {
-    			return createList(nLevel,sStyleName,"none",hnode);
+    			return createList(nLevel,sStyleName,"none",sParStyleName,hnode);
     		}
     		else { // Continued list in start of file; must add explicit restart
-    			return createList(nLevel,sStyleName,Integer.toString(counter.getValue(nLevel)),hnode);
+    			return createList(nLevel,sStyleName,Integer.toString(counter.getValue(nLevel)),sParStyleName,hnode);
     		}
     	}
         else if (currentList==null) { // This is the first item of a list
@@ -887,7 +895,7 @@ public class TextConverter extends ConverterHelper {
         			counter.restart(nLevel,Misc.getPosInteger(sListStartValue,1)-1).step(nLevel);
         		}
         	}
-			return createList(nLevel,sStyleName,null,hnode);
+			return createList(nLevel,sStyleName,null,sParStyleName,hnode);
         }
         else {
         	return currentList;
@@ -895,14 +903,14 @@ public class TextConverter extends ConverterHelper {
     }
     
     // Create a new list and attach it to the current hnode
-    private Element createList(int nLevel, String sStyleName, String sStartValue, Node hnode) {
+    private Element createList(int nLevel, String sStyleName, String sStartValue, String sParStyleName, Node hnode) {
 	    ListStyle style = ofr.getListStyle(sStyleName);
 	    if (style!=null) {
 	    	usedLists.add(style.getName());
 		    Element list = converter.createElement(style.isNumber(nLevel) ? "ol" : "ul");
 		    hnode.appendChild(list);
 		    StyleInfo info = new StyleInfo();
-		    getListSc().applyStyle(nLevel, sStyleName, info, sStartValue);
+		    getListSc().applyStyle(nLevel, sStyleName, sStartValue, sParStyleName, info);
 		    applyStyle(info,list);
 		    return list;
 	    }

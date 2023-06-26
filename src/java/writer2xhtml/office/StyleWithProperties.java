@@ -16,23 +16,25 @@
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston,
  *  MA  02111-1307  USA
  *
- *  Copyright: 2002-2018 by Henrik Just
+ *  Copyright: 2002-2023 by Henrik Just
  *
  *  All Rights Reserved.
  *  
- *  Version 1.6.1 (2018-08-10)
+ *  Version 1.7.1 (2023-06-26)
  */
  
 package writer2xhtml.office;
 
-//import org.w3c.dom.Element;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import org.w3c.dom.Node;
 
 import writer2xhtml.util.Calc;
 import writer2xhtml.util.Misc;
 
-/** <p> Class representing a style in OOo which contains a style:properties
-  * element </p> 
+/** Class representing an ODF-style which contains a style:properties element 
   */
 public class StyleWithProperties extends OfficeStyle {
     private final static int OLDPROPS = 0;
@@ -45,7 +47,6 @@ public class StyleWithProperties extends OfficeStyle {
     private final static int CELL = 7;
 	private final static int GRAPHIC = 8;
     private final static int PAGE = 9;
-    //private final static int DRAWPAGE = 10;
     private final static int COUNT = 10;
 	
     private boolean bEmpty; // Flag to indicate that this style does not contain any properties except rsid
@@ -59,7 +60,7 @@ public class StyleWithProperties extends OfficeStyle {
 
     private boolean bHasFootnoteSep = false;
     private PropertySet footnoteSep = new PropertySet();
-
+    private List<String> tabStops = new ArrayList<>();
 
     public StyleWithProperties() {
         for (int i=0; i<COUNT; i++) {
@@ -138,9 +139,22 @@ public class StyleWithProperties extends OfficeStyle {
                     bHasFootnoteSep = true; 
                     footnoteSep.loadFromDOM(child);
                 }
+                else if (XMLString.STYLE_TAB_STOPS.equals(sName)) {
+                	loadTabStops(child);
+                }
             }
             child = child.getNextSibling();
         }
+    }
+    
+    private void loadTabStops(Node node) {
+    	Node child = node.getFirstChild();
+    	while (child!=null) {
+    		if (Misc.isElement(child, XMLString.STYLE_TAB_STOP)) {
+    			tabStops.add(Misc.getAttribute(child, XMLString.STYLE_POSITION));
+    		}
+    		child = child.getNextSibling();
+    	}
     }
     
     public boolean isEmpty() {
@@ -305,6 +319,18 @@ public class StyleWithProperties extends OfficeStyle {
 
     public String getFootnoteProperty(String sPropName) {
         return footnoteSep.getProperty(sPropName);
+    }
+    
+    public List<String> getTabStops() {
+    	if (tabStops.size()>0) {
+    		return Collections.unmodifiableList(tabStops);
+    	}
+    	StyleWithProperties parentStyle = (StyleWithProperties) family.getStyle(getParentName());
+    	if (parentStyle!=null) {
+    		return parentStyle.getTabStops();
+    	}
+    	// Found no tabstops, return the empty list
+    	return Collections.unmodifiableList(tabStops);
     }
 
 }

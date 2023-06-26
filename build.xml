@@ -8,8 +8,10 @@
 <project name="writer2xhtml" default="help" basedir=".">
 
     <!-- set this property to the location of your SO/OOo installation -->
-	<property name="OFFICE_CLASSES" location="/usr/lib/libreoffice/program/classes" />
-	<property name="URE_CLASSES" location="/usr/lib/libreoffice/program/classes" />
+	<!--<property name="OFFICE_CLASSES" location="/usr/lib/libreoffice/program/classes" />-->
+	<!--<property name="URE_CLASSES" location="/usr/lib/libreoffice/program/classes" />-->
+	<property name="OFFICE_CLASSES" location="C:\Program Files\LibreOffice\program\classes" />
+	<property name="URE_CLASSES" location="C:\Program Files\LibreOffice\program\classes" />
 
     <description>writer2xhtml - build file</description>
 
