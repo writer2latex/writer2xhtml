@@ -20,7 +20,7 @@
  *
  *  All Rights Reserved.
  * 
- *  Version 1.7.1 (2023-06-24)
+ *  Version 1.7.1 (2023-06-25)
  *
  */
 
@@ -710,7 +710,7 @@ public class TextConverter extends ConverterHelper {
         else {
             // Hack because createParagraph doesn't work the way we need here :-(
             Element temp = converter.createElement("temp");
-            par = createParagraph(temp, sStyleName, Misc.isElement(hnode,"li"));
+            par = createParagraph(temp, sStyleName);
             prependAsapNode(par);
             traverseFloats(onode,hnode,par);
             hnode.appendChild(temp.getFirstChild());
@@ -1572,14 +1572,9 @@ public class TextConverter extends ConverterHelper {
     }
 	
     /* Create and append a  styled paragraph node */
-    protected Element createParagraph(Element hnode, String sStyleName, boolean bInList) {
+    protected Element createParagraph(Element hnode, String sStyleName) {
         StyleInfo info = new StyleInfo();
         getParSc().applyStyle(sStyleName,info);
-        if (bInList && config.listFormatting()==XhtmlConfig.CONVERT_ALL) {
-        	// We have to kill these properties because they are *replaced* by list properties
-        	info.props.removeValue("margin-left");
-        	info.props.removeValue("text-indent");
-        }
         Element par = converter.createElement(info.sTagName);
         hnode.appendChild(par);
         applyStyle(info,par);

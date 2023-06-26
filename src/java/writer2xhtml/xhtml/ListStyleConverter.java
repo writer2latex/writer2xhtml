@@ -20,7 +20,7 @@
  *
  *  All Rights Reserved.
  * 
- *  Version 1.7.1 (2023-06-23)
+ *  Version 1.7.1 (2023-06-25)
  *
  */
 
@@ -56,7 +56,7 @@ import writer2xhtml.util.StringComparator;
 public class ListStyleConverter extends StyleConverterHelper {
 	
 	// Value of the configuration option list_formatting (ignore_all, convert_labels, convert_all)
-	private int nFormatting;
+	private int nListFormatting;
 	// Flag to indicate that we need a special li.no_label-class
 	private boolean bHasListHeaders=false;
 	// Maps and sets to keep track of the CSS variants of the class style we need
@@ -73,25 +73,34 @@ public class ListStyleConverter extends StyleConverterHelper {
     public ListStyleConverter(OfficeReader ofr, XhtmlConfig config, Converter converter, int nType) {
         super(ofr,config,converter,nType);
         this.styleMap = config.getXListStyleMap();
-        this.nFormatting = config.listFormatting();
+        this.nListFormatting = config.listFormatting();
+        this.bConvertHard = config.xhtmlFormatting()==XhtmlConfig.CONVERT_ALL || config.xhtmlFormatting()==XhtmlConfig.IGNORE_STYLES;
     }
 
     public void applyStyle(int nLevel, String sStyleName, String sCounterReset, String sParStyleName, StyleInfo info) {
         updateLevel(nLevel,sStyleName);
     	ListStyle style = ofr.getListStyle(sStyleName);
         if (style!=null) {
-        	if (nFormatting!=XhtmlConfig.IGNORE_ALL) {
+        	if (nListFormatting!=XhtmlConfig.IGNORE_ALL) {
         		applyExplicitCounterReset(style, nLevel, sCounterReset,info);
         	}
             if (styleMap.contains(style.getDisplayName())) {
             	applyStyleMap(style,info);
             }
-            else if (nFormatting==XhtmlConfig.CONVERT_ALL) {
+            else if (nListFormatting==XhtmlConfig.CONVERT_ALL) {
             	StyleWithProperties parStyle = ofr.getParStyle(sParStyleName);
+            	if (parStyle!=null && parStyle.isAutomatic() &&
+            			(!bConvertHard ||
+            					(parStyle.getParProperty(XMLString.FO_MARGIN_LEFT, false)==null &&
+            					parStyle.getParProperty(XMLString.FO_TEXT_INDENT, false)==null &&
+            					parStyle.getTabStops(false).isEmpty())
+            			)) { // Don't use automatic styles unless we have to
+            		parStyle = (StyleWithProperties) parStyle.getParentStyle();
+            	}
             	info.sClass = getExtendedClassName(style,nLevel,parStyle);
             	listParStyles.computeIfAbsent(style.getDisplayName(), key -> new HashSet<>()).add(parStyle.getDisplayName());
             }
-            else if (nFormatting==XhtmlConfig.CONVERT_LABELS || !style.isAutomatic()) { // Always apply class names for soft styles
+            else if (nListFormatting==XhtmlConfig.CONVERT_LABELS || !style.isAutomatic()) { // Always apply class names for soft styles
 				info.sClass = getClassName(style,nLevel);
 				listStyles.add(sStyleName);
             }
@@ -118,7 +127,7 @@ public class ListStyleConverter extends StyleConverterHelper {
     
     public void applyUnnumberedItemStyle(String sStyleName, StyleInfo info) {
     	ListStyle style = ofr.getListStyle(sStyleName);
-        if (style!=null && nFormatting!=XhtmlConfig.IGNORE_ALL) {
+        if (style!=null && nListFormatting!=XhtmlConfig.IGNORE_ALL) {
         	info.sClass = "no_label";
         	bHasListHeaders = true;
         }
@@ -129,10 +138,10 @@ public class ListStyleConverter extends StyleConverterHelper {
      */
     public String getStyleDeclarations(String sIndent) {
     	// TODO: What if the first paragraph is a heading?
-		if (nFormatting==XhtmlConfig.CONVERT_ALL) {
+		if (nListFormatting==XhtmlConfig.CONVERT_ALL) {
 			return getFullStyleDeclarations(sIndent);
 		}
-		else if (nFormatting==XhtmlConfig.CONVERT_LABELS) {
+		else if (nListFormatting==XhtmlConfig.CONVERT_LABELS) {
 			return getLabelStyleDeclarations(sIndent);
 		}
 		else {
@@ -153,8 +162,8 @@ public class ListStyleConverter extends StyleConverterHelper {
     	    		    String sSelector = "."+getExtendedClassName(listStyle,nLevel,parStyle);
 						// .liststyle_level_parstyle (we format lists as numbered paragraphs, hence no indentation on list)
 						CSVList props = new CSVList(";");
-						props.addValue("margin-left","0");
-						props.addValue("padding-left","0");
+						props.addValue("margin","0");
+						props.addValue("padding","0");
 						props.addValue("clear:left");
 						cssCounterReset(listStyle,nLevel,props);
 						addStyleDeclaration(sSelector,props,sIndent,buf);
@@ -164,6 +173,18 @@ public class ListStyleConverter extends StyleConverterHelper {
 						props.addValue("content", "''");
 						addStyleDeclaration(sSelector+" > li::marker",props,sIndent,buf);
 						
+	        		    // .liststyle_level > li > p (the list style may override the margin-left)
+						if (cssOverride(listStyle,parStyle,XMLString.FO_MARGIN_LEFT)) {
+		        		    props = new CSVList(";");
+		        	        cssListMarginLeft(listStyle,nLevel,props);
+		        		    addStyleDeclaration(sSelector+" > li > p",props,sIndent,buf);
+						}
+
+	        	    	// .liststyle_level > li > p:not(:first-of-type) (text-indent of additional paragraphs in item is always 0)
+        		        props = new CSVList(";");
+	        	        props.addValue("text-indent", "0");
+	        		    addStyleDeclaration(sSelector+" > li > p:not(:first-of-type)",props,sIndent,buf);
+	        		    
 	        	    	// .liststyle_level > li > p:first-of-type (the list style may override the text-indent)
 						if (cssOverride(listStyle,parStyle,XMLString.FO_TEXT_INDENT)) {
 	        		        props = new CSVList(";");
@@ -171,13 +192,6 @@ public class ListStyleConverter extends StyleConverterHelper {
 		        		    addStyleDeclaration(sSelector+" > li > p:first-of-type",props,sIndent,buf);
 						}
 	        		    
-	        		    // .liststyle_level > li > p (likewise it may override the margin-left)
-						if (cssOverride(listStyle,parStyle,XMLString.FO_MARGIN_LEFT)) {
-		        		    props = new CSVList(";");
-		        	        cssListMarginLeft(listStyle,nLevel,props);
-		        		    addStyleDeclaration(sSelector+" > li > p",props,sIndent,buf);
-						}
-
 						// .liststyle_level_parstyle > li > p:first-of-type::before (this is where we put the label)
 						props = new CSVList(";");
 						cssCounterIncrement(listStyle,nLevel,props);
@@ -366,18 +380,21 @@ public class ListStyleConverter extends StyleConverterHelper {
     // If the parStyle is nonzero, left margin and text indent is taken from the here, otherwise from the list style
     private void cssLabelSize(ListStyle style, int nLevel, StyleWithProperties parStyle, CSVList props) {
     	if ("listtab".equals(style.getLevelStyleProperty(nLevel, XMLString.TEXT_LABEL_FOLLOWED_BY))) {
-    		// Collect and sort tab stops
+    		// First collect and sort tab stops
     		List<String> tabStops = new ArrayList<>();
-        	// The list style provides an additional tab stop
+
+    		// The list style provides an additional tab stop
     		String sListTabStop = getLength(style.getLevelStyleProperty(nLevel, XMLString.TEXT_LIST_TAB_STOP_POSITION));
     		tabStops.add(sListTabStop);
+    		
     		// The left margin is used as an implicit tabstop
     		String sMarginLeft = cssOverride(style,parStyle,XMLString.FO_MARGIN_LEFT)?
     				getLength(style.getLevelStyleProperty(nLevel, XMLString.FO_MARGIN_LEFT)):getLength(parStyle.getProperty(XMLString.FO_MARGIN_LEFT));
     		tabStops.add(sMarginLeft);
-    		for (String sTabStop : parStyle.getTabStops()) {
+    		for (String sTabStop : parStyle.getTabStops(true)) {
     			tabStops.add(Calc.add(sMarginLeft, sTabStop)); // Tabstops are relative to the left margin
     		}
+    		
     		// Sort the tab stops
     		Comparator<String> comparator = new StringComparator<String>("en","US") {
     			public int compare(String a, String b) {
@@ -387,20 +404,22 @@ public class ListStyleConverter extends StyleConverterHelper {
     			}
     		};
     		Collections.sort(tabStops, comparator);
-    		// props.addValue("tabstops",tabStops.toString());
-
-    		// Calculate label width
+    		
+    		// Next calculate label width
+    		
     		// This formula is arbitrary (should be width of the actual content)... 
     		int nDisplayLevels = Misc.getPosInteger(getString(style.getLevelProperty(nLevel, XMLString.TEXT_DISPLAY_LEVELS)), 1);
     		String sWidthEstimate = (1.5+2.5*nDisplayLevels)+"mm";
+
     		// Label width is calculated as the difference between a tab stop and the absolute value of the text-indent
     		String sTextIndent = cssOverride(style,parStyle,XMLString.FO_TEXT_INDENT)?
     				getLength(style.getLevelStyleProperty(nLevel, XMLString.FO_TEXT_INDENT)):getLength(parStyle.getProperty(XMLString.FO_TEXT_INDENT));
     		String sAbsoluteTextIndent = Calc.add(sMarginLeft,sTextIndent);
+    		
     		// First try the collected tab stops
     		String sWidth = null;
     		for (String sTabStop : tabStops) {
-    			sWidth = Calc.sub(sListTabStop,sAbsoluteTextIndent);
+    			sWidth = Calc.sub(sTabStop,sAbsoluteTextIndent);
     			if (Calc.isLessThan(sWidth, sWidthEstimate)) {
     				sWidth = null;
     			}
@@ -408,6 +427,7 @@ public class ListStyleConverter extends StyleConverterHelper {
     				break;
     			}
     		}
+
     		// If that fails, try implicit tab stops every 0.5in
     		if (sWidth==null) {
     			sWidth = Calc.multiply("-100%", sAbsoluteTextIndent);
@@ -415,7 +435,8 @@ public class ListStyleConverter extends StyleConverterHelper {
     				sWidth = Calc.add(sWidth, "0.5in");
     			}
     		}
-			props.addValue("display","inline-block");
+
+    		props.addValue("display","inline-block");
 			props.addValue("width",scale(sWidth));
 			props.addValue("text-indent","0"); // No indentation inside box
     	}

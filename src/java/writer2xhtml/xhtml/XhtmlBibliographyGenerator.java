@@ -20,7 +20,7 @@
  *
  *  All Rights Reserved.
  * 
- *  Version 1.7 (2023-06-10)
+ *  Version 1.7.1 (2023-06-25)
  *
  */
 
@@ -57,7 +57,7 @@ class XhtmlBibliographyGenerator extends BibliographyGenerator {
 		converter.addTarget(li, "bib"+sKey);
 		converter.addEpubType(li, "biblioentry");
 		ul.appendChild(li);
-		currentPar = converter.getTextCv().createParagraph(li, sStyleName, false);
+		currentPar = converter.getTextCv().createParagraph(li, sStyleName);
 	}
 	
 	@Override protected void insertBibliographyItemElement(String sStyleName, String sText) {

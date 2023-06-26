@@ -16,11 +16,11 @@
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston,
  *  MA  02111-1307  USA
  *
- *  Copyright: 2002-2015 by Henrik Just
+ *  Copyright: 2002-2023 by Henrik Just
  *
  *  All Rights Reserved.
  *  
- *  Version 1.6 (2015-05-06)
+ *  Version 1.7.1 (2023-06-26)
  *  
  */
 package org.openoffice.da.comp.w2xcommon.filter;
@@ -73,8 +73,6 @@ public class UNOConverter {
 		
 		// Create mapping from filter names to target media types
 		HashMap<String,String> filterNames = new HashMap<String,String>();
-		filterNames.put("org.openoffice.da.writer2latex","application/x-latex");
-		filterNames.put("org.openoffice.da.writer2bibtex","application/x-bibtex");
 		filterNames.put("org.openoffice.da.writer2xhtml","text/html");
 		filterNames.put("org.openoffice.da.writer2xhtml11","application/xhtml11");
 		filterNames.put("org.openoffice.da.writer2xhtml5","text/html5");

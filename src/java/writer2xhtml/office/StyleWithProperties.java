@@ -321,15 +321,15 @@ public class StyleWithProperties extends OfficeStyle {
         return footnoteSep.getProperty(sPropName);
     }
     
-    public List<String> getTabStops() {
-    	if (tabStops.size()>0) {
+    public List<String> getTabStops(boolean bInherit) {
+    	if (!tabStops.isEmpty() || !bInherit) {
     		return Collections.unmodifiableList(tabStops);
     	}
     	StyleWithProperties parentStyle = (StyleWithProperties) family.getStyle(getParentName());
     	if (parentStyle!=null) {
-    		return parentStyle.getTabStops();
+    		return parentStyle.getTabStops(bInherit);
     	}
-    	// Found no tabstops, return the empty list
+    	// Found no tab stops, return the empty list
     	return Collections.unmodifiableList(tabStops);
     }
 

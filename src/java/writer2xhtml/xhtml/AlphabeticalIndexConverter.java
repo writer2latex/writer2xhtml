@@ -20,7 +20,7 @@
  *
  *  All Rights Reserved.
  * 
- *  Version 1.7 (2023-06-10)
+ *  Version 1.7.1 (2023-06-25)
  *
  */
 package writer2xhtml.xhtml;
@@ -122,7 +122,7 @@ class AlphabeticalIndexConverter extends IndexConverterHelper {
             	if (entry.sWord[j]!=null) {
 		            Element li = converter.createElement("li");
 		            container.appendChild(li);
-		            Element p = getTextCv().createParagraph(li,sEntryStyleName[j],false);
+		            Element p = getTextCv().createParagraph(li,sEntryStyleName[j]);
 		            if (j<2 && entry.sWord[j+1]!=null) {
 		            	// This is a key, and may already be inserted
 		            	if (!entry.sWord[j].equals(sLastKey[j])) {

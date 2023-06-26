@@ -20,7 +20,7 @@
  *
  *  All Rights Reserved.
  * 
- *  Version 1.7 (2023-06-13)
+ *  Version 1.7 (2023-06-26)
  *
  */
  
@@ -33,9 +33,9 @@ public class ConverterFactory {
 
     // Version information
     private static final String VERSION = "1.7";
-    private static final String DATE = "2022-06-13";
+    private static final String DATE = "2022-06-26";
 	
-    /** Return the Writer2LaTeX version in the form
+    /** Return the Writer2xhtml version in the form
      *  (major version).(minor version).(patch level)<br/>
      *  Development versions have an odd minor version number
      *  @return the version number
@@ -43,7 +43,7 @@ public class ConverterFactory {
     public static String getVersion() { return VERSION; }
 
     /** Return date information
-     *  @return the release date for this Writer2LaTeX version
+     *  @return the release date for this Writer2xhtml version
      */
     public static String getDate() { return DATE; }
 

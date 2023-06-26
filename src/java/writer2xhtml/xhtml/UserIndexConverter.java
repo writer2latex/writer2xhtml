@@ -20,7 +20,7 @@
  *
  *  All Rights Reserved.
  * 
- *  Version 1.7 (2023-06-10)
+ *  Version 1.7.1 (2023-06-25)
  *
  */
 package writer2xhtml.xhtml;
@@ -130,7 +130,7 @@ class UserIndexConverter extends IndexConverterHelper {
 	private Element createEntry(Element ul, String sStyleName) {
     	Element li = converter.createElement("li");
     	ul.appendChild(li);
-    	return getTextCv().createParagraph(li,sStyleName,false);
+    	return getTextCv().createParagraph(li,sStyleName);
 	}
     
 }
