@@ -173,6 +173,9 @@ public class ListStyleConverter extends StyleConverterHelper {
 						props.addValue("content", "''");
 						addStyleDeclaration(sSelector+" > li::marker",props,sIndent,buf);
 						
+						// TODO: Potential optimization; if we override text-indent and it happens to be zero, we can do with
+						// only one .list_n_par > li > p rule instead of three
+						
 	        		    // .liststyle_level > li > p (the list style may override the margin-left)
 						if (cssOverride(listStyle,parStyle,XMLString.FO_MARGIN_LEFT)) {
 		        		    props = new CSVList(";");
@@ -317,16 +320,13 @@ public class ListStyleConverter extends StyleConverterHelper {
     	return true;
     }
     
-    // Create CSS properties for margins of list 
+    // Create CSS property for left margin of list 
     private void cssListMarginLeft(ListStyle style, int nLevel, CSVList props) {
 	    String sMarginLeft = getLength(style.getLevelStyleProperty(nLevel, XMLString.FO_MARGIN_LEFT));
-		if (nLevel>1) { // The ODF value is from page margin; we need it to be relative to the previous level
-			sMarginLeft = Calc.sub(sMarginLeft, getLength(style.getLevelStyleProperty(nLevel-1, XMLString.FO_MARGIN_LEFT)));
-		}
 		props.addValue("margin-left",scale(sMarginLeft));
     }
     
-    // Create CSS property for text-indent
+    // Create CSS property for text-indent of list
     private void cssListTextIndent(ListStyle style, int nLevel, CSVList props) {
     	props.addValue("text-indent", scale(getLength(style.getLevelStyleProperty(nLevel, XMLString.FO_TEXT_INDENT))));
     }
