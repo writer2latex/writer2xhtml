@@ -8,6 +8,11 @@ All changes are classified as
 
 ---------- version 1.7.1 ----------
 
+- New feature: Added support for rotated text, letter spacing and hyphenation
+
+- Improvement: Extended support for text decoration (underline, strike through and overline) and removed support for
+  blinking text (deprecated in CSS)
+
 - Improvement: Calculation of list indentations and label widths are now closer to the original
 
 ---------- version 1.7 ----------

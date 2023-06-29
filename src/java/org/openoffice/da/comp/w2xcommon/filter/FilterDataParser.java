@@ -108,7 +108,6 @@ public class FilterDataParser {
 	        		filterData[i] = new PropertyValue();
 	        		filterData[i].Name = sItem[0];
 	        		filterData[i].Value = sItem.length>1 ? sItem[1] : "";
-	        		System.out.println(filterData[i].Name+" "+filterData[i].Value);
 	        	}
 	        	applyParsedFilterData(filterData,converter);
     		}

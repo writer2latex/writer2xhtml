@@ -20,7 +20,7 @@
  *
  *  All Rights Reserved.
  * 
- *  Version 1.7.1 (2023-06-25)
+ *  Version 1.7.1 (2023-06-29)
  *
  */
 
@@ -172,6 +172,7 @@ public class XMLString {
     public static final String STYLE_FONT_NAME_COMPLEX="style:font-name-complex";
     public static final String STYLE_FONT_PITCH="style:font-pitch";
     public static final String STYLE_FONT_FAMILY_GENERIC="style:font-family-generic";
+    public static final String STYLE_FONT_SIZE_REL="style:font-size-rel";
     public static final String STYLE_TEXT_BACKGROUND_COLOR="style:text-background-color";
     public static final String STYLE_USE_WINDOW_FONT_COLOR="style:use-window-font-color";
     public static final String STYLE_TEXT_CROSSING_OUT="style:text-crossing-out";
@@ -215,7 +216,19 @@ public class XMLString {
     public static final String STYLE_COUNTRY_ASIAN="style:country-asian";
 	public static final String STYLE_TAB_STOPS="style:tab-stops";
 	public static final String STYLE_TAB_STOP="style:tab-stop";
-
+	public static final String STYLE_TEXT_ROTATION_ANGLE="style:text-rotation-angle";
+	public static final String STYLE_TEXT_OVERLINE_STYLE="style:text-overline-style";
+	public static final String STYLE_TEXT_LINE_THROUGH_TYPE="style:text-line-through-type";
+	public static final String STYLE_TEXT_UNDERLINE_TYPE="style:text-underline-type";
+	public static final String STYLE_TEXT_OVERLINE_TYPE="style:text-overline-type";
+	public static final String STYLE_TEXT_LINE_THROUGH_MODE="style:text-line-through-mode";
+	public static final String STYLE_TEXT_UNDERLINE_MODE="style:text-underline-mode";
+	public static final String STYLE_TEXT_OVERLINE_MODE="style:text-overline-mode";
+	public static final String STYLE_TEXT_LINE_THROUGH_COLOR="style:text-line-through-color";
+	public static final String STYLE_TEXT_UNDERLINE_COLOR="style:text-underline-color";
+	public static final String STYLE_TEXT_OVERLINE_COLOR="style:text-overline-color";
+	public static final String STYLE_LETTER_KERNING="style:letter-kerning";
+	
     // table namespace - elements
     public static final String TABLE_="table:";
     public static final String TABLE_TABLE="table:table";
@@ -471,6 +484,7 @@ public class XMLString {
     public static final String FO_TEXT_INDENT="fo:text-indent";
     public static final String FO_WRAP_OPTION="fo:wrap-option";
     public static final String FO_COLUMN_COUNT="fo:column-count";
+    public static final String FO_HYPHENATE="fo:hyphenate";
 
     // svg namespace
 	public static final String SVG_DESC="svg:desc";

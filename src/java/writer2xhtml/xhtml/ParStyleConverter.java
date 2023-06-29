@@ -16,11 +16,11 @@
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston,
  *  MA  02111-1307  USA
  *
- *  Copyright: 2002-2010 by Henrik Just
+ *  Copyright: 2002-2023 by Henrik Just
  *
  *  All Rights Reserved.
  * 
- *  Version 1.2 (2010-05-13)
+ *  Version 1.7.1 (2023-06-29)
  *
  */
 
@@ -86,7 +86,7 @@ public class ParStyleConverter extends StyleWithPropertiesConverterHelper {
         getFrameSc().cssPadding(style,props,bInherit);
         getFrameSc().cssBackgroundCommon(style,props,bInherit);
         cssPar(style,props,bInherit);
-        getTextSc().cssTextCommon(style,props,bInherit);
+        getTextSc().cssTextBlock(style,props,bInherit);
     }
 	
     public String getTextBackground(String sStyleName) {

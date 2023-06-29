@@ -20,7 +20,7 @@
  *
  *  All Rights Reserved.
  * 
- *  Version 1.7 (2023-06-10)
+ *  Version 1.7.1 (2023-06-29)
  *
  */
 
@@ -181,7 +181,7 @@ class StyleConverter extends ConverterHelper {
             StyleWithProperties defaultStyle = getDefaultStyle();
             if (defaultStyle!=null) {
                 // text properties only!
-                getTextSc().cssTextCommon(defaultStyle,props,true);
+                getTextSc().cssTextBlock(defaultStyle,props,true);
                 if (config.useDefaultFont() && config.defaultFontName().length()>0) {
                 	props.addValue("font-family", "'"+config.defaultFontName()+"'");
                 }

@@ -16,11 +16,11 @@
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston,
  *  MA  02111-1307  USA
  *
- *  Copyright: 2002-2014 by Henrik Just
+ *  Copyright: 2002-2023 by Henrik Just
  *
  *  All Rights Reserved.
  * 
- *  Version 1.4 (2014-09-16)
+ *  Version 1.7.1 (2023-06-29)
  *
  */
 
@@ -73,7 +73,7 @@ public class FrameStyleConverter extends StyleWithPropertiesConverterHelper {
                     CSVList props = new CSVList(";");
                     getFrameSc().cssMargins(style,props,true);
                     getParSc().cssPar(style,props,true);
-                    getTextSc().cssTextCommon(style,props,true);
+                    getTextSc().cssTextBlock(style,props,true);
                     if (!props.isEmpty()) {
                         buf.append(sIndent)
                            .append(getDefaultTagName(null))
@@ -117,7 +117,7 @@ public class FrameStyleConverter extends StyleWithPropertiesConverterHelper {
      */
     public void applyProperties(StyleWithProperties style, CSVList props, boolean bInherit) {
         cssBox(style,props,bInherit);
-        getTextSc().cssTextCommon(style,props,bInherit); // only in presentations
+        getTextSc().cssTextBlock(style,props,bInherit); // only in presentations
     }
 	
     ////////////////////////////////////////////////////////////////////////////

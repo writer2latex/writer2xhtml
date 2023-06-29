@@ -37,17 +37,17 @@ import writer2xhtml.util.Misc;
 /** Class representing an ODF-style which contains a style:properties element 
   */
 public class StyleWithProperties extends OfficeStyle {
-    private final static int OLDPROPS = 0;
-    private final static int TEXT = 1;
-    private final static int PAR = 2;
-    private final static int SECTION = 3;
-    private final static int TABLE = 4;
-    private final static int COLUMN = 5;
-    private final static int ROW = 6;
-    private final static int CELL = 7;
-	private final static int GRAPHIC = 8;
-    private final static int PAGE = 9;
-    private final static int COUNT = 10;
+    public final static int OLDPROPS = 0;
+    public final static int TEXT = 1;
+    public final static int PAR = 2;
+    public final static int SECTION = 3;
+    public final static int TABLE = 4;
+    public final static int COLUMN = 5;
+    public final static int ROW = 6;
+    public final static int CELL = 7;
+    public final static int GRAPHIC = 8;
+    public final static int PAGE = 9;
+    public final static int COUNT = 10;
 	
     private boolean bEmpty; // Flag to indicate that this style does not contain any properties except rsid
 	
@@ -300,6 +300,51 @@ public class StyleWithProperties extends OfficeStyle {
             if (sValue!=null) { return sValue; }
         }
         return null; // no value
+    }
+    
+    /** Get the font size. This is a special case which combines the two properties
+     *  <code>fo:font-size</code> and <code>style:font-size-rel</code>.
+     *  This method resolves the font size to an absolute size
+     * 
+     * @return the absolute value, or null if the property is not set
+     */
+    public String getAbsoluteFontSize(){
+        if (properties[TEXT].containsProperty(XMLString.STYLE_FONT_SIZE_REL)) {
+        	// Size specified as e.g. +3pt or -2pt
+        	String sValue= properties[TEXT].getProperty(XMLString.STYLE_FONT_SIZE_REL);
+        	String sParentValue = getAbsoluteParentFontSize();
+       		if (sParentValue!=null) {
+       			return Calc.add(Calc.truncateLength(sValue),sParentValue);
+       		}
+        }
+        else if (properties[TEXT].containsProperty(XMLString.FO_FONT_SIZE)) {
+          	String sValue=(String) properties[TEXT].getProperty(XMLString.FO_FONT_SIZE);
+            if (sValue.endsWith("%")) {
+            	// Size specified as a percentage
+                String sParentValue = getAbsoluteParentFontSize();
+                if (sParentValue!=null) {
+                	return Calc.multiply(sValue,sParentValue);
+                }
+            }
+            else {
+            	// Absolute size
+                return Calc.truncateLength(sValue);
+            }
+        }
+        // If we failed, return the parent size
+        return getAbsoluteParentFontSize();
+    }
+
+    private String getAbsoluteParentFontSize() {
+        StyleWithProperties parentStyle = (StyleWithProperties) family.getStyle(getParentName());
+        if (parentStyle!=null) {
+            return parentStyle.getAbsoluteFontSize();
+        }
+        else if (getFamily()!=null && getFamily().getDefaultStyle()!=null) {
+            StyleWithProperties style = (StyleWithProperties) getFamily().getDefaultStyle();
+            return Calc.truncateLength(style.getProperty(TEXT,XMLString.FO_FONT_SIZE,false));
+        }
+        return null;
     }
 	
     // Get a length property that defaults to 0cm
