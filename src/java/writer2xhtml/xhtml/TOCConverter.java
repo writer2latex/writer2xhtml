@@ -20,7 +20,7 @@
  *
  *  All Rights Reserved.
  * 
- *  Version 1.7.1 (2023-06-25)
+ *  Version 1.7.1 (2023-07-26)
  *
  */
 package writer2xhtml.xhtml;
@@ -36,7 +36,6 @@ import writer2xhtml.office.OfficeReader;
 import writer2xhtml.office.TocReader;
 import writer2xhtml.office.XMLString;
 import writer2xhtml.util.Misc;
-import writer2xhtml.xhtml.l10n.L10n;
 
 //Helper class (a struct) to contain information about a toc entry (ie. a heading, other paragraph or toc-mark)
 final class TocEntry {
@@ -134,7 +133,7 @@ class TOCConverter extends IndexConverterHelper {
 		if (ofr.isIndexSourceStyle(getParSc().getRealParStyleName(sStyleName))) {
 	        converter.addTarget(par,TOC_LINK_PREFIX+(++nTocIndex));
 	        TocEntry entry = new TocEntry();
-	        entry.onode = (Element) onode;
+	        entry.onode = onode;
 	        entry.sLabel = sCurrentListLabel;  
 	        entry.nFileIndex = converter.getOutFileIndex();
 	        tocEntries.add(entry);
@@ -170,7 +169,7 @@ class TOCConverter extends IndexConverterHelper {
      */
     @Override void handleIndex(Element onode, Element hnode, int nChapterNumber) {
 		// Identify main toc
-    	if (!ofr.getTocReader(onode).isByChapter()) { 
+    	if (nTocFileIndex==-1 && !ofr.getTocReader(onode).isByChapter()) { 
     		nTocFileIndex = converter.getOutFileIndex(); 
     	}
     	converter.setTocFile(null);
@@ -287,131 +286,4 @@ class TOCConverter extends IndexConverterHelper {
     	return getTextCv().createParagraph(li,sStyleName);
 	}    
     
-    // The panel is populated with a minitoc
-    void generatePanels(int nSplit) {
-        // TODO: Include link to toc and index in appropriate places..
-        int nLastIndex = converter.getOutFileIndex();
-
-        boolean bHasFrontMatter = false;
-
-        TocEntry fakeEntry = new TocEntry();
-        fakeEntry.nOutlineLevel = 0;
-        fakeEntry.nOutlineNumber = new int[11];
-
-        int nLen = tocEntries.size();
-
-        for (int nIndex=0; nIndex<=nLastIndex; nIndex++) {
-            converter.changeOutFile(nIndex);
-            Element panel = converter.getPanelNode();
-            if (panel!=null) {
-                // Get the last heading of level <= split level for this file
-                TocEntry entryCurrent = null;				
-                for (int i=nLen-1; i>=0; i--) {
-                    TocEntry entry = tocEntries.get(i);
-                    if (XMLString.TEXT_H.equals(entry.onode.getTagName()) && entry.nFileIndex==nIndex && entry.nOutlineLevel<=nSplit) {
-                        entryCurrent = entry; break;
-                    }
-                }
-				
-                if (entryCurrent==null) {
-                    entryCurrent = fakeEntry;
-                    if (nIndex==0) { bHasFrontMatter=true; }
-                }
-				
-                // Determine the maximum outline level to include
-                int nMaxLevel = entryCurrent.nOutlineLevel;
-                if (nMaxLevel<nSplit) { nMaxLevel++; }
-
-                // Create minitoc with relevant entries
-                if (bHasFrontMatter) {
-                    Element inline = createPanelLink(panel, nIndex, 0, 1);
-                    inline.appendChild(converter.createTextNode(converter.getL10n().get(L10n.HOME)));
-                }
-				
-                int nPrevFileIndex = 0;
-                for (int i=0; i<nLen; i++) {
-                    TocEntry entry = tocEntries.get(i);
-
-                    if (entry.nFileIndex>nPrevFileIndex+1) {
-                        // Skipping a file index means we have passed an index
-                        for (int k=nPrevFileIndex+1; k<entry.nFileIndex; k++) {
-                            createIndexLink(panel,nIndex,k);
-                        }
-                    }
-                    nPrevFileIndex = entry.nFileIndex;
-					
-                    String sNodeName = entry.onode.getTagName();
-                    if (XMLString.TEXT_H.equals(sNodeName)) {
-
-                        // Determine whether or not to include this heading
-                        // Note that this condition misses the case where
-                        // a heading of level n is followed by a heading of
-                        // level n+2. This is considered a bug in the document!
-                        boolean bInclude = entry.nOutlineLevel<=nMaxLevel;
-                        if (bInclude) {
-                            // Check that this heading matches the current
-                            int nCompareLevels = entry.nOutlineLevel;
-                            for (int j=1; j<nCompareLevels; j++) {
-                                if (entry.nOutlineNumber[j]!=entryCurrent.nOutlineNumber[j]) {
-                                    bInclude = false;
-                                }
-                            }
-                        }
-                        
-                        if (bInclude) {
-                            Element inline = createPanelLink(panel, nIndex, entry.nFileIndex, entry.nOutlineLevel);
-
-                            // Add content of heading
-                            if (entry.sLabel!=null && entry.sLabel.length()>0) {
-                                inline.appendChild(converter.createTextNode(entry.sLabel));
-                                if (!entry.sLabel.endsWith(" ")) {
-                                    inline.appendChild(converter.createTextNode(" "));
-                                }
-                            }
-                            getTextCv().traverseInlineText(entry.onode,inline);
-                        }
-                    }
-                }
-                if (nPrevFileIndex<nLastIndex) {
-                    // Trailing index
-                    for (int k=nPrevFileIndex+1; k<=nLastIndex; k++) {
-                        createIndexLink(panel,nIndex,k);
-                    }
-                }
-            }
-        }
-        
-        converter.changeOutFile(nLastIndex);
-
-    }
-
-    private void createIndexLink(Element panel, int nIndex, int nFileIndex) {
-        if (nFileIndex==nTocFileIndex) {
-            Element inline = createPanelLink(panel, nIndex, nTocFileIndex, 1);
-            inline.appendChild(converter.createTextNode(converter.getL10n().get(L10n.CONTENTS)));
-        }
-        else if (nFileIndex==getTextCv().getAlphabeticalIndex()) {
-            Element inline = createPanelLink(panel, nIndex, getTextCv().getAlphabeticalIndex(), 1);
-            inline.appendChild(converter.createTextNode(converter.getL10n().get(L10n.INDEX)));
-        }
-    }
-
-    private Element createPanelLink(Element panel, int nCurrentFile, int nLinkFile, int nOutlineLevel) {
-        // Create a link
-        Element p = converter.createElement("p");
-        p.setAttribute("class","level"+nOutlineLevel);
-        panel.appendChild(p);
-        Element inline;
-        if (nCurrentFile!=nLinkFile) {
-            inline = converter.createElement("a");
-            inline.setAttribute("href",converter.getOutFileName(nLinkFile,true));
-        }
-        else {
-            inline = converter.createElement("span");
-            inline.setAttribute("class","nolink");
-        }
-        p.appendChild(inline);
-        return inline;
-    }
-
 }

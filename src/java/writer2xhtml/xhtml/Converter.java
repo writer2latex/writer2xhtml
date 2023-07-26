@@ -20,7 +20,7 @@
  *
  *  All Rights Reserved.
  * 
- *  Version 1.7 (2023-06-10)
+ *  Version 1.7.1 (2023-07-26)
  *
  */
 
@@ -125,7 +125,7 @@ public class Converter extends ConverterBase {
 
     // override methods to read templates, style sheets and resources
     @Override public void readTemplate(InputStream is) throws IOException {
-        template = new XhtmlDocument("Template",nType);
+        template = new XhtmlDocument("Template",nType,null,-1);
         template.read(is);
     }
 	
@@ -351,7 +351,14 @@ public class Converter extends ConverterBase {
         	converterResult.setTextFile(new ContentEntryImpl("Text", 1, firstHeading.getFile(), firstHeading.getTarget()));
         }
 
-        // Resolve links
+        resolveLinks();
+        loadMathJax();
+        generateHeadersAndFooters();
+        generatePanels();
+        exportStyles();
+    }
+    
+    private void resolveLinks() {
         ListIterator<LinkDescriptor> iter = links.listIterator();
         while (iter.hasNext()) {
             LinkDescriptor ld = iter.next();
@@ -362,34 +369,13 @@ public class Converter extends ConverterBase {
                     ld.element.setAttribute("href","#"+targetNames.getExportName(ld.sId));
                 }
                 else {
-                    ld.element.setAttribute("href",getOutFileName(nTargetIndex,true)
-                                            +"#"+targetNames.getExportName(ld.sId));
+                    ld.element.setAttribute("href",getOutFileName(nTargetIndex,true)+"#"+targetNames.getExportName(ld.sId));
                 }
             }
         }
-
-        // Add included style sheet, if any - and we are creating OPS content
-        if (bOPS && styleSheet!=null) {
-        	converterResult.addDocument(styleSheet);
-        	for (ResourceDocument doc : resources) {
-        		converterResult.addDocument(doc);
-        	}
-        }
-        
-        // Export styles (XHTML)
-        if (!isOPS() && !config.separateStylesheet()) {
-        	for (int i=0; i<=nOutFileIndex; i++) {
-        		Element head = outFiles.get(i).getHeadNode();
-        		if (head!=null) {
-        			Node styles = styleCv.exportStyles(outFiles.get(i).getContentDOM());
-        			if (styles!=null) {
-        				head.appendChild(styles);
-        			}
-        		}
-        	}
-        }
-        
-        // Load MathJax
+    }
+    
+    private void loadMathJax() {
         // TODO: Should we support different configurations of MathJax?
         if ((isHTML5() || nType==XhtmlDocument.XHTML_MATHML) && config.useMathJax()) {
         	for (int i=0; i<=nOutFileIndex; i++) {
@@ -405,8 +391,10 @@ public class Converter extends ConverterBase {
         			}
         		}
         	}
-        }
-        
+        }    	
+    }
+    
+    private void generateHeadersAndFooters() {
         // Create headers & footers (if nodes are available)
         if (ofr.isSpreadsheet()) {
             for (int i=0; i<=nOutFileIndex; i++) {
@@ -436,8 +424,8 @@ public class Converter extends ConverterBase {
                 int nSheets = tableCv.sheetNames.size();
                 for (int j=0; j<nSheets; j++) {
                     if (config.xhtmlCalcSplit()) {
-                        addNavigationLink(dom,headerPar,tableCv.sheetNames.get(j),j);
-                        addNavigationLink(dom,footerPar,tableCv.sheetNames.get(j),j);
+                        addNavigationLink(dom,headerPar,tableCv.sheetNames.get(j),i,j);
+                        addNavigationLink(dom,footerPar,tableCv.sheetNames.get(j),i,j);
                     }
                     else {
                         addInternalNavigationLink(dom,headerPar,tableCv.sheetNames.get(j),"tableheading"+j);
@@ -469,15 +457,15 @@ public class Converter extends ConverterBase {
                         header.appendChild(a);
                         header.appendChild(dom.createTextNode(" "));
                     }
-                    addNavigationLink(dom,header,l10n.get(L10n.FIRST),0);
-                    addNavigationLink(dom,header,l10n.get(L10n.PREVIOUS),i-1);
-                    addNavigationLink(dom,header,l10n.get(L10n.NEXT),i+1);
-                    addNavigationLink(dom,header,l10n.get(L10n.LAST),nOutFileIndex);
+                    addNavigationLink(dom,header,l10n.get(L10n.FIRST),i,0);
+                    addNavigationLink(dom,header,l10n.get(L10n.PREVIOUS),i,i-1);
+                    addNavigationLink(dom,header,l10n.get(L10n.NEXT),i,i+1);
+                    addNavigationLink(dom,header,l10n.get(L10n.LAST),i,nOutFileIndex);
                     if (textCv.getTocIndex()>=0) {
-                        addNavigationLink(dom,header,l10n.get(L10n.CONTENTS),textCv.getTocIndex());
+                        addNavigationLink(dom,header,l10n.get(L10n.CONTENTS),i,textCv.getTocIndex());
                     }
                     if (textCv.getAlphabeticalIndex()>=0) {
-                        addNavigationLink(dom,header,l10n.get(L10n.INDEX),textCv.getAlphabeticalIndex());
+                        addNavigationLink(dom,header,l10n.get(L10n.INDEX),i,textCv.getAlphabeticalIndex());
                     }
                 }
 
@@ -492,15 +480,15 @@ public class Converter extends ConverterBase {
                         footer.appendChild(a);
                         footer.appendChild(dom.createTextNode(" "));
                     }
-                    addNavigationLink(dom,footer,l10n.get(L10n.FIRST),0);
-                    addNavigationLink(dom,footer,l10n.get(L10n.PREVIOUS),i-1);
-                    addNavigationLink(dom,footer,l10n.get(L10n.NEXT),i+1);
-                    addNavigationLink(dom,footer,l10n.get(L10n.LAST),nOutFileIndex);
+                    addNavigationLink(dom,footer,l10n.get(L10n.FIRST),i,0);
+                    addNavigationLink(dom,footer,l10n.get(L10n.PREVIOUS),i,i-1);
+                    addNavigationLink(dom,footer,l10n.get(L10n.NEXT),i,i+1);
+                    addNavigationLink(dom,footer,l10n.get(L10n.LAST),i,nOutFileIndex);
                     if (textCv.getTocIndex()>=0) {
-                        addNavigationLink(dom,footer,l10n.get(L10n.CONTENTS),textCv.getTocIndex());
+                        addNavigationLink(dom,footer,l10n.get(L10n.CONTENTS),i,textCv.getTocIndex());
                     }
                     if (textCv.getAlphabeticalIndex()>=0) {
-                        addNavigationLink(dom,footer,l10n.get(L10n.INDEX),textCv.getAlphabeticalIndex());
+                        addNavigationLink(dom,footer,l10n.get(L10n.INDEX),i,textCv.getAlphabeticalIndex());
                     }
                 }
             }
@@ -530,8 +518,97 @@ public class Converter extends ConverterBase {
                 }
             }
         }
+    }
+    
+    private void generatePanels() {
+        for (int nSourceIndex=0; nSourceIndex<=nOutFileIndex; nSourceIndex++) {
+            XhtmlDocument doc = outFiles.get(nSourceIndex);
+            Element panel = doc.getPanelNode();
+            if (panel!=null) {
+                Document dom = doc.getContentDOM();
+                int nCurrentLevel = 1;
+            	for (int nTargetIndex=0; nTargetIndex<=nOutFileIndex; nTargetIndex++) {
+            		int nThisLevel = outFiles.get(nTargetIndex).getOutlineLevel();
+            		if (nThisLevel<nCurrentLevel) {
+            			// We are leaving a lower level
+            			nCurrentLevel = nThisLevel;
+            		}
+            		else if (nThisLevel>nCurrentLevel) {
+            			if (nTargetIndex==nSourceIndex+1) {
+            				// We are descending into a lower level which should be expanded because it immediately follows the source file
+            				nCurrentLevel = nThisLevel;
+            			}
+            			else {
+            				// We descend into this level only if it contains the source file
+            				int n = nTargetIndex;
+            				while (n<=nOutFileIndex && outFiles.get(n).getOutlineLevel()>nCurrentLevel) {
+            					if (n++==nSourceIndex) {
+            						// Found the source, so we will descend
+            						nCurrentLevel = nThisLevel;
+            					}
+            				}
+            			}
+            		}
+            		if (nThisLevel==nCurrentLevel) {
+	            		Element p = dom.createElement("p");
+	            		p.setAttribute("class", "level"+nThisLevel);
+	                    panel.appendChild(p);
+	                    addNavigationLink(dom, p, outFiles.get(nTargetIndex).getFileTitle( ),nSourceIndex, nTargetIndex);
+            		}
+            	}
+            }
+        }      
+    }
+    
+    // Add a navigation link to another output file and return the link element
+    private void addNavigationLink(Document dom, Node node, String sTitle, int nSourceIndex, int nTargetIndex) {
+        if (nTargetIndex>=0 && nTargetIndex<=nOutFileIndex && nSourceIndex!=nTargetIndex) {
+            Element a = dom.createElement("a");
+            a.setAttribute("href",Misc.makeHref(getOutFileName(nTargetIndex,true)));
+            a.appendChild(dom.createTextNode(sTitle));
+            node.appendChild(a);
+            node.appendChild(dom.createTextNode(" "));
+        }
+        else {
+            Element span = dom.createElement("span");
+            span.setAttribute("class","nolink");
+            node.appendChild(span);
+            span.appendChild(dom.createTextNode(sTitle));
+            node.appendChild(dom.createTextNode(" "));
+        }
+    }
+	
+    private void addInternalNavigationLink(Document dom, Node node, String s, String sLink) {
+        Element a = dom.createElement("a");
+        a.setAttribute("href","#"+sLink);
+        a.appendChild(dom.createTextNode(s));
+        node.appendChild(a);
+        node.appendChild(dom.createTextNode(" "));
+    }
+    
+    private void exportStyles() {
+        // Add included style sheet, if any - and we are creating OPS content
+        if (bOPS && styleSheet!=null) {
+        	converterResult.addDocument(styleSheet);
+        	for (ResourceDocument doc : resources) {
+        		converterResult.addDocument(doc);
+        	}
+        }
+    	
+        // Add styles to all HTML files (never used for EPUB)
+        if (!isOPS() && !config.separateStylesheet()) {
+        	for (int i=0; i<=nOutFileIndex; i++) {
+        		Element head = outFiles.get(i).getHeadNode();
+        		if (head!=null) {
+        			Node styles = styleCv.exportStyles(outFiles.get(i).getContentDOM());
+        			if (styles!=null) {
+        				head.appendChild(styles);
+        			}
+        		}
+        	}
+        }
         
-        // Export styles
+        // Export separate stylesheet
         if (config.xhtmlFormatting()>XhtmlConfig.IGNORE_STYLES) {
         	if (isOPS()) { // EPUB
         		CssDocument cssDoc = new CssDocument(EPUB_STYLESHEET);
@@ -543,38 +620,7 @@ public class Converter extends ConverterBase {
         		cssDoc.read(styleCv.exportStyles(false));
         		converterResult.addDocument(cssDoc);
         	}
-        }
-        
-    }
-	
-    private void addNavigationLink(Document dom, Node node, String s, int nIndex) {
-        if (nIndex>=0 && nIndex<=nOutFileIndex) {
-            Element a = dom.createElement("a");
-            a.setAttribute("href",Misc.makeHref(getOutFileName(nIndex,true)));
-            a.appendChild(dom.createTextNode(s));
-            //node.appendChild(dom.createTextNode("["));
-            node.appendChild(a);
-            node.appendChild(dom.createTextNode(" "));
-            //node.appendChild(dom.createTextNode("] "));
-        }
-        else {
-            Element span = dom.createElement("span");
-            span.setAttribute("class","nolink");
-            node.appendChild(span);
-            span.appendChild(dom.createTextNode(s));
-            node.appendChild(dom.createTextNode(" "));
-            //node.appendChild(dom.createTextNode("["+s+"] "));
-        }
-    }
-	
-    private void addInternalNavigationLink(Document dom, Node node, String s, String sLink) {
-        Element a = dom.createElement("a");
-        a.setAttribute("href","#"+sLink);
-        a.appendChild(dom.createTextNode(s));
-        //node.appendChild(dom.createTextNode("["));
-        node.appendChild(a);
-        node.appendChild(dom.createTextNode(" "));
-        //node.appendChild(dom.createTextNode("] "));
+        }    	
     }
     
     /* get inline text, ignoring any draw objects, footnotes, formatting and hyperlinks */
@@ -680,8 +726,8 @@ public class Converter extends ConverterBase {
     }
 	
     // Prepare next output file
-    public Element nextOutFile() {
-        htmlDoc = new XhtmlDocument(getOutFileName(++nOutFileIndex,false),nType);
+    public Element nextOutFile(String sFileTitle, int nLevel) {
+        htmlDoc = new XhtmlDocument(getOutFileName(++nOutFileIndex,false),nType,sFileTitle,nLevel);
         htmlDoc.setConfig(config);
         if (template!=null) { htmlDoc.readFromTemplate(template); }
         else if (bNeedHeaderFooter) { htmlDoc.createHeaderFooter(); }

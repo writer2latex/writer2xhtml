@@ -20,7 +20,7 @@
  *
  *  All Rights Reserved.
  * 
- *  Version 1.7 (2023-05-24)
+ *  Version 1.7.1 (2023-07-25)
  *
  */
 
@@ -32,6 +32,8 @@ package writer2xhtml.xhtml;
 import org.w3c.dom.NodeList;
 
 import writer2xhtml.base.DOMDocument;
+import writer2xhtml.util.Misc;
+
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NamedNodeMap;
@@ -105,6 +107,10 @@ public class XhtmlDocument extends DOMDocument {
     private Element footerNode = null;
     private boolean bContainsMath = false;
     private boolean bWritingStyle = false;
+    
+    // Title and outline level
+    private String sFileTitle = null;
+    private int nOutlineLevel = -1;
     
     // Initialize static data
     static {
@@ -266,9 +272,11 @@ public class XhtmlDocument extends DOMDocument {
      *  @param  name  name of this document
      *  @param  nType the type of document
      */
-    public XhtmlDocument(String name, int nType) {
+    public XhtmlDocument(String name, int nType, String sFileTitle, int nOutlineLevel) {
         super(name,sExtension[nType]);
         this.nType = nType;
+        this.sFileTitle = sFileTitle;
+        this.nOutlineLevel = nOutlineLevel;
 
         // create DOM
         Document contentDOM = null;
@@ -308,6 +316,14 @@ public class XhtmlDocument extends DOMDocument {
     
     @Override public boolean containsMath() {
     	return bContainsMath;
+    }
+    
+    public String getFileTitle() {
+    	return sFileTitle;
+    }
+    
+    public int getOutlineLevel() {
+    	return nOutlineLevel;
     }
     
     public void setContainsMath() {
@@ -446,7 +462,7 @@ public class XhtmlDocument extends DOMDocument {
             titleNode = elm;
         }
         else {
-            String sId = elm.getAttribute("id");
+            String sId = Misc.getAttribute(elm,"id");
             if (sContentId.equals(sId)) { contentNode = elm; }
             else if (sHeaderId.equals(sId)) { headerNode = elm; }
             else if (sFooterId.equals(sId)) { footerNode = elm; }

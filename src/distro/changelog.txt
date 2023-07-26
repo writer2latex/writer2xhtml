@@ -8,12 +8,23 @@ All changes are classified as
 
 ---------- version 1.7.1 ----------
 
+- Improved: Panels now include all indexes (previously only table of contents and alphabetical index)
+
+- Improved: Panels now include footnote and endnote pages. Title is either automatic based on the document language
+  or taken from the options footnotes_heading and endnotes_heading
+
+- Bugfix: Now only includes header or footer if the corresponding id in template_ids is non-empty
+
+- Bugfix: Now always uses the first global table of contents for the navigation bars
+
 - New feature: Added support for rotated text, letter spacing and hyphenation
 
-- Improvement: Extended support for text decoration (underline, strike through and overline) and removed support for
+- Improved: Extended support for text decoration (underline, strike through and overline) and removed support for
   blinking text (deprecated in CSS)
 
-- Improvement: Calculation of list indentations and label widths are now closer to the original
+- Improvement: Calculation of list indentations and label widths are now correct also in these two cases:
+  (1) The list style is attached to a paragraph style.
+  (2) Hard paragraph formatting is applied to the list items.
 
 ---------- version 1.7 ----------
 

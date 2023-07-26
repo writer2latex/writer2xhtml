@@ -16,11 +16,11 @@
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston,
  *  MA  02111-1307  USA
  *
- *  Copyright: 2002-2012 by Henrik Just
+ *  Copyright: 2002-2023 by Henrik Just
  *
  *  All Rights Reserved.
  * 
- *  Version 1.4 (2012-03-16)
+ *  Version 1.7.1 (2023-07-24)
  *
  */
 
@@ -46,6 +46,8 @@ public class L10n {
     public final static int HOME = 7;
     public final static int DIRECTORY = 8;
     public final static int DOCUMENT = 9;
+    public final static int FOOTNOTES = 10;
+    public final static int ENDNOTES = 11;
 
     private ResourceBundle resourceBundle = ResourceBundle.getBundle("writer2xhtml.xhtml.l10n.XhtmlStrings",Locale.getDefault());
     private Locale locale = null;
@@ -82,6 +84,8 @@ public class L10n {
         case HOME : return resourceBundle.getString("home");
         case DIRECTORY: return resourceBundle.getString("directory");
         case DOCUMENT: return resourceBundle.getString("document");
+        case FOOTNOTES: return resourceBundle.getString("footnotes");
+        case ENDNOTES: return resourceBundle.getString("endnotes");
         default: return "???";
         }
     }

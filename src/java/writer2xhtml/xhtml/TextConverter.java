@@ -20,7 +20,7 @@
  *
  *  All Rights Reserved.
  * 
- *  Version 1.7.1 (2023-06-25)
+ *  Version 1.7.1 (2023-06-26)
  *
  */
 
@@ -42,8 +42,10 @@ import writer2xhtml.office.OfficeReader;
 import writer2xhtml.office.OfficeStyle;
 import writer2xhtml.office.PageLayout;
 import writer2xhtml.office.StyleWithProperties;
+import writer2xhtml.office.TocReader;
 import writer2xhtml.office.XMLString;
 import writer2xhtml.util.Misc;
+import writer2xhtml.xhtml.l10n.L10n;
 
 import org.w3c.dom.Element;
 
@@ -132,9 +134,10 @@ public class TextConverter extends ConverterHelper {
     /** Converts an office node as a complete text document
      *
      *  @param onode the Office node containing the content to convert
+     *  @param l10n translations for the document language
      */
     public void convertTextContent(Element onode) {
-        Element hnode = converter.nextOutFile();
+        Element hnode = converter.nextOutFile(converter.getL10n().get(L10n.HOME),1);
 
         // Start with page 1
         setSoftPageBreaksLimit(-1);
@@ -166,13 +169,6 @@ public class TextConverter extends ConverterHelper {
         userCv.generate();
         indexCv.generate();
         bibCv.generate();
-        bInToc = false;
-		
-        // Generate navigation links
-        generateHeaders();
-        generateFooters();
-        bInToc = true;
-        tocCv.generatePanels(nSplit);
         bInToc = false;
     }
 	
@@ -278,29 +274,41 @@ public class TextConverter extends ConverterHelper {
     // FILE SPLITTING
     ////////////////////////////////////////////////////////////////////////
 
-    private Node maybeSplit(Node node, StyleWithProperties style) {
-    	return maybeSplit(node,style,-1);
+    private Node maybeSplitIndex(Node onode, Node hnode, String sSourceXML) {
+    	String sFileTitle = null;
+    	Element source = Misc.getChildByTagName(onode, sSourceXML);
+    	if (source!=null && !"chapter".equals(Misc.getAttribute(source, XMLString.TEXT_INDEX_SCOPE))) {
+    		Element title = Misc.getChildByTagName(source, XMLString.TEXT_INDEX_TITLE_TEMPLATE);
+    		if (title!=null) {
+    			sFileTitle = Misc.getPCDATA(title);
+    		}
+    	}
+    	return maybeSplit(hnode,null,sFileTitle,1);
     }
     
-    private Node maybeSplit(Node node, StyleWithProperties style, int nLevel) {
+    private Node maybeSplit(Node node, StyleWithProperties style) {
+    	return maybeSplit(node, style, null, -1);
+    }
+    
+    private Node maybeSplit(Node node, StyleWithProperties style, String sFileTitle, int nLevel) {
     	if (bPendingPageBreak) {
-    		return doMaybeSplit(node, 0);
+    		return doMaybeSplit(node, null, 0);
     	}
     	if (getPageBreak(style)) {
-    		return doMaybeSplit(node, 0);
+    		return doMaybeSplit(node, null, 0);
     	}
     	if (converter.isOPS() && nSplitAfter>0 && nCharacterCount>nSplitAfter) {
-    		return doMaybeSplit(node, 0);
+    		return doMaybeSplit(node, null, 0);
     	}
     	if (nLevel>=0) {
-    		return doMaybeSplit(node, nLevel);
+    		return doMaybeSplit(node, sFileTitle, nLevel);
     	}
     	else {
     		return node;
     	}
     }
 
-    protected Element doMaybeSplit(Node node, int nLevel) {
+    protected Element doMaybeSplit(Node node, String sFileTitle, int nLevel) {
         if (nDontSplitLevel>1) { // we cannot split due to a nested structure
             return (Element) node;
         }
@@ -316,7 +324,7 @@ public class TextConverter extends ConverterHelper {
         	bPendingPageBreak = false;
             if (converter.getOutFileIndex()>=0) { footCv.insertFootnotes(node,false); }
             usedLists.clear();
-            return converter.nextOutFile();
+            return converter.nextOutFile(sFileTitle, nLevel);
         }
         return (Element) node;
     }
@@ -350,17 +358,6 @@ public class TextConverter extends ConverterHelper {
         return false;
     }
     
-    ////////////////////////////////////////////////////////////////////////
-    // NAVIGATION (fill header, footer and panel with navigation links)
-    ////////////////////////////////////////////////////////////////////////
-
-    // The header is populated with prev/next navigation
-    private void generateHeaders() { }
-
-    // The footer is populated with prev/next navigation
-    private void generateFooters() { }
-
-	
     ////////////////////////////////////////////////////////////////////////
     // BLOCK TEXT (returns current html node at end of block)
     ////////////////////////////////////////////////////////////////////////
@@ -436,12 +433,10 @@ public class TextConverter extends ConverterHelper {
                 }
                 else if(nodeName.equals(XMLString.TEXT_H)) {
                 	StyleWithProperties style = ofr.getParStyle(Misc.getAttribute(child,XMLString.TEXT_STYLE_NAME));
-                    int nOutlineLevel = getOutlineLevel((Element)child);
-                    Node rememberNode = hnode;
-                    hnode = maybeSplit(hnode,style,nOutlineLevel);
                 	bPageBreakAfter = maybePageBreak(hnode, style);
                 	nCharacterCount+=OfficeReader.getCharacterCount(child);
-                    handleHeading((Element)child,(Element)hnode,rememberNode!=hnode);
+                	// splitting is handled by handleHeading because we need to add the label
+                	hnode = handleHeading((Element)child, (Element)hnode);
                 }
                 else if (nodeName.equals(XMLString.TEXT_LIST) || // oasis
                          nodeName.equals(XMLString.TEXT_UNORDERED_LIST) || // old
@@ -474,31 +469,40 @@ public class TextConverter extends ConverterHelper {
                 }
                 else if (nodeName.equals(XMLString.TEXT_TABLE_OF_CONTENT)) {
                 	if (config.includeToc()) {
-	                    if (!ofr.getTocReader((Element)child).isByChapter()) {
-	                        hnode = maybeSplit(hnode,null,1);
+                		TocReader tocReader = ofr.getTocReader((Element)child);
+	                    if (!tocReader.isByChapter()) {
+	                    	Element title = tocReader.getIndexTitleTemplate();
+	                    	if (title!=null) {
+	                    		hnode = maybeSplit(hnode,null,Misc.getPCDATA(title),1);
+	                    	}
+	                    	else { // Error in document
+	                    		hnode = maybeSplit(hnode,null,converter.getL10n().get(L10n.CONTENTS),1);	                    		
+	                    	}
 	                    }
 	                    tocCv.handleIndex((Element)child,(Element)hnode,nChapterNumber);
                 	}
                 }
                 else if (nodeName.equals(XMLString.TEXT_ILLUSTRATION_INDEX)) {
+                    // TODO
                     lofCv.handleLOF(child,hnode);
                 }
                 else if (nodeName.equals(XMLString.TEXT_TABLE_INDEX)) {
+                    // TODO
                     lotCv.handleLOT(child,hnode);
                 }
                 else if (nodeName.equals(XMLString.TEXT_OBJECT_INDEX)) {
                     // TODO
                 }
                 else if (nodeName.equals(XMLString.TEXT_USER_INDEX)) {
-                    hnode = maybeSplit(hnode,null,1);
+                	hnode = maybeSplitIndex(child,hnode,XMLString.TEXT_USER_INDEX_SOURCE);
                     userCv.handleIndex((Element)child,(Element)hnode,nChapterNumber);
                 }
                 else if (nodeName.equals(XMLString.TEXT_ALPHABETICAL_INDEX)) {
-                    hnode = maybeSplit(hnode,null,1);
+                	hnode = maybeSplitIndex(child,hnode,XMLString.TEXT_ALPHABETICAL_INDEX_SOURCE);
                     indexCv.handleIndex((Element)child,(Element)hnode,nChapterNumber);
                 }
                 else if (nodeName.equals(XMLString.TEXT_BIBLIOGRAPHY)) {
-                    hnode = maybeSplit(hnode,null,1);
+                	hnode = maybeSplitIndex(child,hnode,XMLString.TEXT_BIBLIOGRAPHY_SOURCE);
                     bibCv.handleIndex((Element)child,(Element)hnode,nChapterNumber);
                 }
                 else if (nodeName.equals(XMLString.TEXT_SOFT_PAGE_BREAK)) {
@@ -545,22 +549,20 @@ public class TextConverter extends ConverterHelper {
         return newhnode.getParentNode();
     }
 	
-    private void handleHeading(Element onode, Element hnode, boolean bAfterSplit) {
+    private Element handleHeading(Element onode, Element hnode) {
         int nListLevel = getOutlineLevel((Element)onode);
         if (nListLevel==1) { nChapterNumber++; }
         boolean bUnNumbered = "true".equals(Misc.getAttribute(onode,XMLString.TEXT_IS_LIST_HEADER));
         boolean bRestart = "true".equals(Misc.getAttribute(onode,XMLString.TEXT_RESTART_NUMBERING));
         int nStartValue = Misc.getPosInteger(Misc.getAttribute(onode,XMLString.TEXT_START_VALUE),1)-1;
-        handleHeading(onode, hnode, bAfterSplit, ofr.getOutlineStyle(),
-            nListLevel, bUnNumbered, bRestart, nStartValue);        
+        return handleHeading(onode, hnode, ofr.getOutlineStyle(), nListLevel, bUnNumbered, bRestart, nStartValue);        
     }
 
     /*
      * Process a text:h tag
      */
-    private void handleHeading(Element onode, Element hnode, boolean bAfterSplit,
-        ListStyle listStyle, int nListLevel, boolean bUnNumbered,
-        boolean bRestart, int nStartValue) {
+    private Element handleHeading(Element onode, Element oldhnode,
+        ListStyle listStyle, int nListLevel, boolean bUnNumbered, boolean bRestart, int nStartValue) {
 
     	handlePageWidth(onode);
 
@@ -576,7 +578,7 @@ public class TextConverter extends ConverterHelper {
     		StyleWithProperties style = ofr.getParStyle(sStyleName);
     		
     		// Check for hidden text
-            if (!bDisplayHiddenText && style!=null && "none".equals(style.getProperty(XMLString.TEXT_DISPLAY))) { return; }
+            if (!bDisplayHiddenText && style!=null && "none".equals(style.getProperty(XMLString.TEXT_DISPLAY))) { return oldhnode; }
             
             // Numbering
         	if (!bUnNumbered) {
@@ -594,7 +596,10 @@ public class TextConverter extends ConverterHelper {
             	counter = getListCounter(listStyle); 
             	if (bRestart) { counter.restart(nListLevel,nStartValue); }
             	sLabel = counter.step(nListLevel).getLabel();
-            }        	
+            }  
+            
+            // Now that we have the label, we are ready to do splitting
+            Element hnode =  (Element)maybeSplit(oldhnode,style,sLabel+Misc.getPCDATA(onode),nLevel);
         	
     		// In EPUB export, a striked out heading will only appear in the external toc            
         	boolean bTocOnly = false;
@@ -608,7 +613,7 @@ public class TextConverter extends ConverterHelper {
         	// Export the heading
         	if (!bTocOnly) {
         		// If split output, add headings of higher levels
-        		if (bAfterSplit && nSplit>0) {
+        		if (hnode!=oldhnode && nSplit>0) {
         			int nFirst = nLevel-nRepeatLevels;
         			if (nFirst<0) { nFirst=0; }                
         			for (int i=nFirst; i<nLevel; i++) {
@@ -616,7 +621,7 @@ public class TextConverter extends ConverterHelper {
         					hnode.appendChild(converter.importNode(currentHeading[i],true));
         				}
         			}
-        		}		
+        		}	
 
         		// Apply style
         		StyleInfo info = new StyleInfo();
@@ -681,11 +686,14 @@ public class TextConverter extends ConverterHelper {
                 }
         		
         	}
+            sCurrentListLabel = null;
+            return hnode;
         }
         else { // beyond h6 - export as ordinary paragraph
-            handleParagraph(onode,hnode);
+            handleParagraph(onode,oldhnode);
+            sCurrentListLabel = null;
+            return oldhnode;
         }
-        sCurrentListLabel = null;
     }
 
     /*
@@ -1081,13 +1089,10 @@ public class TextConverter extends ConverterHelper {
             
                 if (sNodeName.equals(XMLString.TEXT_H)) {
                     nDontSplitLevel++;
-                    int nOutlineLevel = getOutlineLevel((Element)onode);
-                    Node rememberNode = hnode;
                     StyleWithProperties style = ofr.getParStyle(Misc.getAttribute(child, XMLString.TEXT_STYLE_NAME));
-                    hnode = maybeSplit(hnode,style,nOutlineLevel);
                 	boolean bPageBreakAfter = maybePageBreak(hnode, style);
-                    handleHeading((Element)child, (Element)hnode, rememberNode!=hnode,
-                        ofr.getListStyle(sStyleName), nLevel,
+                	// Splitting is handled by handleHeading because we need to add the label
+                    hnode = handleHeading((Element)child, (Element)hnode, ofr.getListStyle(sStyleName), nLevel,
                         bUnNumbered, bRestart, nStartValue);
                     if (bPageBreakAfter) {
                     	insertPageBreak((Element)hnode, "div");

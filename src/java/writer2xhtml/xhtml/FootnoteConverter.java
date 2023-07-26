@@ -16,11 +16,11 @@
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston,
  *  MA  02111-1307  USA
  *
- *  Copyright: 2002-2015 by Henrik Just
+ *  Copyright: 2002-2023 by Henrik Just
  *
  *  All Rights Reserved.
  * 
- *  Version 1.6 (2015-06-14)
+ *  Version 1.7.1 (2023-07-26)
  *
  */
 package writer2xhtml.xhtml;
@@ -31,6 +31,7 @@ import org.w3c.dom.Node;
 import writer2xhtml.office.OfficeReader;
 import writer2xhtml.office.PropertySet;
 import writer2xhtml.office.XMLString;
+import writer2xhtml.xhtml.l10n.L10n;
 
 class FootnoteConverter extends NoteConverter {
 	
@@ -67,7 +68,8 @@ class FootnoteConverter extends NoteConverter {
         	}
         	else if (bFinal) {
         		// New page if required for footnotes as endnotes
-        		if (config.getXhtmlSplitLevel()>0) { hnode = converter.nextOutFile(); }
+            	String sFileTitle = config.getFootnotesHeading().length()>0 ? config.getFootnotesHeading() : converter.getL10n().get(L10n.FOOTNOTES); 
+            	if (config.getXhtmlSplitLevel()>0) { hnode = converter.nextOutFile(sFileTitle,1); }
         		Element section = createNoteSection(hnode, "footnotes");
         		insertNoteHeading(section, config.getFootnotesHeading(), "footnotes");        	
         		flushNotes(section,"footnote");

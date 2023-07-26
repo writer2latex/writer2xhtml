@@ -20,24 +20,10 @@
  *
  *  All Rights Reserved.
  * 
- *  Version 1.7 (2023-06-10)
+ *  Version 1.7.1 (2023-07-25)
  *
  */
  
- /* TODO (impress2xhtml)
-  * Support master page content!
-  * New option: xhtml_draw_scaling: scale all draw objects this percentage
-  * (applies to applySize in this class + page size in PageStyleConverter)
-  * Certain options should have a fixed value for impress2xhtml:
-  *   original_image_size: always false
-  *   xhtml_formatting: always "convert_all"
-  *   xhtml_frame_formatting: always "convert_all"
-  *   xhtml_use_list_hack: always "true" (until list merge is fixed..)
-  * apply hard draw page background (see below)
-  * apply z-order for draw objects (frames)
-  * export notes (part of draw-page)
-  * export list-style-image for image bullets!
-  */
 package writer2xhtml.xhtml;
 
 import java.util.HashMap;
@@ -212,7 +198,7 @@ public class DrawConverter extends ConverterHelper {
     				style.setAttribute("type", "text/css");
     				style.appendChild(converter.createTextNode("body { margin:0 }"));
     			}
-    			currentNode = getTextCv().doMaybeSplit(hnode, 0);    	
+    			currentNode = getTextCv().doMaybeSplit(hnode, null, 0); 	
     		}
     	}
     	return currentNode;
@@ -223,10 +209,10 @@ public class DrawConverter extends ConverterHelper {
     	Element currentNode = hnode;
     	if (converter.isTopLevel() && !fullscreenFrames.isEmpty()) {
     		bCollectFullscreenFrames = false;
-    		currentNode = getTextCv().doMaybeSplit(hnode, 0);
+    		currentNode = getTextCv().doMaybeSplit(hnode, null, 0);
     		for (Element image : fullscreenFrames) {
     			handleDrawElement(image,currentNode,null,FULL_SCREEN);
-    			currentNode = getTextCv().doMaybeSplit(hnode, 0);
+    			currentNode = getTextCv().doMaybeSplit(hnode, null, 0);
     		}
     		fullscreenFrames.clear();
     		bCollectFullscreenFrames = true;

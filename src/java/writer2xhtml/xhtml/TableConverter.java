@@ -16,11 +16,11 @@
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston,
  *  MA  02111-1307  USA
  *
- *  Copyright: 2002-2022 by Henrik Just
+ *  Copyright: 2002-2023 by Henrik Just
  *
  *  All Rights Reserved.
  * 
- *  Version 1.7 (2022-06-16)
+ *  Version 1.7.1 (2023-07-25)
  *
  */
 
@@ -39,6 +39,8 @@ import writer2xhtml.office.TableView;
 import writer2xhtml.office.XMLString;
 import writer2xhtml.util.Calc;
 import writer2xhtml.util.Misc;
+import writer2xhtml.xhtml.l10n.L10n;
+
 import org.w3c.dom.Element;
 
 public class TableConverter extends ConverterHelper {
@@ -58,7 +60,7 @@ public class TableConverter extends ConverterHelper {
     public void convertTableContent(Element onode) {
         Element hnode = null;
         if (!onode.hasChildNodes()) { return; }
-        if (!config.xhtmlCalcSplit()) { hnode = nextOutFile(); }
+        if (!config.xhtmlCalcSplit()) { hnode = nextOutFile(converter.getL10n().get(L10n.HOME),1); }
         NodeList nList = onode.getChildNodes();
         int nLen = nList.getLength();
         for (int i=0; i<nLen; i++) {
@@ -71,10 +73,12 @@ public class TableConverter extends ConverterHelper {
                     if ((config.xhtmlDisplayHiddenSheets() || style==null
                             || !"false".equals(style.getProperty(XMLString.TABLE_DISPLAY)))
                             && (!config.applyPrintRanges() || ofr.getTableReader((Element)child).getPrintRangeCount()>0)) {
-                        if (config.xhtmlCalcSplit()) { hnode = nextOutFile(); }
                         // Collect name
                         String sName = Misc.getAttribute(child,XMLString.TABLE_NAME);
                         sheetNames.add(sName);
+
+                        // Create new file if required
+                        if (config.xhtmlCalcSplit()) { hnode = nextOutFile(sName,1); }
 
                         // Add sheet name as heading, if required
                         if (config.xhtmlUseSheetNamesAsHeadings()) {
@@ -109,12 +113,12 @@ public class TableConverter extends ConverterHelper {
     	if (converter.getOutFileIndex()<0) {
     		// No files, add an empty one (This may happen if apply_print_ranges=true
     		// and the document does not contain any print ranges)
-    		nextOutFile();
+    		nextOutFile(converter.getL10n().get(L10n.HOME),1);
     	}
     }
 	
-    private Element nextOutFile() {
-        Element hnode = converter.nextOutFile();
+    private Element nextOutFile(String sFileTitle, int nLevel) {
+        Element hnode = converter.nextOutFile(sFileTitle,nLevel);
         // Add title, if required by config
         if (config.xhtmlUseTitleAsHeading()) {
             String sTitle = converter.getMetaData().getTitle();
