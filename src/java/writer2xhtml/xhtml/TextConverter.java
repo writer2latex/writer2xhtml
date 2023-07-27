@@ -599,7 +599,7 @@ public class TextConverter extends ConverterHelper {
             }  
             
             // Now that we have the label, we are ready to do splitting
-            Element hnode =  (Element)maybeSplit(oldhnode,style,sLabel+Misc.getPCDATA(onode),nLevel);
+            Element hnode =  (Element)maybeSplit(oldhnode,style,sLabel+converter.getPlainInlineText(onode),nLevel);
         	
     		// In EPUB export, a striked out heading will only appear in the external toc            
         	boolean bTocOnly = false;

@@ -16,11 +16,11 @@
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston,
  *  MA  02111-1307  USA
  *
- *  Copyright: 2002-2022 by Henrik Just
+ *  Copyright: 2002-2023 by Henrik Just
  *
  *  All Rights Reserved.
  * 
- *  Version 1.7 (2022-06-17)
+ *  Version 1.7.1 (2023-07-26)
  *
  */ 
  
@@ -116,6 +116,7 @@ public class XhtmlOptionsDialogCalc extends OptionsDialogBase {
         else if (nConfig==1) {
             helper.put("ConfigURL","$(user)/writer2xhtml.xml");
             helper.put("AutoCreate","true");
+    		helper.put("TemplateURL", "$(user)/writer2xhtml-template.xhtml");
         }
         short nUnits = saveListBoxOption(xProps, "Units");
         if (!isLocked("units")) {

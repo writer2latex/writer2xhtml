@@ -8,6 +8,8 @@ All changes are classified as
 
 ---------- version 1.7.1 ----------
 
+- Bugfix: Custom templates and style sheets now also work for spreadsheets
+
 - Improved: Panels now include all indexes (previously only table of contents and alphabetical index)
 
 - Improved: Panels now include footnote and endnote pages. Title is either automatic based on the document language

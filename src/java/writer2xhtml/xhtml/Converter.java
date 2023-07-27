@@ -91,7 +91,7 @@ public class Converter extends ConverterBase {
     
     // The included style sheet and associated resources
     private CssDocument styleSheet = null;
-    private Set<ResourceDocument> resources = new HashSet<ResourceDocument>();
+    private Set<ResourceDocument> resources = new HashSet<>();
     
     // The xhtml output file(s)
     protected int nType = XhtmlDocument.XHTML10; // the doctype
@@ -105,8 +105,8 @@ public class Converter extends ConverterBase {
     //private int nAlphabeticalIndex = -1;
 
     // Hyperlinks
-    Hashtable<String, Integer> targets = new Hashtable<String, Integer>();
-    LinkedList<LinkDescriptor> links = new LinkedList<LinkDescriptor>();
+    Hashtable<String, Integer> targets = new Hashtable<>();
+    LinkedList<LinkDescriptor> links = new LinkedList<>();
     // Strip illegal characters from internal hyperlink targets
     private ExportNameCollection targetNames = new ExportNameCollection(true);
     
@@ -114,7 +114,7 @@ public class Converter extends ConverterBase {
     // attributes - at least background color and font size later)
     // The page content width serves as a base, and may possibly change even if the stack is non-empty
     private String pageContentWidth = null;
-    private Stack<String> contentWidth = new Stack<String>();
+    private Stack<String> contentWidth = new Stack<>();
     
     // Constructor setting the DOCTYPE
     public Converter(int nType) {
@@ -277,15 +277,59 @@ public class Converter extends ConverterBase {
     public boolean isOPS() { return bOPS; }
     
     @Override public void convertInner() throws IOException {
-        sTargetFileName = Misc.trimDocumentName(sTargetFileName,XhtmlDocument.getExtension(nType));    		
+    	// Set the base target file name
+        sTargetFileName = Misc.trimDocumentName(sTargetFileName, XhtmlDocument.getExtension(nType));    		
 		
+        // Prepare the output files
         outFiles = new Vector<XhtmlDocument>();
         nOutFileIndex = -1;
 
-        bNeedHeaderFooter = !bOPS && (ofr.isSpreadsheet() || ofr.isPresentation() || config.getXhtmlSplitLevel()>0 || config.pageBreakSplit()>XhtmlConfig.NONE || config.getXhtmlUplink().length()>0);
-
-        l10n = new L10n();
+        // Do we need to autocreate header and footer? (Default template only)
+        bNeedHeaderFooter = !bOPS
+        		&& (ofr.isSpreadsheet() || config.getXhtmlSplitLevel()>0 || config.pageBreakSplit()>XhtmlConfig.NONE || config.getXhtmlUplink().length()>0);
         
+        // Initialize converter
+        setLocale();
+        initializeImageConverter();
+        initializeConverterHelpers();
+        
+        // Set the main content width (used to calculate relative widths)
+        setPageContentWidth(getStyleCv().getPageSc().getTextWidth(ofr.getFirstMasterPage()));
+
+        // Traverse the body
+        Element body = ofr.getContent();
+        if (ofr.isSpreadsheet()) {
+        	tableCv.convertTableContent(body);
+        }
+        else {
+        	textCv.convertTextContent(body);
+        }
+		
+        // Post processing
+        addTitleAndTextPageEntries();
+        resolveLinks();
+        loadMathJax();
+        generateHeadersAndFooters();
+        generatePanels();
+        exportStyles();
+    }
+    
+    // Set the language to the document language
+    private void setLocale() {
+        l10n = new L10n();
+        StyleWithProperties style = ofr.isSpreadsheet() ? ofr.getDefaultCellStyle() : ofr.getDefaultParStyle();
+        if (style!=null) {
+        	// The only CTL language recognized currently is farsi
+        	if ("fa".equals(style.getProperty(XMLString.STYLE_LANGUAGE_COMPLEX))) {
+        		l10n.setLocale("fa", "IR");
+        	}
+        	else {
+        		l10n.setLocale(style.getProperty(XMLString.FO_LANGUAGE), style.getProperty(XMLString.FO_COUNTRY));
+        	}
+        }
+    }
+    
+    private void initializeImageConverter() {
         imageConverter.setUseBase64(config.embedImg());
         
         if (isOPS()) {
@@ -306,34 +350,18 @@ public class Converter extends ConverterBase {
         if (isHTML5()) { // HTML5 supports SVG as well
         	imageConverter.setDefaultVectorFormat(MIMETypes.SVG);
         }
-
+    }
+    
+    private void initializeConverterHelpers() {
         styleCv = new StyleConverter(ofr,config,this,nType);
         textCv = new TextConverter(ofr,config,this);
         tableCv = new TableConverter(ofr,config,this);
         drawCv = new DrawConverter(ofr,config,this);
         mathCv = new MathConverter(ofr,config,this,nType!=XhtmlDocument.XHTML10 && nType!=XhtmlDocument.XHTML11);
-
-        // Set locale to document language
-        StyleWithProperties style = ofr.isSpreadsheet() ? ofr.getDefaultCellStyle() : ofr.getDefaultParStyle();
-        if (style!=null) {
-        	// The only CTL language recognized currently is farsi
-        	if ("fa".equals(style.getProperty(XMLString.STYLE_LANGUAGE_COMPLEX))) {
-        		l10n.setLocale("fa", "IR");
-        	}
-        	else {
-        		l10n.setLocale(style.getProperty(XMLString.FO_LANGUAGE), style.getProperty(XMLString.FO_COUNTRY));
-        	}
-        }
-        
-        // Set the main content width
-        setPageContentWidth(getStyleCv().getPageSc().getTextWidth(ofr.getFirstMasterPage()));
-
-        // Traverse the body
-        Element body = ofr.getContent();
-        if (ofr.isSpreadsheet()) { tableCv.convertTableContent(body); }
-        else { textCv.convertTextContent(body); }
-		
-        // Set the title page and text page entries
+    }
+    
+    // For EPUB export we need to identify the title page and the (first) text page
+    private void addTitleAndTextPageEntries() {
         if (converterResult.getContent().isEmpty()) {
         	// No headings in the document: There is no title page and the text page is the first page
         	converterResult.setTextFile(new ContentEntryImpl("Text", 1, outFiles.get(0), null));
@@ -349,13 +377,7 @@ public class Converter extends ConverterBase {
         	}
         	// The text page is the one containing the first heading
         	converterResult.setTextFile(new ContentEntryImpl("Text", 1, firstHeading.getFile(), firstHeading.getTarget()));
-        }
-
-        resolveLinks();
-        loadMathJax();
-        generateHeadersAndFooters();
-        generatePanels();
-        exportStyles();
+        }    	
     }
     
     private void resolveLinks() {
@@ -394,130 +416,67 @@ public class Converter extends ConverterBase {
         }    	
     }
     
+    // Add headers and footers to all files; slightly different between spreadsheets and text documents
     private void generateHeadersAndFooters() {
-        // Create headers & footers (if nodes are available)
-        if (ofr.isSpreadsheet()) {
-            for (int i=0; i<=nOutFileIndex; i++) {
-
-                XhtmlDocument doc = outFiles.get(i);
-                Document dom = doc.getContentDOM();
-                Element header = doc.getHeaderNode();
-                Element footer = doc.getFooterNode();
-                Element headerPar = dom.createElement("p");
-                Element footerPar = dom.createElement("p");
-                footerPar.setAttribute("style","clear:both"); // no floats may pass!
-
-                // Add uplink
-                if (config.getXhtmlUplink().length()>0) {
-                    Element a = dom.createElement("a");
-                    a.setAttribute("href",config.getXhtmlUplink());
-                    a.appendChild(dom.createTextNode(l10n.get(L10n.UP)));
-                    headerPar.appendChild(a);
-                    headerPar.appendChild(dom.createTextNode(" "));
-                    a = dom.createElement("a");
-                    a.setAttribute("href",config.getXhtmlUplink());
-                    a.appendChild(dom.createTextNode(l10n.get(L10n.UP)));
-                    footerPar.appendChild(a);
-                    footerPar.appendChild(dom.createTextNode(" "));
-                }
-                // Add links to all sheets:
-                int nSheets = tableCv.sheetNames.size();
-                for (int j=0; j<nSheets; j++) {
-                    if (config.xhtmlCalcSplit()) {
-                        addNavigationLink(dom,headerPar,tableCv.sheetNames.get(j),i,j);
-                        addNavigationLink(dom,footerPar,tableCv.sheetNames.get(j),i,j);
-                    }
-                    else {
-                        addInternalNavigationLink(dom,headerPar,tableCv.sheetNames.get(j),"tableheading"+j);
-                        addInternalNavigationLink(dom,footerPar,tableCv.sheetNames.get(j),"tableheading"+j);
-	                }
-                }
-                
-                if (header!=null) { header.appendChild(headerPar); }
-                if (footer!=null) { footer.appendChild(footerPar); }
-            }
+        for (int nFileIndex=0; nFileIndex<=nOutFileIndex; nFileIndex++) {
+	        XhtmlDocument doc = outFiles.get(nFileIndex);
+	        if (ofr.isSpreadsheet()) {
+    	        generateHeaderOrFooterCalc(nFileIndex, doc.getContentDOM(), doc.getHeaderNode());
+    	        generateHeaderOrFooterCalc(nFileIndex, doc.getContentDOM(), doc.getFooterNode());
+	        }
+	        else {
+    	        generateHeaderOrFooterWriter(nFileIndex, doc.getContentDOM(), doc.getHeaderNode());
+    	        generateHeaderOrFooterWriter(nFileIndex, doc.getContentDOM(), doc.getFooterNode());
+	        }
+	        if (doc.getFooterNode()!=null) {
+	        	doc.getFooterNode().setAttribute("style","clear:both"); // no floats may pass the footer!
+	        }
         }
-        else if (nOutFileIndex>0) {
-            for (int i=0; i<=nOutFileIndex; i++) {
-                XhtmlDocument doc = outFiles.get(i);
-                Document dom = doc.getContentDOM();
-                //Element content = doc.getContentNode();
-
-                // Header links
-                Element header = doc.getHeaderNode();
-                if (header!=null) {
-                    if (ofr.isPresentation()) {
-                        // Absolute placement in presentations (quick and dirty solution)
-                        header.setAttribute("style","position:absolute;top:0;left:0");
-                    }
-                    if (config.getXhtmlUplink().length()>0) {
-                        Element a = dom.createElement("a");
-                        a.setAttribute("href",config.getXhtmlUplink());
-                        a.appendChild(dom.createTextNode(l10n.get(L10n.UP)));
-                        header.appendChild(a);
-                        header.appendChild(dom.createTextNode(" "));
-                    }
-                    addNavigationLink(dom,header,l10n.get(L10n.FIRST),i,0);
-                    addNavigationLink(dom,header,l10n.get(L10n.PREVIOUS),i,i-1);
-                    addNavigationLink(dom,header,l10n.get(L10n.NEXT),i,i+1);
-                    addNavigationLink(dom,header,l10n.get(L10n.LAST),i,nOutFileIndex);
-                    if (textCv.getTocIndex()>=0) {
-                        addNavigationLink(dom,header,l10n.get(L10n.CONTENTS),i,textCv.getTocIndex());
-                    }
-                    if (textCv.getAlphabeticalIndex()>=0) {
-                        addNavigationLink(dom,header,l10n.get(L10n.INDEX),i,textCv.getAlphabeticalIndex());
-                    }
+    }
+    
+    // For spreadsheets the header/footer contains an uplink + links to all sheets
+    private void generateHeaderOrFooterCalc(int nFileIndex, Document dom, Element hnode) {
+        if (hnode!=null) {
+        	addUplink(dom, hnode);
+            int nSheets = tableCv.sheetNames.size();
+            for (int nSheetIndex=0; nSheetIndex<nSheets; nSheetIndex++) {
+                if (config.xhtmlCalcSplit()) {
+                    addNavigationLink(dom,hnode,tableCv.sheetNames.get(nSheetIndex),nFileIndex,nSheetIndex);
                 }
-
-                // Footer links
-                Element footer = doc.getFooterNode();
-                if (footer!=null && !ofr.isPresentation()) {
-                    // No footer in presentations
-                    if (config.getXhtmlUplink().length()>0) {
-                        Element a = dom.createElement("a");
-                        a.setAttribute("href",config.getXhtmlUplink());
-                        a.appendChild(dom.createTextNode(l10n.get(L10n.UP)));
-                        footer.appendChild(a);
-                        footer.appendChild(dom.createTextNode(" "));
-                    }
-                    addNavigationLink(dom,footer,l10n.get(L10n.FIRST),i,0);
-                    addNavigationLink(dom,footer,l10n.get(L10n.PREVIOUS),i,i-1);
-                    addNavigationLink(dom,footer,l10n.get(L10n.NEXT),i,i+1);
-                    addNavigationLink(dom,footer,l10n.get(L10n.LAST),i,nOutFileIndex);
-                    if (textCv.getTocIndex()>=0) {
-                        addNavigationLink(dom,footer,l10n.get(L10n.CONTENTS),i,textCv.getTocIndex());
-                    }
-                    if (textCv.getAlphabeticalIndex()>=0) {
-                        addNavigationLink(dom,footer,l10n.get(L10n.INDEX),i,textCv.getAlphabeticalIndex());
-                    }
+                else {
+                    addInternalNavigationLink(dom,hnode,tableCv.sheetNames.get(nSheetIndex),"tableheading"+nSheetIndex);
                 }
-            }
-        }
-        else if (config.getXhtmlUplink().length()>0) {
-            for (int i=0; i<=nOutFileIndex; i++) {
-                XhtmlDocument doc = outFiles.get(i);
-                Document dom = doc.getContentDOM();
-                //Element content = doc.getContentNode();
-
-                Element header = doc.getHeaderNode();
-                if (header!=null) {
-                    Element a = dom.createElement("a");
-                    a.setAttribute("href",config.getXhtmlUplink());
-                    a.appendChild(dom.createTextNode(l10n.get(L10n.UP)));
-                    header.appendChild(a);
-                    header.appendChild(dom.createTextNode(" "));
-                }
-
-                Element footer = doc.getFooterNode();
-                if (footer!=null) {
-                    Element a = dom.createElement("a");
-                    a.setAttribute("href",config.getXhtmlUplink());
-                    a.appendChild(dom.createTextNode(l10n.get(L10n.UP)));
-                    footer.appendChild(a);
-                    footer.appendChild(dom.createTextNode(" "));
-                }
-            }
-        }
+        	}
+        }    	
+    }
+    
+    // For text documents the header/footer contains first-previous-next-last links + links to table of contents and alphabetical index
+    private void generateHeaderOrFooterWriter(int nFileIndex, Document dom, Element hnode) {
+        if (hnode!=null) {
+        	addUplink(dom, hnode);
+        	if (config.getXhtmlSplitLevel()>0) {
+	            addNavigationLink(dom, hnode, l10n.get(L10n.FIRST), nFileIndex, 0);
+	            addNavigationLink(dom, hnode, l10n.get(L10n.PREVIOUS), nFileIndex, nFileIndex-1);
+	            addNavigationLink(dom, hnode, l10n.get(L10n.NEXT), nFileIndex, nFileIndex+1);
+	            addNavigationLink(dom, hnode, l10n.get(L10n.LAST), nFileIndex, nOutFileIndex);
+	            if (textCv.getTocIndex()>=0) {
+	                addNavigationLink(dom, hnode, l10n.get(L10n.CONTENTS), nFileIndex, textCv.getTocIndex());
+	            }
+	            if (textCv.getAlphabeticalIndex()>=0) {
+	                addNavigationLink(dom, hnode, l10n.get(L10n.INDEX), nFileIndex, textCv.getAlphabeticalIndex());
+	            }
+        	}
+        }    	
+    }
+    
+    private void addUplink(Document dom, Element hnode) {
+    	if (!config.getXhtmlUplink().isEmpty()) {
+    		Element a = dom.createElement("a");
+		    a.setAttribute("href", config.getXhtmlUplink());
+		    a.appendChild(dom.createTextNode(l10n.get(L10n.UP)));
+		    hnode.appendChild(a);
+		    hnode.appendChild(dom.createTextNode(" "));
+    	}
     }
     
     private void generatePanels() {
@@ -623,7 +582,7 @@ public class Converter extends ConverterBase {
         }    	
     }
     
-    /* get inline text, ignoring any draw objects, footnotes, formatting and hyperlinks */
+    // get inline text, ignoring any draw objects, footnotes, formatting and hyperlinks
     protected String getPlainInlineText(Node node) {
     	StringBuilder buf = new StringBuilder();
         Node child = node.getFirstChild();
