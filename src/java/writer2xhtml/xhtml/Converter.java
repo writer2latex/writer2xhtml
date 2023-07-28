@@ -20,7 +20,7 @@
  *
  *  All Rights Reserved.
  * 
- *  Version 1.7.1 (2023-07-26)
+ *  Version 1.7.1 (2023-07-28)
  *
  */
 
@@ -28,15 +28,13 @@ package writer2xhtml.xhtml;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
-import java.util.ListIterator;
-import java.util.LinkedList;
+import java.util.Map;
+import java.util.List;
 import java.util.Set;
 import java.util.Stack;
-import java.util.Vector;
-import java.util.Hashtable;
-import java.util.Iterator;
-
 import java.io.InputStream;
 import java.io.IOException;
 
@@ -96,17 +94,15 @@ public class Converter extends ConverterBase {
     // The xhtml output file(s)
     protected int nType = XhtmlDocument.XHTML10; // the doctype
     private boolean bOPS = false; // Do we need to be OPS conforming?
-    Vector<XhtmlDocument> outFiles;
+    List<XhtmlDocument> outFiles;
     private int nOutFileIndex;
     private XhtmlDocument htmlDoc; // current outfile
     private Document htmlDOM; // current DOM, usually within htmlDoc
     private boolean bNeedHeaderFooter = false;
-    //private int nTocFileIndex = -1;
-    //private int nAlphabeticalIndex = -1;
 
     // Hyperlinks
-    Hashtable<String, Integer> targets = new Hashtable<>();
-    LinkedList<LinkDescriptor> links = new LinkedList<>();
+    Map<String, Integer> targets = new HashMap<>();
+    List<LinkDescriptor> links = new ArrayList<>();
     // Strip illegal characters from internal hyperlink targets
     private ExportNameCollection targetNames = new ExportNameCollection(true);
     
@@ -281,7 +277,7 @@ public class Converter extends ConverterBase {
         sTargetFileName = Misc.trimDocumentName(sTargetFileName, XhtmlDocument.getExtension(nType));    		
 		
         // Prepare the output files
-        outFiles = new Vector<XhtmlDocument>();
+        outFiles = new ArrayList<>();
         nOutFileIndex = -1;
 
         // Do we need to autocreate header and footer? (Default template only)
@@ -381,9 +377,7 @@ public class Converter extends ConverterBase {
     }
     
     private void resolveLinks() {
-        ListIterator<LinkDescriptor> iter = links.listIterator();
-        while (iter.hasNext()) {
-            LinkDescriptor ld = iter.next();
+        for (LinkDescriptor ld : links) {
             Integer targetIndex = targets.get(ld.sId);
             if (targetIndex!=null) {
                 int nTargetIndex = targetIndex.intValue();
@@ -392,6 +386,9 @@ public class Converter extends ConverterBase {
                 }
                 else {
                     ld.element.setAttribute("href",getOutFileName(nTargetIndex,true)+"#"+targetNames.getExportName(ld.sId));
+                }
+                if (ld.bPageRef) { // insert page number
+                	ld.element.appendChild(ld.element.getOwnerDocument().createTextNode(Integer.toString(nTargetIndex+1)));
                 }
             }
         }
@@ -813,22 +810,6 @@ public class Converter extends ConverterBase {
         	}
 
         }
-        
-        // Recreate nested sections, if any
-        if (!textCv.sections.isEmpty()) {
-            Iterator<Node> iter = textCv.sections.iterator();
-            while (iter.hasNext()) {
-                Element section = (Element) iter.next();
-                String sStyleName = Misc.getAttribute(section,XMLString.TEXT_STYLE_NAME);
-                Element div = htmlDOM.createElement("div");
-                htmlDoc.getContentNode().appendChild(div);
-                htmlDoc.setContentNode(div);
-                StyleInfo sectionInfo = new StyleInfo();
-                styleCv.getSectionSc().applyStyle(sStyleName,sectionInfo);
-                styleCv.getSectionSc().applyStyle(sectionInfo,div);
-            }
-        }
-        
         return htmlDoc.getContentNode();
     }
     
@@ -867,9 +848,14 @@ public class Converter extends ConverterBase {
 
     // create an internal link
     public Element createLink(String sId) {
+    	return createLink(sId,false);
+    }
+
+    // create an internal link
+    public Element createLink(String sId, boolean bPageRef) {
         Element a = htmlDOM.createElement("a");
         LinkDescriptor ld = new LinkDescriptor();
-        ld.element = a; ld.sId = sId; ld.nIndex = nOutFileIndex;
+        ld.element = a; ld.sId = sId; ld.nIndex = nOutFileIndex;; ld.bPageRef = bPageRef;
         links.add(ld);
         return a;
     }
@@ -880,7 +866,7 @@ public class Converter extends ConverterBase {
         String sHref = onode.getAttribute(XMLString.XLINK_HREF);
         Element anchor;
         if (sHref.startsWith("#")) { // internal link
-            anchor = createLink(sHref.substring(1));
+            anchor = createLink(sHref.substring(1),false);
         }
         else { // external link
             anchor = htmlDOM.createElement("a");

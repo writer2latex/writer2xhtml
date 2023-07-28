@@ -20,7 +20,7 @@
  *
  *  All Rights Reserved.
  * 
- *  Version 1.7.1 (2023-06-26)
+ *  Version 1.7.1 (2023-06-28)
  *
  */
 
@@ -68,7 +68,7 @@ public class TextConverter extends ConverterHelper {
     private int nLastSplitLevel = 1; // The outline level at which the last split occurred
     private int nDontSplitLevel = 0; // if > 0 splitting is forbidden
     boolean bAfterHeading=false; // last element was a top level heading
-    protected Stack<Node> sections = new Stack<Node>(); // stack of nested sections
+    protected Stack<Node> sections = new Stack<>(); // stack of nested sections
     Element[] currentHeading = new Element[7]; // Last headings (repeated when splitting)
     private int nCharacterCount = 0; // The number of text characters in the current document
     
@@ -324,7 +324,21 @@ public class TextConverter extends ConverterHelper {
         	bPendingPageBreak = false;
             if (converter.getOutFileIndex()>=0) { footCv.insertFootnotes(node,false); }
             usedLists.clear();
-            return converter.nextOutFile(sFileTitle, nLevel);
+            Element newHnode = converter.nextOutFile(sFileTitle, nLevel);
+            // Recreate nested sections, if any
+            for (Node section : sections) {
+            	// Create div for section
+            	Element div = converter.createElement("div");
+                newHnode.appendChild(div);
+                // Apply the section style
+                String sStyleName = Misc.getAttribute(section,XMLString.TEXT_STYLE_NAME);
+                StyleInfo sectionInfo = new StyleInfo();
+                converter.getStyleCv().getSectionSc().applyStyle(sStyleName,sectionInfo);
+                converter.getStyleCv().getSectionSc().applyStyle(sectionInfo,div);
+                // The div is our new node
+                newHnode = div;
+            }
+            return newHnode;
         }
         return (Element) node;
     }
@@ -1386,12 +1400,9 @@ public class TextConverter extends ConverterHelper {
         // Turn reference into hyperlink
         String sFormat = Misc.getAttribute(onode,XMLString.TEXT_REFERENCE_FORMAT);
         String sName = Misc.getAttribute(onode,XMLString.TEXT_REF_NAME);
-        Element anchor = converter.createLink(sPrefix+sName);
+        Element anchor = converter.createLink(sPrefix+sName,"page".equals(sFormat));
         hnode.appendChild(anchor);
-        if ("page".equals(sFormat)) { // all page numbers are 1 :-)
-            anchor.appendChild( converter.createTextNode("1") );
-        }
-        else { // in other cases use current value
+        if (!"page".equals(sFormat)) { // use current value if not a page reference
             traversePCDATA(onode,anchor);
         }
     }

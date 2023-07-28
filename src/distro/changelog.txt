@@ -8,6 +8,9 @@ All changes are classified as
 
 ---------- version 1.7.1 ----------
 
+- Improved: Page references now inserts the "real" page number, that is the file number in the sequence (only
+  relevant if split_levels>0)
+
 - Bugfix: Custom templates and style sheets now also work for spreadsheets
 
 - Improved: Panels now include all indexes (previously only table of contents and alphabetical index)
