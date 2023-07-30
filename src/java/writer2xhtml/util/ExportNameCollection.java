@@ -16,21 +16,23 @@
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston,
  *  MA  02111-1307  USA
  *
- *  Copyright: 2002-2014 by Henrik Just
+ *  Copyright: 2002-2023 by Henrik Just
  *
  *  All Rights Reserved.
  * 
- *  Version 1.4 (2014-09-16)
+ *  Version 1.7.1 (2023-07-30)
  *
  */
 
 package writer2xhtml.util;
 
+import java.text.Normalizer;
 import java.util.Enumeration;
 import java.util.Hashtable;
 
 /** Maintain a collection of export names. 
  *  This is used to map named collections to simpler names (only A-Z, a-z and 0-9, and possibly additional characters)
+ *  Accented letters are automatically replaced with the corresponding base character
  */
 public class ExportNameCollection{
     private Hashtable<String, String> exportNames = new Hashtable<String, String>();
@@ -59,7 +61,7 @@ public class ExportNameCollection{
     public void addName(String sName){
         if (containsName(sName)) { return; }
         StringBuilder outbuf=new StringBuilder();
-        SimpleInputBuffer inbuf=new SimpleInputBuffer(sName);
+        SimpleInputBuffer inbuf=new SimpleInputBuffer(Normalizer.normalize(sName, Normalizer.Form.NFD));
 		
         // Don't start with a digit
         if (bAcceptNumbers && inbuf.peekChar()>='0' && inbuf.peekChar()<='9') {
@@ -68,8 +70,8 @@ public class ExportNameCollection{
 
         char c;
         // convert numbers to roman numbers and discard unwanted characters
-        while ((c=inbuf.peekChar())!='\0'){
-            if ((c>='a' && c<='z') || (c>='A' && c<='Z')) {
+        while ((c=inbuf.peekChar())!='\0') {
+        	if ((c>='a' && c<='z') || (c>='A' && c<='Z')) {
                 outbuf.append(inbuf.getChar());
             }
             else if (c>='0' && c<='9'){
@@ -84,8 +86,12 @@ public class ExportNameCollection{
             else if (sAdditionalChars.indexOf(c)>-1) {
             	outbuf.append(inbuf.getChar());
             }
-            else {
-                inbuf.getChar(); // ignore this character
+        	else { // Special treatment for Danish letters; otherwise ignore character
+                if (c=='\u00C6') { outbuf.append("AE"); }
+                else if (c=='\u00D8') { outbuf.append("OE"); }
+                else if (c=='\u00E6') { outbuf.append("ae"); }
+                else if (c=='\u00F8') { outbuf.append("oe"); }
+                inbuf.getChar();
             }
         }
         String sExportName=outbuf.toString();

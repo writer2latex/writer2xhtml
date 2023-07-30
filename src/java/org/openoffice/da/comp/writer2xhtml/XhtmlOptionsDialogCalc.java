@@ -38,7 +38,8 @@ import org.openoffice.da.comp.w2xcommon.helper.PropertyHelper;
  */
 public class XhtmlOptionsDialogCalc extends OptionsDialogBase {
 	
-    // Translate list box items (table settings) to configuration option values 
+    // Translate list box items to configuration option values 
+    private static final String[] FILENAMES_VALUES = { "name_number", "name_section", "section" };
     private static final String[] SIZE_VALUES = { "auto", "relative", "none" };
     
     /** The component will be registered under this name.
@@ -91,6 +92,7 @@ public class XhtmlOptionsDialogCalc extends OptionsDialogBase {
 
         // Files
         loadCheckBoxOption(xProps, "CalcSplit");
+        loadListBoxOption(xProps, "Filenames");
         loadCheckBoxOption(xProps, "SaveImagesInSubdir");
         
         // Special content
@@ -140,6 +142,7 @@ public class XhtmlOptionsDialogCalc extends OptionsDialogBase {
 
         // Files
         saveCheckBoxOption(xProps, helper, "CalcSplit", "calc_split");
+        saveListBoxOption(xProps, helper, "Filenames", "filenames", FILENAMES_VALUES);
         saveCheckBoxOption(xProps, helper, "SaveImagesInSubdir", "save_images_in_subdir");
 
         // Special content
@@ -162,11 +165,14 @@ public class XhtmlOptionsDialogCalc extends OptionsDialogBase {
             updateLockedOptions();
             enableControls();
         }
+        else if (sMethod.equals("CalcSplitChange")) {
+        	enableSplitSettings();
+        }
         return true;
     }
 	
     public String[] getSupportedMethodNames() {
-        String[] sNames = { "ConfigChange" };
+        String[] sNames = { "ConfigChange", "CalcSplitChange" };
         return sNames;
     }
 	
@@ -187,6 +193,7 @@ public class XhtmlOptionsDialogCalc extends OptionsDialogBase {
 
         // Files
         setControlEnabled("CalcSplit",!isLocked("calc_split"));
+        enableSplitSettings();
         setControlEnabled("SaveImagesInSubdir",!isLocked("save_images_in_subdir"));
 
         // Special content
@@ -197,6 +204,11 @@ public class XhtmlOptionsDialogCalc extends OptionsDialogBase {
         setControlEnabled("ImageSize",!isLocked("image_size") && !isLocked("original_image_size"));
         setControlEnabled("EmbedSVG",this instanceof HTML5OptionsDialogCalc && !isLocked("embed_svg"));
         setControlEnabled("EmbedImg",!isLocked("embed_img"));
+    }
+    
+    private void enableSplitSettings() {
+        setControlEnabled("FilenamesLabel",getCheckBoxStateAsBoolean("CalcSplit") && !isLocked("save_images_in_subdir"));
+        setControlEnabled("Filenames",getCheckBoxStateAsBoolean("CalcSplit") && !isLocked("save_images_in_subdir"));
     }
 		
 }

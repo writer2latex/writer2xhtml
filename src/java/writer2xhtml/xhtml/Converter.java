@@ -20,7 +20,7 @@
  *
  *  All Rights Reserved.
  * 
- *  Version 1.7.1 (2023-07-28)
+ *  Version 1.7.1 (2023-07-30)
  *
  */
 
@@ -99,6 +99,8 @@ public class Converter extends ConverterBase {
     private XhtmlDocument htmlDoc; // current outfile
     private Document htmlDOM; // current DOM, usually within htmlDoc
     private boolean bNeedHeaderFooter = false;
+    private Set<String> usedFileTitles = new HashSet<>();
+    private ExportNameCollection fileNames = new ExportNameCollection("",true,"-");
 
     // Hyperlinks
     Map<String, Integer> targets = new HashMap<>();
@@ -121,7 +123,7 @@ public class Converter extends ConverterBase {
 
     // override methods to read templates, style sheets and resources
     @Override public void readTemplate(InputStream is) throws IOException {
-        template = new XhtmlDocument("Template",nType,null,-1);
+        template = new XhtmlDocument("Template",nType,null,null,-1);
         template.read(is);
     }
 	
@@ -385,7 +387,8 @@ public class Converter extends ConverterBase {
                     ld.element.setAttribute("href","#"+targetNames.getExportName(ld.sId));
                 }
                 else {
-                    ld.element.setAttribute("href",getOutFileName(nTargetIndex,true)+"#"+targetNames.getExportName(ld.sId));
+                    //ld.element.setAttribute("href",getOutFileName(nTargetIndex,true)+"#"+targetNames.getExportName(ld.sId));
+                	ld.element.setAttribute("href",outFiles.get(nTargetIndex).getFileName()+"#"+targetNames.getExportName(ld.sId));
                 }
                 if (ld.bPageRef) { // insert page number
                 	ld.element.appendChild(ld.element.getOwnerDocument().createTextNode(Integer.toString(nTargetIndex+1)));
@@ -509,7 +512,8 @@ public class Converter extends ConverterBase {
 	            		Element p = dom.createElement("p");
 	            		p.setAttribute("class", "level"+nThisLevel);
 	                    panel.appendChild(p);
-	                    addNavigationLink(dom, p, outFiles.get(nTargetIndex).getFileTitle( ),nSourceIndex, nTargetIndex);
+	                    addNavigationLink(dom, p, outFiles.get(nTargetIndex).getFileLabel( )+outFiles.get(nTargetIndex).getFileTitle( ),
+	                    		nSourceIndex, nTargetIndex);
             		}
             	}
             }
@@ -520,7 +524,8 @@ public class Converter extends ConverterBase {
     private void addNavigationLink(Document dom, Node node, String sTitle, int nSourceIndex, int nTargetIndex) {
         if (nTargetIndex>=0 && nTargetIndex<=nOutFileIndex && nSourceIndex!=nTargetIndex) {
             Element a = dom.createElement("a");
-            a.setAttribute("href",Misc.makeHref(getOutFileName(nTargetIndex,true)));
+            //a.setAttribute("href",Misc.makeHref(getOutFileName(nTargetIndex,true)));
+            a.setAttribute("href",Misc.makeHref(outFiles.get(nTargetIndex).getFileName()));
             a.appendChild(dom.createTextNode(sTitle));
             node.appendChild(a);
             node.appendChild(dom.createTextNode(" "));
@@ -651,12 +656,6 @@ public class Converter extends ConverterBase {
     /////////////////////////////////////////////////////////////////////////
     // UTILITY METHODS
 	
-    // Create output file name (docname.html, docname1.html, docname2.html etc.)
-    public String getOutFileName(int nIndex, boolean bWithExt) {
-        return sTargetFileName + (nIndex>0 ? Integer.toString(nIndex) : "") 
-                               + (bWithExt ? htmlDoc.getFileExtension() : "");
-    }
-	
     // Return true if the current outfile has a non-empty body
     public boolean outFileHasContent() {
         if (htmlDoc.getContentNode().hasChildNodes()) {
@@ -682,8 +681,34 @@ public class Converter extends ConverterBase {
     }
 	
     // Prepare next output file
-    public Element nextOutFile(String sFileTitle, int nLevel) {
-        htmlDoc = new XhtmlDocument(getOutFileName(++nOutFileIndex,false),nType,sFileTitle,nLevel);
+    public Element nextOutFile(String sFileLabel, String sFileTitle, int nLevel) {
+        nOutFileIndex++;
+        // Use the given file name for the master document
+        String sFinalFileName = sTargetFileName;
+        // Construct a file name according to the option filenames for remaining documents
+        if (nOutFileIndex>0) { // Create the document using a file name created according to the filenames option
+	    	if (config.getFilenames()==XhtmlConfig.NAME_NUMBER || sFileTitle==null) { // Sequential numbering of files
+	   			sFinalFileName = sTargetFileName+nOutFileIndex;
+	    	}
+	    	else { // Use modified (for friendly URL) file title for file name
+	    		String sModifiedTitle = sFileTitle.replace(' ', '-').toLowerCase();
+	    		if (usedFileTitles.contains(sModifiedTitle)) { // We have seen this title before; ensure a unique name
+	    			int n=0;
+	    			while (usedFileTitles.contains(sModifiedTitle+(++n)));
+	    			sModifiedTitle = sModifiedTitle + n;
+	    		}
+	    		usedFileTitles.add(sModifiedTitle);
+	    		if (config.getFilenames()==XhtmlConfig.NAME_SECTION) {
+		    		sFinalFileName = sTargetFileName+"-"+fileNames.getExportName(sModifiedTitle);	    			
+	    		}
+	    		else { // Must be SECTION
+		    		sFinalFileName = fileNames.getExportName(sModifiedTitle);
+	    		}
+	    	}
+        }
+       	htmlDoc = new XhtmlDocument(sFinalFileName, nType, sFileLabel, sFileTitle, nLevel);
+    	
+        // Configure and populate the document, and add to result
         htmlDoc.setConfig(config);
         if (template!=null) { htmlDoc.readFromTemplate(template); }
         else if (bNeedHeaderFooter) { htmlDoc.createHeaderFooter(); }
@@ -697,7 +722,7 @@ public class Converter extends ConverterBase {
         addEpubNs(rootElement);
         rootElement.insertBefore(htmlDOM.createComment(
              "This file was converted to HTML by "
-             + (ofr.isText() ? "Writer" : (ofr.isSpreadsheet() ? "Calc" : "Impress"))
+             + (ofr.isSpreadsheet() ? "Calc" : "Writer")
              + "2xhtml ver. " + ConverterFactory.getVersion() +
              ". See http://writer2xhtml.sourceforge.net for more info."),
              rootElement.getFirstChild());

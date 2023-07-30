@@ -20,7 +20,7 @@
  *
  *  All Rights Reserved.
  * 
- *  Version 1.7.1 (2023-07-25)
+ *  Version 1.7.1 (2023-07-30)
  *
  */
  
@@ -198,7 +198,7 @@ public class DrawConverter extends ConverterHelper {
     				style.setAttribute("type", "text/css");
     				style.appendChild(converter.createTextNode("body { margin:0 }"));
     			}
-    			currentNode = getTextCv().doMaybeSplit(hnode, null, 0); 	
+    			currentNode = getTextCv().doMaybeSplit(hnode, null, null, 0); 	
     		}
     	}
     	return currentNode;
@@ -209,10 +209,10 @@ public class DrawConverter extends ConverterHelper {
     	Element currentNode = hnode;
     	if (converter.isTopLevel() && !fullscreenFrames.isEmpty()) {
     		bCollectFullscreenFrames = false;
-    		currentNode = getTextCv().doMaybeSplit(hnode, null, 0);
+    		currentNode = getTextCv().doMaybeSplit(hnode, null, null, 0);
     		for (Element image : fullscreenFrames) {
     			handleDrawElement(image,currentNode,null,FULL_SCREEN);
-    			currentNode = getTextCv().doMaybeSplit(hnode, null, 0);
+    			currentNode = getTextCv().doMaybeSplit(hnode, null, null, 0);
     		}
     		fullscreenFrames.clear();
     		bCollectFullscreenFrames = true;

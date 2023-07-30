@@ -20,7 +20,7 @@
  *
  *  All Rights Reserved.
  * 
- *  Version 1.7.1 (2023-07-26)
+ *  Version 1.7.1 (2023-07-30)
  *
  */ 
  
@@ -33,12 +33,12 @@ import com.sun.star.uno.XComponentContext;
 import org.openoffice.da.comp.w2xcommon.filter.OptionsDialogBase;
 import org.openoffice.da.comp.w2xcommon.helper.PropertyHelper;
 
-/** This class provides a uno component which implements a filter ui for the
- *  Xhtml export
+/** This class provides a uno component which implements a filter ui for the XHTML  export
  */
 public class XhtmlOptionsDialogBase extends OptionsDialogBase {
 	
-    // Translate list box items (image and table settings) to configuration option values 
+    // Translate list box items to configuration option values 
+    private static final String[] FILENAMES_VALUES = { "name_number", "name_section", "section" };
     private static final String[] SIZE_VALUES = { "auto", "relative", "none" };
     
     public String getDialogLibraryName() { return "W2XDialogs"; }
@@ -74,6 +74,7 @@ public class XhtmlOptionsDialogBase extends OptionsDialogBase {
         loadCheckBoxOption(xProps, "Split");
         loadListBoxOption(xProps, "SplitLevel");
         loadListBoxOption(xProps, "RepeatLevels");
+        loadListBoxOption(xProps, "Filenames");
         loadCheckBoxOption(xProps, "SaveImagesInSubdir");
         
         // Special content
@@ -149,6 +150,7 @@ public class XhtmlOptionsDialogBase extends OptionsDialogBase {
                 helper.put("split_level","0");
             }
         }    		
+        saveListBoxOption(xProps, helper, "Filenames", "filenames", FILENAMES_VALUES);
         saveCheckBoxOption(xProps, helper, "SaveImagesInSubdir", "save_images_in_subdir");
 
         // Special content
@@ -185,7 +187,7 @@ public class XhtmlOptionsDialogBase extends OptionsDialogBase {
             enableControls();
         }
         else if (sMethod.equals("SplitChange")) {
-            enableSplitLevel();
+            enableSplitSettings();
         }
         return true;
     }
@@ -209,6 +211,8 @@ public class XhtmlOptionsDialogBase extends OptionsDialogBase {
         setControlEnabled("SplitLevel",!isLocked("split_level") && bSplit);
         setControlEnabled("RepeatLevelsLabel",!isLocked("repeat_levels") && !isLocked("split_level") && bSplit);
         setControlEnabled("RepeatLevels",!isLocked("repeat_levels") && !isLocked("split_level") && bSplit);
+        setControlEnabled("FilenamesLabel",!isLocked("filenames") && bSplit);
+        setControlEnabled("Filenames",!isLocked("filenames") && bSplit);
         setControlEnabled("SaveImagesInSubdir",!isLocked("save_images_in_subdir"));
         
         // Special content
@@ -240,7 +244,7 @@ public class XhtmlOptionsDialogBase extends OptionsDialogBase {
         setControlEnabled("IgnoreDoubleSpaces",!isLocked("ignore_double_spaces"));
     }
 	
-    private void enableSplitLevel() {
+    private void enableSplitSettings() {
         if (!isLocked("split_level")) {
             boolean bState = getCheckBoxStateAsBoolean("Split");
             setControlEnabled("SplitLevelLabel",bState);
@@ -249,6 +253,8 @@ public class XhtmlOptionsDialogBase extends OptionsDialogBase {
                 setControlEnabled("RepeatLevelsLabel",bState);
                 setControlEnabled("RepeatLevels",bState);
             }
+            setControlEnabled("FilenamesLabel",!isLocked("filenames") && bState);
+            setControlEnabled("Filenames",!isLocked("filenames") && bState);
         }
     }
 

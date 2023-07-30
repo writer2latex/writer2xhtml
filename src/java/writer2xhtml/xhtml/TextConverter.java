@@ -20,7 +20,7 @@
  *
  *  All Rights Reserved.
  * 
- *  Version 1.7.1 (2023-06-28)
+ *  Version 1.7.1 (2023-07-30)
  *
  */
 
@@ -68,7 +68,7 @@ public class TextConverter extends ConverterHelper {
     private int nLastSplitLevel = 1; // The outline level at which the last split occurred
     private int nDontSplitLevel = 0; // if > 0 splitting is forbidden
     boolean bAfterHeading=false; // last element was a top level heading
-    protected Stack<Node> sections = new Stack<>(); // stack of nested sections
+    private Stack<Node> sections = new Stack<>(); // stack of nested sections
     Element[] currentHeading = new Element[7]; // Last headings (repeated when splitting)
     private int nCharacterCount = 0; // The number of text characters in the current document
     
@@ -137,7 +137,7 @@ public class TextConverter extends ConverterHelper {
      *  @param l10n translations for the document language
      */
     public void convertTextContent(Element onode) {
-        Element hnode = converter.nextOutFile(converter.getL10n().get(L10n.HOME),1);
+        Element hnode = converter.nextOutFile("",converter.getL10n().get(L10n.HOME),1);
 
         // Start with page 1
         setSoftPageBreaksLimit(-1);
@@ -283,32 +283,32 @@ public class TextConverter extends ConverterHelper {
     			sFileTitle = Misc.getPCDATA(title);
     		}
     	}
-    	return maybeSplit(hnode,null,sFileTitle,1);
+    	return maybeSplit(hnode,null,"",sFileTitle,1);
     }
     
     private Node maybeSplit(Node node, StyleWithProperties style) {
-    	return maybeSplit(node, style, null, -1);
+    	return maybeSplit(node, style, null, null, -1);
     }
     
-    private Node maybeSplit(Node node, StyleWithProperties style, String sFileTitle, int nLevel) {
+    private Node maybeSplit(Node node, StyleWithProperties style, String sFileLabel, String sFileTitle, int nLevel) {
     	if (bPendingPageBreak) {
-    		return doMaybeSplit(node, null, 0);
+    		return doMaybeSplit(node, null, null, 0);
     	}
     	if (getPageBreak(style)) {
-    		return doMaybeSplit(node, null, 0);
+    		return doMaybeSplit(node, null, null, 0);
     	}
     	if (converter.isOPS() && nSplitAfter>0 && nCharacterCount>nSplitAfter) {
-    		return doMaybeSplit(node, null, 0);
+    		return doMaybeSplit(node, null, null, 0);
     	}
     	if (nLevel>=0) {
-    		return doMaybeSplit(node, sFileTitle, nLevel);
+    		return doMaybeSplit(node, sFileLabel, sFileTitle, nLevel);
     	}
     	else {
     		return node;
     	}
     }
 
-    protected Element doMaybeSplit(Node node, String sFileTitle, int nLevel) {
+    protected Element doMaybeSplit(Node node, String sFileLabel, String sFileTitle, int nLevel) {
         if (nDontSplitLevel>1) { // we cannot split due to a nested structure
             return (Element) node;
         }
@@ -324,7 +324,7 @@ public class TextConverter extends ConverterHelper {
         	bPendingPageBreak = false;
             if (converter.getOutFileIndex()>=0) { footCv.insertFootnotes(node,false); }
             usedLists.clear();
-            Element newHnode = converter.nextOutFile(sFileTitle, nLevel);
+            Element newHnode = converter.nextOutFile(sFileLabel, sFileTitle, nLevel);
             // Recreate nested sections, if any
             for (Node section : sections) {
             	// Create div for section
@@ -487,10 +487,10 @@ public class TextConverter extends ConverterHelper {
 	                    if (!tocReader.isByChapter()) {
 	                    	Element title = tocReader.getIndexTitleTemplate();
 	                    	if (title!=null) {
-	                    		hnode = maybeSplit(hnode,null,Misc.getPCDATA(title),1);
+	                    		hnode = maybeSplit(hnode,null,"",Misc.getPCDATA(title),1);
 	                    	}
 	                    	else { // Error in document
-	                    		hnode = maybeSplit(hnode,null,converter.getL10n().get(L10n.CONTENTS),1);	                    		
+	                    		hnode = maybeSplit(hnode,null,"",converter.getL10n().get(L10n.CONTENTS),1);	                    		
 	                    	}
 	                    }
 	                    tocCv.handleIndex((Element)child,(Element)hnode,nChapterNumber);
@@ -613,7 +613,7 @@ public class TextConverter extends ConverterHelper {
             }  
             
             // Now that we have the label, we are ready to do splitting
-            Element hnode =  (Element)maybeSplit(oldhnode,style,sLabel+converter.getPlainInlineText(onode),nLevel);
+            Element hnode =  (Element)maybeSplit(oldhnode,style,sLabel,converter.getPlainInlineText(onode),nLevel);
         	
     		// In EPUB export, a striked out heading will only appear in the external toc            
         	boolean bTocOnly = false;

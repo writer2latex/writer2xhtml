@@ -20,7 +20,7 @@
  *
  *  All Rights Reserved.
  * 
- *  Version 1.7.1 (2023-07-26)
+ *  Version 1.7.1 (2023-07-30)
  *
  */
 package writer2xhtml.xhtml;
@@ -69,7 +69,7 @@ class FootnoteConverter extends NoteConverter {
         	else if (bFinal) {
         		// New page if required for footnotes as endnotes
             	String sFileTitle = config.getFootnotesHeading().length()>0 ? config.getFootnotesHeading() : converter.getL10n().get(L10n.FOOTNOTES); 
-            	if (config.getXhtmlSplitLevel()>0) { hnode = converter.nextOutFile(sFileTitle,1); }
+            	if (config.getXhtmlSplitLevel()>0) { hnode = converter.nextOutFile("",sFileTitle,1); }
         		Element section = createNoteSection(hnode, "footnotes");
         		insertNoteHeading(section, config.getFootnotesHeading(), "footnotes");        	
         		flushNotes(section,"footnote");

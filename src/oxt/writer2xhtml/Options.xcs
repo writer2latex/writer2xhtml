@@ -37,6 +37,7 @@
             <prop oor:name="Split" oor:type="xs:boolean" />
             <prop oor:name="SplitLevel" oor:type="xs:short" />
             <prop oor:name="RepeatLevels" oor:type="xs:short" />
+            <prop oor:name="Filenames" oor:type="xs:short" />
             <prop oor:name="SaveImagesInSubdir" oor:type="xs:boolean" />
             
             <!-- Special content -->
@@ -79,6 +80,7 @@
 
             <!-- Files -->
             <prop oor:name="CalcSplit" oor:type="xs:boolean" />
+            <prop oor:name="Filenames" oor:type="xs:short" />
             <prop oor:name="SaveImagesInSubdir" oor:type="xs:boolean" />
 
             <!-- Special content -->

@@ -20,7 +20,7 @@
  *
  *  All Rights Reserved.
  * 
- *  Version 1.7.1 (2023-07-25)
+ *  Version 1.7.1 (2023-07-30)
  *
  */
 
@@ -109,6 +109,7 @@ public class XhtmlDocument extends DOMDocument {
     private boolean bWritingStyle = false;
     
     // Title and outline level
+    private String sFileLabel = null;
     private String sFileTitle = null;
     private int nOutlineLevel = -1;
     
@@ -272,9 +273,10 @@ public class XhtmlDocument extends DOMDocument {
      *  @param  name  name of this document
      *  @param  nType the type of document
      */
-    public XhtmlDocument(String name, int nType, String sFileTitle, int nOutlineLevel) {
+    public XhtmlDocument(String name, int nType, String sFileLabel, String sFileTitle, int nOutlineLevel) {
         super(name,sExtension[nType]);
         this.nType = nType;
+        this.sFileLabel = sFileLabel;
         this.sFileTitle = sFileTitle;
         this.nOutlineLevel = nOutlineLevel;
 
@@ -316,6 +318,10 @@ public class XhtmlDocument extends DOMDocument {
     
     @Override public boolean containsMath() {
     	return bContainsMath;
+    }
+    
+    public String getFileLabel() {
+    	return sFileLabel;
     }
     
     public String getFileTitle() {

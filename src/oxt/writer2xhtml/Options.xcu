@@ -31,6 +31,9 @@
         <prop oor:name="RepeatLevels" oor:type="xs:short">
             <value>5</value>
         </prop>
+        <prop oor:name="Filenames" oor:type="xs:short">
+            <value>0</value>
+        </prop>
         <prop oor:name="SaveImagesInSubdir" oor:type="xs:boolean">
             <value>false</value>
         </prop>
@@ -112,6 +115,9 @@
 		<!-- Files -->
         <prop oor:name="CalcSplit" oor:type="xs:boolean">
             <value>false</value>
+        </prop>
+        <prop oor:name="Filenames" oor:type="xs:short">
+            <value>0</value>
         </prop>
         <prop oor:name="SaveImagesInSubdir" oor:type="xs:boolean">
             <value>false</value>

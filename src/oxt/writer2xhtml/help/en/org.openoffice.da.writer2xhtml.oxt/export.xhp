@@ -127,6 +127,27 @@
         headings of level 3 and set this option to 2, the headings of level 1 and 2 will be repeated before the heading of level 3,
         providing precise information as to where in the document the section belongs.</paragraph>
 
+    	<bookmark xml-lang="en-US" branch="hid/org.openoffice.da.writer2xhtml.oxt:OptionsFilenames" id="bm_options_filenames"/>
+        <paragraph role="heading" level="3" xml-lang="en-US">File names</paragraph>
+   		<paragraph role="paragraph" xml-lang="en-US"><ahelp hid="org.openoffice.da.writer2xhtml.oxt:OptionsFilenames" visibility="hidden">Select how to create file names for the secondary HTML files</ahelp></paragraph>
+        <paragraph role="paragraph" xml-lang="en-US">When you split the document at headings, Writer2xhtml produces several HTML files. 
+        You can use this option to specify how to create file names for the secondary HTML files. Let us say that you document is named "document"
+        and has the headings "The first heading" and "The second heading".</paragraph>
+        <list type="unordered">
+			<listitem>
+				<paragraph role="paragraph" xml-lang="en-US"><emph>Base file name + number</emph> will use a sequential numbering scheme. With the example,
+				it will produce the files document.html, document1.html, document2.html.</paragraph>
+			</listitem>
+			<listitem>
+				<paragraph role="paragraph" xml-lang="en-US"><emph>Base file name + section</emph> will replace the number with the current heading. With
+				the example, it will produce the files document.html, document-the-first-heading.html, document-the-second-heading.html.</paragraph>
+			</listitem>
+			<listitem>
+				<paragraph role="paragraph" xml-lang="en-US"><emph>Section</emph> will do the same, but only include the base file name for the first file. With
+				the example, it will produce the files document.html, the-first-heading.html, the-second-heading.html.</paragraph>
+			</listitem>
+        </list>
+
    		<bookmark xml-lang="en-US" branch="hid/org.openoffice.da.writer2xhtml.oxt:OptionsSaveImagesInSubdir" id="bm_options_saveimagesinsubdir"/>
 		<paragraph role="paragraph" xml-lang="en-US"><ahelp hid="org.openoffice.da.writer2xhtml.oxt:OptionsSaveImagesInSubdir" visibility="hidden">Check this to save images in a subdirectory relative to the exported document</ahelp></paragraph>
 		<section id="saveimagesinsubdir">

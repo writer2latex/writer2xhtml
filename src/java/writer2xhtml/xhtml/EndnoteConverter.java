@@ -20,7 +20,7 @@
  *
  *  All Rights Reserved.
  * 
- *  Version 1.7.1 (2023-07-26)
+ *  Version 1.7.1 (2023-07-30)
  *
  */
 package writer2xhtml.xhtml;
@@ -44,7 +44,7 @@ class EndnoteConverter extends NoteConverter {
     void insertEndnotes(Node hnode) {
         if (hasNotes()) {
         	String sFileTitle = config.getEndnotesHeading().length()>0 ? config.getEndnotesHeading() : converter.getL10n().get(L10n.ENDNOTES); 
-        	if (config.getXhtmlSplitLevel()>0) { hnode = converter.nextOutFile(sFileTitle,1); }
+        	if (config.getXhtmlSplitLevel()>0) { hnode = converter.nextOutFile("",sFileTitle,1); }
         	Element section = createNoteSection(hnode, "rearnotes");
         	insertNoteHeading(section, config.getEndnotesHeading(), "endnotes");
         	flushNotes(section,"rearnote");

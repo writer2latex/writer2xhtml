@@ -20,7 +20,7 @@
  *
  *  All Rights Reserved.
  * 
- *  Version 1.7.1 (2023-07-25)
+ *  Version 1.7.1 (2023-07-30)
  *
  */
 
@@ -118,7 +118,7 @@ public class TableConverter extends ConverterHelper {
     }
 	
     private Element nextOutFile(String sFileTitle, int nLevel) {
-        Element hnode = converter.nextOutFile(sFileTitle,nLevel);
+        Element hnode = converter.nextOutFile("",sFileTitle,nLevel);
         // Add title, if required by config
         if (config.xhtmlUseTitleAsHeading()) {
             String sTitle = converter.getMetaData().getTitle();

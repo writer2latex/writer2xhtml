@@ -20,7 +20,7 @@
  *
  *  All Rights Reserved.
  * 
- *  Version 1.7 (2023-06-05)
+ *  Version 1.7.1 (2023-07-29)
  *
  */
 
@@ -41,7 +41,7 @@ import writer2xhtml.util.Misc;
 
 public class XhtmlConfig extends writer2xhtml.base.ConfigBase {
     // Implement configuration methods
-    protected int getOptionCount() { return 61; }
+    protected int getOptionCount() { return 62; }
     protected String getDefaultConfigPath() { return "/writer2xhtml/xhtml/config/"; }
 	
     // Override setOption: To be backwards compatible, we must accept options
@@ -106,6 +106,11 @@ public class XhtmlConfig extends writer2xhtml.base.ConfigBase {
     public static final int EXPLICIT = 2;
     public static final int ALL = 3;
     
+    // File names
+    public static final int NAME_NUMBER = 0;
+    public static final int NAME_SECTION = 1;
+    public static final int SECTION = 2;
+    
     // Options
     private static final int IGNORE_HARD_LINE_BREAKS = 0;
     private static final int IGNORE_EMPTY_PARAGRAPHS = 1;
@@ -168,6 +173,7 @@ public class XhtmlConfig extends writer2xhtml.base.ConfigBase {
     private static final int EXTERNAL_TOC_DEPTH_MARKS = 58;
     private static final int ORIGINAL_PAGE_NUMBERS = 59;
     private static final int AVOID_HTML5 = 60;
+    private static final int FILENAMES = 61;
 
     protected ComplexOption xheading = addComplexOption("heading-map");
     protected ComplexOption xpar = addComplexOption("paragraph-map");
@@ -321,6 +327,20 @@ public class XhtmlConfig extends writer2xhtml.base.ConfigBase {
         };
         options[ORIGINAL_PAGE_NUMBERS] = new BooleanOption("original_page_numbers","false");
         options[AVOID_HTML5] = new BooleanOption("avoid_html5","false");
+        options[FILENAMES] = new IntegerOption("filenames","section") {
+        	@Override public void setString(String sValue) {
+        		super.setString(sValue);
+        		if ("name_section".equals(sValue)) {
+        			nValue = NAME_SECTION;
+        		}
+        		else if ("section".equals(sValue)) {
+        			nValue = SECTION;
+        		}
+        		else {
+        			nValue = NAME_NUMBER;
+        		}
+        	}
+        };
     }
     
 	protected void readInner(Element elm) {
@@ -465,6 +485,7 @@ public class XhtmlConfig extends writer2xhtml.base.ConfigBase {
     public int externalTocDepthMarks() { return ((IntegerOption) options[EXTERNAL_TOC_DEPTH_MARKS]).getValue(); }
     public boolean originalPageNumbers() { return ((BooleanOption) options[ORIGINAL_PAGE_NUMBERS]).getValue(); }
     public boolean avoidHtml5() { return ((BooleanOption) options[AVOID_HTML5]).getValue(); }
+    public int getFilenames() { return ((IntegerOption) options[FILENAMES]).getValue(); }
 	
     public XhtmlStyleMap getXParStyleMap() { return getStyleMap(xpar); }
     public XhtmlStyleMap getXHeadingStyleMap() { return getStyleMap(xheading); }
