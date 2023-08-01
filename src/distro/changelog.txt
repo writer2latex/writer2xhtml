@@ -8,8 +8,13 @@ All changes are classified as
 
 ---------- version 1.7.1 ----------
 
+- Changed: The HTML export dialogs offers two new configurations: "Original formatting with navigation panel" and "Clean HTML".
+
+- Changed: The standard option cleanxhtml.xml has been reworked to not include options that are available in the export dialog. Also, the
+  content has been reordered to match the order in the configuration.
+
 - Improved: In exported names (e.g. CSS class names), non-ASCII letters were previously ignored. Now they are replaced by the
-  corresponding base character making names more readably. Also the Danish letters ae and o with stroke are replaced by ASCII characters.
+  corresponding base character making names more readable. Also the Danish letters ae and o with stroke are replaced by ASCII characters.
 
 - New feature: New option filenames with to define the file naming scheme if file splitting is used.
   Possible values are values name-number (default, use base file name+number), name-section (use base file name+heading/sheet name)

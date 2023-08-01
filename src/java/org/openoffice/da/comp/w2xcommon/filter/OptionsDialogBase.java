@@ -16,16 +16,17 @@
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston,
  *  MA  02111-1307  USA
  *
- *  Copyright: 2002-2014 by Henrik Just
+ *  Copyright: 2002-2023 by Henrik Just
  *
  *  All Rights Reserved.
  * 
- *  Version 1.4 (2014-11-01)
+ *  Version 1.7.1 (2023-07-31)
  *
  */ 
  
 package org.openoffice.da.comp.w2xcommon.filter;
 
+import java.util.Arrays;
 import java.util.HashSet;
 
 import org.openoffice.da.comp.w2xcommon.helper.DialogBase;
@@ -53,8 +54,7 @@ import com.sun.star.util.XChangesBatch;
 
 /** This class provides an abstract uno component which implements a filter ui
  */
-public abstract class OptionsDialogBase extends DialogBase implements
-        XPropertyAccess { // Filter ui requires XExecutableDialog + XPropertyAccess
+public abstract class OptionsDialogBase extends DialogBase implements XPropertyAccess { // Filter ui requires XExecutableDialog + XPropertyAccess
 		
     //////////////////////////////////////////////////////////////////////////
     // The subclass must override the following; and override the
@@ -307,9 +307,9 @@ public abstract class OptionsDialogBase extends DialogBase implements
         int nStdConfigs = sStdConfigs.length;
 
         Object configurations = XPropertySetHelper.getPropertyValue(xProps,"Configurations");
-        XNameAccess xConfigurations = (XNameAccess)
-            UnoRuntime.queryInterface(XNameAccess.class,configurations);
+        XNameAccess xConfigurations = (XNameAccess) UnoRuntime.queryInterface(XNameAccess.class,configurations);
         sConfigNames = xConfigurations.getElementNames();
+        Arrays.sort(sConfigNames);
         int nRegConfigs = sConfigNames.length;
 
         String[] sAllConfigs = new String[nStdConfigs+nRegConfigs];

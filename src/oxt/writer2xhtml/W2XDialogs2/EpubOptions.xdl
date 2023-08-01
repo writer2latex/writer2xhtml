@@ -9,7 +9,7 @@
   <dlg:text dlg:id="ConfigLabel" dlg:tab-index="1" dlg:left="10" dlg:top="22" dlg:width="60" dlg:height="12" dlg:value="Use style"/>
   <dlg:menulist dlg:id="Config" dlg:tab-index="2" dlg:left="75" dlg:top="20" dlg:width="90" dlg:height="12" dlg:help-url="org.openoffice.da.writer2xhtml.oxt:EpubOptionsConfig" dlg:spin="true" dlg:linecount="10">
    <dlg:menupopup>
-    <dlg:menuitem dlg:value="Original formatting"/>
+     <dlg:menuitem dlg:value="Original formatting"/>
     <dlg:menuitem dlg:value="Custom"/>
    </dlg:menupopup>
    <script:event script:event-name="on-itemstatechange" script:macro-name="vnd.sun.star.UNO:ConfigChange" script:language="UNO"/>

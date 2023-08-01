@@ -5,6 +5,213 @@
   xmlns:oor="http://openoffice.org/2001/registry"
   xmlns:xs="http://www.w3.org/2001/XMLSchema">
     <node oor:name="XhtmlOptions">
+        <node oor:name="Configurations">
+	        <node oor:name="01w2x-default" oor:op="replace">
+	            <prop oor:name="LockedOptions" oor:type="xs:string">
+	                <value/>
+	            </prop>
+	            <prop oor:name="DisplayName" oor:type="xs:string" oor:localized="true">
+	                <value>Original formatting</value>
+	            </prop>
+	            <prop oor:name="ConfigURL" oor:type="xs:string">
+	                <value>*default.xml</value>
+	            </prop>
+	            <prop oor:name="TargetTemplateURL" oor:type="xs:string">
+	                <value/>
+	            </prop>
+	            <prop oor:name="StyleSheetURL" oor:type="xs:string">
+	                <value/>
+	            </prop>
+	        </node>
+	        <node oor:name="02w2x-panel" oor:op="replace">
+	            <prop oor:name="LockedOptions" oor:type="xs:string">
+	                <value/>
+	            </prop>
+	            <prop oor:name="DisplayName" oor:type="xs:string" oor:localized="true">
+	                <value>Original formatting with navigation panel</value>
+	            </prop>
+	            <prop oor:name="ConfigURL" oor:type="xs:string">
+	                <value>%origin%/config/panel.xml</value>
+	            </prop>
+	            <prop oor:name="TargetTemplateURL" oor:type="xs:string">
+	                <value>%origin%/config/panel-template.xml</value>
+	            </prop>
+	            <prop oor:name="StyleSheetURL" oor:type="xs:string">
+	                <value/>
+	            </prop>
+	        </node>
+	        <node oor:name="03w2x-clean" oor:op="replace">
+	            <prop oor:name="LockedOptions" oor:type="xs:string">
+	                <value/>
+	            </prop>
+	            <prop oor:name="DisplayName" oor:type="xs:string" oor:localized="true">
+	                <value>Clean HTML</value>
+	            </prop>
+	            <prop oor:name="ConfigURL" oor:type="xs:string">
+	                <value>*cleanxhtml.xml</value>
+	            </prop>
+	            <prop oor:name="TargetTemplateURL" oor:type="xs:string">
+	                <value></value>
+	            </prop>
+	            <prop oor:name="StyleSheetURL" oor:type="xs:string">
+	                <value/>
+	            </prop>
+	        </node>
+	        <node oor:name="04w2x-custom" oor:op="replace">
+	            <prop oor:name="LockedOptions" oor:type="xs:string">
+	                <value/>
+	            </prop>
+	            <prop oor:name="DisplayName" oor:type="xs:string" oor:localized="true">
+	                <value>Custom</value>
+	            </prop>
+	            <prop oor:name="ConfigURL" oor:type="xs:string">
+	                <value>$(user)/writer2xhtml.xml</value>
+	            </prop>
+	            <prop oor:name="TargetTemplateURL" oor:type="xs:string">
+	                <value>$(user)/writer2xhtml-template.xhtml</value>
+	            </prop>
+	            <prop oor:name="StyleSheetURL" oor:type="xs:string">
+	                <value/>
+	            </prop>
+	        </node>
+	        <node oor:name="05w2x-chocolate" oor:op="replace">
+	            <prop oor:name="LockedOptions" oor:type="xs:string">
+	                <value/>
+	            </prop>
+	            <prop oor:name="DisplayName" oor:type="xs:string" oor:localized="true">
+	                <value>W3C Chocolate</value>
+	            </prop>
+	            <prop oor:name="ConfigURL" oor:type="xs:string">
+	                <value>%origin%/config/chocolate.xml</value>
+	            </prop>
+	            <prop oor:name="TargetTemplateURL" oor:type="xs:string">
+	                <value></value>
+	            </prop>
+	            <prop oor:name="StyleSheetURL" oor:type="xs:string">
+	                <value/>
+	            </prop>
+	        </node>
+	        <node oor:name="06w2x-midnight" oor:op="replace">
+	            <prop oor:name="LockedOptions" oor:type="xs:string">
+	                <value/>
+	            </prop>
+	            <prop oor:name="DisplayName" oor:type="xs:string" oor:localized="true">
+	                <value>W3C Midnight</value>
+	            </prop>
+	            <prop oor:name="ConfigURL" oor:type="xs:string">
+	                <value>%origin%/config/midnight.xml</value>
+	            </prop>
+	            <prop oor:name="TargetTemplateURL" oor:type="xs:string">
+	                <value></value>
+	            </prop>
+	            <prop oor:name="StyleSheetURL" oor:type="xs:string">
+	                <value/>
+	            </prop>
+	        </node>
+	        <node oor:name="07w2x-modernist" oor:op="replace">
+	            <prop oor:name="LockedOptions" oor:type="xs:string">
+	                <value/>
+	            </prop>
+	            <prop oor:name="DisplayName" oor:type="xs:string" oor:localized="true">
+	                <value>W3C Modernist</value>
+	            </prop>
+	            <prop oor:name="ConfigURL" oor:type="xs:string">
+	                <value>%origin%/config/modernist.xml</value>
+	            </prop>
+	            <prop oor:name="TargetTemplateURL" oor:type="xs:string">
+	                <value></value>
+	            </prop>
+	            <prop oor:name="StyleSheetURL" oor:type="xs:string">
+	                <value/>
+	            </prop>
+	        </node>
+	        <node oor:name="08w2x-oldstyle" oor:op="replace">
+	            <prop oor:name="LockedOptions" oor:type="xs:string">
+	                <value/>
+	            </prop>
+	            <prop oor:name="DisplayName" oor:type="xs:string" oor:localized="true">
+	                <value>W3C Oldstyle</value>
+	            </prop>
+	            <prop oor:name="ConfigURL" oor:type="xs:string">
+	                <value>%origin%/config/oldstyle.xml</value>
+	            </prop>
+	            <prop oor:name="TargetTemplateURL" oor:type="xs:string">
+	                <value></value>
+	            </prop>
+	            <prop oor:name="StyleSheetURL" oor:type="xs:string">
+	                <value/>
+	            </prop>
+	        </node>
+	        <node oor:name="09w2x-steely" oor:op="replace">
+	            <prop oor:name="LockedOptions" oor:type="xs:string">
+	                <value/>
+	            </prop>
+	            <prop oor:name="DisplayName" oor:type="xs:string" oor:localized="true">
+	                <value>W3C Steely</value>
+	            </prop>
+	            <prop oor:name="ConfigURL" oor:type="xs:string">
+	                <value>%origin%/config/steely.xml</value>
+	            </prop>
+	            <prop oor:name="TargetTemplateURL" oor:type="xs:string">
+	                <value></value>
+	            </prop>
+	            <prop oor:name="StyleSheetURL" oor:type="xs:string">
+	                <value/>
+	            </prop>
+	        </node>
+	        <node oor:name="10w2x-swiss" oor:op="replace">
+	            <prop oor:name="LockedOptions" oor:type="xs:string">
+	                <value/>
+	            </prop>
+	            <prop oor:name="DisplayName" oor:type="xs:string" oor:localized="true">
+	                <value>W3C Swiss</value>
+	            </prop>
+	            <prop oor:name="ConfigURL" oor:type="xs:string">
+	                <value>%origin%/config/swiss.xml</value>
+	            </prop>
+	            <prop oor:name="TargetTemplateURL" oor:type="xs:string">
+	                <value></value>
+	            </prop>
+	            <prop oor:name="StyleSheetURL" oor:type="xs:string">
+	                <value/>
+	            </prop>
+	        </node>
+	        <node oor:name="11w2x-traditional" oor:op="replace">
+	            <prop oor:name="LockedOptions" oor:type="xs:string">
+	                <value/>
+	            </prop>
+	            <prop oor:name="DisplayName" oor:type="xs:string" oor:localized="true">
+	                <value>W3C Traditional</value>
+	            </prop>
+	            <prop oor:name="ConfigURL" oor:type="xs:string">
+	                <value>%origin%/config/traditional.xml</value>
+	            </prop>
+	            <prop oor:name="TargetTemplateURL" oor:type="xs:string">
+	                <value></value>
+	            </prop>
+	            <prop oor:name="StyleSheetURL" oor:type="xs:string">
+	                <value/>
+	            </prop>
+	        </node>
+	        <node oor:name="12w2x-ultramarine" oor:op="replace">
+	            <prop oor:name="LockedOptions" oor:type="xs:string">
+	                <value/>
+	            </prop>
+	            <prop oor:name="DisplayName" oor:type="xs:string" oor:localized="true">
+	                <value>W3C Ultramarine</value>
+	            </prop>
+	            <prop oor:name="ConfigURL" oor:type="xs:string">
+	                <value>%origin%/config/ultramarine.xml</value>
+	            </prop>
+	            <prop oor:name="TargetTemplateURL" oor:type="xs:string">
+	                <value></value>
+	            </prop>
+	            <prop oor:name="StyleSheetURL" oor:type="xs:string">
+	                <value/>
+	            </prop>
+	        </node>
+		</node>
+
 		<!-- General -->
         <prop oor:name="Config" oor:type="xs:short">
             <value>0</value>
@@ -78,6 +285,77 @@
         </prop>
     </node>
     <node oor:name="XhtmlOptionsCalc">
+        <node oor:name="Configurations">
+	        <node oor:name="01c2x-default" oor:op="replace">
+	            <prop oor:name="LockedOptions" oor:type="xs:string">
+	                <value/>
+	            </prop>
+	            <prop oor:name="DisplayName" oor:type="xs:string" oor:localized="true">
+	                <value>Original formatting</value>
+	            </prop>
+	            <prop oor:name="ConfigURL" oor:type="xs:string">
+	                <value>*default.xml</value>
+	            </prop>
+	            <prop oor:name="TargetTemplateURL" oor:type="xs:string">
+	                <value/>
+	            </prop>
+	            <prop oor:name="StyleSheetURL" oor:type="xs:string">
+	                <value/>
+	            </prop>
+	        </node>
+	        <node oor:name="02c2x-panel" oor:op="replace">
+	            <prop oor:name="LockedOptions" oor:type="xs:string">
+	                <value/>
+	            </prop>
+	            <prop oor:name="DisplayName" oor:type="xs:string" oor:localized="true">
+	                <value>Original formatting with navigation panel</value>
+	            </prop>
+	            <prop oor:name="ConfigURL" oor:type="xs:string">
+	                <value>%origin%/config/panel.xml</value>
+	            </prop>
+	            <prop oor:name="TargetTemplateURL" oor:type="xs:string">
+	                <value>%origin%/config/panel-template.xml</value>
+	            </prop>
+	            <prop oor:name="StyleSheetURL" oor:type="xs:string">
+	                <value/>
+	            </prop>
+	        </node>
+	        <node oor:name="03c2x-clean" oor:op="replace">
+	            <prop oor:name="LockedOptions" oor:type="xs:string">
+	                <value/>
+	            </prop>
+	            <prop oor:name="DisplayName" oor:type="xs:string" oor:localized="true">
+	                <value>Clean HTML</value>
+	            </prop>
+	            <prop oor:name="ConfigURL" oor:type="xs:string">
+	                <value>*cleanxhtml.xml</value>
+	            </prop>
+	            <prop oor:name="TargetTemplateURL" oor:type="xs:string">
+	                <value></value>
+	            </prop>
+	            <prop oor:name="StyleSheetURL" oor:type="xs:string">
+	                <value/>
+	            </prop>
+	        </node>
+	        <node oor:name="04c2x-custom" oor:op="replace">
+	            <prop oor:name="LockedOptions" oor:type="xs:string">
+	                <value/>
+	            </prop>
+	            <prop oor:name="DisplayName" oor:type="xs:string" oor:localized="true">
+	                <value>Custom</value>
+	            </prop>
+	            <prop oor:name="ConfigURL" oor:type="xs:string">
+	                <value>$(user)/writer2xhtml.xml</value>
+	            </prop>
+	            <prop oor:name="TargetTemplateURL" oor:type="xs:string">
+	                <value>$(user)/writer2xhtml-template.xhtml</value>
+	            </prop>
+	            <prop oor:name="StyleSheetURL" oor:type="xs:string">
+	                <value/>
+	            </prop>
+	        </node>
+		</node>
+		
         <prop oor:name="Config" oor:type="xs:short">
             <value>0</value>
         </prop>
@@ -129,7 +407,7 @@
         <prop oor:name="UseDublinCore" oor:type="xs:boolean">
             <value>true</value>
         </prop>
-		<!- Figures and tables -->
+		<!-- Figures and tables -->
         <prop oor:name="ImageSize" oor:type="xs:short">
             <value>0</value> <!-- auto -->
         </prop>
@@ -141,6 +419,44 @@
         </prop>
     </node>
     <node oor:name="EpubOptions">
+        <!--
+        <node oor:name="Configurations">
+	        <node oor:name="01w2e-default" oor:op="replace">
+	            <prop oor:name="LockedOptions" oor:type="xs:string">
+	                <value/>
+	            </prop>
+	            <prop oor:name="DisplayName" oor:type="xs:string" oor:localized="true">
+	                <value>Original formatting</value>
+	            </prop>
+	            <prop oor:name="ConfigURL" oor:type="xs:string">
+	                <value>*default.xml</value>
+	            </prop>
+	            <prop oor:name="TargetTemplateURL" oor:type="xs:string">
+	                <value/>
+	            </prop>
+	            <prop oor:name="StyleSheetURL" oor:type="xs:string">
+	                <value/>
+	            </prop>
+	        </node>
+	        <node oor:name="02w2e-custom" oor:op="replace">
+	            <prop oor:name="LockedOptions" oor:type="xs:string">
+	                <value/>
+	            </prop>
+	            <prop oor:name="DisplayName" oor:type="xs:string" oor:localized="true">
+	                <value>Custom</value>
+	            </prop>
+	            <prop oor:name="ConfigURL" oor:type="xs:string">
+	                <value>$(user)/writer2xhtml.xml</value>
+	            </prop>
+	            <prop oor:name="TargetTemplateURL" oor:type="xs:string">
+	                <value>$(user)/writer2xhtml-template.xhtml</value>
+	            </prop>
+	            <prop oor:name="StyleSheetURL" oor:type="xs:string">
+	                <value/>
+	            </prop>
+	        </node>
+		</node>
+        -->
         <prop oor:name="Config" oor:type="xs:short">
             <value>0</value>
         </prop>

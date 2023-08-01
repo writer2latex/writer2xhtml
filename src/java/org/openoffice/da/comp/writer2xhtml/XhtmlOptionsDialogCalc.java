@@ -20,7 +20,7 @@
  *
  *  All Rights Reserved.
  * 
- *  Version 1.7.1 (2023-07-26)
+ *  Version 1.7.1 (2023-07-31)
  *
  */ 
  
@@ -111,15 +111,7 @@ public class XhtmlOptionsDialogCalc extends OptionsDialogBase {
     /** Save settings from the dialog to the registry and create FilterData */
     protected void saveSettings(XPropertySet xProps, PropertyHelper helper) {
         // General
-        short nConfig = saveConfig(xProps, helper);
-        if (nConfig==0) {
-            helper.put("ConfigURL","*default.xml");
-        }
-        else if (nConfig==1) {
-            helper.put("ConfigURL","$(user)/writer2xhtml.xml");
-            helper.put("AutoCreate","true");
-    		helper.put("TemplateURL", "$(user)/writer2xhtml-template.xhtml");
-        }
+        saveConfig(xProps, helper);
         short nUnits = saveListBoxOption(xProps, "Units");
         if (!isLocked("units")) {
 	    	switch (nUnits) {

@@ -29,22 +29,32 @@
     	</section>
         <list type="unordered">
 			<listitem>
-				<section id="split2">
 				<paragraph role="paragraph" xml-lang="en-US"><emph>Original formatting</emph> produces an HTML document which uses
 				the same style as the original document. The document will look quite similar to the original when viewed
-				in a browser.</paragraph>
-				</section>
+				in a browser. If you choose to split the document at headings, a simple navigation panel to go back and forward through the
+				files will be added as a header and footer.</paragraph>
 			</listitem>
 			<listitem>
-				<paragraph role="paragraph" xml-lang="en-US"><emph>Chocolate, Midnight, Modern, Oldstyle, Steely, Swiss, Traditional
-				and Ultramarine</emph> formats the document with one of the
-				<link href="http://www.w3.org/StyleSheets/Core/" name="Link to the W3C's page on core style sheets">8 core styles</link> provided by the World Wide Web Consortium.</paragraph>
+				<paragraph role="paragraph" xml-lang="en-US"><emph>Original formatting with navigation panel</emph> also produces an HTML document which uses
+				the same style as the original document. This setting will add a navigation panel to the left to navigate through the files.
+				The navigation panel displays a table of contents based on headings and indexes in the document. 
+				</paragraph>
+			</listitem>
+			<listitem>
+				<paragraph role="paragraph" xml-lang="en-US"><emph>Clean HTML</emph> produces a HTML document without any CSS styling.
+				Use this if you only want to export the content of the file, but not the formatting. 
+				</paragraph>
 			</listitem>
 			<listitem>
 				<paragraph role="paragraph" xml-lang="en-US"><emph>Custom</emph> is a user defined format. You can define your own
 				style by providing a CSS style sheet and a mapping from Writer styles to your CSS styles.
 				 To configure the custom format, choose <emph><link href="org.openoffice.da.writer2xhtml.oxt/Configuration/Introduction.xhp"
 				name="Custom configuration">Tools - Options - Writer2xhtml</link></emph>.</paragraph>
+			</listitem>
+			<listitem>
+				<paragraph role="paragraph" xml-lang="en-US"><emph>W3C Chocolate, W3C Midnight, W3C Modern, W3C Oldstyle, W3C Steely, W3C Swiss, W3C Traditional
+				and W3C Ultramarine</emph> formats the document with one of the
+				<link href="http://www.w3.org/StyleSheets/Core/" name="Link to the W3C's page on core style sheets">8 core styles</link> provided by the World Wide Web Consortium.</paragraph>
 			</listitem>
         </list>
         <section id="split3">

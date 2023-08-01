@@ -20,7 +20,7 @@
  *
  *  All Rights Reserved.
  * 
- *  Version 1.7.1 (2023-07-30)
+ *  Version 1.7.1 (2023-07-31)
  *
  */ 
  
@@ -105,25 +105,7 @@ public class XhtmlOptionsDialogBase extends OptionsDialogBase {
     /** Save settings from the dialog to the registry and create filterdata */
     protected void saveSettings(XPropertySet xProps, PropertyHelper helper) {
         // Style
-        short nConfig = saveConfig(xProps, helper);
-        String[] sCoreStyles = { "Chocolate", "Midnight", "Modernist", "Oldstyle", "Steely", "Swiss", "Traditional", "Ultramarine" };
-        switch (nConfig) {
-            case 0: helper.put("ConfigURL","*default.xml"); break;
-            case 1:
-            case 2:
-            case 3:
-            case 4:
-            case 5:
-            case 6:
-            case 7:
-            case 8: helper.put("ConfigURL","*cleanxhtml.xml");
-                    helper.put("custom_stylesheet", "http://www.w3.org/StyleSheets/Core/"+sCoreStyles[nConfig-1]);
-                    break;
-            case 9: helper.put("ConfigURL","$(user)/writer2xhtml.xml");
-            		helper.put("AutoCreate","true");
-            		helper.put("TemplateURL", "$(user)/writer2xhtml-template.xhtml");
-        }
-        
+        saveConfig(xProps, helper);
         // General
         short nUnits = saveListBoxOption(xProps, "Units");
         if (!isLocked("units")) {

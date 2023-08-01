@@ -16,11 +16,11 @@
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston,
  *  MA  02111-1307  USA
  *
- *  Copyright: 2002-2014 by Henrik Just
+ *  Copyright: 2002-2023 by Henrik Just
  *
  *  All Rights Reserved.
  * 
- *  Version 1.4 (2014-08-26)
+ *  Version 1.7.1 (2023-08-01)
  *
  */
 
@@ -46,6 +46,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
 import writer2xhtml.api.ComplexOption;
+import writer2xhtml.util.Misc;
 
 import org.w3c.dom.Element;
 import org.w3c.dom.DOMImplementation;
@@ -98,14 +99,14 @@ public abstract class ConfigBase implements writer2xhtml.api.Config {
     public void readDefaultConfig(String sName) throws IllegalArgumentException {
         InputStream is = this.getClass().getResourceAsStream(getDefaultConfigPath()+sName);
         if (is==null) {
-            throw new IllegalArgumentException("The internal configuration '"+sName+ "' does not exist");
+            throw new IllegalArgumentException("The standard configuration '"+sName+ "' does not exist");
         }
         try {
             read(is);
         }
         catch (IOException e) {
             // This would imply a bug in the configuration file!
-            throw new IllegalArgumentException("The internal configuration '"+sName+ "' is invalid");
+            throw new IllegalArgumentException("The standard configuration '"+sName+ "' is invalid");
         }
     }
 
@@ -122,6 +123,15 @@ public abstract class ConfigBase implements writer2xhtml.api.Config {
         }
 
         Node root = dom.getDocumentElement();
+        String sExtends = Misc.getAttribute(root, "extends"); 
+        if (sExtends!=null) {
+        	try {
+        		readDefaultConfig(sExtends);
+        	}
+        	catch (IllegalArgumentException e) {
+        		throw new IOException("The standard configuration "+sExtends+" does not exist");
+        	}
+        }
         Node child = root.getFirstChild();
         while (child!=null) {
             if (child.getNodeType()==Node.ELEMENT_NODE) {

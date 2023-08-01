@@ -24,7 +24,19 @@
 		<embed href="org.openoffice.da.writer2xhtml.oxt/export.xhp#split1"/>
 		<list type="unordered">
 			<listitem>
-				<embed href="org.openoffice.da.writer2xhtml.oxt/export.xhp#split2"/>
+				<paragraph role="paragraph" xml-lang="en-US"><emph>Original formatting</emph> produces an HTML document which uses
+				the same style as the original document. The document will look quite similar to the original when viewed
+				in a browser. If you choose to create separate files for each sheet, a simple navigation panel with links to all sheets will be added as a header and footer.</paragraph>
+			</listitem>
+			<listitem>
+				<paragraph role="paragraph" xml-lang="en-US"><emph>Original formatting with navigation panel</emph> also produces an HTML document which uses
+				the same style as the original document. This setting will add a navigation panel to the left to navigate through the files.
+				</paragraph>
+			</listitem>
+			<listitem>
+				<paragraph role="paragraph" xml-lang="en-US"><emph>Clean HTML</emph> produces a HTML document without any CSS styling.
+				Use this if you only want to export the content of the file, but not the formatting. 
+				</paragraph>
 			</listitem>
 			<listitem>
 				<paragraph role="paragraph" xml-lang="en-US"><emph>Custom</emph> is a user defined format.
