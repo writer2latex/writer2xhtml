@@ -20,7 +20,7 @@
 *
 *  All Rights Reserved.
 * 
-*  Version 1.7 (2023-06-05)
+*  Version 1.7.1 (2023-08-01)
 *
 */ 
 
@@ -509,6 +509,7 @@ public class ConfigurationDialog extends ConfigurationDialogBase implements XSer
     	@Override protected void setControls(DialogAccess dlg) {
     		listBoxFromConfig(dlg, "Formatting", "formatting", sExportValues, (short) 0);
     		listBoxFromConfig(dlg, "FrameFormatting", "frame_formatting", sExportValues, (short) 0);
+    		listBoxFromConfig(dlg, "ListFormatting", "list_formatting", sListExportValues, (short) 0);
     		
     		// OOo does not support styles for sections and tables, hence this simplified variant
     		dlg.setCheckBoxStateAsBoolean("SectionFormatting",
@@ -518,10 +519,6 @@ public class ConfigurationDialog extends ConfigurationDialogBase implements XSer
         		config.getOption("table_formatting").equals("convert_all") ||
         		config.getOption("table_formatting").equals("ignore_styles"));
     		
-    		checkBoxFromConfig(dlg, "IgnoreTableDimensions", "ignore_table_dimensions");
-    		
-    		listBoxFromConfig(dlg, "ListFormatting", "list_formatting", sListExportValues, (short) 0);
-
     		textFieldFromConfig(dlg, "MaxWidth", "max_width");
 
     		checkBoxFromConfig(dlg, "SeparateStylesheet", "separate_stylesheet");
@@ -530,14 +527,11 @@ public class ConfigurationDialog extends ConfigurationDialogBase implements XSer
     	@Override protected void getControls(DialogAccess dlg) {
     		listBoxToConfig(dlg, "Formatting", "formatting", sExportValues);
     		listBoxToConfig(dlg, "FrameFormatting", "frame_formatting", sExportValues);
+    		listBoxToConfig(dlg, "ListFormatting", "list_formatting", sListExportValues);
     		
     		config.setOption("section_formatting", dlg.getCheckBoxStateAsBoolean("SectionFormatting") ? "convert_all" : "ignore_all");
     		config.setOption("table_formatting", dlg.getCheckBoxStateAsBoolean("TableFormatting") ? "convert_all" : "ignore_all");
     		
-    		checkBoxToConfig(dlg, "IgnoreTableDimensions", "ignore_table_dimensions");
-
-    		listBoxToConfig(dlg, "ListFormatting", "list_formatting", sListExportValues);
-
     		textFieldToConfig(dlg, "MaxWidth", "max_width");
 
     		checkBoxToConfig(dlg, "SeparateStylesheet", "separate_stylesheet");
@@ -550,8 +544,6 @@ public class ConfigurationDialog extends ConfigurationDialogBase implements XSer
     }
 
     private class ContentHandler extends PageHandler {
-    	private final String[] sFormulaValues = { "image+starmath", "starmath" };
-    	
     	@Override protected void setControls(DialogAccess dlg) {
     		textFieldFromConfig(dlg, "EndnotesHeading", "endnotes_heading");
     		textFieldFromConfig(dlg, "FootnotesHeading", "footnotes_heading");

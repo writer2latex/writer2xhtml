@@ -22,9 +22,8 @@
         Otherwise the CSS code will be exported embedded in the HTML document(s).</paragraph>
 
         <bookmark xml-lang="en-US" branch="hid/org.openoffice.da.writer2xhtml.oxt:CofigFormatting" id="bm_configformatting"/>
-        <paragraph role="heading" level="3" xml-lang="en-US">Formatting</paragraph>
-        <paragraph role="paragraph" xml-lang="en-US">This is used to specify how much text formatting
-        (character and paragraph) to export.</paragraph>
+        <paragraph role="heading" level="3" xml-lang="en-US">Text and paragraph formatting</paragraph>
+        <paragraph role="paragraph" xml-lang="en-US">This is used to specify how much text and paragrapg formatting to export.</paragraph>
         <list type="unordered">
         	<listitem>
 		        <paragraph role="paragraph" xml-lang="en-US"><emph>Convert all</emph>: Convert all supported formatting to CSS</paragraph>
@@ -49,23 +48,6 @@
         	</listitem>
         </list>
 
-        <bookmark xml-lang="en-US" branch="hid/org.openoffice.da.writer2xhtml.oxt:FrameFormatting" id="bm_configframeformatting"/>
-        <paragraph role="heading" level="3" xml-lang="en-US">Frame formatting</paragraph>
-        <paragraph role="paragraph" xml-lang="en-US">This is used for the same purpose, but affects frame formatting only.</paragraph>
-
-        <bookmark xml-lang="en-US" branch="hid/org.openoffice.da.writer2xhtml.oxt:SectionFormatting" id="bm_configsectionformatting"/>
-        <paragraph role="heading" level="3" xml-lang="en-US">Convert section formatting</paragraph>
-        <paragraph role="paragraph" xml-lang="en-US">Check this if you want to export section formatting (background, margins).</paragraph>
-
-        <bookmark xml-lang="en-US" branch="hid/org.openoffice.da.writer2xhtml.oxt:TableFormatting" id="bm_configtableformatting"/>
-        <paragraph role="heading" level="3" xml-lang="en-US">Convert table formatting</paragraph>
-        <paragraph role="paragraph" xml-lang="en-US">Check this if you want to export table formatting.</paragraph>
-
-        <bookmark xml-lang="en-US" branch="hid/org.openoffice.da.writer2xhtml.oxt:IgnoreTableDimensions" id="bm_configignoretabledimensions"/>
-        <paragraph role="heading" level="3" xml-lang="en-US">Ignore table dimensions</paragraph>
-        <paragraph role="paragraph" xml-lang="en-US">Check this if you do not want table dimensions (table width, column width and
-        row height) to be exported, but want to leave the layout of the tables to the browser.</paragraph>
-
         <bookmark xml-lang="en-US" branch="hid/org.openoffice.da.writer2xhtml.oxt:ListFormatting" id="bm_configlistformatting"/>
         <paragraph role="heading" level="3" xml-lang="en-US">List formatting</paragraph>
         <paragraph role="paragraph" xml-lang="en-US">Choose how to export list formatting.</paragraph>
@@ -80,6 +62,18 @@
 		        <paragraph role="paragraph" xml-lang="en-US"><emph>Ignore all</emph>: Convert no list formatting at all, leaving everything to browser defaults or to a custom style sheet.</paragraph>
         	</listitem>
         </list>
+
+        <bookmark xml-lang="en-US" branch="hid/org.openoffice.da.writer2xhtml.oxt:FrameFormatting" id="bm_configframeformatting"/>
+        <paragraph role="heading" level="3" xml-lang="en-US">Frame formatting</paragraph>
+        <paragraph role="paragraph" xml-lang="en-US">This is used for the same purpose, but affects frame formatting only.</paragraph>
+
+        <bookmark xml-lang="en-US" branch="hid/org.openoffice.da.writer2xhtml.oxt:SectionFormatting" id="bm_configsectionformatting"/>
+        <paragraph role="heading" level="3" xml-lang="en-US">Convert section formatting</paragraph>
+        <paragraph role="paragraph" xml-lang="en-US">Check this if you want to export section formatting (background, margins).</paragraph>
+
+        <bookmark xml-lang="en-US" branch="hid/org.openoffice.da.writer2xhtml.oxt:TableFormatting" id="bm_configtableformatting"/>
+        <paragraph role="heading" level="3" xml-lang="en-US">Convert table formatting</paragraph>
+        <paragraph role="paragraph" xml-lang="en-US">Check this if you want to export table formatting.</paragraph>
 
         <bookmark xml-lang="en-US" branch="hid/org.openoffice.da.writer2xhtml.oxt:MaxWidth" id="bm_configmaxwidth"/>
         <paragraph role="heading" level="3" xml-lang="en-US">Maximum text width</paragraph>

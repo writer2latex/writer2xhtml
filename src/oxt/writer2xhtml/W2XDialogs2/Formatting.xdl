@@ -5,7 +5,7 @@
   <dlg:style dlg:style-id="0" dlg:font-weight="150"/>
  </dlg:styles>
  <dlg:bulletinboard>
-  <dlg:text dlg:id="FormattingLabel" dlg:tab-index="1" dlg:left="10" dlg:top="32" dlg:width="110" dlg:height="12" dlg:value="Formatting"/>
+  <dlg:text dlg:id="FormattingLabel" dlg:tab-index="1" dlg:left="10" dlg:top="32" dlg:width="110" dlg:height="12" dlg:value="Text and paragraph formatting"/>
   <dlg:menulist dlg:id="Formatting" dlg:tab-index="2" dlg:left="130" dlg:top="30" dlg:width="120" dlg:height="12" dlg:help-url="org.openoffice.da.writer2xhtml.oxt:Formatting" dlg:spin="true" dlg:linecount="4">
    <dlg:menupopup>
     <dlg:menuitem dlg:value="Convert all"/>
@@ -23,11 +23,10 @@
     <dlg:menuitem dlg:value="Ignore all"/>
    </dlg:menupopup>
   </dlg:menulist>
-  <dlg:checkbox dlg:id="SectionFormatting" dlg:tab-index="5" dlg:left="10" dlg:top="60" dlg:width="240" dlg:height="12" dlg:help-url="org.openoffice.da.writer2xhtml.oxt:SectionFormatting" dlg:value="Convert section formatting" dlg:checked="false"/>
-  <dlg:checkbox dlg:id="TableFormatting" dlg:tab-index="6" dlg:left="10" dlg:top="74" dlg:width="240" dlg:height="12" dlg:help-url="org.openoffice.da.writer2xhtml.oxt:TableFormatting" dlg:value="Convert table formatting" dlg:checked="false"/>
-  <dlg:checkbox dlg:id="IgnoreTableDimensions" dlg:tab-index="7" dlg:left="10" dlg:top="88" dlg:width="240" dlg:height="12" dlg:help-url="org.openoffice.da.writer2xhtml.oxt:IgnoreTableDimensions" dlg:value="Ignore table dimensions" dlg:checked="false"/>
-  <dlg:text dlg:id="ListFormattingLabel" dlg:tab-index="8" dlg:left="10" dlg:top="102" dlg:width="110" dlg:height="12" dlg:value="List formatting"/>
-  <dlg:menulist dlg:id="ListFormatting" dlg:tab-index="9" dlg:left="130" dlg:top="100" dlg:width="120" dlg:height="12" dlg:help-url="org.openoffice.da.writer2xhtml.oxt:ListFormatting" dlg:spin="true" dlg:linecount="3">
+  <dlg:checkbox dlg:id="SectionFormatting" dlg:tab-index="6" dlg:left="10" dlg:top="74" dlg:width="240" dlg:height="12" dlg:help-url="org.openoffice.da.writer2xhtml.oxt:SectionFormatting" dlg:value="Convert section formatting" dlg:checked="false"/>
+  <dlg:checkbox dlg:id="TableFormatting" dlg:tab-index="7" dlg:left="10" dlg:top="88" dlg:width="240" dlg:height="12" dlg:help-url="org.openoffice.da.writer2xhtml.oxt:TableFormatting" dlg:value="Convert table formatting" dlg:checked="false"/>
+  <dlg:text dlg:id="ListFormattingLabel" dlg:tab-index="8" dlg:left="10" dlg:top="60" dlg:width="110" dlg:height="12" dlg:value="List formatting"/>
+  <dlg:menulist dlg:id="ListFormatting" dlg:tab-index="5" dlg:left="130" dlg:top="58" dlg:width="120" dlg:height="12" dlg:help-url="org.openoffice.da.writer2xhtml.oxt:ListFormatting" dlg:spin="true" dlg:linecount="3">
    <dlg:menupopup>
     <dlg:menuitem dlg:value="Convert all"/>
     <dlg:menuitem dlg:value="Convert labels"/>
@@ -35,9 +34,9 @@
    </dlg:menupopup>
   </dlg:menulist>
   <dlg:checkbox dlg:id="SeparateStylesheet" dlg:tab-index="0" dlg:left="10" dlg:top="18" dlg:width="180" dlg:height="12" dlg:help-url="org.openoffice.da.writer2xhtml.oxt:SeparateStylesheet" dlg:value="Create separate style sheet" dlg:checked="false"/>
-  <dlg:text dlg:id="MaxWidthLabel" dlg:tab-index="11" dlg:left="10" dlg:top="116" dlg:width="110" dlg:height="12" dlg:value="Maximum text width"/>
-  <dlg:textfield dlg:id="MaxWidth" dlg:tab-index="10" dlg:left="130" dlg:top="114" dlg:width="120" dlg:height="12" dlg:help-url="org.openoffice.da.writer2xhtml.oxt:MaxWidth"/>
-  <dlg:text dlg:style-id="0" dlg:id="FormattingExportLabel" dlg:tab-index="12" dlg:left="6" dlg:top="4" dlg:width="185" dlg:height="12" dlg:value="Formatting Export"/>
-  <dlg:button dlg:id="HelpButton" dlg:tab-index="13" dlg:left="200" dlg:top="4" dlg:width="55" dlg:height="14" dlg:help-url="org.openoffice.da.writer2xhtml.oxt:ConfigFormattingExport" dlg:value="Help" dlg:button-type="help"/>
+  <dlg:text dlg:id="MaxWidthLabel" dlg:tab-index="10" dlg:left="10" dlg:top="102" dlg:width="110" dlg:height="12" dlg:value="Maximum text width"/>
+  <dlg:textfield dlg:id="MaxWidth" dlg:tab-index="9" dlg:left="130" dlg:top="102" dlg:width="120" dlg:height="12" dlg:help-url="org.openoffice.da.writer2xhtml.oxt:MaxWidth"/>
+  <dlg:text dlg:style-id="0" dlg:id="FormattingExportLabel" dlg:tab-index="11" dlg:left="6" dlg:top="4" dlg:width="185" dlg:height="12" dlg:value="Formatting Export"/>
+  <dlg:button dlg:id="HelpButton" dlg:tab-index="12" dlg:left="200" dlg:top="4" dlg:width="55" dlg:height="14" dlg:help-url="org.openoffice.da.writer2xhtml.oxt:ConfigFormattingExport" dlg:value="Help" dlg:button-type="help"/>
  </dlg:bulletinboard>
 </dlg:window>
