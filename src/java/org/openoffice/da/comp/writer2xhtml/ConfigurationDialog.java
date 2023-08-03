@@ -20,7 +20,7 @@
 *
 *  All Rights Reserved.
 * 
-*  Version 1.7.1 (2023-08-01)
+*  Version 1.7.1 (2023-08-03)
 *
 */ 
 
@@ -504,7 +504,7 @@ public class ConfigurationDialog extends ConfigurationDialogBase implements XSer
 
     private class FormattingHandler extends PageHandler {
     	private final String[] sExportValues = { "convert_all", "ignore_styles", "ignore_hard", "ignore_all" };
-    	private final String[] sListExportValues = { "convert_all", "convert_labels", "ignore_all" };
+    	private final String[] sListExportValues = { "convert_all", "convert_labels", "convert_label_styles", "ignore_all" };
     	
     	@Override protected void setControls(DialogAccess dlg) {
     		listBoxFromConfig(dlg, "Formatting", "formatting", sExportValues, (short) 0);

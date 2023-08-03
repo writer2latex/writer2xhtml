@@ -20,7 +20,7 @@
  *
  *  All Rights Reserved.
  * 
- *  Version 1.7.1 (2023-07-29)
+ *  Version 1.7.1 (2023-08-02)
  *
  */
 
@@ -64,8 +64,8 @@ public class XhtmlConfig extends writer2xhtml.base.ConfigBase {
         }
         // this option has been changed; replace old values with best match
         if (sName.equals("list_formatting")) {
-        	if (sValue.equals("css1")) { sValue="ignore_all"; }
-        	else if (sValue.equals("css1_hack")) { sValue="convert_all"; }
+        	if (sValue.equals("css1")) { sValue="convert_label_styles"; }
+        	else if (sValue.equals("css1_hack")) { sValue="convert_labels"; }
         	else if (sValue.equals("hard_labels")) { sValue="convert_all"; }
         }
         // this option has been renamed and extended
@@ -84,7 +84,8 @@ public class XhtmlConfig extends writer2xhtml.base.ConfigBase {
     public static final int CONVERT_ALL = 3;
     
     // Special value for lists
-    public static final int CONVERT_LABELS = 1;
+    public static final int CONVERT_LABEL_STYLES = 1;
+    public static final int CONVERT_LABELS = 2;
     
 	// Units
 	public static final int ORIGINAL = 0;
@@ -223,6 +224,7 @@ public class XhtmlConfig extends writer2xhtml.base.ConfigBase {
         	@Override public void setString(String sValue) {
         		super.setString(sValue);
         		if ("ignore_all".equals(sValue)) { nValue = IGNORE_ALL; }
+        		else if ("convert_label_styles".equals(sValue)) { nValue = CONVERT_LABEL_STYLES; }
         		else if ("convert_labels".equals(sValue)) { nValue = CONVERT_LABELS; }
         		else { nValue = CONVERT_ALL; }
         	}

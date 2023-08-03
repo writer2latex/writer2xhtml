@@ -26,10 +26,11 @@
   <dlg:checkbox dlg:id="SectionFormatting" dlg:tab-index="6" dlg:left="10" dlg:top="74" dlg:width="240" dlg:height="12" dlg:help-url="org.openoffice.da.writer2xhtml.oxt:SectionFormatting" dlg:value="Convert section formatting" dlg:checked="false"/>
   <dlg:checkbox dlg:id="TableFormatting" dlg:tab-index="7" dlg:left="10" dlg:top="88" dlg:width="240" dlg:height="12" dlg:help-url="org.openoffice.da.writer2xhtml.oxt:TableFormatting" dlg:value="Convert table formatting" dlg:checked="false"/>
   <dlg:text dlg:id="ListFormattingLabel" dlg:tab-index="8" dlg:left="10" dlg:top="60" dlg:width="110" dlg:height="12" dlg:value="List formatting"/>
-  <dlg:menulist dlg:id="ListFormatting" dlg:tab-index="5" dlg:left="130" dlg:top="58" dlg:width="120" dlg:height="12" dlg:help-url="org.openoffice.da.writer2xhtml.oxt:ListFormatting" dlg:spin="true" dlg:linecount="3">
+  <dlg:menulist dlg:id="ListFormatting" dlg:tab-index="5" dlg:left="130" dlg:top="58" dlg:width="120" dlg:height="12" dlg:help-url="org.openoffice.da.writer2xhtml.oxt:ListFormatting" dlg:spin="true" dlg:linecount="4">
    <dlg:menupopup>
     <dlg:menuitem dlg:value="Convert all"/>
     <dlg:menuitem dlg:value="Convert labels"/>
+    <dlg:menuitem dlg:value="Convert label styles"/>
     <dlg:menuitem dlg:value="Ignore all"/>
    </dlg:menupopup>
   </dlg:menulist>

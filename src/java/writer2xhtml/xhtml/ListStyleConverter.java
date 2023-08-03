@@ -20,7 +20,7 @@
  *
  *  All Rights Reserved.
  * 
- *  Version 1.7.1 (2023-06-25)
+ *  Version 1.7.1 (2023-08-03)
  *
  */
 
@@ -61,7 +61,7 @@ public class ListStyleConverter extends StyleConverterHelper {
 	private boolean bHasListHeaders=false;
 	// Maps and sets to keep track of the CSS variants of the class style we need
     private Map<String,Integer> listDepth = new HashMap<>(); // Maximum depth for a given list
-    private Set<String> listStyles = new HashSet<>(); // List styles (used if formatting=convert_labels)
+    private Set<String> listStyles = new HashSet<>(); // List styles (used if formatting=convert_labels or convert_label_styles)
     private Map<String,Set<String>> listParStyles = new HashMap<>(); // List styles->Paragraph styles (if formatting=convert_all)
 	
     /** Create a new <code>ListStyleConverter</code>
@@ -81,13 +81,16 @@ public class ListStyleConverter extends StyleConverterHelper {
         updateLevel(nLevel,sStyleName);
     	ListStyle style = ofr.getListStyle(sStyleName);
         if (style!=null) {
-        	if (nListFormatting!=XhtmlConfig.IGNORE_ALL) {
-        		applyExplicitCounterReset(style, nLevel, sCounterReset,info);
+        	if (nListFormatting==XhtmlConfig.CONVERT_ALL ||nListFormatting==XhtmlConfig.CONVERT_LABELS) {
+        		// Counter export only: Reset counter if not continued from previous list
+        		applyExplicitCounterReset(style, nLevel, sCounterReset, info);
         	}
             if (styleMap.contains(style.getDisplayName())) {
+            	// Apply user map if available
             	applyStyleMap(style,info);
             }
             else if (nListFormatting==XhtmlConfig.CONVERT_ALL) {
+            	// For full formatting the class name is a combination of the list style and a paragraph style
             	StyleWithProperties parStyle = ofr.getParStyle(sParStyleName);
             	if (parStyle!=null && parStyle.isAutomatic() &&
             			(!bConvertHard ||
@@ -100,7 +103,9 @@ public class ListStyleConverter extends StyleConverterHelper {
             	info.sClass = getExtendedClassName(style,nLevel,parStyle);
             	listParStyles.computeIfAbsent(style.getDisplayName(), key -> new HashSet<>()).add(parStyle.getDisplayName());
             }
-            else if (nListFormatting==XhtmlConfig.CONVERT_LABELS || !style.isAutomatic()) { // Always apply class names for soft styles
+            else if (nListFormatting==XhtmlConfig.CONVERT_LABELS || nListFormatting==XhtmlConfig.CONVERT_LABEL_STYLES
+            		|| !style.isAutomatic()) { // Always apply class names for soft styles
+            	// Otherwise the class name is derived from the list style name
 				info.sClass = getClassName(style,nLevel);
 				listStyles.add(sStyleName);
             }
@@ -143,6 +148,9 @@ public class ListStyleConverter extends StyleConverterHelper {
 		}
 		else if (nListFormatting==XhtmlConfig.CONVERT_LABELS) {
 			return getLabelStyleDeclarations(sIndent);
+		}
+		else if (nListFormatting==XhtmlConfig.CONVERT_LABEL_STYLES) {
+			return getCSS1StyleDeclarations(sIndent);
 		}
 		else {
 			return "";
@@ -219,8 +227,8 @@ public class ListStyleConverter extends StyleConverterHelper {
     // Used if formatting=convert_labels
     private String getLabelStyleDeclarations(String sIndent) {
     	StringBuilder buf = new StringBuilder();
-    	for (String sDisplayName : listStyles) {
-            ListStyle style = (ListStyle) getStyles().getStyleByDisplayName(sDisplayName);
+    	for (String sStyleName : listStyles) {
+            ListStyle style = (ListStyle) getStyles().getStyle(sStyleName);
             if (style!=null) {
 	        	int nDepth = getListDepth(style.getName());
 	            for (int nLevel=1; nLevel<=nDepth; nLevel++) {
@@ -257,6 +265,24 @@ public class ListStyleConverter extends StyleConverterHelper {
 	    return buf.toString();
     }
 
+    // Used if formatting=convert_label_styles (use CSS1)
+    private String getCSS1StyleDeclarations(String sIndent) {
+    	StringBuilder buf = new StringBuilder();
+    	for (String sStyleName : listStyles) {
+            ListStyle style = (ListStyle) getStyles().getStyle(sStyleName);
+            if (style!=null) {
+	        	int nDepth = getListDepth(style.getName());
+	            for (int nLevel=1; nLevel<=nDepth; nLevel++) {
+	        	    String sSelector = "."+getClassName(style,nLevel);
+           		    CSVList props = new CSVList(";");
+           		    css1List(style,nLevel,props);
+        		    addStyleDeclaration(sSelector,props,sIndent,buf);
+	            }
+	        }
+    	}
+	    return buf.toString();
+    }
+    
     // TODO: Would this fit better in StyleConverterHelper?
     private void addStyleDeclaration(String sSelector, CSVList props, String sIndent, StringBuilder buf) {
     	if (!props.isEmpty()) { // TODO: Is this a good idea? Perhaps only for some rules?
@@ -288,6 +314,33 @@ public class ListStyleConverter extends StyleConverterHelper {
     
     private int getListDepth(String sStyleName) {
     	return listDepth.containsKey(sStyleName) ? listDepth.get(sStyleName) : 0;
+    }
+    
+    // ================= CSS1 List formatting =================
+
+    // This is for CSS1 style list formatting; still offered
+    private void css1List(ListStyle style, int nLevel, CSVList props){
+    	String sLevelType = style.getLevelType(nLevel);
+    	if (XMLString.TEXT_LIST_LEVEL_STYLE_NUMBER.equals(sLevelType)) {
+    		// Numbering style, get number format
+    		String sNumFormat = getNumberFormat(style,nLevel);
+    		if (sNumFormat!=null) {
+    			props.addValue("list-style-type",sNumFormat);
+    		}
+    	}
+    	else if (XMLString.TEXT_LIST_LEVEL_STYLE_BULLET.equals(sLevelType)) {
+    		// Bullet. We can only choose from disc, bullet and square
+    		switch (nLevel % 3) {
+    		case 1: props.addValue("list-style-type","disc"); break;
+    		case 2: props.addValue("list-style-type","circle"); break;
+    		case 0: props.addValue("list-style-type","square"); break;
+    		}
+    	}
+    	else if (XMLString.TEXT_LIST_LEVEL_STYLE_IMAGE.equals(sLevelType)) {
+    		String sURL = getImageURL(style,nLevel);
+    		if (sURL!=null) { props.addValue("list-style-image","url('"+sURL+"')"); }
+    	}
+        props.addValue("clear:left");
     }
         
     // ================= List formatting ===================
@@ -476,9 +529,11 @@ public class ListStyleConverter extends StyleConverterHelper {
         	StringBuilder label = new StringBuilder();
         	label.append(sPrefix);
         	for (int i=nLevels; i>0; i--) {
-        		String sCounter = getCounterFormat(style,nLevel-i+1);
-        		label.append(sCounter);
-        		if (i>1 && sCounter.length()>0) { label.append(" '.' "); }
+        		String sNumFormat = getNumberFormat(style,nLevel-i+1);
+        		if (sNumFormat!=null) {
+	        		label.append("counter("+getClassName(style,nLevel)+","+sNumFormat+")");
+	        		if (i>1) { label.append(" '.' "); }
+        		}
         	}
         	label.append(sSuffix);
         	// Assign the content property
@@ -492,28 +547,13 @@ public class ListStyleConverter extends StyleConverterHelper {
     	}
     	else if (XMLString.TEXT_LIST_LEVEL_STYLE_IMAGE.equals(sLevelType)) {
     		// The label is an image, which is linked or embedded
-    		String sURL = null;
-    		Element image = style.getImage(nLevel);
-    		if (image!=null) {
-    			BinaryGraphicsDocument bgd = converter.getImageCv().getImage(image);
-    			if (bgd!=null) {
-    				sURL = bgd.getFileName();
-    				if (config.embedImg() && !bgd.isLinked()) {
-    					StringBuilder sb = new StringBuilder();
-    	        		sb.append("data:").append(bgd.getMIMEType()).append(";base64,").append(bgd.getBase64());
-    	        		sURL = sb.toString();
-    				}
-    				else if (!bgd.isRecycled() && !bgd.isLinked()) {
-    	        		converter.addDocument(bgd);
-    	        	}
-    			}
-    		}
+    		String sURL = getImageURL(style,nLevel);
     		if (sURL!=null) { props.addValue("content", "url("+sURL+") ' '"); }
     	}
     }
     
-    // Translate the number format for a numbered style to a CSS counter format
-    private String getCounterFormat(ListStyle style, int nLevel) {
+    // Translate the number format for a numbered style to a CSS number format
+    private String getNumberFormat(ListStyle style, int nLevel) {
     	String sNumFormat = style.getLevelProperty(nLevel,XMLString.STYLE_NUM_FORMAT);
     	if (sNumFormat.length()>0) {
 	    	String sCSSNumFormat = "decimal";
@@ -521,14 +561,34 @@ public class ListStyleConverter extends StyleConverterHelper {
 	    	else if ("I".equals(sNumFormat)) { sCSSNumFormat = "upper-roman"; }
 	    	else if ("a".equals(sNumFormat)) { sCSSNumFormat = "lower-alpha"; }
 	    	else if ("A".equals(sNumFormat)) { sCSSNumFormat = "upper-alpha"; }
-			return "counter("+getClassName(style,nLevel)+","+sCSSNumFormat+")";
+	    	return sCSSNumFormat;
     	}
     	else { // No numbering at this level
-    		return "";
+    		return null;
     	}
     }
-	
+    
     // ================= Helpers ===================
+    
+    private String getImageURL(ListStyle style, int nLevel) {
+		String sURL = null;
+		Element image = style.getImage(nLevel);
+		if (image!=null) {
+			BinaryGraphicsDocument bgd = converter.getImageCv().getImage(image);
+			if (bgd!=null) {
+				sURL = bgd.getFileName();
+				if (config.embedImg() && !bgd.isLinked()) {
+					StringBuilder sb = new StringBuilder();
+	        		sb.append("data:").append(bgd.getMIMEType()).append(";base64,").append(bgd.getBase64());
+	        		sURL = sb.toString();
+				}
+				else if (!bgd.isRecycled() && !bgd.isLinked()) {
+	        		converter.addDocument(bgd);
+	        	}
+			}
+		}
+		return sURL; // May be null
+    }
 
     // Create class name for a specific level
     private String getClassName(ListStyle style, int nLevel) {

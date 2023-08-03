@@ -59,6 +59,10 @@
 		        <paragraph role="paragraph" xml-lang="en-US"><emph>Convert labels</emph>: Convert numbering and bullets, but use browser default for indentations.</paragraph>
         	</listitem>
         	<listitem>
+		        <paragraph role="paragraph" xml-lang="en-US"><emph>Convert label styles</emph>: Convert only the basic style of numbering and bullets. This is mainly intended for EPUB export, because
+		        EPUB readers often does not understand the more advanced CSS code used by "Convert all" and "Convert labels".</paragraph>
+        	</listitem>
+        	<listitem>
 		        <paragraph role="paragraph" xml-lang="en-US"><emph>Ignore all</emph>: Convert no list formatting at all, leaving everything to browser defaults or to a custom style sheet.</paragraph>
         	</listitem>
         </list>
