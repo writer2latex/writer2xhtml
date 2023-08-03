@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+  <!-- Use CSS1 for list formatting for EPUB readers without counter support -->
+  <option name="list_formatting" value="convert_label_styles" />
+</config>

@@ -1,0 +1,16 @@
+<html>
+  <head>
+    <style>
+      #panel { width:20%;float:left; }
+      #content { width:80%;float:left; }
+      #panel span.nolink { font-weight:bold; }
+      p.level2 { margin-left:1rem; }
+      p.level3 { margin-left:2rem; }
+      p.level4, p.level5, p.level6, p.level7, p.level8, p.level9, p.level10 { margin-left:3rem; }
+    </style>
+  </head>
+  <body>
+    <div id="panel"/>
+    <div id="content"/>
+  </body>
+</html>

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config extends="cleanxhtml.xml">
+  <option name="custom_stylesheet" value="https://www.w3.org/StyleSheets/Core/Modernist" />
+</config>
