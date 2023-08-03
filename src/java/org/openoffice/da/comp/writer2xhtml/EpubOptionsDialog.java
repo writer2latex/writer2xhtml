@@ -16,11 +16,11 @@
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston,
  *  MA  02111-1307  USA
  *
- *  Copyright: 2002-2022 by Henrik Just
+ *  Copyright: 2002-2023 by Henrik Just
  *
  *  All Rights Reserved.
  * 
- *  Version 1.7 (2022-06-20)
+ *  Version 1.7.1 (2023-08-03)
  *
  */
 
@@ -137,17 +137,6 @@ public class EpubOptionsDialog extends OptionsDialogBase {
 	
     /** Save settings from the dialog to the registry and create FilterData */
     @Override protected void saveSettings(XPropertySet xProps, PropertyHelper helper) {
-        // Style
-        short nConfig = saveConfig(xProps, helper);
-        switch (nConfig) {
-            case 0: helper.put("ConfigURL","*default.xml"); break;
-            case 1: helper.put("ConfigURL","$(user)/writer2xhtml.xml");
-            		helper.put("AutoCreate","true");
-            		helper.put("TemplateURL", "$(user)/writer2xhtml-template.xhtml");
-            		helper.put("StyleSheetURL", "$(user)/writer2xhtml-styles.css");
-            		helper.put("ResourceURL", "$(user)/writer2xhtml-resources");
-        }
-		
         saveNumericOptionAsPercentage(xProps, helper, "Scaling", "scaling");
         saveListBoxOption(xProps, helper, "TableSize", "table_size", SIZE_VALUES);
         saveNumericOptionAsPercentage(xProps, helper, "ColumnScaling", "column_scaling");

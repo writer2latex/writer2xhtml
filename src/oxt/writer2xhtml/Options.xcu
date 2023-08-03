@@ -213,9 +213,6 @@
 		</node>
 
 		<!-- General -->
-        <prop oor:name="Config" oor:type="xs:short">
-            <value>0</value>
-        </prop>
         <prop oor:name="ConfigName" oor:type="xs:string">
             <value />
         </prop>
@@ -356,9 +353,6 @@
 	        </node>
 		</node>
 		
-        <prop oor:name="Config" oor:type="xs:short">
-            <value>0</value>
-        </prop>
         <prop oor:name="ConfigName" oor:type="xs:string">
             <value></value>
         </prop>
@@ -419,7 +413,6 @@
         </prop>
     </node>
     <node oor:name="EpubOptions">
-        <!--
         <node oor:name="Configurations">
 	        <node oor:name="01w2e-default" oor:op="replace">
 	            <prop oor:name="LockedOptions" oor:type="xs:string">
@@ -429,12 +422,15 @@
 	                <value>Original formatting</value>
 	            </prop>
 	            <prop oor:name="ConfigURL" oor:type="xs:string">
-	                <value>*default.xml</value>
+	                <value>%origin%/config/epub.xml</value>
 	            </prop>
 	            <prop oor:name="TargetTemplateURL" oor:type="xs:string">
 	                <value/>
 	            </prop>
 	            <prop oor:name="StyleSheetURL" oor:type="xs:string">
+	                <value/>
+	            </prop>
+	            <prop oor:name="ResourceURL" oor:type="xs:string">
 	                <value/>
 	            </prop>
 	        </node>
@@ -452,14 +448,14 @@
 	                <value>$(user)/writer2xhtml-template.xhtml</value>
 	            </prop>
 	            <prop oor:name="StyleSheetURL" oor:type="xs:string">
-	                <value/>
+	                <value>$(user)/writer2xhtml-styles.css</value>
+	            </prop>
+	            <prop oor:name="ResourceURL" oor:type="xs:string">
+	                <value>$(user)/writer2xhtml-resources</value>
 	            </prop>
 	        </node>
 		</node>
-        -->
-        <prop oor:name="Config" oor:type="xs:short">
-            <value>0</value>
-        </prop>
+
         <prop oor:name="ConfigName" oor:type="xs:string">
             <value></value>
         </prop>

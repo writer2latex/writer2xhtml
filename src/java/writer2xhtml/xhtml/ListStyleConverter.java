@@ -577,6 +577,9 @@ public class ListStyleConverter extends StyleConverterHelper {
 			BinaryGraphicsDocument bgd = converter.getImageCv().getImage(image);
 			if (bgd!=null) {
 				sURL = bgd.getFileName();
+				if (converter.isOPS()) { // If we are creating OPS images and styles are in separate folders
+					sURL = "../"+sURL;
+				}
 				if (config.embedImg() && !bgd.isLinked()) {
 					StringBuilder sb = new StringBuilder();
 	        		sb.append("data:").append(bgd.getMIMEType()).append(";base64,").append(bgd.getBase64());

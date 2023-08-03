@@ -20,7 +20,7 @@
  *
  *  All Rights Reserved.
  * 
- *  Version 1.7.1 (2023-07-31)
+ *  Version 1.7.1 (2023-08-03)
  *
  */ 
  
@@ -99,8 +99,7 @@ public abstract class OptionsDialogBase extends DialogBase implements XPropertyA
         try {
             // Prepare registry view
             Object view = getRegistryView(false);
-            XPropertySet xProps = (XPropertySet)
-                UnoRuntime.queryInterface(XPropertySet.class,view);
+            XPropertySet xProps = (XPropertySet) UnoRuntime.queryInterface(XPropertySet.class,view);
 
             // Load settings using method from subclass
             loadSettings(xProps);
@@ -119,16 +118,14 @@ public abstract class OptionsDialogBase extends DialogBase implements XPropertyA
         try {
             // Prepare registry view
             Object rwview = getRegistryView(true);
-            XPropertySet xProps = (XPropertySet)
-                UnoRuntime.queryInterface(XPropertySet.class,rwview);
+            XPropertySet xProps = (XPropertySet) UnoRuntime.queryInterface(XPropertySet.class,rwview);
 
             // Save settings and create FilterData using method from subclass
             PropertyHelper filterData = new PropertyHelper();
             saveSettings(xProps, filterData);
 
             // Commit registry changes
-            XChangesBatch  xUpdateContext = (XChangesBatch)
-                UnoRuntime.queryInterface(XChangesBatch.class,rwview);
+            XChangesBatch  xUpdateContext = (XChangesBatch) UnoRuntime.queryInterface(XChangesBatch.class,rwview);
             try {
                 xUpdateContext.commitChanges();
             }
@@ -179,8 +176,7 @@ public abstract class OptionsDialogBase extends DialogBase implements XPropertyA
             XComponent xComponent = xDesktop.getCurrentComponent();
 			
             // Get the document info property set
-            XDocumentPropertiesSupplier xDocPropsSuppl =
-                	UnoRuntime.queryInterface(XDocumentPropertiesSupplier.class, xComponent);
+            XDocumentPropertiesSupplier xDocPropsSuppl = UnoRuntime.queryInterface(XDocumentPropertiesSupplier.class, xComponent);
                 return xDocPropsSuppl.getDocumentProperties().getTemplateName();
         }
         catch (Exception e) {
@@ -191,10 +187,8 @@ public abstract class OptionsDialogBase extends DialogBase implements XPropertyA
     // Get a view of the options root in the registry
     private Object getRegistryView(boolean bUpdate) 
         throws com.sun.star.uno.Exception {
-        Object provider = xMSF.createInstance(
-            "com.sun.star.configuration.ConfigurationProvider");
-        XMultiServiceFactory xProvider = (XMultiServiceFactory)
-            UnoRuntime.queryInterface(XMultiServiceFactory.class,provider);
+        Object provider = xMSF.createInstance("com.sun.star.configuration.ConfigurationProvider");
+        XMultiServiceFactory xProvider = (XMultiServiceFactory) UnoRuntime.queryInterface(XMultiServiceFactory.class,provider);
         PropertyValue[] args = new PropertyValue[1];
         args[0] = new PropertyValue();
         args[0].Name = "nodepath";
@@ -202,14 +196,12 @@ public abstract class OptionsDialogBase extends DialogBase implements XPropertyA
         String sServiceName = bUpdate ?
             "com.sun.star.configuration.ConfigurationUpdateAccess" :
             "com.sun.star.configuration.ConfigurationAccess";
-        Object view = xProvider.createInstanceWithArguments(sServiceName,args);
-        return view;
+        return xProvider.createInstanceWithArguments(sServiceName,args);
     }
 	
     // Dispose a previously obtained registry view
     private void disposeRegistryView(Object view) {
-        XComponent xComponent = (XComponent)
-            UnoRuntime.queryInterface(XComponent.class,view);
+        XComponent xComponent = (XComponent) UnoRuntime.queryInterface(XComponent.class,view);
         xComponent.dispose();
     }
 
@@ -250,50 +242,42 @@ public abstract class OptionsDialogBase extends DialogBase implements XPropertyA
 	
     protected void updateLockedOptions() {
         lockedOptions.clear();
-        short nItem = getListBoxSelectedItem("Config");
-        int nStdConfigs = getListBoxStringItemList("Config").length - sConfigNames.length;
-        if (nItem>=nStdConfigs) {
-            // Get current configuration name
-            String sName = sConfigNames[nItem-nStdConfigs];
+        // Get current configuration name
+        String sName = sConfigNames[getListBoxSelectedItem("Config")];
+		
+        try {
+            // Prepare registry view
+            Object view = getRegistryView(false);
+            XPropertySet xProps = (XPropertySet) UnoRuntime.queryInterface(XPropertySet.class,view);
+ 		
+            // Get the available configurations
+            Object configurations = XPropertySetHelper.getPropertyValue(xProps,"Configurations");
+            XNameAccess xConfigurations = (XNameAccess) UnoRuntime.queryInterface(XNameAccess.class,configurations);
 			
-            try {
-                // Prepare registry view
-                Object view = getRegistryView(false);
-                XPropertySet xProps = (XPropertySet)
-                    UnoRuntime.queryInterface(XPropertySet.class,view);
-	 		
-                // Get the available configurations
-                Object configurations = XPropertySetHelper.getPropertyValue(xProps,"Configurations");
-                XNameAccess xConfigurations = (XNameAccess)
-                    UnoRuntime.queryInterface(XNameAccess.class,configurations);
-				
-                // Get the LockedOptions node from the desired configuration
-                String sLockedOptions = "";
-                Object config = xConfigurations.getByName(sName);
-                XPropertySet xCfgProps = (XPropertySet)
-                    UnoRuntime.queryInterface(XPropertySet.class,config);
-                sLockedOptions = XPropertySetHelper.getPropertyValueAsString(xCfgProps,"LockedOptions");
-				
-                // Dispose the registry view
-                disposeRegistryView(view);
+            // Get the LockedOptions node from the desired configuration
+            String sLockedOptions = "";
+            Object config = xConfigurations.getByName(sName);
+            XPropertySet xCfgProps = (XPropertySet) UnoRuntime.queryInterface(XPropertySet.class,config);
+            sLockedOptions = XPropertySetHelper.getPropertyValueAsString(xCfgProps,"LockedOptions");
 			
-                // Feed lockedOptions with the comma separated list of options
-                int nStart = 0;
-                for (int i=0; i<sLockedOptions.length(); i++) {
-                    if (sLockedOptions.charAt(i)==',') {
-                        lockedOptions.add(sLockedOptions.substring(nStart,i).trim());
-                        nStart = i+1;
-                    }
-                }
-                if (nStart<sLockedOptions.length()) {
-                    lockedOptions.add(sLockedOptions.substring(nStart).trim());
+            // Dispose the registry view
+            disposeRegistryView(view);
+		
+            // Feed lockedOptions with the comma separated list of options
+            int nStart = 0;
+            for (int i=0; i<sLockedOptions.length(); i++) {
+                if (sLockedOptions.charAt(i)==',') {
+                    lockedOptions.add(sLockedOptions.substring(nStart,i).trim());
+                    nStart = i+1;
                 }
             }
-            catch (Exception e) {
-                // no options will be locked...
+            if (nStart<sLockedOptions.length()) {
+                lockedOptions.add(sLockedOptions.substring(nStart).trim());
             }
         }
-        
+        catch (Exception e) {
+            // no options will be locked...
+        }
     }    
 	
     protected boolean isLocked(String sOptionName) {
@@ -302,58 +286,39 @@ public abstract class OptionsDialogBase extends DialogBase implements XPropertyA
 	
     // Configuration
     protected void loadConfig(XPropertySet xProps) {
-        // The list box is extended with configurations from the registry
-        String[] sStdConfigs = getListBoxStringItemList("Config");
-        int nStdConfigs = sStdConfigs.length;
-
         Object configurations = XPropertySetHelper.getPropertyValue(xProps,"Configurations");
         XNameAccess xConfigurations = (XNameAccess) UnoRuntime.queryInterface(XNameAccess.class,configurations);
         sConfigNames = xConfigurations.getElementNames();
         Arrays.sort(sConfigNames);
-        int nRegConfigs = sConfigNames.length;
-
-        String[] sAllConfigs = new String[nStdConfigs+nRegConfigs];
-        for (short i=0; i<nStdConfigs; i++) {
-            sAllConfigs[i] = sStdConfigs[i];
-        }
-		
-        for (short i=0; i<nRegConfigs; i++) {
+        int nConfigCount = sConfigNames.length;
+        String[] sDisplayNames = new String[nConfigCount];
+        for (short i=0; i<nConfigCount; i++) {
             try {
                 Object config = xConfigurations.getByName(sConfigNames[i]);
-                XPropertySet xCfgProps = (XPropertySet)
-                    UnoRuntime.queryInterface(XPropertySet.class,config);
-                sAllConfigs[nStdConfigs+i] = XPropertySetHelper.getPropertyValueAsString(xCfgProps,"DisplayName");
+                XPropertySet xCfgProps = (XPropertySet) UnoRuntime.queryInterface(XPropertySet.class,config);
+                sDisplayNames[i] = XPropertySetHelper.getPropertyValueAsString(xCfgProps,"DisplayName");
             }
             catch (Exception e) {
-                sAllConfigs[nStdConfigs+i] = "";
+                sDisplayNames[i] = "";
             }
         }
-
-        setListBoxStringItemList("Config",sAllConfigs);
-        if (nStdConfigs+nRegConfigs<=12) {
-            setListBoxLineCount("Config",(short) (nStdConfigs+nRegConfigs));
-        }  
-        else {
-            setListBoxLineCount("Config",(short) 12);
-        }
+        setListBoxStringItemList("Config",sDisplayNames);
 		
         // Select item based on template name
         String sTheTemplateName = getTemplateName();
         Object templates = XPropertySetHelper.getPropertyValue(xProps,"Templates");
-        XNameAccess xTemplates = (XNameAccess)
-            UnoRuntime.queryInterface(XNameAccess.class,templates);
+        XNameAccess xTemplates = (XNameAccess) UnoRuntime.queryInterface(XNameAccess.class,templates);
         String[] sTemplateNames = xTemplates.getElementNames();
         for (int i=0; i<sTemplateNames.length; i++) {
             try {
                 Object template = xTemplates.getByName(sTemplateNames[i]);
-                XPropertySet xTplProps = (XPropertySet)
-                    UnoRuntime.queryInterface(XPropertySet.class,template);
+                XPropertySet xTplProps = (XPropertySet) UnoRuntime.queryInterface(XPropertySet.class,template);
                 String sTemplateName = XPropertySetHelper.getPropertyValueAsString(xTplProps,"TemplateName");
                 if (sTemplateName.equals(sTheTemplateName)) {
                     String sConfigName = XPropertySetHelper.getPropertyValueAsString(xTplProps,"ConfigName");
-                    for (short j=0; j<nRegConfigs; j++) {
+                    for (short j=0; j<nConfigCount; j++) {
                         if (sConfigNames[j].equals(sConfigName)) {
-                            setListBoxSelectedItem("Config",(short) (nStdConfigs+j));
+                            setListBoxSelectedItem("Config",(short) (j));
                             return;
                         }
                     }
@@ -365,66 +330,51 @@ public abstract class OptionsDialogBase extends DialogBase implements XPropertyA
         }
 
         // Select item based on value stored in registry
-        short nConfig = XPropertySetHelper.getPropertyValueAsShort(xProps,"Config");
-        if (nConfig<nStdConfigs) {
-            setListBoxSelectedItem("Config",nConfig);
-        }
-        else { // Registry configurations are stored by name
-            String sConfigName = XPropertySetHelper.getPropertyValueAsString(xProps,"ConfigName");
-            for (short i=0; i<nRegConfigs; i++) {
-                if (sConfigNames[i].equals(sConfigName)) {
-                    setListBoxSelectedItem("Config",(short) (nStdConfigs+i));
-                }
+        String sConfigName = XPropertySetHelper.getPropertyValueAsString(xProps,"ConfigName");
+        for (short i=0; i<nConfigCount; i++) {
+            if (sConfigNames[i].equals(sConfigName)) {
+                setListBoxSelectedItem("Config",(short) (i));
             }
         }
     }
 	
-    protected short saveConfig(XPropertySet xProps, PropertyHelper filterData) {
+    protected void saveConfig(XPropertySet xProps, PropertyHelper filterData) {
         // The Config list box is common for all dialogs
         Object configurations = XPropertySetHelper.getPropertyValue(xProps,"Configurations");
-        XNameAccess xNameAccess = (XNameAccess)
-            UnoRuntime.queryInterface(XNameAccess.class,configurations);
+        XNameAccess xNameAccess = (XNameAccess) UnoRuntime.queryInterface(XNameAccess.class,configurations);
 
         short nConfig = getListBoxSelectedItem("Config");
-        int nStdConfigs = getListBoxStringItemList("Config").length - sConfigNames.length;
-        if (nConfig>=nStdConfigs) { // only handle registry configurations
-        	int i = nConfig-nStdConfigs;
-			XPropertySetHelper.setPropertyValue(xProps,"ConfigName",sConfigNames[i]);
-        	try {
-        		Object config = xNameAccess.getByName(sConfigNames[i]);
-        		XPropertySet xCfgProps = (XPropertySet)
-        		UnoRuntime.queryInterface(XPropertySet.class,config);
-        		MacroExpander expander = new MacroExpander(xContext);
-        		filterData.put("ConfigURL",expander.expandMacros(XPropertySetHelper.getPropertyValueAsString(xCfgProps,"ConfigURL")));
-        		filterData.put("TemplateURL",expander.expandMacros(XPropertySetHelper.getPropertyValueAsString(xCfgProps,"TargetTemplateURL")));
-        		filterData.put("StyleSheetURL",expander.expandMacros(XPropertySetHelper.getPropertyValueAsString(xCfgProps,"StyleSheetURL")));
+		XPropertySetHelper.setPropertyValue(xProps,"ConfigName",sConfigNames[nConfig]);
+    	try {
+    		Object config = xNameAccess.getByName(sConfigNames[nConfig]);
+    		XPropertySet xCfgProps = (XPropertySet)
+    		UnoRuntime.queryInterface(XPropertySet.class,config);
+    		MacroExpander expander = new MacroExpander(xContext);
+    		filterData.put("ConfigURL",expander.expandMacros(XPropertySetHelper.getPropertyValueAsString(xCfgProps,"ConfigURL")));
+    		filterData.put("TemplateURL",expander.expandMacros(XPropertySetHelper.getPropertyValueAsString(xCfgProps,"TargetTemplateURL")));
+    		filterData.put("StyleSheetURL",expander.expandMacros(XPropertySetHelper.getPropertyValueAsString(xCfgProps,"StyleSheetURL")));
+    		filterData.put("ResourceURL",expander.expandMacros(XPropertySetHelper.getPropertyValueAsString(xCfgProps,"ResourceURL")));
 
-        		// The resources are provided as a set
-        		Object resources = XPropertySetHelper.getPropertyValue(xCfgProps,"Resources");
-        		XNameAccess xResourceNameAccess = (XNameAccess) UnoRuntime.queryInterface(XNameAccess.class,resources);
-        		if (xResourceNameAccess!=null) {
-        			StringBuilder buf = new StringBuilder();
-        			String[] sResourceNames = xResourceNameAccess.getElementNames();
-        			for (String sName : sResourceNames) {
-        				Object resource = xResourceNameAccess.getByName(sName);
-        				XPropertySet xResourceProps = (XPropertySet) UnoRuntime.queryInterface(XPropertySet.class,resource);
-        				String sURL = expander.expandMacros(XPropertySetHelper.getPropertyValueAsString(xResourceProps,"URL"));
-        				String sFileName = expander.expandMacros(XPropertySetHelper.getPropertyValueAsString(xResourceProps,"FileName"));
-        				String sMediaType = expander.expandMacros(XPropertySetHelper.getPropertyValueAsString(xResourceProps,"MediaType"));
-        				if (buf.length()>0) { buf.append(';'); }
-        				buf.append(sURL).append("::").append(sFileName).append("::").append(sMediaType);
-        			}
-    				filterData.put("Resources",buf.toString());    				
-        		}
-        	}
-        	catch (Exception e) {
-        	}
-        }
-        else { // Standard configurations have no name
-            XPropertySetHelper.setPropertyValue(xProps,"ConfigName","");        	
-        }
-        XPropertySetHelper.setPropertyValue(xProps,"Config",nConfig);
-        return nConfig;
+    		// The resources can also be provided as a set
+    		Object resources = XPropertySetHelper.getPropertyValue(xCfgProps,"Resources");
+    		XNameAccess xResourceNameAccess = (XNameAccess) UnoRuntime.queryInterface(XNameAccess.class,resources);
+    		if (xResourceNameAccess!=null) {
+    			StringBuilder buf = new StringBuilder();
+    			String[] sResourceNames = xResourceNameAccess.getElementNames();
+    			for (String sName : sResourceNames) {
+    				Object resource = xResourceNameAccess.getByName(sName);
+    				XPropertySet xResourceProps = (XPropertySet) UnoRuntime.queryInterface(XPropertySet.class,resource);
+    				String sURL = expander.expandMacros(XPropertySetHelper.getPropertyValueAsString(xResourceProps,"URL"));
+    				String sFileName = expander.expandMacros(XPropertySetHelper.getPropertyValueAsString(xResourceProps,"FileName"));
+    				String sMediaType = expander.expandMacros(XPropertySetHelper.getPropertyValueAsString(xResourceProps,"MediaType"));
+    				if (buf.length()>0) { buf.append(';'); }
+    				buf.append(sURL).append("::").append(sFileName).append("::").append(sMediaType);
+    			}
+				filterData.put("Resources",buf.toString());    				
+    		}
+    	}
+    	catch (Exception e) {
+    	}
     }
 	
     // Check box option (boolean)

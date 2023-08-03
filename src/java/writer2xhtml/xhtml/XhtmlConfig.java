@@ -20,7 +20,7 @@
  *
  *  All Rights Reserved.
  * 
- *  Version 1.7.1 (2023-08-02)
+ *  Version 1.7.1 (2023-08-03)
  *
  */
 
@@ -329,7 +329,7 @@ public class XhtmlConfig extends writer2xhtml.base.ConfigBase {
         };
         options[ORIGINAL_PAGE_NUMBERS] = new BooleanOption("original_page_numbers","false");
         options[AVOID_HTML5] = new BooleanOption("avoid_html5","false");
-        options[FILENAMES] = new IntegerOption("filenames","section") {
+        options[FILENAMES] = new IntegerOption("filenames","name_number") {
         	@Override public void setString(String sValue) {
         		super.setString(sValue);
         		if ("name_section".equals(sValue)) {

@@ -12,6 +12,7 @@
             <prop oor:name="ConfigURL" oor:type="xs:string" />
             <prop oor:name="TargetTemplateURL" oor:type="xs:string" />
             <prop oor:name="StyleSheetURL" oor:type="xs:string" />
+            <prop oor:name="ResourceURL" oor:type="xs:string" />
             <set oor:name="Resources" oor:node-type="Resource" />			
         </group>
         <group oor:name="Resource">
@@ -27,7 +28,6 @@
     <component>
         <group oor:name="XhtmlOptions">
             <!-- General -->
-            <prop oor:name="Config" oor:type="xs:short" />
             <prop oor:name="ConfigName" oor:type="xs:string" />
             <prop oor:name="Units" oor:type="xs:short" />
             <prop oor:name="Scaling" oor:type="xs:int" />
@@ -64,7 +64,6 @@
         </group>
         <group oor:name="XhtmlOptionsCalc" >
             <!-- General -->
-            <prop oor:name="Config" oor:type="xs:short" />
             <prop oor:name="ConfigName" oor:type="xs:string" />
             <prop oor:name="Units" oor:type="xs:short" />
             <prop oor:name="Scaling" oor:type="xs:int" />
@@ -98,7 +97,6 @@
         </group>
         <group oor:name="EpubOptions">
             <!-- Style -->
-            <prop oor:name="Config" oor:type="xs:short" />
             <prop oor:name="ConfigName" oor:type="xs:string" />
             <prop oor:name="Scaling" oor:type="xs:int" />
             <prop oor:name="TableSize" oor:type="xs:short"/>
