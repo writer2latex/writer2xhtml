@@ -329,11 +329,12 @@ public abstract class OptionsDialogBase extends DialogBase implements XPropertyA
             }
         }
 
-        // Select item based on value stored in registry
+        // Select item based on value stored in registry (default to the first item)
+        setListBoxSelectedItem("Config", (short) 0);
         String sConfigName = XPropertySetHelper.getPropertyValueAsString(xProps,"ConfigName");
         for (short i=0; i<nConfigCount; i++) {
             if (sConfigNames[i].equals(sConfigName)) {
-                setListBoxSelectedItem("Config",(short) (i));
+                setListBoxSelectedItem("Config", i);
             }
         }
     }

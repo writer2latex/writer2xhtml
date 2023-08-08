@@ -20,7 +20,7 @@
  *
  *  All Rights Reserved.
  * 
- *  Version 1.7.1 (2023-08-03)
+ *  Version 1.7.1 (2023-08-08)
  *
  */
 
@@ -61,7 +61,7 @@ public class ListStyleConverter extends StyleConverterHelper {
 	private boolean bHasListHeaders=false;
 	// Maps and sets to keep track of the CSS variants of the class style we need
     private Map<String,Integer> listDepth = new HashMap<>(); // Maximum depth for a given list
-    private Set<String> listStyles = new HashSet<>(); // List styles (used if formatting=convert_labels or convert_label_styles)
+    private Set<String> listStyles = new HashSet<>(); // List styles (used if formatting!=ignore_all)
     private Map<String,Set<String>> listParStyles = new HashMap<>(); // List styles->Paragraph styles (if formatting=convert_all)
 	
     /** Create a new <code>ListStyleConverter</code>
@@ -90,18 +90,24 @@ public class ListStyleConverter extends StyleConverterHelper {
             	applyStyleMap(style,info);
             }
             else if (nListFormatting==XhtmlConfig.CONVERT_ALL) {
-            	// For full formatting the class name is a combination of the list style and a paragraph style
-            	StyleWithProperties parStyle = ofr.getParStyle(sParStyleName);
-            	if (parStyle!=null && parStyle.isAutomatic() &&
-            			(!bConvertHard ||
-            					(parStyle.getParProperty(XMLString.FO_MARGIN_LEFT, false)==null &&
-            					parStyle.getParProperty(XMLString.FO_TEXT_INDENT, false)==null &&
-            					parStyle.getTabStops(false).isEmpty())
-            			)) { // Don't use automatic styles unless we have to
-            		parStyle = (StyleWithProperties) parStyle.getParentStyle();
+            	if (sParStyleName!=null) {
+	            	// For full formatting the class name is a combination of the list style and a paragraph style
+	            	StyleWithProperties parStyle = ofr.getParStyle(sParStyleName);
+	            	if (parStyle!=null && parStyle.isAutomatic() &&
+	            			(!bConvertHard ||
+	            					(parStyle.getParProperty(XMLString.FO_MARGIN_LEFT, false)==null &&
+	            					parStyle.getParProperty(XMLString.FO_TEXT_INDENT, false)==null &&
+	            					parStyle.getTabStops(false).isEmpty())
+	            			)) { // Don't use automatic styles unless we have to
+	            		parStyle = (StyleWithProperties) parStyle.getParentStyle();
+	            	}
+	            	info.sClass = getExtendedClassName(style,nLevel,parStyle);
+	            	listParStyles.computeIfAbsent(style.getDisplayName(), key -> new HashSet<>()).add(parStyle.getDisplayName());
             	}
-            	info.sClass = getExtendedClassName(style,nLevel,parStyle);
-            	listParStyles.computeIfAbsent(style.getDisplayName(), key -> new HashSet<>()).add(parStyle.getDisplayName());
+            	else { // No paragraph style found; ie. this level has no content
+    				info.sClass = getClassName(style,nLevel);
+    				listStyles.add(sStyleName);            		
+            	}
             }
             else if (nListFormatting==XhtmlConfig.CONVERT_LABELS || nListFormatting==XhtmlConfig.CONVERT_LABEL_STYLES
             		|| !style.isAutomatic()) { // Always apply class names for soft styles
@@ -160,6 +166,27 @@ public class ListStyleConverter extends StyleConverterHelper {
     // Used if formatting=convert_all
     private String getFullStyleDeclarations(String sIndent) {
     	StringBuilder buf = new StringBuilder();
+    	for (String sStyleName : listStyles) { // Plain list style (for levels without content)
+    		ListStyle listStyle = (ListStyle) getStyles().getStyle(sStyleName);
+    		if (listStyle!=null) {
+	        	int nDepth = getListDepth(listStyle.getName());
+	            for (int nLevel=1; nLevel<=nDepth; nLevel++) {
+	    		    String sSelector = "."+getClassName(listStyle,nLevel);
+					// .liststyle_level (we format lists as numbered paragraphs, hence no indentation on list)
+					CSVList props = new CSVList(";");
+					props.addValue("margin","0");
+					props.addValue("padding","0");
+					props.addValue("clear:left");
+					cssCounterReset(listStyle,nLevel,props);
+					addStyleDeclaration(sSelector,props,sIndent,buf);
+					
+					// .liststyle_level > li::marker (for the same reason, the marker is empty)
+					props = new CSVList(";");
+					props.addValue("content", "''");
+					addStyleDeclaration(sSelector+" > li::marker",props,sIndent,buf);
+	            }
+	        }
+    	}
     	for (String sDisplayName : listParStyles.keySet()) {
             ListStyle listStyle = (ListStyle) getStyles().getStyleByDisplayName(sDisplayName);
     		for (String sParDisplayName : listParStyles.get(sDisplayName)) {

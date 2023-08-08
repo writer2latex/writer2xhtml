@@ -20,7 +20,7 @@
  *
  *  All Rights Reserved.
  * 
- *  Version 1.7.1 (2023-07-30)
+ *  Version 1.7.1 (2023-08-06)
  *
  */
 
@@ -848,7 +848,6 @@ public class TextConverter extends ConverterHelper {
         // The method createList handles this
         Element currentList = null;
         
-
         // Traverse the list, creating list elements on the way
         Node child = onode.getFirstChild();
         while (child!=null) {
@@ -889,11 +888,7 @@ public class TextConverter extends ConverterHelper {
     // Determine restart of numbering, create a new list if required and attach it to the current hnode
     private Element createList(Node itemnode, int nLevel, String sStyleName, String sStartValue, Node hnode, Element currentList) {
     	// In addition the the list style we may need the paragraph style
-    	String sParStyleName = null;
-    	Element par = Misc.getFirstChildElement(itemnode);
-    	if (Misc.isElement(par, XMLString.TEXT_P)) {
-    		sParStyleName = Misc.getAttribute(par, XMLString.TEXT_STYLE_NAME);
-    	}
+    	String sParStyleName = getListParStyleName(itemnode);
     	
     	ListCounter counter = getListCounter(ofr.getListStyle(sStyleName));
     	if (sStartValue!=null) { // The list restarts at this item; must create a new list to do this with CSS
@@ -922,6 +917,28 @@ public class TextConverter extends ConverterHelper {
         else {
         	return currentList;
         }
+    }
+    
+    // Get paragraph style name associated with a list item (usually from the first paragraph)
+    private String getListParStyleName(Node item) {
+    	System.out.println("Looking for par style in "+item.getNodeName());
+    	Element par = Misc.getFirstChildElement(item);
+    	System.out.println("Found so far "+par);
+    	if (Misc.isElement(par, XMLString.TEXT_P)) {
+    		System.out.println("Which has style name "+Misc.getAttribute(par, XMLString.TEXT_STYLE_NAME));
+    		return Misc.getAttribute(par, XMLString.TEXT_STYLE_NAME);
+    	}
+    	// The item will be empty if the list starts with a lower level item. In that case look for a sibling
+    	Node sibling = item.getNextSibling();
+    	System.out.println("Tried a sibling "+sibling);
+    	if (sibling!=null && Misc.isElement(sibling,XMLString.TEXT_LIST_ITEM)) {
+    		System.out.println("Had luck");
+        	par = Misc.getFirstChildElement(sibling);
+        	if (Misc.isElement(par, XMLString.TEXT_P)) {
+        		return Misc.getAttribute(par, XMLString.TEXT_STYLE_NAME);
+        	}
+    	}
+    	return null;
     }
     
     // Create a new list and attach it to the current hnode

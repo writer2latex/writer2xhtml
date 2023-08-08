@@ -8,6 +8,8 @@ All changes are classified as
 
 ---------- version 1.7.1 ----------
 
+- Bugfix: Lists that does not start with the top level are now indented correctly
+
 - Bugfix: Removed the no longer functional checkbox "Ignore table dimensions" from options (custom configuration)
 
 - New feature: The HTML export dialogs offers two new configurations: "Original formatting with navigation panel" and "Clean HTML".

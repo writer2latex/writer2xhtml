@@ -124,7 +124,7 @@ In addition to oxt, the build file supports the following targets:
     clean
 
 
-Henrik Just, June 2023
+Henrik Just, August 2023
 
 
 Thanks to Michael Niedermair for writing the original ant build file

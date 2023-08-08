@@ -20,7 +20,7 @@
  *
  *  All Rights Reserved.
  * 
- *  Version 1.7 (2023-06-27)
+ *  Version 1.7.1 (2023-08-08)
  *
  */
  
@@ -33,7 +33,7 @@ public class ConverterFactory {
 
     // Version information
     private static final String VERSION = "1.7.1";
-    private static final String DATE = "2023-07-29";
+    private static final String DATE = "2023-08-08";
 	
     /** Return the Writer2xhtml version in the form
      *  (major version).(minor version).(patch level)<br/>

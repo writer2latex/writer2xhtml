@@ -14,5 +14,5 @@ Bugs and feature requests should be reported to
   writer2latex (at) gmail.com
   
 
-June 2023
+August 2023
 Henrik Just
